@@ -1,9 +1,1 @@
-# blank
-
-blank
-
-## Attributes
-
-- **Database**: mongodb
-- **Storage Adapter**: localDisk
-# website
+# Official wizgrowth website Repository

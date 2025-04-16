@@ -9,19 +9,21 @@ export function Header() {
       id: 1,
       name: 'Facebook',
       url: '/facebook/',
-      icon: <FaceBookIcon />,
+      icon: <FaceBookIcon width="15px" height="15px" className="p-3 rounded-full bg-primary-100" />,
     },
     {
       id: 2,
       name: 'Instagram',
       url: '/instagram/',
-      icon: <InstagramIcon />,
+      icon: (
+        <InstagramIcon width="15px" height="15px" className="p-3 rounded-full bg-primary-100" />
+      ),
     },
     {
       id: 3,
       name: 'LinkedIn',
       url: '/linkedin/',
-      icon: <Linkedin />,
+      icon: <Linkedin width="15px" height="15px" className="p-3 rounded-full bg-primary-100" />,
     },
   ]
   return (

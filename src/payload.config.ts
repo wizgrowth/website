@@ -9,6 +9,8 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Homepage } from './collections/homepage'
+import { seoPlugin } from '@payloadcms/plugin-seo'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -21,6 +23,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media],
+  globals: [Homepage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -35,5 +38,15 @@ export default buildConfig({
   plugins: [
     payloadCloudPlugin(),
     // storage-adapter-placeholder
+    seoPlugin({
+      // collections: ['blog'], //slug of the collection type
+      globals: ['homepage'], //slug of the global type
+      uploadsCollection: 'media',
+      generateTitle: ({ doc }) => doc.title,
+      generateDescription: ({ doc }) => doc.plainText,
+      generateURL: ({ doc, collectionSlug }) =>
+        `https://example.com/${collectionSlug}/${doc?.slug}`,
+      tabbedUI: true,
+    }),
   ],
 })

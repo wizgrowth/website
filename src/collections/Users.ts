@@ -8,7 +8,6 @@ export const Users: CollectionConfig = {
   auth: true,
   access: {
     create: ({ req: { user } }) => {
-      console.log(user)
       return user?.Role === 'admin' && true
     },
     read: ({ req: { user } }) => {

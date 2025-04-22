@@ -1,10 +1,10 @@
 // import { headers as getHeaders } from 'next/headers.js'
 // import { getPayload } from 'payload'
-import React from 'react'
 // import { fileURLToPath } from 'url'
-
 // import config from '@/payload.config'
+import React from 'react'
 import './styles.css'
+import { Hero } from './components/sections/hero'
 
 type MetaData = {
   meta: {
@@ -36,12 +36,11 @@ export default async function HomePage() {
   // const payloadConfig = await config
   // const payload = await getPayload({ config: payloadConfig })
   // const { user } = await payload.auth({ headers })
-
   // const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
 
   return (
-    <section className="my-5">
-      <h1 className="text-3xl text-center">Wizgrowth Home page</h1>
+    <section className=" bg-primary-600 antialiased">
+      <Hero />
     </section>
   )
 }

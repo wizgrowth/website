@@ -5,6 +5,7 @@
 import React from 'react'
 import './styles.css'
 import { Hero } from './components/sections/hero'
+import { Services } from './components/sections/services'
 
 type MetaData = {
   meta: {
@@ -41,6 +42,7 @@ export default async function HomePage() {
   return (
     <section className=" bg-primary-600 antialiased">
       <Hero />
+      <Services />
     </section>
   )
 }

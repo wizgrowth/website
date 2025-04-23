@@ -70,7 +70,7 @@ export function Footer() {
     },
   ]
   return (
-    <section className="mt-24 bg-primary-100 pt-20  pb-8">
+    <section className="bg-primary-100 pt-20  pb-8">
       <div className="container">
         <div className="flex item-center justify-between">
           {/* section-1 */}

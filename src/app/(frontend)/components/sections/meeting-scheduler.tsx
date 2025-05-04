@@ -4,12 +4,31 @@ import { useState, useEffect } from 'react'
 import { Calendar } from '@/components/ui/calendar'
 import { Button } from '@/components/buttons/button'
 import { ClockIcon } from '@/components/icons/clock-icon'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+
+const schema = yup
+  .object({
+    name: yup.string().required('Name is required'),
+    email: yup.string().email('Invalid email format').required('Email is required'),
+  })
+  .required()
 
 export default function MeetingScheduler() {
+  type BookingDataProps = {
+    name?: string
+    email?: string
+    date?: string
+    time?: string
+  }
+
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [selectedTime, setSelectedTime] = useState<string | null>(null)
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([])
   const [bookingConfirmed, setBookingConfirmed] = useState<boolean>(false)
+  const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false)
+  const [formData, setFormData] = useState<BookingDataProps>({})
 
   // Generate time slots when a date is selected
   useEffect(() => {
@@ -40,13 +59,18 @@ export default function MeetingScheduler() {
 
   const handleBooking = () => {
     if (selectedDate && selectedTime) {
-      console.log('Booking confirmed for:', {
+      setFormData((prevData) => ({
+        ...prevData,
         date: selectedDate.toDateString(),
         time: selectedTime,
-      })
+      }))
       setBookingConfirmed(true)
     }
   }
+
+  useEffect(() => {
+    console.log('Form data:', formData)
+  }, [formData])
 
   //   const formatDate = (date: Date) => {
   //     if (!date) return ''
@@ -69,6 +93,30 @@ export default function MeetingScheduler() {
   const today = new Date()
   const sixMonthsFromNow = new Date()
   sixMonthsFromNow.setMonth(today.getMonth() + 6)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: 'onSubmit',
+  })
+
+  // Form submission handler
+  type FormData = {
+    name: string
+    email: string
+  }
+
+  const onSubmit = (data: FormData) => {
+    setFormData(() => {
+      return {
+        ...data,
+      }
+    })
+    setIsFormSubmitted(true)
+  }
 
   return (
     <section className="pb-20">
@@ -103,65 +151,103 @@ export default function MeetingScheduler() {
               let’s create a plan that works for you.
             </p>
           </div>
-
-          <div className="flex items-center justify-center basis-1/3">
-            {/* Calendar selection using shadcn/ui */}
-            {!selectedDate && (
-              <div>
-                <div className="flex justify-center">
-                  <Calendar
-                    mode="single"
-                    selected={selectedDate || undefined}
-                    onSelect={handleDateSelect}
-                    fromDate={today}
-                    toDate={sixMonthsFromNow}
-                    className="rounded-md border"
-                  />
-                </div>
+          {!isFormSubmitted && (
+            <form className="flex flex-col gap-4 pr-4 py-28 basis-1/3">
+              <div className="flex flex-col gap-1 relative">
+                <label htmlFor="name" className="text-sm font-medium leading-6 text-black">
+                  Your Name*
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter your name"
+                  className="border rounded-md p-2"
+                  id="name"
+                  {...register('name')}
+                />
+                <p className="text-red-500 text-xs absolute -bottom-4">{errors.name?.message}</p>
               </div>
-            )}
-
-            {/* Time slot selection */}
-            {selectedDate && !bookingConfirmed && (
-              <div>
-                <div className="h-72 w-64 overflow-y-auto flex flex-col gap-2">
-                  {availableTimeSlots.map((time, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleTimeSelect(time)}
-                      className={`px-4 py-2 rounded-md transition-colors ${
-                        time === selectedTime
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
-                      }`}
-                    >
-                      {time}
-                    </button>
-                  ))}
-                </div>
-                {/* Booking confirmation */}
-                {selectedDate && selectedTime && (
-                  <div className="mt-6 w-full">
-                    <button
-                      onClick={handleBooking}
-                      className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors w-full"
-                    >
-                      Confirm Booking
-                    </button>
+              <div className="flex flex-col gap-1 relative">
+                <label htmlFor="email" className="text-sm font-medium leading-6 text-black">
+                  Your Email*
+                </label>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="border rounded-md p-2"
+                  id="email"
+                  {...register('email')}
+                />
+                <p className="text-red-500 text-xs absolute -bottom-4">{errors.email?.message}</p>
+              </div>
+              <button
+                type="submit"
+                onClick={handleSubmit(onSubmit)}
+                className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              >
+                Submit
+              </button>
+            </form>
+          )}
+          {isFormSubmitted && (
+            <div className="flex items-center justify-center basis-1/3">
+              {/* Calendar selection using shadcn/ui */}
+              {!selectedDate && (
+                <div>
+                  <div className="flex justify-center">
+                    <Calendar
+                      mode="single"
+                      selected={selectedDate || undefined}
+                      onSelect={handleDateSelect}
+                      fromDate={today}
+                      toDate={sixMonthsFromNow}
+                      className="rounded-md border"
+                    />
                   </div>
-                )}
-              </div>
-            )}
+                </div>
+              )}
 
-            {/* Success message */}
-            {bookingConfirmed && (
-              <div className="p-4 bg-green-100 text-green-800 rounded-md">
-                <p className="font-medium">Your meeting has been scheduled!</p>
-                <p>Date: {selectedDate ? formatDateWithYear(selectedDate) : ''}</p>
-                <p>Time: {selectedTime}</p>
-              </div>
-            )}
-          </div>
+              {/* Time slot selection */}
+              {selectedDate && !bookingConfirmed && (
+                <div>
+                  <div className="h-72 w-64 overflow-y-auto flex flex-col gap-2">
+                    {availableTimeSlots.map((time, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handleTimeSelect(time)}
+                        className={`px-4 py-2 rounded-md transition-colors ${
+                          time === selectedTime
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                        }`}
+                      >
+                        {time}
+                      </button>
+                    ))}
+                  </div>
+                  {/* Booking confirmation */}
+                  {selectedDate && selectedTime && (
+                    <div className="mt-6 w-full">
+                      <button
+                        onClick={handleBooking}
+                        className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors w-full"
+                      >
+                        Confirm Booking
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Success message */}
+              {bookingConfirmed && (
+                <div className="p-4 bg-green-100 text-green-800 rounded-md">
+                  <p className="font-medium">Your meeting has been scheduled!</p>
+                  <p>Date: {selectedDate ? formatDateWithYear(selectedDate) : ''}</p>
+                  <p>Time: {selectedTime}</p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>

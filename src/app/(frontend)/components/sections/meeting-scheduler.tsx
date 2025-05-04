@@ -69,7 +69,24 @@ export default function MeetingScheduler() {
   }
 
   useEffect(() => {
-    console.log('Form data:', formData)
+    async function addBookingDataToBackend() {
+      try {
+        const response = await fetch('http://localhost:3003/api/booking', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        })
+        const data = await response.json()
+        console.log('Response from backend:', data)
+        setIsFormSubmitted(true)
+      } catch (error) {
+        console.error('Error sending booking data to backend:', error)
+      }
+    }
+
+    addBookingDataToBackend()
   }, [formData])
 
   //   const formatDate = (date: Date) => {

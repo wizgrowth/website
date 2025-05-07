@@ -28,7 +28,7 @@ export default function MeetingScheduler() {
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([])
   const [bookingConfirmed, setBookingConfirmed] = useState<boolean>(false)
   const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false)
-  const [formData, setFormData] = useState<BookingDataProps>({})
+  const [formData, setFormData] = useState<BookingDataProps | null>(null)
 
   // Generate time slots when a date is selected
   useEffect(() => {
@@ -85,8 +85,9 @@ export default function MeetingScheduler() {
         console.error('Error sending booking data to backend:', error)
       }
     }
-
-    addBookingDataToBackend()
+    if (formData) {
+      addBookingDataToBackend()
+    }
   }, [formData])
 
   //   const formatDate = (date: Date) => {

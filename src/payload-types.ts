@@ -89,10 +89,12 @@ export interface Config {
   globals: {
     contact: Contact;
     homepage: Homepage;
+    services: Service;
   };
   globalsSelect: {
     contact: ContactSelect<false> | ContactSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
   };
   locale: null;
   user: User & {
@@ -350,6 +352,24 @@ export interface Homepage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: number;
+  Title: string;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact_select".
  */
 export interface ContactSelect<T extends boolean = true> {
@@ -370,6 +390,23 @@ export interface ContactSelect<T extends boolean = true> {
  * via the `definition` "homepage_select".
  */
 export interface HomepageSelect<T extends boolean = true> {
+  Title?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
   Title?: T;
   meta?:
     | T

@@ -11,6 +11,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Homepage } from './collections/homepage'
 import { Contact } from './collections/contact'
+import { Services } from './collections/services'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { DemoBooking } from './collections/Demo-booking'
 
@@ -25,7 +26,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, DemoBooking],
-  globals: [Contact, Homepage],
+  globals: [Contact, Homepage, Services],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -42,7 +43,7 @@ export default buildConfig({
     // storage-adapter-placeholder
     seoPlugin({
       // collections: ['blog'], //slug of the collection type
-      globals: ['homepage', 'contact'], //slug of the global type
+      globals: ['homepage', 'contact', 'services'], //slug of the global type
       uploadsCollection: 'media',
       generateTitle: ({ doc }) => doc.title,
       generateDescription: ({ doc }) => doc.plainText,

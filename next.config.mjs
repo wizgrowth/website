@@ -14,7 +14,7 @@ const nextConfig = {
   images: {
     domains: ['vdskmkiggnujcnwluksm.supabase.co'],
   },
+  trailingSlash: true,
 }
-
 
 export default withPayload(nextConfig, { devBundleServerPackages: false })

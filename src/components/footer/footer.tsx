@@ -74,7 +74,7 @@ export function Footer() {
       <div className="container">
         <div className="flex item-center justify-between">
           {/* section-1 */}
-          <div>
+          <div className="basis-56">
             <div>
               <p className="text-base text-primary-300 font-bold">Opening Hours</p>
               <div className="flex items-center gap-2 mt-5">
@@ -117,6 +117,7 @@ export function Footer() {
           <div>
             <p className="text-base text-primary-300 font-bold">Contact Info</p>
             {contactInfo.map((item) => (
+              // eslint-disable-next-line @next/next/no-html-link-for-pages
               <a href="/" className="flex items-center gap-2 mt-2" key={item.id}>
                 {item.icon}
                 <p className="text-base font-light leading-6 text-primary-400">{item.content}</p>

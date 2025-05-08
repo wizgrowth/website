@@ -7,6 +7,17 @@
  */
 
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SideMenu".
+ */
+export type SideMenu =
+  | {
+      titleId?: string | null;
+      title?: string | null;
+      id?: string | null;
+    }[]
+  | null;
+/**
  * Supported timezones in IANA format.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -190,7 +201,27 @@ export interface Demobooking {
  */
 export interface BlogInner {
   id: number;
-  Title?: string | null;
+  slug: string;
+  title?: string | null;
+  featuredImage?: (number | null) | Media;
+  category?: ('general' | 'best of' | 'ai')[] | null;
+  readingTime?: string | null;
+  sideMenu?: SideMenu;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   publishedBy?: (number | null) | User;
   updatedBy?: (number | null) | User;
   meta?: {
@@ -331,7 +362,13 @@ export interface DemobookingSelect<T extends boolean = true> {
  * via the `definition` "blogInner_select".
  */
 export interface BlogInnerSelect<T extends boolean = true> {
-  Title?: T;
+  slug?: T;
+  title?: T;
+  featuredImage?: T;
+  category?: T;
+  readingTime?: T;
+  sideMenu?: T | SideMenuSelect<T>;
+  content?: T;
   publishedBy?: T;
   updatedBy?: T;
   meta?:
@@ -343,6 +380,15 @@ export interface BlogInnerSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SideMenu_select".
+ */
+export interface SideMenuSelect<T extends boolean = true> {
+  titleId?: T;
+  title?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

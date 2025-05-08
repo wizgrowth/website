@@ -130,7 +130,15 @@ export interface UserAuthOperations {
 export interface User {
   id: number;
   Name: string;
+  'Profile Picture'?: (number | null) | Media;
   Role?: ('admin' | 'user') | null;
+  Designation?: string | null;
+  Description?: string | null;
+  'Social Media'?: {
+    LinkedIn?: string | null;
+    Twitter?: string | null;
+    Instagram?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -241,7 +249,17 @@ export interface PayloadMigration {
  */
 export interface UsersSelect<T extends boolean = true> {
   Name?: T;
+  'Profile Picture'?: T;
   Role?: T;
+  Designation?: T;
+  Description?: T;
+  'Social Media'?:
+    | T
+    | {
+        LinkedIn?: T;
+        Twitter?: T;
+        Instagram?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   email?: T;

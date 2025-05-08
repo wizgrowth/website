@@ -33,6 +33,11 @@ export const Users: CollectionConfig = {
   fields: [
     { name: 'Name', type: 'text', required: true, defaultValue: 'User' },
     {
+      name: 'Profile Picture',
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
       name: 'Role',
       type: 'select',
       options: [
@@ -56,6 +61,17 @@ export const Users: CollectionConfig = {
           return user?.Role === 'admin' && true
         },
       },
+    },
+    { name: 'Designation', type: 'text' },
+    { name: 'Description', type: 'textarea' },
+    {
+      name: 'Social Media',
+      type: 'group',
+      fields: [
+        { name: 'LinkedIn', type: 'text' },
+        { name: 'Twitter', type: 'text' },
+        { name: 'Instagram', type: 'text' },
+      ],
     },
   ],
 }

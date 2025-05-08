@@ -11,12 +11,13 @@ export const Users: CollectionConfig = {
       return user?.Role === 'admin' && true
     },
     read: ({ req: { user } }) => {
-      if (user?.Role === 'admin') return true
-      return {
-        id: {
-          equals: user?.id,
-        },
-      }
+      return (user?.Role === 'admin' || user?.Role === 'user') && true
+      // if (user?.Role === 'admin') return true
+      // return {
+      //   id: {
+      //     equals: user?.id,
+      //   },
+      // }
     },
     update: ({ req: { user } }) => {
       if (user?.Role === 'admin') return true
@@ -62,7 +63,10 @@ export const Users: CollectionConfig = {
         },
       },
     },
-    { name: 'Designation', type: 'text' },
+    {
+      name: 'Designation',
+      type: 'text',
+    },
     { name: 'Description', type: 'textarea' },
     {
       name: 'Social Media',

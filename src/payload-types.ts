@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     demobooking: Demobooking;
+    blogInner: BlogInner;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -79,6 +80,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     demobooking: DemobookingSelect<false> | DemobookingSelect<true>;
+    blogInner: BlogInnerSelect<false> | BlogInnerSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -184,6 +186,26 @@ export interface Demobooking {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blogInner".
+ */
+export interface BlogInner {
+  id: number;
+  Title?: string | null;
+  publishedBy?: (number | null) | User;
+  updatedBy?: (number | null) | User;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -200,6 +222,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'demobooking';
         value: number | Demobooking;
+      } | null)
+    | ({
+        relationTo: 'blogInner';
+        value: number | BlogInner;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -297,6 +323,24 @@ export interface DemobookingSelect<T extends boolean = true> {
   Email?: T;
   Date?: T;
   Time?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blogInner_select".
+ */
+export interface BlogInnerSelect<T extends boolean = true> {
+  Title?: T;
+  publishedBy?: T;
+  updatedBy?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

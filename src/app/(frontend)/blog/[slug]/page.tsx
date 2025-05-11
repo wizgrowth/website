@@ -1,3 +1,5 @@
+import { Hero } from './components'
+
 type BlogInnerPageProps = {
   slug: string
 }
@@ -15,6 +17,7 @@ type MetaData = {
   }[]
 }
 
+// fetching meta data
 const fetchMetaData = async (slug: string): Promise<MetaData> => {
   try {
     const response = await fetch(
@@ -36,7 +39,27 @@ export async function generateMetadata({ params }: ParamsProps) {
   }
 }
 
+// fetching page data
+export async function getPageData(slug: string) {
+  try {
+    const response = await fetch(
+      `${process.env.SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
+    )
+    const data = await response.json()
+    return data
+  } catch (err) {
+    console.log(err)
+    throw new Error('Failed to fetch page data')
+  }
+}
+
 export default async function BlogInnerPage({ params }: ParamsProps) {
   const { slug } = await params
-  return <section className="mt-40">{slug}</section>
+  const innerData = await getPageData(slug)
+
+  return (
+    <>
+      <Hero innerData={innerData.docs[0]} />
+    </>
+  )
 }

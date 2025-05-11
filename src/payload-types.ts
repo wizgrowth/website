@@ -142,15 +142,15 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
-  Name: string;
-  'Profile Picture'?: (number | null) | Media;
+  name: string;
+  profilePicture?: (number | null) | Media;
   Role?: ('admin' | 'user') | null;
-  Designation?: string | null;
-  Description?: string | null;
-  'Social Media'?: {
-    LinkedIn?: string | null;
-    Twitter?: string | null;
-    Instagram?: string | null;
+  designation?: string | null;
+  description?: string | null;
+  socialMedia?: {
+    linkedIn?: string | null;
+    twitter?: string | null;
+    instagram?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -305,17 +305,17 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  Name?: T;
-  'Profile Picture'?: T;
+  name?: T;
+  profilePicture?: T;
   Role?: T;
-  Designation?: T;
-  Description?: T;
-  'Social Media'?:
+  designation?: T;
+  description?: T;
+  socialMedia?:
     | T
     | {
-        LinkedIn?: T;
-        Twitter?: T;
-        Instagram?: T;
+        linkedIn?: T;
+        twitter?: T;
+        instagram?: T;
       };
   updatedAt?: T;
   createdAt?: T;

@@ -11,7 +11,8 @@ export const Users: CollectionConfig = {
       return user?.Role === 'admin' && true
     },
     read: ({ req: { user } }) => {
-      return (user?.Role === 'admin' || user?.Role === 'user') && true
+      return true
+      // return (user?.Role === 'admin' || user?.Role === 'user') && true
       // if (user?.Role === 'admin') return true
       // return {
       //   id: {
@@ -32,9 +33,9 @@ export const Users: CollectionConfig = {
     },
   },
   fields: [
-    { name: 'Name', type: 'text', required: true, defaultValue: 'User' },
+    { name: 'name', type: 'text', required: true, defaultValue: 'User' },
     {
-      name: 'Profile Picture',
+      name: 'profilePicture',
       type: 'upload',
       relationTo: 'media',
     },
@@ -64,17 +65,17 @@ export const Users: CollectionConfig = {
       },
     },
     {
-      name: 'Designation',
+      name: 'designation',
       type: 'text',
     },
-    { name: 'Description', type: 'textarea' },
+    { name: 'description', type: 'textarea' },
     {
-      name: 'Social Media',
+      name: 'socialMedia',
       type: 'group',
       fields: [
-        { name: 'LinkedIn', type: 'text' },
-        { name: 'Twitter', type: 'text' },
-        { name: 'Instagram', type: 'text' },
+        { name: 'linkedIn', type: 'text' },
+        { name: 'twitter', type: 'text' },
+        { name: 'instagram', type: 'text' },
       ],
     },
   ],

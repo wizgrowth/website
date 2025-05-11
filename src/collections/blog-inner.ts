@@ -51,9 +51,9 @@ export const BlogInner: CollectionConfig = {
     },
     {
       label: 'Side Menu',
-      name: 'sideMenu', // required
-      type: 'array', // required
-      interfaceName: 'SideMenu', // optional
+      name: 'sideMenu',
+      type: 'array',
+      interfaceName: 'SideMenu',
       fields: [
         {
           label: 'Title Id',
@@ -89,6 +89,8 @@ export const BlogInner: CollectionConfig = {
       },
     },
   ],
+  // admin: {readonly:true} - This property makes the particular field readOnly to admins and users by payload
+  // used hooks to add publishedby and updatedby data
   hooks: {
     beforeChange: [
       ({ req, data, operation }) => {

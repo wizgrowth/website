@@ -7,7 +7,7 @@ type HeroProps = {
 }
 
 export function Hero({ innerData }: HeroProps) {
-  console.log(innerData)
+  // console.log(innerData)
   return (
     <section>
       <div className="container mt-40  rounded-[20px] border border-solid border-slate-200 bg-gradient-to-r from-[#e0f2fe99] to-primary-200  p-8 pl-12 max-sm:px-5">

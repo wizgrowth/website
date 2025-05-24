@@ -1,4 +1,4 @@
-import { Hero } from './components'
+import { Hero, Content } from './components'
 
 type BlogInnerPageProps = {
   slug: string
@@ -60,6 +60,7 @@ export default async function BlogInnerPage({ params }: ParamsProps) {
   return (
     <>
       <Hero innerData={innerData.docs[0]} />
+      <Content innerData={innerData.docs[0]} />
     </>
   )
 }

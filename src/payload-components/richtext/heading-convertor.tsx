@@ -33,7 +33,6 @@ export const headingConverter: JSXConverters<SerializedHeadingNode> = {
     const hasAsteriskWrapping = plainText.includes('*')
     let processedContent = content
     let idText = plainText.split('*').length > 1 ? plainText.split('*')[0] : plainText
-    console.log(processedContent)
     if (hasAsteriskWrapping) {
       const textParts = plainText.split('*')
       if (textParts.length > 1) {

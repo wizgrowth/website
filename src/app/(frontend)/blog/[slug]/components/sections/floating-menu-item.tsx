@@ -9,7 +9,7 @@ type FloatingMenuProps = {
   }
 }
 
-export function FloatingMenu({ data }: FloatingMenuProps) {
+export function FloatingMenuItem({ data }: FloatingMenuProps) {
   useEffect(() => {
     let currentActiveId: string | null | undefined = null
 

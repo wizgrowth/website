@@ -1,6 +1,6 @@
 import { RichTextConverterComponent } from '@/payload-components/richtext/richtext-convertor'
 import { BlogPost } from './types'
-import { FloatingMenu } from './floating-menu'
+import { FloatingMenuItem } from './floating-menu-item'
 
 type ContentProps = {
   innerData: BlogPost
@@ -22,7 +22,7 @@ export function Content({ innerData }: ContentProps) {
             </p>
             <div className="flex flex-col gap-3">
               {sideMenu.map((item) => {
-                return <FloatingMenu key={item.id} data={item} />
+                return <FloatingMenuItem key={item.id} data={item} />
               })}
             </div>
           </div>

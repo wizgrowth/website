@@ -8,11 +8,11 @@ type ContentProps = {
 
 export function Content({ innerData }: ContentProps) {
   const { sideMenu } = innerData
-  console.log(sideMenu)
+
   return (
     <section className="mt-24">
       <div className="container flex items-start gap-10">
-        <div className="basis-1/3">
+        <div id="blog-floating-menu" className="basis-1/3 flex flex-col gap-6">
           {sideMenu.map((item) => {
             return <FloatingMenu key={item.id} data={item} />
           })}

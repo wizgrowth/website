@@ -7,6 +7,17 @@
  */
 
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SideMenu".
+ */
+export type SideMenu =
+  | {
+      titleId?: string | null;
+      title?: string | null;
+      id?: string | null;
+    }[]
+  | null;
+/**
  * Supported timezones in IANA format.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -70,6 +81,7 @@ export interface Config {
     users: User;
     media: Media;
     demobooking: Demobooking;
+    blogInner: BlogInner;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -79,6 +91,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     demobooking: DemobookingSelect<false> | DemobookingSelect<true>;
+    blogInner: BlogInnerSelect<false> | BlogInnerSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -129,15 +142,15 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
-  Name: string;
-  'Profile Picture'?: (number | null) | Media;
+  name: string;
+  profilePicture?: (number | null) | Media;
   Role?: ('admin' | 'user') | null;
-  Designation?: string | null;
-  Description?: string | null;
-  'Social Media'?: {
-    LinkedIn?: string | null;
-    Twitter?: string | null;
-    Instagram?: string | null;
+  designation?: string | null;
+  description?: string | null;
+  socialMedia?: {
+    linkedIn?: string | null;
+    twitter?: string | null;
+    instagram?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -184,6 +197,46 @@ export interface Demobooking {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blogInner".
+ */
+export interface BlogInner {
+  id: number;
+  slug: string;
+  title?: string | null;
+  featuredImage?: (number | null) | Media;
+  category?: ('general' | 'best of' | 'ai')[] | null;
+  readingTime?: string | null;
+  sideMenu?: SideMenu;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  publishedBy?: (number | null) | User;
+  updatedBy?: (number | null) | User;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -200,6 +253,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'demobooking';
         value: number | Demobooking;
+      } | null)
+    | ({
+        relationTo: 'blogInner';
+        value: number | BlogInner;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -248,17 +305,17 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  Name?: T;
-  'Profile Picture'?: T;
+  name?: T;
+  profilePicture?: T;
   Role?: T;
-  Designation?: T;
-  Description?: T;
-  'Social Media'?:
+  designation?: T;
+  description?: T;
+  socialMedia?:
     | T
     | {
-        LinkedIn?: T;
-        Twitter?: T;
-        Instagram?: T;
+        linkedIn?: T;
+        twitter?: T;
+        instagram?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -299,6 +356,39 @@ export interface DemobookingSelect<T extends boolean = true> {
   Time?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blogInner_select".
+ */
+export interface BlogInnerSelect<T extends boolean = true> {
+  slug?: T;
+  title?: T;
+  featuredImage?: T;
+  category?: T;
+  readingTime?: T;
+  sideMenu?: T | SideMenuSelect<T>;
+  content?: T;
+  publishedBy?: T;
+  updatedBy?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SideMenu_select".
+ */
+export interface SideMenuSelect<T extends boolean = true> {
+  titleId?: T;
+  title?: T;
+  id?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

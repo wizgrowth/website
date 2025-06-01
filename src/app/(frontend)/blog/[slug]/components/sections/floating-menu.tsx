@@ -38,5 +38,9 @@ export function FloatingMenu({ data }: FloatingMenuProps) {
     })
   }, [])
 
-  return <a href={`#${data.titleId}`}>{data.title}</a>
+  return (
+    <a className="pl-2 rounded-sm" href={`#${data.titleId}`}>
+      {data.title}
+    </a>
+  )
 }

@@ -15,6 +15,7 @@ import { BlogInner } from './collections/blog-inner'
 import { Contact } from './collections/contact'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { DemoBooking } from './collections/Demo-booking'
+import { BlogHome } from './collections/blog-home'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -27,7 +28,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, DemoBooking, BlogInner],
-  globals: [Contact, Homepage, Services],
+  globals: [Contact, Homepage, Services, BlogHome],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -44,7 +45,7 @@ export default buildConfig({
     // storage-adapter-placeholder
     seoPlugin({
       collections: ['blogInner'], //slug of the collection type
-      globals: ['homepage', 'contact', 'services'], //slug of the global type
+      globals: ['homepage', 'contact', 'services', 'blog-home'], //slug of the global type
       uploadsCollection: 'media',
       generateTitle: ({ doc }) => doc.title,
       generateDescription: ({ doc }) => doc.plainText,

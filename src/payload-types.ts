@@ -103,11 +103,13 @@ export interface Config {
     contact: Contact;
     homepage: Homepage;
     services: Service;
+    'blog-home': BlogHome;
   };
   globalsSelect: {
     contact: ContactSelect<false> | ContactSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
+    'blog-home': BlogHomeSelect<false> | BlogHomeSelect<true>;
   };
   locale: null;
   user: User & {
@@ -478,6 +480,24 @@ export interface Service {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-home".
+ */
+export interface BlogHome {
+  id: number;
+  title: string;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact_select".
  */
 export interface ContactSelect<T extends boolean = true> {
@@ -516,6 +536,23 @@ export interface HomepageSelect<T extends boolean = true> {
  */
 export interface ServicesSelect<T extends boolean = true> {
   Title?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-home_select".
+ */
+export interface BlogHomeSelect<T extends boolean = true> {
+  title?: T;
   meta?:
     | T
     | {

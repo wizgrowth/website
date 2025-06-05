@@ -1,6 +1,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import { Hero } from './components'
+import { Hero, BlogList } from './components'
 
 const payload = await getPayload({ config })
 
@@ -8,9 +8,11 @@ const blogHomeData = await payload.findGlobal({
   slug: 'blog-home',
 })
 
-const blogInnerData = await payload.find({
+const blogHeroData = await payload.find({
   collection: 'blogInner',
   depth: 2,
+  limit: 1, // limit to 1 item
+  sort: '-createdAt', // sort by most recent
   select: {
     title: true,
     slug: true,
@@ -21,7 +23,7 @@ const blogInnerData = await payload.find({
   },
 })
 
-console.dir(blogInnerData.docs[1], { depth: 5, colors: true })
+// console.dir(blogInnerData, { depth: 5, colors: true })
 
 export function generateMetadata() {
   return {
@@ -33,7 +35,8 @@ export function generateMetadata() {
 export default function BlogHome() {
   return (
     <section className="mt-40">
-      <Hero innerData={blogInnerData.docs[1]} />
+      <Hero innerData={blogHeroData.docs[0]} />
+      <BlogList />
     </section>
   )
 }

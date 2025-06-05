@@ -5,7 +5,7 @@ type HeroProps = {
 }
 
 export function Hero({ innerData }: HeroProps) {
-  console.log(innerData, 'Hero Component Data')
+  // console.log(innerData, 'Hero Component Data')
   return (
     <section className=" pt-20 pb-40 relative">
       <div className="container">
@@ -16,7 +16,7 @@ export function Hero({ innerData }: HeroProps) {
           className="w-full h-40 opacity-45 absolute bottom-0 left-0"
           style={{
             background:
-              'linear-gradient(180deg,rgba(42, 155, 78, 0) 0%, rgba(87, 199, 133, 0.48) 100%, rgba(237, 221, 83, 0) 0%)',
+              'linear-gradient(180deg,rgba(42, 155, 78, 0) 0%, rgba(233, 244, 241, 1) 100%, rgba(237, 221, 83, 0) 0%)',
           }}
         />
       </div>

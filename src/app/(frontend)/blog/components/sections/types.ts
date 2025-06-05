@@ -7,6 +7,7 @@ export type BlogPost = {
   publishedBy?:
     | {
         name?: string | null | undefined
+        createdAt?: string | null | undefined
       }
     | number
     | null

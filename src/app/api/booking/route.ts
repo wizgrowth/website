@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     Time: time,
   }
   try {
-    const response = await fetch('http://localhost:3003/api/demobooking/', {
+    const response = await fetch('http://localhost:3001/api/demobooking/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

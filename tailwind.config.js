@@ -17,6 +17,10 @@ const config = {
           '2xl': '1536px',
         },
       },
+      screens: {
+        xxs: '380px',
+        xs: '480px',
+      },
       colors: {
         'primary-100': '#f2f7f6',
         'primary-200': '#E9F4F1',

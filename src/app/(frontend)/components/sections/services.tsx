@@ -33,12 +33,16 @@ export function Services() {
     },
   ]
   return (
-    <section className="mt-28 pb-24">
+    <section className="mt-28 pb-24 max-sm:mt-12">
       <div className="container">
-        <div className="p-20 bg-primary-200 rounded-3xl">
-          <p className="text-lg font-bold leading-6 text-primary-400">What we do</p>
-          <div className="flex justify-between items-center mt-2">
-            <h2 className="text-4xl font-extrabold leading-snug">Digital Marketing Services</h2>
+        <div className="p-20 bg-primary-200 rounded-3xl max-sm:px-5 max-sm:py-16">
+          <p className="text-lg font-bold leading-6 text-primary-400 max-lg:text-center">
+            What we do
+          </p>
+          <div className="flex justify-between items-center mt-2 max-lg:flex-col max-lg:gap-6">
+            <h2 className="text-4xl font-extrabold leading-snug max-sm:text-3xl max-lg:text-center">
+              Digital Marketing Services
+            </h2>
             <Button
               className="py-3 px-8 bg-primary-400 text-white rounded-lg text-lg font-bold block w-fit"
               Btntext="All Services"
@@ -50,7 +54,7 @@ export function Services() {
               return (
                 <div
                   key={item.id}
-                  className="bg-white py-10 px-14 flex items-center gap-12 rounded-3xl"
+                  className="bg-white py-10 px-14 flex items-center gap-12 rounded-3xl max-lg:gap-6 max-md:flex-col max-xs:px-5"
                 >
                   <p className="text-4xl font-extrabold leading-snug text-primary-300">
                     0{item.id}.
@@ -64,10 +68,10 @@ export function Services() {
                     height={130}
                   />
                   <div>
-                    <h3 className="text-2xl font-extrabold leading-snug text-primary-300">
+                    <h3 className="text-2xl font-extrabold leading-snug text-primary-300 max-md:text-center max-md:mt-5">
                       {item.title}
                     </h3>
-                    <p className="text-base font-normal leading-6 text-primary-300 mt-4">
+                    <p className="text-base font-normal leading-6 text-primary-300 mt-4 max-md:text-center">
                       {item.description}
                     </p>
                   </div>

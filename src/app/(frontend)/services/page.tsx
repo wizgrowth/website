@@ -1,27 +1,17 @@
 import { Hero, Services, FreeConsultation } from './components'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
-type MetaData = {
-  meta: {
-    title?: string
-    description?: string
-  }
-}
+const payload = await getPayload({ config })
 
-const fetchMetaData = async (): Promise<MetaData> => {
-  try {
-    const response = await fetch(`${process.env.SITE_DOMAIN}/api/globals/services`)
-    const data: MetaData = await response.json()
-    return data
-  } catch (err) {
-    console.error('Error fetching data:', err)
-    throw new Error('Failed to fetch metadata')
-  }
-}
-export async function generateMetadata() {
-  const meta = await fetchMetaData()
+const servicesPageMetaData = await payload.findGlobal({
+  slug: 'services',
+})
+
+export function generateMetadata() {
   return {
-    title: meta?.meta?.title || 'Wizgrowth Contact us Page',
-    description: meta?.meta?.description || 'Get in touch with us for any inquiries or support.',
+    title: servicesPageMetaData?.meta?.title || 'Wizgrowth Services Page',
+    description: servicesPageMetaData?.meta?.description || 'Wizgrowth Services Page',
   }
 }
 

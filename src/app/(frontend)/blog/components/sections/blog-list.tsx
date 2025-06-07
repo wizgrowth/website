@@ -26,15 +26,14 @@ function convertToIsoDate(isoDate: string) {
     month: 'long',
     day: 'numeric',
   })
-  console.log(readableDate, 'Converted Date')
   return readableDate
 }
 
 export function BlogList() {
   return (
-    <section className="mt-20 mb-28">
+    <section className="mt-20 mb-28 max-sm:mt-16">
       <div className="container">
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-3 gap-5 max-lg:grid-cols-2 max-sm:grid-cols-1">
           {blogListData.docs.map((item: BlogPost) => {
             return (
               <a

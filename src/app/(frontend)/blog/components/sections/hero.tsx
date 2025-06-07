@@ -7,7 +7,7 @@ type HeroProps = {
 export function Hero({ innerData }: HeroProps) {
   // console.log(innerData, 'Hero Component Data')
   return (
-    <section className=" pt-20 pb-40 relative">
+    <section className=" pt-20 pb-40 relative max-sm:pb-16 max-sm:pt-10">
       <div className="container">
         <h1 className="mb-3 text-6xl leading-16 font-bold text-slate-900 max-lg:text-5xl max-sm:text-4xl max-sm:leading-tight text-center">
           WizGrowth Blog&apos;s

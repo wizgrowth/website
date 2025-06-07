@@ -1,6 +1,6 @@
 type ButtonProp = {
-  className: string
-  Btntext: string
+  className?: string
+  Btntext?: string
   href?: string
 }
 

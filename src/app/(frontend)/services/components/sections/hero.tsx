@@ -11,7 +11,7 @@ export function Hero() {
             width={402}
             height={480}
             alt="Hero Image"
-            className="-mt-7 max-lg:hidden"
+            className="-mt-7 max-lg:hidden max-xl:pl-10"
             priority
           />
           <div>

@@ -23,8 +23,6 @@ const blogHeroData = await payload.find({
   },
 })
 
-// console.dir(blogInnerData, { depth: 5, colors: true })
-
 export function generateMetadata() {
   return {
     title: blogHomeData?.meta?.title || 'Blog Home',

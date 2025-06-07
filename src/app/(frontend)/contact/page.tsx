@@ -1,28 +1,19 @@
 import MeetingScheduler from '../components/sections/meeting-scheduler'
 import { Hero, OurBackground } from './components'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
-type MetaData = {
-  meta: {
-    title?: string
-    description?: string
-  }
-}
+const payload = await getPayload({ config })
 
-const fetchMetaData = async (): Promise<MetaData> => {
-  try {
-    const response = await fetch(`${process.env.SITE_DOMAIN}/api/globals/contact`)
-    const data: MetaData = await response.json()
-    return data
-  } catch (err) {
-    console.error('Error fetching data:', err)
-    throw new Error('Failed to fetch metadata')
-  }
-}
-export async function generateMetadata() {
-  const meta = await fetchMetaData()
+const contactMetaData = await payload.findGlobal({
+  slug: 'contact',
+})
+
+export function generateMetadata() {
   return {
-    title: meta?.meta?.title || 'Wizgrowth Contact us Page',
-    description: meta?.meta?.description || 'Get in touch with us for any inquiries or support.',
+    title: contactMetaData?.meta?.title || 'Wizgrowth Contact us Page',
+    description:
+      contactMetaData?.meta?.description || 'Get in touch with us for any inquiries or support.',
   }
 }
 

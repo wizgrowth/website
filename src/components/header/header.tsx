@@ -63,7 +63,7 @@ export function Header() {
             </a>
             <a
               href="/blog/"
-              className={`font-medium hover:bg-primary-100 px-3 py-2 rounded-md ${pathName === '/blog/' ? 'bg-primary-100' : ''}`}
+              className={`font-medium hover:bg-primary-100 px-3 py-2 rounded-md ${pathName.startsWith('/blog/') ? 'bg-primary-100' : ''}`}
             >
               Blog
             </a>

@@ -69,12 +69,29 @@ export function Footer() {
       ),
     },
   ]
+  const quote = (
+    <div className="mt-5">
+      <p className="text-center text-2xl leading-9 font-semibold">
+        “Beware of little expenses, a small leak will <br aria-hidden /> sink a great ship”
+      </p>
+      <p className="text-center text-base font-bold leading-6 text-primary-300 mt-2">
+        — Benjamin Franklin
+      </p>
+      <Image
+        src="https://vdskmkiggnujcnwluksm.supabase.co/storage/v1/object/sign/wizgrowth-assets/footer/leaf.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ3aXpncm93dGgtYXNzZXRzL2Zvb3Rlci9sZWFmLnBuZyIsImlhdCI6MTc0NDkxMzU1NCwiZXhwIjoyMDYwMjczNTU0fQ.jyUcvOLLw2qbbH9zagCp_t7YpgKyem1ew_ATuLjRHO0"
+        width={100}
+        height={100}
+        alt="leaf image"
+        className="mx-auto mt-6"
+      />
+    </div>
+  )
   return (
     <section className="bg-primary-100 pt-20  pb-8">
       <div className="container">
-        <div className="flex item-center justify-between">
+        <div className="flex item-center justify-between max-xl:justify-center max-xl:gap-20 max-sm:flex-col">
           {/* section-1 */}
-          <div className="basis-56">
+          <div className="basis-56 max-xl:flex max-xl:basis-auto max-xl:gap-20 max-md:flex-col">
             <div>
               <p className="text-base text-primary-300 font-bold">Opening Hours</p>
               <div className="flex items-center gap-2 mt-5">
@@ -86,7 +103,7 @@ export function Footer() {
                 <p className="text-sm font-light text-primary-400">Sat - Sun 10AM - 5PM</p>
               </div>
             </div>
-            <div className="mt-8">
+            <div className="mt-8 max-xl:mt-0">
               <p className="text-base text-primary-300 font-bold">Social Media</p>
               <div className="flex items-center gap-2 mt-2">
                 {socialMedia.map((item) => (
@@ -98,21 +115,7 @@ export function Footer() {
             </div>
           </div>
           {/* section-2 */}
-          <div className="mt-5">
-            <p className="text-center text-2xl leading-9 font-semibold">
-              “Beware of little expenses, a small leak will <br aria-hidden /> sink a great ship”
-            </p>
-            <p className="text-center text-base font-bold leading-6 text-primary-300 mt-2">
-              — Benjamin Franklin
-            </p>
-            <Image
-              src="https://vdskmkiggnujcnwluksm.supabase.co/storage/v1/object/sign/wizgrowth-assets/footer/leaf.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ3aXpncm93dGgtYXNzZXRzL2Zvb3Rlci9sZWFmLnBuZyIsImlhdCI6MTc0NDkxMzU1NCwiZXhwIjoyMDYwMjczNTU0fQ.jyUcvOLLw2qbbH9zagCp_t7YpgKyem1ew_ATuLjRHO0"
-              width={100}
-              height={100}
-              alt="leaf image"
-              className="mx-auto mt-6"
-            />
-          </div>
+          <div className="max-xl:hidden">{quote}</div>
           {/* sectioon-3 */}
           <div>
             <p className="text-base text-primary-300 font-bold">Contact Info</p>
@@ -125,7 +128,8 @@ export function Footer() {
             ))}
           </div>
         </div>
-        <div className="mt-24 mr-8">
+        <div className="mt-24 mr-8 max-xl:mr-0">
+          <div className="xl:hidden mb-10">{quote}</div>
           <p className="text-sm font-normal leading-5 text-primary-400 text-center">
             Copyright © WizGrowth Inc. 2025
           </p>

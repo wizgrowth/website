@@ -1,5 +1,4 @@
 import { TickIcon } from '@/components/icons/tick-icon'
-import { number } from 'yup'
 
 export function OurBackground() {
   const data = [
@@ -34,7 +33,7 @@ export function OurBackground() {
 
   return (
     <section className="pb-20">
-      <div className="container flex items-start justify-between gap-10">
+      <div className="container flex items-start justify-between gap-10 max-md:flex-col">
         <div>
           <h2 className="text-4xl leading-tight font-extrabold">Few words about our background</h2>
           <p className="text-base leading-7 font-normal text-primary-300 mt-5 mb-7">
@@ -51,7 +50,7 @@ export function OurBackground() {
             )
           })}
         </div>
-        <div className="flex items-start gap-12">
+        <div className="flex items-start gap-12 max-xs:flex-col">
           {backgroundData.map((item) => {
             return (
               <div key={item.id}>

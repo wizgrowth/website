@@ -5,13 +5,13 @@ import config from '@payload-config'
 const payload = await getPayload({ config })
 
 type ParamsProps = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateMetadata({ params }: ParamsProps) {
-  const { slug } = params
+  const { slug } = await params
 
   const result = await payload.find({
     collection: 'blogInner',
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: ParamsProps) {
 }
 
 // fetching page data
-export async function getPageData(slug: string) {
+async function getInnerPageData(slug: string) {
   try {
     const response = await fetch(
       `${process.env.SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
@@ -43,8 +43,8 @@ export async function getPageData(slug: string) {
 }
 
 export default async function BlogInnerPage({ params }: ParamsProps) {
-  const { slug } = params
-  const innerData = await getPageData(slug)
+  const { slug } = await params
+  const innerData = await getInnerPageData(slug)
 
   return (
     <>

@@ -1,41 +1,30 @@
 import { Hero, Content } from './components'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
-type BlogInnerPageProps = {
-  slug: string
-}
+const payload = await getPayload({ config })
 
 type ParamsProps = {
-  params: Promise<BlogInnerPageProps>
-}
-
-type MetaData = {
-  docs: {
-    meta: {
-      title?: string
-      description?: string
-    }
-  }[]
-}
-
-// fetching meta data
-const fetchMetaData = async (slug: string): Promise<MetaData> => {
-  try {
-    const response = await fetch(
-      `${process.env.SITE_DOMAIN}/api/blogInner/?select[slug]=true&select[meta]=true&where[slug][equals]=${slug}`,
-    )
-    const data: MetaData = await response.json()
-    return data
-  } catch (err) {
-    console.error('Error fetching data:', err)
-    throw new Error('Failed to fetch metadata')
+  params: {
+    slug: string
   }
 }
+
 export async function generateMetadata({ params }: ParamsProps) {
-  const { slug } = await params
-  const meta = await fetchMetaData(slug)
+  const { slug } = params
+
+  const result = await payload.find({
+    collection: 'blogInner',
+    where: {
+      slug: { equals: slug },
+    },
+  })
+
+  const blogInnerPage = result.docs?.[0]
+
   return {
-    title: meta?.docs?.[0]?.meta?.title || 'Wizgrowth Blogs',
-    description: meta?.docs?.[0]?.meta?.description,
+    title: blogInnerPage?.meta?.title || 'Wizgrowth Blogs',
+    description: blogInnerPage?.meta?.description || 'Stay updated with the latest from Wizgrowth.',
   }
 }
 
@@ -54,7 +43,7 @@ export async function getPageData(slug: string) {
 }
 
 export default async function BlogInnerPage({ params }: ParamsProps) {
-  const { slug } = await params
+  const { slug } = params
   const innerData = await getPageData(slug)
 
   return (

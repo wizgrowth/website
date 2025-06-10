@@ -28,6 +28,6 @@ export const servicesSections = [
     id: 6,
     title: 'Website Development',
     description:
-      'Reget cursus rutrum vestibulum. Commodo aliquam ac elementum semper quisque duis.',
+      'From sleek designs to SEO friendly code, we build fast, responsive, and scalable websites that turn clicks into customers.',
   },
 ]

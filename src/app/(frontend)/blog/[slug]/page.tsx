@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: ParamsProps) {
 async function getInnerPageData(slug: string) {
   try {
     const response = await fetch(
-      `${process.env.SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
+      `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
     )
     const data = await response.json()
     return data

@@ -7,14 +7,20 @@ export async function POST(request: Request) {
     Date: date,
     Time: time,
   }
+  const isStaging = process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
   try {
-    const response = await fetch('http://localhost:3001/api/demobooking/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      isStaging
+        ? `${process.env.NEXT_PUBLIC_STAGING_DOMAIN}/api/demobooking/`
+        : `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/demobooking/`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
       },
-      body: JSON.stringify(bookingData),
-    })
+    )
     const data = await response.json()
     console.log('Response from external API:', data)
   } catch (error) {

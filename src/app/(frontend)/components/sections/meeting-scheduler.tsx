@@ -74,8 +74,8 @@ export default function MeetingScheduler() {
       try {
         const response = await fetch(
           isStaging
-            ? `${process.env.NEXT_PUBLIC_STAGING_DOMAIN}/api/demobooking/`
-            : `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/demobooking/`,
+            ? `${process.env.NEXT_PUBLIC_STAGING_DOMAIN}/api/booking/`
+            : `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/booking/`,
           {
             method: 'POST',
             headers: {

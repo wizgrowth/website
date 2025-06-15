@@ -70,14 +70,20 @@ export default function MeetingScheduler() {
 
   useEffect(() => {
     async function addBookingDataToBackend() {
+      const isStaging = process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
       try {
-        const response = await fetch('http://localhost:3001/api/booking', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        const response = await fetch(
+          isStaging
+            ? `${process.env.NEXT_PUBLIC_STAGING_DOMAIN}/api/demobooking/`
+            : `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/demobooking/`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
           },
-          body: JSON.stringify(formData),
-        })
+        )
         const data = await response.json()
         console.log('Response from backend:', data)
         setIsFormSubmitted(true)

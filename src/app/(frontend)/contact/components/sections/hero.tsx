@@ -8,7 +8,7 @@ export function Hero() {
         <div className="mt-40 bg-primary-200 rounded-3xl flex items-center justify-evenly max-xl:lg:gap-10 max-xl:lg:pl-10 max-lg:flex-col max-lg:pt-16 max-lg:px-24 lg:pr-5 max-sm:px-7">
           <div>
             <h1 className="font-extrabold text-5xl leading-tight text-black max-xl:text-4xl max-lg:text-center max-xl:leading-snug">
-              Don’t Know What To Do?
+              {/* Don’t Know What To Do? */}
               <br aria-hidden className="max-xl:hidden" /> Call Us Today
             </h1>
             <Button

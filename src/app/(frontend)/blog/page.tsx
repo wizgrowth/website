@@ -25,8 +25,8 @@ const blogHeroData = await payload.find({
 
 export function generateMetadata() {
   return {
-    title: blogHomeData?.meta?.title || 'Blog Home',
-    description: blogHomeData?.meta?.description || 'Welcome to the blog',
+    title: blogHomeData?.meta?.title || 'Wizgrowth Blog',
+    description: blogHomeData?.meta?.description || 'Welcome to wizgrowth blog',
   }
 }
 

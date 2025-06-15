@@ -52,17 +52,17 @@ export const Users: CollectionConfig = {
           value: 'user',
         },
       ],
-      access: {
-        create: ({ req: { user } }) => {
-          return user?.Role === 'admin' && true
-        },
-        read: ({ req: { user } }) => {
-          return user?.Role === 'admin' && true
-        },
-        update: ({ req: { user } }) => {
-          return user?.Role === 'admin' && true
-        },
-      },
+      // access: {
+      //   create: ({ req: { user } }) => {
+      //     return user?.Role === 'admin' && true
+      //   },
+      //   read: ({ req: { user } }) => {
+      //     return user?.Role === 'admin' && true
+      //   },
+      //   update: ({ req: { user } }) => {
+      //     return user?.Role === 'admin' && true
+      //   },
+      // },
     },
     {
       name: 'designation',

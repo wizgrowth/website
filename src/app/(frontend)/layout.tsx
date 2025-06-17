@@ -23,6 +23,12 @@ export const metadata = {
   },
   description:
     'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development',
+  openGraph: {
+    title: 'Wizgrowth - India’s Leading Digital Marketing Agency',
+    description:
+      'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development',
+    type: 'website',
+  },
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

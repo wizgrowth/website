@@ -25,6 +25,22 @@ export async function generateMetadata({ params }: ParamsProps) {
   return {
     title: blogInnerPage?.meta?.title || 'Wizgrowth Blogs',
     description: blogInnerPage?.meta?.description || 'Stay updated with the latest from Wizgrowth.',
+    openGraph: {
+      title: blogInnerPage?.meta?.ogTitle,
+      description: blogInnerPage?.meta?.ogDescription,
+      images: [
+        {
+          url:
+            typeof blogInnerPage?.meta?.ogImage === 'object'
+              ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${blogInnerPage?.meta?.ogImage?.url}`
+              : undefined,
+          width: 1200,
+          height: 630,
+          alt: blogInnerPage?.meta?.ogTitle,
+        },
+      ],
+      type: 'website',
+    },
   }
 }
 

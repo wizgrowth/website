@@ -14,8 +14,10 @@ const homePageData = await payload.findGlobal({
 
 export function generateMetadata() {
   return {
-    title: homePageData?.meta?.title || 'Wizgrowth Home Page',
-    description: homePageData?.meta?.description || 'Wizgrowth Home Page',
+    title: homePageData?.meta?.title || 'Wizgrowth - India’s Leading Digital Marketing Agency',
+    description:
+      homePageData?.meta?.description ||
+      'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development',
   }
 }
 

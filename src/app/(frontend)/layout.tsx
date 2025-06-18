@@ -17,8 +17,18 @@ const poppins = Poppins({
 })
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  title: {
+    default: 'Wizgrowth - India’s Leading Digital Marketing Agency',
+    template: '%s - Wizgrowth',
+  },
+  description:
+    'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development',
+  openGraph: {
+    title: 'Wizgrowth - India’s Leading Digital Marketing Agency',
+    description:
+      'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development',
+    type: 'website',
+  },
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

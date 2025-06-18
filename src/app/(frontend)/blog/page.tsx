@@ -25,8 +25,24 @@ const blogHeroData = await payload.find({
 
 export function generateMetadata() {
   return {
-    title: blogHomeData?.meta?.title || 'Blog Home',
-    description: blogHomeData?.meta?.description || 'Welcome to the blog',
+    title: blogHomeData?.meta?.title || 'Wizgrowth Blog',
+    description: blogHomeData?.meta?.description || 'Welcome to wizgrowth blog',
+    openGraph: {
+      title: blogHomeData?.meta?.ogTitle,
+      description: blogHomeData?.meta?.ogDescription,
+      images: [
+        {
+          url:
+            typeof blogHomeData?.meta?.ogImage === 'object'
+              ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${blogHomeData?.meta?.ogImage?.url}`
+              : undefined,
+          width: 1200,
+          height: 630,
+          alt: blogHomeData?.meta?.ogTitle,
+        },
+      ],
+      type: 'website',
+    },
   }
 }
 

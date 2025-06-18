@@ -52,6 +52,25 @@ export default buildConfig({
       generateURL: ({ doc, collectionSlug }) =>
         `https://example.com/${collectionSlug}/${doc?.slug}`,
       tabbedUI: true,
+      fields: ({ defaultFields }) => [
+        ...defaultFields,
+        {
+          label: 'Open Graph Title',
+          name: 'ogTitle',
+          type: 'text',
+        },
+        {
+          label: 'Open Graph Description',
+          name: 'ogDescription',
+          type: 'textarea',
+        },
+        {
+          label: 'Open Graph Image',
+          name: 'ogImage',
+          type: 'upload',
+          relationTo: 'media',
+        },
+      ],
     }),
   ],
 })

@@ -2,9 +2,9 @@
 'use client'
 
 import Image from 'next/image'
-import { FaceBookIcon } from '../icons/facebook'
-import { InstagramIcon } from '../icons/instagram'
-import { Linkedin } from '../icons/linkedin'
+// import { FaceBookIcon } from '../icons/facebook'
+// import { InstagramIcon } from '../icons/instagram'
+// import { Linkedin } from '../icons/linkedin'
 import { MobileNavBar } from './mobile-navbar'
 import { usePathname } from 'next/navigation'
 
@@ -12,28 +12,29 @@ export function Header() {
   const pathName = usePathname()
 
   // need to dry the code
-  const socialMedia = [
-    {
-      id: 1,
-      name: 'Facebook',
-      url: '/facebook/',
-      icon: <FaceBookIcon width="15px" height="15px" className="p-3 rounded-full bg-primary-100" />,
-    },
-    {
-      id: 2,
-      name: 'Instagram',
-      url: '/instagram/',
-      icon: (
-        <InstagramIcon width="15px" height="15px" className="p-3 rounded-full bg-primary-100" />
-      ),
-    },
-    {
-      id: 3,
-      name: 'LinkedIn',
-      url: '/linkedin/',
-      icon: <Linkedin width="15px" height="15px" className="p-3 rounded-full bg-primary-100" />,
-    },
-  ]
+  // social media to be added alter
+  // const socialMedia = [
+  //   {
+  //     id: 1,
+  //     name: 'Facebook',
+  //     url: '/facebook/',
+  //     icon: <FaceBookIcon width="15px" height="15px" className="p-3 rounded-full bg-primary-100" />,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Instagram',
+  //     url: '/instagram/',
+  //     icon: (
+  //       <InstagramIcon width="15px" height="15px" className="p-3 rounded-full bg-primary-100" />
+  //     ),
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'LinkedIn',
+  //     url: '/linkedin/',
+  //     icon: <Linkedin width="15px" height="15px" className="p-3 rounded-full bg-primary-100" />,
+  //   },
+  // ]
   return (
     <section className="py-8 fixed top-0 left-0 right-0 bg-white z-10 shadow-md">
       <div className="relative">
@@ -74,16 +75,17 @@ export function Header() {
               Contact
             </a>
           </div>
-          <div className="flex justify-center items-center gap-4 max-lg:hidden">
+          {/* <div className="flex justify-center items-center gap-4 max-lg:hidden">
             {socialMedia.map((item) => (
               <a key={item.id} href={item.url}>
                 {item.icon}
               </a>
             ))}
-          </div>
+          </div> */}
 
           {/* mobile navbar */}
-          <MobileNavBar socialMedia={socialMedia} />
+          {/* <MobileNavBar socialMedia={socialMedia} /> */}
+          <MobileNavBar />
         </div>
       </div>
     </section>

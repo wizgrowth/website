@@ -1,51 +1,52 @@
 import Image from 'next/image'
 import { ClockIcon } from '@components/icons/clock-icon'
-import { FaceBookIcon } from '../icons/facebook'
-import { InstagramIcon } from '../icons/instagram'
-import { Linkedin } from '../icons/linkedin'
+// import { FaceBookIcon } from '../icons/facebook'
+// import { InstagramIcon } from '../icons/instagram'
+// import { Linkedin } from '../icons/linkedin'
 import { PhoneIcon } from '../icons/phone'
 import { EmailIcon } from '../icons/email-icon'
 import { LocationIcon } from '../icons/location-icon'
 
 export function Footer() {
-  const socialMedia = [
-    {
-      id: 1,
-      name: 'Facebook',
-      url: '/facebook/',
-      icon: (
-        <FaceBookIcon
-          width="13px"
-          height="13px"
-          className="p-2 rounded-full border border-primary-400 stroke-primary-300 fill-primary-300"
-        />
-      ),
-    },
-    {
-      id: 2,
-      name: 'Instagram',
-      url: '/instagram/',
-      icon: (
-        <InstagramIcon
-          width="13px"
-          height="13px"
-          className="p-2 rounded-full border border-primary-400 stroke-primary-300 fill-primary-300"
-        />
-      ),
-    },
-    {
-      id: 3,
-      name: 'LinkedIn',
-      url: '/linkedin/',
-      icon: (
-        <Linkedin
-          width="13px"
-          height="13px"
-          className="p-2 rounded-full border border-primary-400 stroke-primary-300 fill-primary-300"
-        />
-      ),
-    },
-  ]
+  // social media to be added later
+  // const socialMedia = [
+  //   {
+  //     id: 1,
+  //     name: 'Facebook',
+  //     url: '/facebook/',
+  //     icon: (
+  //       <FaceBookIcon
+  //         width="13px"
+  //         height="13px"
+  //         className="p-2 rounded-full border border-primary-400 stroke-primary-300 fill-primary-300"
+  //       />
+  //     ),
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Instagram',
+  //     url: '/instagram/',
+  //     icon: (
+  //       <InstagramIcon
+  //         width="13px"
+  //         height="13px"
+  //         className="p-2 rounded-full border border-primary-400 stroke-primary-300 fill-primary-300"
+  //       />
+  //     ),
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'LinkedIn',
+  //     url: '/linkedin/',
+  //     icon: (
+  //       <Linkedin
+  //         width="13px"
+  //         height="13px"
+  //         className="p-2 rounded-full border border-primary-400 stroke-primary-300 fill-primary-300"
+  //       />
+  //     ),
+  //   },
+  // ]
   const contactInfo = [
     {
       id: 1,
@@ -56,7 +57,7 @@ export function Footer() {
     },
     {
       id: 2,
-      content: 'marketing@wizgrowth.com',
+      content: 'admin@wizgrowth.com',
       icon: (
         <EmailIcon width="15px" height="15px" className="stroke-primary-300 fill-primary-400" />
       ),
@@ -103,7 +104,7 @@ export function Footer() {
                 <p className="text-sm font-light text-primary-400">Sat - Sun 10AM - 5PM</p>
               </div>
             </div>
-            <div className="mt-8 max-xl:mt-0">
+            {/* <div className="mt-8 max-xl:mt-0">
               <p className="text-base text-primary-300 font-bold">Social Media</p>
               <div className="flex items-center gap-2 mt-2">
                 {socialMedia.map((item) => (
@@ -112,7 +113,7 @@ export function Footer() {
                   </a>
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
           {/* section-2 */}
           <div className="max-xl:hidden">{quote}</div>

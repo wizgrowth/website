@@ -6,6 +6,7 @@ html {
   font-family: 'DM Sans', sans-serif;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  scroll-padding-top: 100px;
 }
 :root {
   --font-poppins: 'Poppins', sans-serif;
@@ -14,8 +15,6 @@ html {
 body {
   font-family: var(--font-poppins);
 }
-
-
 
 @layer base {
   :root {
@@ -72,8 +71,6 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
-
-
 
 @layer base {
   * {

@@ -1,16 +1,17 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { useState } from 'react'
 
-type MobileNavBarProps = {
-  socialMedia: {
-    id: number
-    name: string
-    url: string
-    icon: React.JSX.Element
-  }[]
-}
+// type MobileNavBarProps = {
+//   socialMedia: {
+//     id: number
+//     name: string
+//     url: string
+//     icon: React.JSX.Element
+//   }[]
+// }
 
-export function MobileNavBar({ socialMedia }: MobileNavBarProps) {
+// export function MobileNavBar({ socialMedia }: MobileNavBarProps) {
+export function MobileNavBar() {
   const [toggle, setToggle] = useState(false)
   return (
     <div className="lg:hidden">
@@ -52,13 +53,13 @@ export function MobileNavBar({ socialMedia }: MobileNavBarProps) {
         >
           Contact
         </a>
-        <div className="flex justify-start items-center gap-4 mt-10 px-3">
+        {/* <div className="flex justify-start items-center gap-4 mt-10 px-3">
           {socialMedia.map((item) => (
             <a key={item.id} href={item.url}>
               {item.icon}
             </a>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   )

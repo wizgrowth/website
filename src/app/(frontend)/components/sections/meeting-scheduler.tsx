@@ -143,7 +143,7 @@ export default function MeetingScheduler() {
   }
 
   return (
-    <section className="pb-20">
+    <section className="pb-20" id="book-demo">
       <div className="container ">
         <div className="bg-primary-300 rounded-3xl py-20 px-20 max-md:px-5">
           <div className="flex items-center justify-between max-lg:flex-col max-lg:gap-10">
@@ -155,11 +155,11 @@ export default function MeetingScheduler() {
                 Book a Consultation
               </p>
             </div>
-            <Button
+            {/* <Button
               className="bg-primary-200 text-lg font-medium leading-7 text-primary-400 py-5 px-6 rounded-xl block w-fit"
               href="/more-about-me/"
               Btntext="More About Me"
-            />
+            /> */}
           </div>
           {/* calendar */}
           <div className="w-full mx-auto bg-white rounded-lg shadow-md mt-16 flex items-center gap-7 px-14 max-lg:flex-col max-sm:px-5">

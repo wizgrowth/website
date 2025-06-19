@@ -20,7 +20,7 @@ export function Hero() {
               Results
             </h1>
             <Button
-              href="tel:123456789"
+              href="tel:7907551261"
               className="px-8 py-3 bg-primary-400 text-white rounded-lg hover:opacity-90 transition duration-300 ease-in-out mt-8 block w-fit font-medium text-lg max-lg:mx-auto"
               Btntext="Get Started Now"
             />

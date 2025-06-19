@@ -57,7 +57,7 @@ export function Footer() {
     },
     {
       id: 2,
-      content: 'marketing@wizgrowth.com',
+      content: 'admin@wizgrowth.com',
       icon: (
         <EmailIcon width="15px" height="15px" className="stroke-primary-300 fill-primary-400" />
       ),

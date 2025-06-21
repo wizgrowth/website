@@ -17,10 +17,12 @@ export function FloatingMenuItem({ data }: FloatingMenuProps) {
       let newActiveId: string | null | undefined = null
 
       document
-        .querySelectorAll('.payload-richtext h2 a, h3 a, h4 a, h5 a, h6 a')
+        .querySelectorAll(
+          '.payload-richtext h2,.payload-richtext h3,.payload-richtext h4,.payload-richtext h5,.payload-richtext h6',
+        )
         .forEach((item) => {
           if (item.getBoundingClientRect().top < window.innerHeight) {
-            newActiveId = item.parentElement?.getAttribute('id')
+            newActiveId = item?.getAttribute('id')
           }
         })
 
@@ -39,7 +41,7 @@ export function FloatingMenuItem({ data }: FloatingMenuProps) {
   }, [])
 
   return (
-    <a className="pl-2 rounded-sm" href={`#${data.titleId}`}>
+    <a className="pl-2 rounded-sm hover:bg-primary-200" href={`#${data.titleId}`}>
       {data.title}
     </a>
   )

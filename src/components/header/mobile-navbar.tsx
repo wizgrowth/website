@@ -21,6 +21,7 @@ export function MobileNavBar() {
         onClick={() => {
           setToggle((prev) => !prev)
         }}
+        aria-label="Toggle navigation"
       >
         <span className="block h-[1.5px] w-[18px] rounded-lg bg-black mb-[3px] "></span>
         <span className="block h-[1.5px] w-[18px] rounded-lg bg-black mb-[3px] opacity-100"></span>

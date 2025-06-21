@@ -6,7 +6,7 @@ html {
   font-family: 'DM Sans', sans-serif;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  scroll-padding-top: 120px;
 }
 :root {
   --font-poppins: 'Poppins', sans-serif;

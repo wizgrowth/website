@@ -7,7 +7,6 @@ const payload = await getPayload({ config })
 const servicesPageMetaData = await payload.findGlobal({
   slug: 'services',
 })
-console.log(servicesPageMetaData)
 export function generateMetadata() {
   return {
     title: servicesPageMetaData?.meta?.title || 'Services Page',

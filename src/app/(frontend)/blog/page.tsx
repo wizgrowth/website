@@ -2,6 +2,8 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { Hero, BlogList } from './components'
 
+export const revalidate = 60
+
 const payload = await getPayload({ config })
 
 const blogHomeData = await payload.findGlobal({

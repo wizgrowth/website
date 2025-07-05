@@ -33,13 +33,13 @@ export function BlogList() {
   return (
     <section className="mt-20 mb-28 max-sm:mt-16">
       <div className="container">
-        <div className="grid grid-cols-3 gap-5 max-lg:grid-cols-2 max-sm:grid-cols-1">
+        <div className="grid grid-cols-3 gap-5 max-xl:grid-cols-2 max-md:grid-cols-1">
           {blogListData.docs.map((item: BlogPost) => {
             return (
               <a
                 href={item.slug}
                 key={item.id}
-                className="border border-slate-200 p-5 rounded-lg bg-primary-200 hover:bg-primary-100 transition duration-300"
+                className="border border-slate-200 p-5 rounded-lg bg-primary-200 hover:bg-primary-100 hover:border-primary-400 transition duration-300"
               >
                 {typeof item.featuredImage === 'object' && item.featuredImage?.url && (
                   <Image
@@ -47,7 +47,7 @@ export function BlogList() {
                     alt={item.title || 'Blog feature image'}
                     width={500}
                     height={300}
-                    className="rounded-3xl"
+                    className="rounded-3xl w-full h-60 max-lg:h-40 max-md:h-60 object-cover max-sm:w-96 max-sm:mx-auto"
                   />
                 )}
                 {Array.isArray(item?.category) && item.category.length > 0 && (

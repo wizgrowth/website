@@ -41,7 +41,7 @@ export function Header() {
         <div className="container flex justify-between items-center">
           <a href="/">
             <Image
-              src="https://vdskmkiggnujcnwluksm.supabase.co/storage/v1/object/sign/wizgrowth-assets/header/wizgrowth-header-logo.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ3aXpncm93dGgtYXNzZXRzL2hlYWRlci93aXpncm93dGgtaGVhZGVyLWxvZ28ucG5nIiwiaWF0IjoxNzQ0NjU2NzA3LCJleHAiOjIwNjAwMTY3MDd9.uZloCq7pQawSvku2tciZIWiMOHulTcq8LGYgJDTe9Dk"
+              src="https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/header/wizgrowth-header-logo.png"
               alt="Wizgrowth logo"
               width={190}
               height={30}

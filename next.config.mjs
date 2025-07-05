@@ -12,7 +12,12 @@ const nextConfig = {
     return config
   },
   images: {
-    domains: ['vdskmkiggnujcnwluksm.supabase.co'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ibffbzwoucksfljolszp.supabase.co',
+      },
+    ],
   },
   trailingSlash: true,
 }

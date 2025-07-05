@@ -58,14 +58,14 @@ export function Hero({ innerData }: HeroProps) {
                 </div>
               </div>
             </div>
-            <div className="flex w-full flex-1 flex-shrink-0 justify-end max-lg:justify-center lg:basis-[45%] xl:basis-[40%] max-sm:hidden">
+            <div className="flex w-full flex-1 flex-shrink-0 justify-end max-lg:justify-center lg:basis-[45%] xl:basis-[40%] max-lg:hidden">
               {innerData?.featuredImage?.url && (
                 <Image
                   src={innerData.featuredImage.url}
                   alt={innerData?.featuredImage?.alt}
-                  width={279}
-                  height={428}
-                  className="h-[279px] w-[428px] max-w-full rounded-xl object-cover max-lg:h-auto"
+                  width={500}
+                  height={300}
+                  className="rounded-3xl w-full h-60 object-cover max-lg:w-96"
                   priority={true}
                   fetchPriority="high"
                 />

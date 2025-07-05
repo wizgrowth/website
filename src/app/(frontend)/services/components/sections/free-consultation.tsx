@@ -21,7 +21,7 @@ export function FreeConsultation() {
           </div>
 
           <Image
-            src="https://vdskmkiggnujcnwluksm.supabase.co/storage/v1/object/sign/wizgrowth-assets/services/call-to-action-section-image.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8zMzljOWM1OS0zNzJhLTRkNzQtYTllNC1lZTA2OWU3YWI0ZWEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ3aXpncm93dGgtYXNzZXRzL3NlcnZpY2VzL2NhbGwtdG8tYWN0aW9uLXNlY3Rpb24taW1hZ2UucG5nIiwiaWF0IjoxNzQ5MzI0OTQyLCJleHAiOjIwNjQ2ODQ5NDJ9.YileBCIjv0Q9tQheptaa8aagsA_kJhgo4lXQ_3U9DbY"
+            src="https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/service-page/call-to-action-section-image.png"
             alt="call to action image"
             width={541}
             height={424}

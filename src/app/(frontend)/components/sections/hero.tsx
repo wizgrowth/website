@@ -26,7 +26,7 @@ export function Hero() {
         <div className="basis-1/2 bg-primary-700 rounded-3xl max-lg:hidden">
           <div className="px-16 -mt-9">
             <Image
-              src="https://vdskmkiggnujcnwluksm.supabase.co/storage/v1/object/sign/wizgrowth-assets/front-page/wizgrowth-hero.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ3aXpncm93dGgtYXNzZXRzL2Zyb250LXBhZ2Uvd2l6Z3Jvd3RoLWhlcm8ucG5nIiwiaWF0IjoxNzQ1MzQ5NDQ5LCJleHAiOjIwNjA3MDk0NDl9.ufs2VCj0UQd0DKgFSQpOSqCVil2Ntw_gtS7KoVWW-Rc"
+              src="https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/front-page/wizgrowth-hero.png"
               width={561}
               height={702}
               alt="Hero image"

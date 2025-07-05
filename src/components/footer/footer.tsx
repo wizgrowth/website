@@ -79,7 +79,7 @@ export function Footer() {
         — Benjamin Franklin
       </p>
       <Image
-        src="https://vdskmkiggnujcnwluksm.supabase.co/storage/v1/object/sign/wizgrowth-assets/footer/leaf.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ3aXpncm93dGgtYXNzZXRzL2Zvb3Rlci9sZWFmLnBuZyIsImlhdCI6MTc0NDkxMzU1NCwiZXhwIjoyMDYwMjczNTU0fQ.jyUcvOLLw2qbbH9zagCp_t7YpgKyem1ew_ATuLjRHO0"
+        src="https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/footer/leaf.png"
         width={100}
         height={100}
         alt="leaf image"

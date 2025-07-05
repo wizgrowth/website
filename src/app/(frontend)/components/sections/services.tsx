@@ -13,21 +13,21 @@ export function Services() {
     {
       id: 1,
       imgSrc:
-        'https://vdskmkiggnujcnwluksm.supabase.co/storage/v1/object/sign/wizgrowth-assets/front-page/tax-consultation.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ3aXpncm93dGgtYXNzZXRzL2Zyb250LXBhZ2UvdGF4LWNvbnN1bHRhdGlvbi5wbmciLCJpYXQiOjE3NDU0Mzk0OTAsImV4cCI6MjA2MDc5OTQ5MH0.aoqCRLeAzRq3YlyQWJUnuXsMLJypITANZPjH00l9eag',
+        'https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/front-page/tax-consultation.png',
       title: 'SEO',
       description: 'Get found and get traffic with data driven SEO.',
     },
     {
       id: 2,
       imgSrc:
-        'https://vdskmkiggnujcnwluksm.supabase.co/storage/v1/object/sign/wizgrowth-assets/front-page/finance-consultation.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ3aXpncm93dGgtYXNzZXRzL2Zyb250LXBhZ2UvZmluYW5jZS1jb25zdWx0YXRpb24ucG5nIiwiaWF0IjoxNzQ1NDM5NTA5LCJleHAiOjIwNjA3OTk1MDl9._ffnZ3BOylzjTOQAaKs-3hQD3BMXHeUIElD8wi4I8VU',
+        'https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/front-page/finance-consultation.png',
       title: 'Social Media Marketing',
       description: 'Build your brand and connect with your audience across all platforms.',
     },
     {
       id: 3,
       imgSrc:
-        'https://vdskmkiggnujcnwluksm.supabase.co/storage/v1/object/sign/wizgrowth-assets/front-page/business-consultation.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ3aXpncm93dGgtYXNzZXRzL2Zyb250LXBhZ2UvYnVzaW5lc3MtY29uc3VsdGF0aW9uLnBuZyIsImlhdCI6MTc0NTQzOTUyNywiZXhwIjoyMDYwNzk5NTI3fQ.6HwLo0ejvEF6WUMPh3tAeB_NoDhQJNFHPRVo4f-eyIM',
+        'https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/front-page/business-consultation.png',
       title: 'Paid Advertising (PPC)',
       description: "Boost your brand's presence on social media platforms.",
     },

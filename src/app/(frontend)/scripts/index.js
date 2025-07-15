@@ -1,2 +1,2 @@
 export { GoogleTag } from './google-tag'
-export { Noscripts } from './noscripts'
+export { NoScripts } from './noscripts'

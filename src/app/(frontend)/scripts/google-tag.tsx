@@ -1,5 +1,5 @@
 import { GoogleTagManager } from '@next/third-parties/google'
 
-export default function GoogleTag() {
+export function GoogleTag() {
   return <GoogleTagManager gtmId="GTM-5VR52CQZ" />
 }

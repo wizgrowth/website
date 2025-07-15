@@ -15,5 +15,3 @@ export function NoScripts() {
     </>
   )
 }
-
-export default NoScripts

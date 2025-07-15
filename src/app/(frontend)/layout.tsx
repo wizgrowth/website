@@ -4,6 +4,8 @@ import { Header } from '@components/header'
 import { Footer } from '@/components/footer'
 // In your app/layout.js (App Router) or pages/_app.js (Pages Router)
 import { Poppins } from 'next/font/google'
+import { GoogleTagManager } from '@next/third-parties/google'
+import { NoScript } from './script'
 
 // Configure the font with all variants you need
 const poppins = Poppins({
@@ -36,7 +38,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en" className={poppins.variable}>
+      <GoogleTagManager gtmId="GTM-5VR52CQZ" />
       <body>
+        <NoScript />
         <main>
           <Header />
           {children}

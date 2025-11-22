@@ -1,17 +1,28 @@
 name: Run Payload Migrations
+
 on:
   push:
     branches:
       - main
+      - Staging/wizgrowth
+
 jobs:
   migrate:
     runs-on: ubuntu-latest
+
+    # Auto-select the GitHub Environment based on branch
+    environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
       - name: Install Dependencies
         run: yarn install
+
+      - name: Set Environment Variables
+        run: |
+          echo "DATABASE_URI=${{ secrets.DATABASE_URI }}" >> $GITHUB_ENV
+          echo "PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}" >> $GITHUB_ENV
+
       - name: Run Migrations
-        env:
-          DATABASE_URI: ${{ secrets.DATABASE_URI }}
-          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
         run: yarn payload migrate

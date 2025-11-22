@@ -21,6 +21,9 @@ import { s3Storage } from '@payloadcms/storage-s3'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+// Determine if S3 storage plugin should be enabled (only for local development)
+const envArray = [process.env.NEXT_PUBLIC_SITE_DOMAIN, process.env.NEXT_PUBLIC_STAGING_DOMAIN]
+const isLocalhost = envArray.some((item) => item?.includes('http://localhost'))
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -73,22 +76,27 @@ export default buildConfig({
         },
       ],
     }),
-    s3Storage({
-      collections: {
-        media: {
-          prefix: 'media',
-        },
-      },
-      bucket: `${process.env.S3_BUCKET}`,
-      config: {
-        forcePathStyle: true, // Important for using Supabase
-        credentials: {
-          accessKeyId: `${process.env.S3_ACCESS_KEY_ID}`,
-          secretAccessKey: `${process.env.S3_SECRET_ACCESS_KEY}`,
-        },
-        region: process.env.S3_REGION,
-        endpoint: process.env.S3_ENDPOINT,
-      },
-    }),
+    // Conditionally include S3 storage (only for production or staging development)
+    ...(isLocalhost
+      ? []
+      : [
+          s3Storage({
+            collections: {
+              media: {
+                prefix: 'media',
+              },
+            },
+            bucket: `${process.env.S3_BUCKET}`,
+            config: {
+              forcePathStyle: true, // Important for using Supabase
+              credentials: {
+                accessKeyId: `${process.env.S3_ACCESS_KEY_ID}`,
+                secretAccessKey: `${process.env.S3_SECRET_ACCESS_KEY}`,
+              },
+              region: process.env.S3_REGION,
+              endpoint: process.env.S3_ENDPOINT,
+            },
+          }),
+        ]),
   ],
 })

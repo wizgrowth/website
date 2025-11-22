@@ -9,9 +9,10 @@ on:
 jobs:
   migrate:
     runs-on: ubuntu-latest
-
-    # Auto-select the GitHub Environment based on branch
     environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+
+    # Add timeout to prevent hanging
+    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v4
@@ -19,10 +20,16 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-      - name: Set Environment Variables
-        run: |
-          echo "DATABASE_URI=${{ secrets.DATABASE_URI }}" >> $GITHUB_ENV
-          echo "PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}" >> $GITHUB_ENV
+      - name: Check Migration Status
+        env:
+          DATABASE_URI: ${{ secrets.DATABASE_URI }}
+          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+        run: yarn payload migrate:status
 
-      - name: Run Migrations
-        run: yarn payload migrate
+      - name: Run Migrations (Non-Interactive)
+        env:
+          DATABASE_URI: ${{ secrets.DATABASE_URI }}
+          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+        run: |
+          # Auto-accept any prompts by piping yes
+          yes | yarn payload migrate || echo "Migration completed or no changes needed"

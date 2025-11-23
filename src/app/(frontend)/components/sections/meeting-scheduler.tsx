@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { Calendar } from '@/components/ui/calendar'
-import { Button } from '@/components/buttons/button'
 import { ClockIcon } from '@/components/icons/clock-icon'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -70,20 +69,14 @@ export default function MeetingScheduler() {
 
   useEffect(() => {
     async function addBookingDataToBackend() {
-      const isStaging = process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
       try {
-        const response = await fetch(
-          isStaging
-            ? `${process.env.NEXT_PUBLIC_STAGING_DOMAIN}/api/booking/`
-            : `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/booking/`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/booking/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        )
+          body: JSON.stringify(formData),
+        })
         const data = await response.json()
         console.log('Response from backend:', data)
         setIsFormSubmitted(true)

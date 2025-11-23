@@ -65,6 +65,7 @@ async function getInnerPageData(slug: string) {
 
 export default async function BlogInnerPage({ params }: ParamsProps) {
   const { slug } = await params
+  console.log('slug inside bloginnerpage component', slug)
   const innerData = await getInnerPageData(slug)
 
   return (

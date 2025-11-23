@@ -12,14 +12,14 @@ type ParamsProps = {
 
 export async function generateMetadata({ params }: ParamsProps) {
   const { slug } = await params
-
+  console.log(slug)
   const result = await payload.find({
     collection: 'blogInner',
     where: {
       slug: { equals: slug },
     },
   })
-
+  console.log(result)
   const blogInnerPage = result.docs?.[0]
 
   return {

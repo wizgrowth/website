@@ -22,8 +22,7 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 // Determine if S3 storage plugin should be enabled (only for local development)
-const envArray = [process.env.NEXT_PUBLIC_SITE_DOMAIN, process.env.NEXT_PUBLIC_STAGING_DOMAIN]
-const isLocalhost = envArray.some((item) => item?.includes('http://localhost'))
+const isLocalHost = process.env.ISLOCALHOST === 'true'
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -76,13 +75,12 @@ export default buildConfig({
         },
       ],
     }),
-    // S3 storage - always included in config but conditionally enabled
+    // S3 storage - always included in plugins array so importmap can detect it
+    // Only enabled when not on localhost
     s3Storage({
       collections: {
         media: {
           prefix: 'media',
-          // Disable S3 storage for localhost (files stored locally instead)
-          disableLocalStorage: !isLocalhost,
         },
       },
       bucket: `${process.env.S3_BUCKET || ''}`,
@@ -95,6 +93,7 @@ export default buildConfig({
         region: process.env.S3_REGION || '',
         endpoint: process.env.S3_ENDPOINT || '',
       },
+      enabled: !isLocalHost, // Conditionally enable/disable the plugin
     }),
   ],
 })

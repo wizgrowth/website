@@ -45,33 +45,42 @@ export async function generateMetadata({ params }: ParamsProps) {
 }
 
 // fetching page data
-async function getInnerPageData(slug: string) {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
-    )
-    const data = await response.json()
-    console.log(
-      data,
-      slug,
-      `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
-    )
-    return data
-  } catch (err) {
-    console.log(err)
-    throw new Error('Failed to fetch page data')
-  }
-}
+// async function getInnerPageData(slug: string) {
+//   try {
+//     const response = await fetch(
+//       `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
+//     )
+//     const data = await response.json()
+//     console.log(
+//       data,
+//       slug,
+//       `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
+//     )
+//     return data
+//   } catch (err) {
+//     console.log(err)
+//     throw new Error('Failed to fetch page data')
+//   }
+// }
 
 export default async function BlogInnerPage({ params }: ParamsProps) {
   const { slug } = await params
-  console.log('slug inside bloginnerpage component', slug)
-  const innerData = await getInnerPageData(slug)
+  // const innerData = await getInnerPageData(slug)
 
+  const result = await payload.find({
+    collection: 'blogInner',
+    where: {
+      slug: { equals: slug },
+    },
+  })
+
+  const innerData = result
+  console.log(innerData)
   return (
     <>
-      <Hero innerData={innerData.docs[0]} />
-      <Content innerData={innerData.docs[0]} />
+      {/* <Hero innerData={innerData.docs[0]} /> */}
+      {/* <Content innerData={innerData.docs[0]} /> */}
+      <h1 className="mt-[500px]">hello world {slug}</h1>
     </>
   )
 }

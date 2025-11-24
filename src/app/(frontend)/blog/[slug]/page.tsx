@@ -44,14 +44,18 @@ export async function generateMetadata({ params }: ParamsProps) {
   }
 }
 // In your component or API route
-console.log('NEXT_PUBLIC_SITE_DOMAIN:', process.env.NEXT_PUBLIC_SITE_DOMAIN)
+console.log(
+  'NEXT_PUBLIC_SITE_DOMAIN:',
+  process.env.NEXT_PUBLIC_SITE_DOMAIN,
+  process.env.NEXT_PUBLIC_STAGING_DOMAIN,
+)
 console.log('All env:', process.env)
 // fetching page data
 async function getInnerPageData(slug: string) {
   console.log(process.env.NEXT_PUBLIC_SITE_DOMAIN, slug)
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
+      `${process.env.NEXT_PUBLIC_STAGING_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
     )
     const data = await response.json()
     return data

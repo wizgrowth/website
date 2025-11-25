@@ -58,7 +58,7 @@ function getBaseURL() {
   // 3. Local dev
   return 'http://localhost:3000'
 }
-
+console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
 // fetching page data
 async function getInnerPageData(slug: string) {
   try {

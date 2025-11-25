@@ -30,6 +30,11 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+
+  // 🌟 ADD CORS HERE
+  cors: ['http://localhost:3000', '*.vercel.app', 'https://www.wizgrowth.com'],
+  // 🌟 END CORS
+
   collections: [Users, Media, DemoBooking, BlogInner],
   globals: [Contact, Homepage, Services, BlogHome],
   editor: lexicalEditor(),
@@ -45,10 +50,10 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
-    // storage-adapter-placeholder
+
     seoPlugin({
-      collections: ['blogInner'], //slug of the collection type
-      globals: ['homepage', 'contact', 'services', 'blog-home'], //slug of the global type
+      collections: ['blogInner'],
+      globals: ['homepage', 'contact', 'services', 'blog-home'],
       uploadsCollection: 'media',
       generateTitle: ({ doc }) => doc.title,
       generateDescription: ({ doc }) => doc.plainText,
@@ -75,8 +80,7 @@ export default buildConfig({
         },
       ],
     }),
-    // S3 storage - always included in plugins array so importmap can detect it
-    // Only enabled when not on localhost
+
     s3Storage({
       collections: {
         media: {
@@ -85,7 +89,7 @@ export default buildConfig({
       },
       bucket: `${process.env.S3_BUCKET || ''}`,
       config: {
-        forcePathStyle: true, // Important for using Supabase
+        forcePathStyle: true,
         credentials: {
           accessKeyId: `${process.env.S3_ACCESS_KEY_ID || ''}`,
           secretAccessKey: `${process.env.S3_SECRET_ACCESS_KEY || ''}`,
@@ -93,7 +97,7 @@ export default buildConfig({
         region: process.env.S3_REGION || '',
         endpoint: process.env.S3_ENDPOINT || '',
       },
-      enabled: !isLocalHost, // Conditionally enable/disable the plugin
+      enabled: !isLocalHost,
     }),
   ],
 })

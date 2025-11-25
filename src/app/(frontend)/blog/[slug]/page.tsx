@@ -43,24 +43,30 @@ export async function generateMetadata({ params }: ParamsProps) {
     },
   }
 }
-// In your component or API route
-console.log(
-  'NEXT_PUBLIC_SITE_DOMAIN:',
-  process.env.NEXT_PUBLIC_SITE_DOMAIN,
-  process.env.NEXT_PUBLIC_STAGING_DOMAIN,
-)
-console.log('All env:', process.env)
+
+function getBaseURL() {
+  // 1. If we're in a Vercel Preview/Prod environment
+  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
+    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  }
+
+  // 2. If you set a manual SITE_DOMAIN for production (optional)
+  if (process.env.NEXT_PUBLIC_SITE_DOMAIN) {
+    return process.env.NEXT_PUBLIC_SITE_DOMAIN
+  }
+
+  // 3. Local dev
+  return 'http://localhost:3000'
+}
+
 // fetching page data
 async function getInnerPageData(slug: string) {
-  console.log(process.env.NEXT_PUBLIC_SITE_DOMAIN, slug)
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_STAGING_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
-    )
-    const data = await response.json()
-    return data
+    const baseURL = getBaseURL()
+    const response = await fetch(`${baseURL}/api/blogInner/?where[slug][equals]=${slug}&depth=2`)
+    return await response.json()
   } catch (err) {
-    console.log(err)
+    console.error(err)
     throw new Error('Failed to fetch page data')
   }
 }

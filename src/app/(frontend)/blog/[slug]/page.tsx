@@ -44,26 +44,12 @@ export async function generateMetadata({ params }: ParamsProps) {
   }
 }
 
-function getBaseURL() {
-  // 1. If we're in a Vercel Preview/Prod environment
-  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
-    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-  }
-
-  // 2. If you set a manual SITE_DOMAIN for production (optional)
-  if (process.env.NEXT_PUBLIC_SITE_DOMAIN) {
-    return process.env.NEXT_PUBLIC_SITE_DOMAIN
-  }
-
-  // 3. Local dev
-  return 'http://localhost:3000'
-}
-console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
 // fetching page data
 async function getInnerPageData(slug: string) {
   try {
-    const baseURL = getBaseURL()
-    const response = await fetch(`${baseURL}/api/blogInner/?where[slug][equals]=${slug}&depth=2`)
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
+    )
     return await response.json()
   } catch (err) {
     console.error(err)

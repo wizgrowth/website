@@ -50,10 +50,9 @@ async function getInnerPageData(slug: string) {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
     )
-    const data = await response.json()
-    return data
+    return await response.json()
   } catch (err) {
-    console.log(err)
+    console.error(err)
     throw new Error('Failed to fetch page data')
   }
 }
@@ -61,7 +60,6 @@ async function getInnerPageData(slug: string) {
 export default async function BlogInnerPage({ params }: ParamsProps) {
   const { slug } = await params
   const innerData = await getInnerPageData(slug)
-
   return (
     <>
       <Hero innerData={innerData.docs[0]} />

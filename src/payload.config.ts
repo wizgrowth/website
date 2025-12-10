@@ -21,6 +21,8 @@ import { s3Storage } from '@payloadcms/storage-s3'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+// Determine if S3 storage plugin should be enabled (only for local development)
+const isLocalHost = process.env.ISLOCALHOST === 'true'
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -28,6 +30,11 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+
+  // 🌟 ADD CORS HERE
+  cors: ['http://localhost:3000', '*.vercel.app', 'https://www.wizgrowth.com'],
+  // 🌟 END CORS
+
   collections: [Users, Media, DemoBooking, BlogInner],
   globals: [Contact, Homepage, Services, BlogHome],
   editor: lexicalEditor(),
@@ -43,10 +50,10 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
-    // storage-adapter-placeholder
+
     seoPlugin({
-      collections: ['blogInner'], //slug of the collection type
-      globals: ['homepage', 'contact', 'services', 'blog-home'], //slug of the global type
+      collections: ['blogInner'],
+      globals: ['homepage', 'contact', 'services', 'blog-home'],
       uploadsCollection: 'media',
       generateTitle: ({ doc }) => doc.title,
       generateDescription: ({ doc }) => doc.plainText,
@@ -73,22 +80,24 @@ export default buildConfig({
         },
       ],
     }),
+
     s3Storage({
       collections: {
         media: {
           prefix: 'media',
         },
       },
-      bucket: `${process.env.S3_BUCKET}`,
+      bucket: `${process.env.S3_BUCKET || ''}`,
       config: {
-        forcePathStyle: true, // Important for using Supabase
+        forcePathStyle: true,
         credentials: {
-          accessKeyId: `${process.env.S3_ACCESS_KEY_ID}`,
-          secretAccessKey: `${process.env.S3_SECRET_ACCESS_KEY}`,
+          accessKeyId: `${process.env.S3_ACCESS_KEY_ID || ''}`,
+          secretAccessKey: `${process.env.S3_SECRET_ACCESS_KEY || ''}`,
         },
-        region: process.env.S3_REGION,
-        endpoint: process.env.S3_ENDPOINT,
+        region: process.env.S3_REGION || '',
+        endpoint: process.env.S3_ENDPOINT || '',
       },
+      enabled: !isLocalHost,
     }),
   ],
 })

@@ -233,9 +233,27 @@ export interface BlogInner {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (number | null) | Media;
-    ogTitle?: string | null;
-    ogDescription?: string | null;
-    ogImage?: (number | null) | Media;
+    keywords?: string | null;
+    metaRobots?: string | null;
+    schema?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    canonicalUrl?: string | null;
+    metaSocial?:
+      | {
+          platform: 'facebook' | 'twitter';
+          ogTitle?: string | null;
+          ogDescription?: string | null;
+          ogImage?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -382,9 +400,19 @@ export interface BlogInnerSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
-        ogTitle?: T;
-        ogDescription?: T;
-        ogImage?: T;
+        keywords?: T;
+        metaRobots?: T;
+        schema?: T;
+        canonicalUrl?: T;
+        metaSocial?:
+          | T
+          | {
+              platform?: T;
+              ogTitle?: T;
+              ogDescription?: T;
+              ogImage?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -444,9 +472,27 @@ export interface Contact {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (number | null) | Media;
-    ogTitle?: string | null;
-    ogDescription?: string | null;
-    ogImage?: (number | null) | Media;
+    keywords?: string | null;
+    metaRobots?: string | null;
+    schema?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    canonicalUrl?: string | null;
+    metaSocial?:
+      | {
+          platform: 'facebook' | 'twitter';
+          ogTitle?: string | null;
+          ogDescription?: string | null;
+          ogImage?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -465,9 +511,27 @@ export interface Homepage {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (number | null) | Media;
-    ogTitle?: string | null;
-    ogDescription?: string | null;
-    ogImage?: (number | null) | Media;
+    keywords?: string | null;
+    metaRobots?: string | null;
+    schema?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    canonicalUrl?: string | null;
+    metaSocial?:
+      | {
+          platform: 'facebook' | 'twitter';
+          ogTitle?: string | null;
+          ogDescription?: string | null;
+          ogImage?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -486,9 +550,27 @@ export interface Service {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (number | null) | Media;
-    ogTitle?: string | null;
-    ogDescription?: string | null;
-    ogImage?: (number | null) | Media;
+    keywords?: string | null;
+    metaRobots?: string | null;
+    schema?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    canonicalUrl?: string | null;
+    metaSocial?:
+      | {
+          platform: 'facebook' | 'twitter';
+          ogTitle?: string | null;
+          ogDescription?: string | null;
+          ogImage?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -507,9 +589,27 @@ export interface BlogHome {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (number | null) | Media;
-    ogTitle?: string | null;
-    ogDescription?: string | null;
-    ogImage?: (number | null) | Media;
+    keywords?: string | null;
+    metaRobots?: string | null;
+    schema?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    canonicalUrl?: string | null;
+    metaSocial?:
+      | {
+          platform: 'facebook' | 'twitter';
+          ogTitle?: string | null;
+          ogDescription?: string | null;
+          ogImage?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -526,9 +626,19 @@ export interface ContactSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
-        ogTitle?: T;
-        ogDescription?: T;
-        ogImage?: T;
+        keywords?: T;
+        metaRobots?: T;
+        schema?: T;
+        canonicalUrl?: T;
+        metaSocial?:
+          | T
+          | {
+              platform?: T;
+              ogTitle?: T;
+              ogDescription?: T;
+              ogImage?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -546,9 +656,19 @@ export interface HomepageSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
-        ogTitle?: T;
-        ogDescription?: T;
-        ogImage?: T;
+        keywords?: T;
+        metaRobots?: T;
+        schema?: T;
+        canonicalUrl?: T;
+        metaSocial?:
+          | T
+          | {
+              platform?: T;
+              ogTitle?: T;
+              ogDescription?: T;
+              ogImage?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -566,9 +686,19 @@ export interface ServicesSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
-        ogTitle?: T;
-        ogDescription?: T;
-        ogImage?: T;
+        keywords?: T;
+        metaRobots?: T;
+        schema?: T;
+        canonicalUrl?: T;
+        metaSocial?:
+          | T
+          | {
+              platform?: T;
+              ogTitle?: T;
+              ogDescription?: T;
+              ogImage?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -586,9 +716,19 @@ export interface BlogHomeSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
-        ogTitle?: T;
-        ogDescription?: T;
-        ogImage?: T;
+        keywords?: T;
+        metaRobots?: T;
+        schema?: T;
+        canonicalUrl?: T;
+        metaSocial?:
+          | T
+          | {
+              platform?: T;
+              ogTitle?: T;
+              ogDescription?: T;
+              ogImage?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

@@ -1,41 +1,30 @@
-import { Hero, Services, FreeConsultation } from './components'
-import { getPayload } from 'payload'
-import config from '@payload-config'
+import { Hero, Services, FreeConsultation } from './components';
+import { getPayload } from 'payload';
+import config from '@payload-config';
+import { getMeta } from '@/app/utils/get-meta';
+import { Schema } from '@/components/scripts/schema';
 
-const payload = await getPayload({ config })
+const payload = await getPayload({ config });
 
 const servicesPageMetaData = await payload.findGlobal({
   slug: 'services',
-})
-export function generateMetadata() {
-  return {
-    title: servicesPageMetaData?.meta?.title || 'Services Page',
-    description: servicesPageMetaData?.meta?.description || 'Wizgrowth Services Page',
-    openGraph: {
-      title: servicesPageMetaData?.meta?.ogTitle,
-      description: servicesPageMetaData?.meta?.ogDescription,
-      images: [
-        {
-          url:
-            typeof servicesPageMetaData?.meta?.ogImage === 'object'
-              ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${servicesPageMetaData?.meta?.ogImage?.url}`
-              : undefined,
-          width: 1200,
-          height: 630,
-          alt: servicesPageMetaData?.meta?.ogTitle,
-        },
-      ],
-      type: 'website',
-    },
-  }
+});
+
+export async function generateMetadata() {
+  const metadata = await getMeta({
+    meta: servicesPageMetaData?.meta,
+  });
+  return metadata;
 }
 
 export default function ServicesPage() {
+  const structuredData = servicesPageMetaData?.meta?.schema;
   return (
     <>
+      <Schema structuredData={structuredData} />
       <Hero />
       <Services />
       <FreeConsultation />
     </>
-  )
+  );
 }

@@ -51,6 +51,7 @@ export default async function BlogInnerPage({ params }: ParamsProps) {
     where: {
       slug: { equals: slug },
     },
+    depth: 2,
   });
 
   console.log('hello world');
@@ -62,7 +63,7 @@ export default async function BlogInnerPage({ params }: ParamsProps) {
         structuredData={innerData?.meta?.schema === null ? undefined : innerData?.meta?.schema}
       />
       <Hero innerData={innerData} />
-      {innerData?.sideMenu && innerData?.sideMenu.length > 0 && <Content innerData={innerData} />}
+      <Content innerData={innerData} />
     </>
   );
 }

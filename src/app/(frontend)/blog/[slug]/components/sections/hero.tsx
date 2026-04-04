@@ -7,7 +7,6 @@ type HeroProps = {
 };
 
 export function Hero({ innerData }: HeroProps) {
-  console.log('innerData', innerData);
   const author =
     innerData?.publishedBy && typeof innerData?.publishedBy === 'object'
       ? innerData?.publishedBy
@@ -79,17 +78,18 @@ export function Hero({ innerData }: HeroProps) {
               </div>
             </div>
             <div className="flex w-full flex-1 flex-shrink-0 justify-end max-lg:justify-center lg:basis-[45%] xl:basis-[40%] max-lg:hidden">
-              {featuredImage?.url && (
-                <Image
-                  src={featuredImage.url}
-                  alt={featuredImage.alt}
-                  width={500}
-                  height={300}
-                  className="rounded-3xl w-full h-60 object-cover max-lg:w-96"
-                  priority={true}
-                  fetchPriority="high"
-                />
-              )}
+              <Image
+                src={
+                  featuredImage?.url ||
+                  'https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/blog-inner/blog-default-thumbnail.png'
+                }
+                alt={featuredImage?.alt || 'Blog feature image'}
+                width={500}
+                height={300}
+                className="rounded-xl w-full h-60 object-cover max-lg:w-96"
+                priority={true}
+                fetchPriority="high"
+              />
             </div>
           </div>
         </div>

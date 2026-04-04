@@ -8,18 +8,18 @@ type HeroProps = {
 
 export function Hero({ innerData }: HeroProps) {
   const author =
-    innerData.publishedBy && typeof innerData.publishedBy === 'object'
-      ? innerData.publishedBy
+    innerData?.publishedBy && typeof innerData?.publishedBy === 'object'
+      ? innerData?.publishedBy
       : null;
 
   const authorImage =
-    author?.profilePicture && typeof author.profilePicture === 'object'
-      ? author.profilePicture
+    author?.profilePicture && typeof author?.profilePicture === 'object'
+      ? author?.profilePicture
       : null;
 
   const featuredImage =
-    innerData.featuredImage && typeof innerData.featuredImage === 'object'
-      ? innerData.featuredImage
+    innerData?.featuredImage && typeof innerData?.featuredImage === 'object'
+      ? innerData?.featuredImage
       : null;
 
   return (

@@ -53,7 +53,7 @@ export default async function BlogInnerPage({ params }: ParamsProps) {
     },
     depth: 2,
   });
-
+  console.log('innerPageData', innerPageData, slug);
   console.log('hello world');
 
   const innerData = innerPageData.docs[0];

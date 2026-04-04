@@ -2,11 +2,31 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
+   DO $$ BEGIN
    CREATE TYPE "public"."enum_blog_inner_meta_meta_social_platform" AS ENUM('facebook', 'twitter');
-  CREATE TYPE "public"."enum_contact_meta_meta_social_platform" AS ENUM('facebook', 'twitter');
-  CREATE TYPE "public"."enum_homepage_meta_meta_social_platform" AS ENUM('facebook', 'twitter');
-  CREATE TYPE "public"."enum_services_meta_meta_social_platform" AS ENUM('facebook', 'twitter');
-  CREATE TYPE "public"."enum_blog_home_meta_meta_social_platform" AS ENUM('facebook', 'twitter');
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  DO $$ BEGIN
+   CREATE TYPE "public"."enum_contact_meta_meta_social_platform" AS ENUM('facebook', 'twitter');
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  DO $$ BEGIN
+   CREATE TYPE "public"."enum_homepage_meta_meta_social_platform" AS ENUM('facebook', 'twitter');
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  DO $$ BEGIN
+   CREATE TYPE "public"."enum_services_meta_meta_social_platform" AS ENUM('facebook', 'twitter');
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  DO $$ BEGIN
+   CREATE TYPE "public"."enum_blog_home_meta_meta_social_platform" AS ENUM('facebook', 'twitter');
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
   CREATE TABLE IF NOT EXISTS "blog_inner_meta_meta_social" (
   	"_order" integer NOT NULL,
   	"_parent_id" integer NOT NULL,
@@ -57,41 +77,41 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"og_image_id" integer
   );
   
-  ALTER TABLE "blog_inner" DROP CONSTRAINT "blog_inner_meta_og_image_id_media_id_fk";
+  ALTER TABLE "blog_inner" DROP CONSTRAINT IF EXISTS "blog_inner_meta_og_image_id_media_id_fk";
   
-  ALTER TABLE "contact" DROP CONSTRAINT "contact_meta_og_image_id_media_id_fk";
+  ALTER TABLE "contact" DROP CONSTRAINT IF EXISTS "contact_meta_og_image_id_media_id_fk";
   
-  ALTER TABLE "homepage" DROP CONSTRAINT "homepage_meta_og_image_id_media_id_fk";
+  ALTER TABLE "homepage" DROP CONSTRAINT IF EXISTS "homepage_meta_og_image_id_media_id_fk";
   
-  ALTER TABLE "services" DROP CONSTRAINT "services_meta_og_image_id_media_id_fk";
+  ALTER TABLE "services" DROP CONSTRAINT IF EXISTS "services_meta_og_image_id_media_id_fk";
   
-  ALTER TABLE "blog_home" DROP CONSTRAINT "blog_home_meta_og_image_id_media_id_fk";
+  ALTER TABLE "blog_home" DROP CONSTRAINT IF EXISTS "blog_home_meta_og_image_id_media_id_fk";
   
   DROP INDEX IF EXISTS "blog_inner_meta_meta_og_image_idx";
   DROP INDEX IF EXISTS "contact_meta_meta_og_image_idx";
   DROP INDEX IF EXISTS "homepage_meta_meta_og_image_idx";
   DROP INDEX IF EXISTS "services_meta_meta_og_image_idx";
   DROP INDEX IF EXISTS "blog_home_meta_meta_og_image_idx";
-  ALTER TABLE "blog_inner" ADD COLUMN "meta_keywords" varchar;
-  ALTER TABLE "blog_inner" ADD COLUMN "meta_meta_robots" varchar;
-  ALTER TABLE "blog_inner" ADD COLUMN "meta_schema" jsonb;
-  ALTER TABLE "blog_inner" ADD COLUMN "meta_canonical_url" varchar;
-  ALTER TABLE "contact" ADD COLUMN "meta_keywords" varchar;
-  ALTER TABLE "contact" ADD COLUMN "meta_meta_robots" varchar;
-  ALTER TABLE "contact" ADD COLUMN "meta_schema" jsonb;
-  ALTER TABLE "contact" ADD COLUMN "meta_canonical_url" varchar;
-  ALTER TABLE "homepage" ADD COLUMN "meta_keywords" varchar;
-  ALTER TABLE "homepage" ADD COLUMN "meta_meta_robots" varchar;
-  ALTER TABLE "homepage" ADD COLUMN "meta_schema" jsonb;
-  ALTER TABLE "homepage" ADD COLUMN "meta_canonical_url" varchar;
-  ALTER TABLE "services" ADD COLUMN "meta_keywords" varchar;
-  ALTER TABLE "services" ADD COLUMN "meta_meta_robots" varchar;
-  ALTER TABLE "services" ADD COLUMN "meta_schema" jsonb;
-  ALTER TABLE "services" ADD COLUMN "meta_canonical_url" varchar;
-  ALTER TABLE "blog_home" ADD COLUMN "meta_keywords" varchar;
-  ALTER TABLE "blog_home" ADD COLUMN "meta_meta_robots" varchar;
-  ALTER TABLE "blog_home" ADD COLUMN "meta_schema" jsonb;
-  ALTER TABLE "blog_home" ADD COLUMN "meta_canonical_url" varchar;
+  ALTER TABLE "blog_inner" ADD COLUMN IF NOT EXISTS "meta_keywords" varchar;
+  ALTER TABLE "blog_inner" ADD COLUMN IF NOT EXISTS "meta_meta_robots" varchar;
+  ALTER TABLE "blog_inner" ADD COLUMN IF NOT EXISTS "meta_schema" jsonb;
+  ALTER TABLE "blog_inner" ADD COLUMN IF NOT EXISTS "meta_canonical_url" varchar;
+  ALTER TABLE "contact" ADD COLUMN IF NOT EXISTS "meta_keywords" varchar;
+  ALTER TABLE "contact" ADD COLUMN IF NOT EXISTS "meta_meta_robots" varchar;
+  ALTER TABLE "contact" ADD COLUMN IF NOT EXISTS "meta_schema" jsonb;
+  ALTER TABLE "contact" ADD COLUMN IF NOT EXISTS "meta_canonical_url" varchar;
+  ALTER TABLE "homepage" ADD COLUMN IF NOT EXISTS "meta_keywords" varchar;
+  ALTER TABLE "homepage" ADD COLUMN IF NOT EXISTS "meta_meta_robots" varchar;
+  ALTER TABLE "homepage" ADD COLUMN IF NOT EXISTS "meta_schema" jsonb;
+  ALTER TABLE "homepage" ADD COLUMN IF NOT EXISTS "meta_canonical_url" varchar;
+  ALTER TABLE "services" ADD COLUMN IF NOT EXISTS "meta_keywords" varchar;
+  ALTER TABLE "services" ADD COLUMN IF NOT EXISTS "meta_meta_robots" varchar;
+  ALTER TABLE "services" ADD COLUMN IF NOT EXISTS "meta_schema" jsonb;
+  ALTER TABLE "services" ADD COLUMN IF NOT EXISTS "meta_canonical_url" varchar;
+  ALTER TABLE "blog_home" ADD COLUMN IF NOT EXISTS "meta_keywords" varchar;
+  ALTER TABLE "blog_home" ADD COLUMN IF NOT EXISTS "meta_meta_robots" varchar;
+  ALTER TABLE "blog_home" ADD COLUMN IF NOT EXISTS "meta_schema" jsonb;
+  ALTER TABLE "blog_home" ADD COLUMN IF NOT EXISTS "meta_canonical_url" varchar;
   DO $$ BEGIN
    ALTER TABLE "blog_inner_meta_meta_social" ADD CONSTRAINT "blog_inner_meta_meta_social_og_image_id_media_id_fk" FOREIGN KEY ("og_image_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION

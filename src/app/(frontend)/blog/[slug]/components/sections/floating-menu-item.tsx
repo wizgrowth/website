@@ -1,20 +1,18 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react'
+import { useEffect } from 'react';
+import { SideMenu } from '@/payload-types';
 
 type FloatingMenuProps = {
-  data: {
-    title: string
-    titleId: string
-  }
-}
+  data: SideMenu;
+};
 
 export function FloatingMenuItem({ data }: FloatingMenuProps) {
   useEffect(() => {
-    let currentActiveId: string | null | undefined = null
+    let currentActiveId: string | null | undefined = null;
 
     window?.addEventListener('scroll', () => {
-      let newActiveId: string | null | undefined = null
+      let newActiveId: string | null | undefined = null;
 
       document
         .querySelectorAll(
@@ -22,27 +20,27 @@ export function FloatingMenuItem({ data }: FloatingMenuProps) {
         )
         .forEach((item) => {
           if (item.getBoundingClientRect().top < window.innerHeight) {
-            newActiveId = item?.getAttribute('id')
+            newActiveId = item?.getAttribute('id');
           }
-        })
+        });
 
       if (newActiveId && newActiveId !== currentActiveId) {
-        currentActiveId = newActiveId
+        currentActiveId = newActiveId;
 
         document.querySelectorAll('#blog-floating-menu a').forEach((link) => {
-          link.classList.remove('active')
+          link.classList.remove('active');
 
           if (link.getAttribute('href') === `#${newActiveId}`) {
-            link.classList.add('active')
+            link.classList.add('active');
           }
-        })
+        });
       }
-    })
-  }, [])
+    });
+  }, []);
 
   return (
-    <a className="pl-2 rounded-sm hover:bg-primary-200" href={`#${data.titleId}`}>
-      {data.title}
+    <a className="pl-2 rounded-sm hover:bg-primary-200" href={`#${data?.[0]?.titleId}`}>
+      {data?.[0]?.title}
     </a>
-  )
+  );
 }

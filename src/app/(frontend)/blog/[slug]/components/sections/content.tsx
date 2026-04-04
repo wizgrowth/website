@@ -1,13 +1,13 @@
-import { RichTextConverterComponent } from '@/payload-components/richtext/richtext-convertor'
-import { BlogPost } from './types'
-import { FloatingMenuItem } from './floating-menu-item'
+import { RichTextConverterComponent } from '@/payload-components/richtext/richtext-convertor';
+import { FloatingMenuItem } from './floating-menu-item';
+import { BlogInner } from '@/payload-types';
 
 type ContentProps = {
-  innerData: BlogPost
-}
+  innerData: BlogInner;
+};
 
 export function Content({ innerData }: ContentProps) {
-  const { sideMenu } = innerData
+  const { sideMenu } = innerData;
 
   return (
     <section className="mt-24 mb-16 max-md:mt-16">
@@ -21,9 +21,10 @@ export function Content({ innerData }: ContentProps) {
               INSIDE THE ARTICLE
             </p>
             <div className="flex flex-col gap-3">
-              {sideMenu.map((item) => {
-                return <FloatingMenuItem key={item.id} data={item} />
-              })}
+              {sideMenu &&
+                sideMenu.map((item) => {
+                  return <FloatingMenuItem key={item.id} data={[item]} />;
+                })}
             </div>
           </div>
         </div>
@@ -32,9 +33,9 @@ export function Content({ innerData }: ContentProps) {
         [&_.payload-richtext>p]:leading-6 [&_.payload-richtext>p]:text-slate-900 [&_.payload-richtext>p]:sm:leading-7 [&_.payload-richtext>p]:mb-5
         [&_.payload-richtext>ul_li]:list-disc [&_.payload-richtext>ul_li]:mb-2 [&_.payload-richtext>ul]:mb-7 [&_.payload-richtext>ol_li]:list-disc [&_.payload-richtext>ol_li]:mb-2 [&_.payload-richtext>ol]:mb-7 [&_.payload-richtext>img]:mb-6 [&_.payload-richtext>img]:w-auto [&_.payload-richtext>img]:rounded-3xl [&_.payload-richtext>img]:h-auto [&_.payload-richtext>ol]:ml-4 [&_.payload-richtext>ul]:ml-4"
         >
-          <RichTextConverterComponent data={innerData?.content} />
+          <RichTextConverterComponent data={innerData?.content as any} />
         </div>
       </div>
     </section>
-  )
+  );
 }

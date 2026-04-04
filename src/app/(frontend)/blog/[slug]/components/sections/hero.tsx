@@ -1,19 +1,34 @@
-import Image from 'next/image'
-import { BlogPost } from './types'
-import { ClockIcon } from '@/components/icons/clock-icon'
+import Image from 'next/image';
+import { BlogInner } from '@/payload-types';
+import { ClockIcon } from '@/components/icons/clock-icon';
 
 type HeroProps = {
-  innerData: BlogPost
-}
+  innerData: BlogInner;
+};
 
 export function Hero({ innerData }: HeroProps) {
+  const author =
+    innerData.publishedBy && typeof innerData.publishedBy === 'object'
+      ? innerData.publishedBy
+      : null;
+
+  const authorImage =
+    author?.profilePicture && typeof author.profilePicture === 'object'
+      ? author.profilePicture
+      : null;
+
+  const featuredImage =
+    innerData.featuredImage && typeof innerData.featuredImage === 'object'
+      ? innerData.featuredImage
+      : null;
+
   return (
     <section>
       <div className="container">
         <div className="mt-40  rounded-[20px] border border-solid border-slate-200 bg-gradient-to-r from-[#e0f2fe99] to-primary-200  p-8 pl-12 max-sm:px-5">
           <div className="flex items-center gap-12 max-lg:flex-col">
             <div className="w-full lg:basis-[55%] xl:basis-[60%]">
-              {innerData?.category?.length > 0 && (
+              {innerData?.category && innerData.category.length > 0 && (
                 <p className="rounded-[40px] bg-gradient-to-r from-orange-200 to-rose-200 px-4 py-1 text-lg leading-7 font-bold text-slate-700 max-sm:text-base max-sm:leading-6 w-fit uppercase">
                   {innerData.category[0]}
                 </p>
@@ -25,10 +40,10 @@ export function Hero({ innerData }: HeroProps) {
               )}
               <div className="flex max-xl:flex-col max-xl:gap-4">
                 <div className="group flex items-center gap-3 border-solid border-slate-300 xl:border-r xl:pr-10">
-                  {innerData?.publishedBy?.profilePicture?.url && (
+                  {authorImage?.url && (
                     <Image
-                      src={innerData.publishedBy.profilePicture.url}
-                      alt={innerData.publishedBy.profilePicture.alt || 'author profile picture'}
+                      src={authorImage.url}
+                      alt={authorImage.alt || 'author profile picture'}
                       width="44"
                       height="44"
                       className="rounded-[10px] object-cover h-full"
@@ -38,9 +53,9 @@ export function Hero({ innerData }: HeroProps) {
                     <p className="text-base leading-6 text-slate-900 max-sm:text-base max-sm:leading-5 font-normal">
                       Article written by
                     </p>
-                    {innerData?.publishedBy?.name && (
+                    {author?.name && (
                       <p className="text-lg leading-6 font-medium text-black max-sm:text-base max-sm:leading-5 group-hover:underline">
-                        {innerData.publishedBy.name}
+                        {author.name}
                       </p>
                     )}
                   </div>
@@ -59,10 +74,10 @@ export function Hero({ innerData }: HeroProps) {
               </div>
             </div>
             <div className="flex w-full flex-1 flex-shrink-0 justify-end max-lg:justify-center lg:basis-[45%] xl:basis-[40%] max-lg:hidden">
-              {innerData?.featuredImage?.url && (
+              {featuredImage?.url && (
                 <Image
-                  src={innerData.featuredImage.url}
-                  alt={innerData?.featuredImage?.alt}
+                  src={featuredImage.url}
+                  alt={featuredImage.alt}
                   width={500}
                   height={300}
                   className="rounded-3xl w-full h-60 object-cover max-lg:w-96"
@@ -75,5 +90,5 @@ export function Hero({ innerData }: HeroProps) {
         </div>
       </div>
     </section>
-  )
+  );
 }

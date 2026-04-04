@@ -3,6 +3,7 @@ import { getPayload } from 'payload';
 import config from '@payload-config';
 import { getMeta } from '@/app/utils/get-meta';
 import { Schema } from '@/components/scripts/schema';
+import { notFound } from 'next/navigation';
 
 const payload = await getPayload({ config });
 
@@ -31,19 +32,6 @@ export async function generateMetadata({ params }: ParamsProps) {
   return metadata;
 }
 
-// fetching page data
-// async function getInnerPageData(slug: string) {
-//   try {
-//     const response = await fetch(
-//       `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
-//     );
-//     return await response.json();
-//   } catch (err) {
-//     console.error(err);
-//     throw new Error('Failed to fetch page data');
-//   }
-// }
-
 export default async function BlogInnerPage({ params }: ParamsProps) {
   const { slug } = await params;
   const innerPageData = await payload.find({
@@ -53,10 +41,12 @@ export default async function BlogInnerPage({ params }: ParamsProps) {
     },
     depth: 2,
   });
-  console.log('innerPageData', innerPageData, slug);
-  console.log('hello world');
 
   const innerData = innerPageData.docs[0];
+  if (!innerData) {
+    notFound();
+  }
+
   return (
     <>
       <Schema

@@ -38,8 +38,8 @@ export default function BlogHome() {
   return (
     <>
       <Schema structuredData={structuredData} />
-      <section className="mt-40">
-        <Hero innerData={blogHeroData.docs[0]} />
+      <section className="mt-8 max-sm:mt-20">
+        <Hero />
         <BlogList />
       </section>
     </>

@@ -32,30 +32,35 @@ export async function generateMetadata({ params }: ParamsProps) {
 }
 
 // fetching page data
-async function getInnerPageData(slug: string) {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
-    );
-    return await response.json();
-  } catch (err) {
-    console.error(err);
-    throw new Error('Failed to fetch page data');
-  }
-}
+// async function getInnerPageData(slug: string) {
+//   try {
+//     const response = await fetch(
+//       `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/blogInner/?where[slug][equals]=${slug}&depth=2`,
+//     );
+//     return await response.json();
+//   } catch (err) {
+//     console.error(err);
+//     throw new Error('Failed to fetch page data');
+//   }
+// }
 
 export default async function BlogInnerPage({ params }: ParamsProps) {
   const { slug } = await params;
-  const innerData = await getInnerPageData(slug);
+  const innerPageData = await payload.find({
+    collection: 'blogInner',
+    where: {
+      slug: { equals: slug },
+    },
+  });
+
+  const innerData = innerPageData.docs[0];
   return (
     <>
       <Schema
-        structuredData={
-          innerData.docs[0]?.meta?.schema === null ? undefined : innerData.docs[0]?.meta?.schema
-        }
+        structuredData={innerData?.meta?.schema === null ? undefined : innerData?.meta?.schema}
       />
-      <Hero innerData={innerData.docs[0]} />
-      <Content innerData={innerData.docs[0]} />
+      <Hero innerData={innerData} />
+      <Content innerData={innerData} />
     </>
   );
 }

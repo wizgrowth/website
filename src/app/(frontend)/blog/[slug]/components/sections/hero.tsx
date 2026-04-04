@@ -7,6 +7,7 @@ type HeroProps = {
 };
 
 export function Hero({ innerData }: HeroProps) {
+  console.log('innerData', innerData);
   const author =
     innerData?.publishedBy && typeof innerData?.publishedBy === 'object'
       ? innerData?.publishedBy
@@ -21,6 +22,10 @@ export function Hero({ innerData }: HeroProps) {
     innerData?.featuredImage && typeof innerData?.featuredImage === 'object'
       ? innerData?.featuredImage
       : null;
+
+  console.log('author', author);
+  console.log('authorImage', authorImage);
+  console.log('featuredImage', featuredImage);
 
   return (
     <section>

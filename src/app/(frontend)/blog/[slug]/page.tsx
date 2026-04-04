@@ -53,6 +53,8 @@ export default async function BlogInnerPage({ params }: ParamsProps) {
     },
   });
 
+  console.log('hello world');
+
   const innerData = innerPageData.docs[0];
   return (
     <>

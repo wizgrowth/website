@@ -18,20 +18,6 @@ export async function generateMetadata() {
   });
   return metadata;
 }
-const blogHeroData = await payload.find({
-  collection: 'blogInner',
-  depth: 2,
-  limit: 1, // limit to 1 item
-  sort: '-createdAt', // sort by most recent
-  select: {
-    title: true,
-    slug: true,
-    category: true,
-    readingTime: true,
-    publishedBy: true,
-    featuredImage: true,
-  },
-});
 
 export default function BlogHome() {
   const structuredData = blogHomeData?.meta?.schema;

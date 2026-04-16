@@ -15,7 +15,6 @@ type ParamsProps = {
 
 export async function generateMetadata({ params }: ParamsProps) {
   const { slug } = await params;
-
   const result = await payload.find({
     collection: 'blogInner',
     where: {
@@ -34,6 +33,7 @@ export async function generateMetadata({ params }: ParamsProps) {
 
 export default async function BlogInnerPage({ params }: ParamsProps) {
   const { slug } = await params;
+
   const innerPageData = await payload.find({
     collection: 'blogInner',
     where: {

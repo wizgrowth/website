@@ -1,15 +1,37 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-'use client'
+'use client';
 
-import Image from 'next/image'
+import Image from 'next/image';
+import { ChevronDown } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 // import { FaceBookIcon } from '../icons/facebook'
 // import { InstagramIcon } from '../icons/instagram'
 // import { Linkedin } from '../icons/linkedin'
-import { MobileNavBar } from './mobile-navbar'
-import { usePathname } from 'next/navigation'
+import { MobileNavBar } from './mobile-navbar';
+import { usePathname } from 'next/navigation';
 
 export function Header() {
-  const pathName = usePathname()
+  const pathName = usePathname();
+  const [toolsOpen, setToolsOpen] = useState(false);
+  const toolsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!toolsOpen) return;
+    function handlePointerDown(event: MouseEvent) {
+      if (toolsRef.current && !toolsRef.current.contains(event.target as Node)) {
+        setToolsOpen(false);
+      }
+    }
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') setToolsOpen(false);
+    }
+    document.addEventListener('mousedown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [toolsOpen]);
 
   // need to dry the code
   // social media to be added alter
@@ -74,6 +96,46 @@ export function Header() {
             >
               Contact
             </a>
+            <div
+              className="relative"
+              ref={toolsRef}
+              onMouseEnter={() => setToolsOpen(true)}
+              onMouseLeave={() => setToolsOpen(false)}
+            >
+              <button
+                type="button"
+                className={`font-medium hover:bg-primary-100 px-3 py-2 rounded-md inline-flex items-center gap-1 ${toolsOpen ? 'bg-primary-100' : ''}`}
+                aria-expanded={toolsOpen}
+                aria-haspopup="menu"
+                id="tools-menu-button"
+              >
+                Tools
+                <ChevronDown
+                  className={`size-4 shrink-0 transition-transform ${toolsOpen ? 'rotate-180' : ''}`}
+                  aria-hidden
+                />
+              </button>
+              {toolsOpen ? (
+                <div
+                  className="absolute right-0 top-full z-20 pt-1"
+                  role="menu"
+                  aria-labelledby="tools-menu-button"
+                >
+                  <div className="min-w-[12rem] rounded-md border border-neutral-200 bg-white py-1 shadow-lg">
+                    <a
+                      href="https://invoicestack.vercel.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      role="menuitem"
+                      className="block px-3 py-2 text-sm font-medium text-neutral-800 hover:bg-primary-100"
+                      onClick={() => setToolsOpen(false)}
+                    >
+                      Invoice generator
+                    </a>
+                  </div>
+                </div>
+              ) : null}
+            </div>
           </div>
           {/* <div className="flex justify-center items-center gap-4 max-lg:hidden">
             {socialMedia.map((item) => (
@@ -89,5 +151,5 @@ export function Header() {
         </div>
       </div>
     </section>
-  )
+  );
 }

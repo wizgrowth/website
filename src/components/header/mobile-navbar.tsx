@@ -1,5 +1,8 @@
+'use client';
+
 /* eslint-disable @next/next/no-html-link-for-pages */
-import { useState } from 'react'
+import { ChevronDown } from 'lucide-react';
+import { useState } from 'react';
 
 // type MobileNavBarProps = {
 //   socialMedia: {
@@ -12,14 +15,15 @@ import { useState } from 'react'
 
 // export function MobileNavBar({ socialMedia }: MobileNavBarProps) {
 export function MobileNavBar() {
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
   return (
     <div className="lg:hidden">
       <button
         className="my-1 hidden size-7 rounded px-[5px] max-lg:!block pt-[9.5px] pb-[9.5px]"
         type="button"
         onClick={() => {
-          setToggle((prev) => !prev)
+          setToggle((prev) => !prev);
         }}
         aria-label="Toggle navigation"
       >
@@ -54,6 +58,38 @@ export function MobileNavBar() {
         >
           Contact
         </a>
+        <div className="flex flex-col">
+          <button
+            type="button"
+            className="font-medium hover:bg-primary-100 px-3 py-2 text-white rounded-md hover:text-primary-300 transition duration-200 flex w-full items-center justify-between gap-2 text-left"
+            aria-expanded={toolsOpen}
+            aria-controls="mobile-tools-submenu"
+            id="mobile-tools-button"
+            onClick={() => setToolsOpen((open) => !open)}
+          >
+            Tools
+            <ChevronDown
+              className={`size-4 shrink-0 transition-transform ${toolsOpen ? 'rotate-180' : ''}`}
+              aria-hidden
+            />
+          </button>
+          {toolsOpen ? (
+            <div id="mobile-tools-submenu" role="region" aria-labelledby="mobile-tools-button">
+              <a
+                href="https://invoicestack.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium hover:bg-primary-100 block pl-8 pr-3 py-2 text-sm text-white/95 rounded-md hover:text-primary-300 transition duration-200"
+                onClick={() => {
+                  setToggle(false);
+                  setToolsOpen(false);
+                }}
+              >
+                Invoice generator
+              </a>
+            </div>
+          ) : null}
+        </div>
         {/* <div className="flex justify-start items-center gap-4 mt-10 px-3">
           {socialMedia.map((item) => (
             <a key={item.id} href={item.url}>
@@ -63,5 +99,5 @@ export function MobileNavBar() {
         </div> */}
       </div>
     </div>
-  )
+  );
 }

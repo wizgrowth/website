@@ -1,11 +1,11 @@
-import Image from 'next/image'
-import { ClockIcon } from '@components/icons/clock-icon'
+import Image from 'next/image';
+import { ClockIcon } from '@components/icons/clock-icon';
 // import { FaceBookIcon } from '../icons/facebook'
 // import { InstagramIcon } from '../icons/instagram'
 // import { Linkedin } from '../icons/linkedin'
-import { PhoneIcon } from '../icons/phone'
-import { EmailIcon } from '../icons/email-icon'
-import { LocationIcon } from '../icons/location-icon'
+import { PhoneIcon } from '../icons/phone';
+import { EmailIcon } from '../icons/email-icon';
+import { LocationIcon } from '../icons/location-icon';
 
 export function Footer() {
   // social media to be added later
@@ -47,6 +47,7 @@ export function Footer() {
   //     ),
   //   },
   // ]
+  const year = new Date().getFullYear();
   const contactInfo = [
     {
       id: 1,
@@ -69,7 +70,7 @@ export function Footer() {
         <LocationIcon width="15px" height="15px" className="stroke-primary-300 fill-primary-400" />
       ),
     },
-  ]
+  ];
   const quote = (
     <div className="mt-5">
       <p className="text-center text-2xl leading-9 font-semibold">
@@ -86,7 +87,7 @@ export function Footer() {
         className="mx-auto mt-6"
       />
     </div>
-  )
+  );
   return (
     <section className="bg-primary-100 pt-20  pb-8">
       <div className="container">
@@ -132,10 +133,10 @@ export function Footer() {
         <div className="mt-24 mr-8 max-xl:mr-0">
           <div className="xl:hidden mb-10">{quote}</div>
           <p className="text-sm font-normal leading-5 text-primary-400 text-center">
-            Copyright © WizGrowth Inc. 2025
+            Copyright © WizGrowth Inc. {year}
           </p>
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -3,6 +3,7 @@ import * as migration_20250618_175456_init from './20250618_175456_init';
 import * as migration_20250622_194700_init from './20250622_194700_init';
 import * as migration_20251123_121146_restore_prefix_column from './20251123_121146_restore_prefix_column';
 import * as migration_20251216_195830_schema from './20251216_195830_schema';
+import * as migration_20260509_075007 from './20260509_075007';
 
 export const migrations = [
   {
@@ -28,6 +29,11 @@ export const migrations = [
   {
     up: migration_20251216_195830_schema.up,
     down: migration_20251216_195830_schema.down,
-    name: '20251216_195830_schema'
+    name: '20251216_195830_schema',
+  },
+  {
+    up: migration_20260509_075007.up,
+    down: migration_20260509_075007.down,
+    name: '20260509_075007'
   },
 ];

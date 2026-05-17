@@ -22,10 +22,6 @@ export function Hero({ innerData }: HeroProps) {
       ? innerData?.featuredImage
       : null;
 
-  console.log('author', author);
-  console.log('authorImage', authorImage);
-  console.log('featuredImage', featuredImage);
-
   return (
     <section>
       <div className="container">

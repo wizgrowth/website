@@ -6,7 +6,7 @@ const payload = await getPayload({ config });
 
 const blogListData = await payload.find({
   collection: 'blogInner',
-  depth: 2,
+  depth: 1,
   limit: 200,
   sort: '-createdAt', // sort by most recent
   select: {
@@ -19,8 +19,6 @@ const blogListData = await payload.find({
     createdAt: true,
   },
 });
-
-console.log('blogListData', blogListData);
 
 export function BlogList() {
   return (

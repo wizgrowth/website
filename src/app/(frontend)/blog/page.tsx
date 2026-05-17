@@ -4,8 +4,6 @@ import { Hero, BlogList } from './components';
 import { getMeta } from '@/app/utils/get-meta';
 import { Schema } from '@/components/scripts/schema';
 
-export const revalidate = 60;
-
 const payload = await getPayload({ config });
 
 const blogHomeData = await payload.findGlobal({

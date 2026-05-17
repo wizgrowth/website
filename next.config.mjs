@@ -1,16 +1,11 @@
 import { withPayload } from '@payloadcms/next/withPayload'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { dirname } from 'path'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config) => {
-    config.resolve.alias['@components'] = path.resolve(__dirname, 'components')
-    return config
-  },
   images: {
     remotePatterns: [
       {
@@ -20,6 +15,9 @@ const nextConfig = {
     ],
   },
   trailingSlash: true,
+  turbopack: {
+    root: path.resolve(__dirname),
+  },
 }
 
 export default withPayload(nextConfig, { devBundleServerPackages: false })

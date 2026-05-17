@@ -13,6 +13,13 @@ const nextConfig = {
         hostname: 'ibffbzwoucksfljolszp.supabase.co',
       },
     ],
+    // Payload serves uploads at /api/media/... with query params (e.g. ?prefix=media).
+    // Next.js 16 requires an explicit localPatterns entry when the src includes a search string.
+    localPatterns: [
+      {
+        pathname: '/api/media/**',
+      },
+    ],
   },
   trailingSlash: true,
   turbopack: {

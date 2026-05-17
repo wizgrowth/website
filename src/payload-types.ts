@@ -107,12 +107,14 @@ export interface Config {
     homepage: Homepage;
     services: Service;
     'blog-home': BlogHome;
+    academy: Academy;
   };
   globalsSelect: {
     contact: ContactSelect<false> | ContactSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
     'blog-home': BlogHomeSelect<false> | BlogHomeSelect<true>;
+    academy: AcademySelect<false> | AcademySelect<true>;
   };
   locale: null;
   widgets: {
@@ -660,6 +662,45 @@ export interface BlogHome {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "academy".
+ */
+export interface Academy {
+  id: number;
+  Title: string;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    keywords?: string | null;
+    metaRobots?: string | null;
+    schema?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    canonicalUrl?: string | null;
+    metaSocial?:
+      | {
+          platform: 'facebook' | 'twitter';
+          ogTitle?: string | null;
+          ogDescription?: string | null;
+          ogImage?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact_select".
  */
 export interface ContactSelect<T extends boolean = true> {
@@ -754,6 +795,36 @@ export interface ServicesSelect<T extends boolean = true> {
  */
 export interface BlogHomeSelect<T extends boolean = true> {
   title?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        keywords?: T;
+        metaRobots?: T;
+        schema?: T;
+        canonicalUrl?: T;
+        metaSocial?:
+          | T
+          | {
+              platform?: T;
+              ogTitle?: T;
+              ogDescription?: T;
+              ogImage?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "academy_select".
+ */
+export interface AcademySelect<T extends boolean = true> {
+  Title?: T;
   meta?:
     | T
     | {

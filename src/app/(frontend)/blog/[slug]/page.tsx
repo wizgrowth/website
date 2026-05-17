@@ -5,6 +5,8 @@ import { getMeta } from '@/app/utils/get-meta';
 import { Schema } from '@/components/scripts/schema';
 import { notFound } from 'next/navigation';
 
+export const revalidate = 15552000;
+
 const payload = await getPayload({ config });
 
 type ParamsProps = {
@@ -56,4 +58,8 @@ export default async function BlogInnerPage({ params }: ParamsProps) {
       <Content innerData={innerData} />
     </>
   );
+}
+
+export async function generateStaticParams() {
+  return [];
 }

@@ -1,5 +1,5 @@
-import type { CollectionConfig } from 'payload'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import type { CollectionConfig } from 'payload';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
 
 export const BlogInner: CollectionConfig = {
   slug: 'blogInner',
@@ -96,16 +96,32 @@ export const BlogInner: CollectionConfig = {
       ({ req, data, operation }) => {
         if (operation === 'create') {
           if (req.user) {
-            data.publishedBy = req.user.id
+            data.publishedBy = req.user.id;
           }
         }
         if (operation === 'update') {
           if (req.user) {
-            data.updatedBy = req.user.id
+            data.updatedBy = req.user.id;
           }
         }
-        return data
+        return data;
+      },
+    ],
+    afterChange: [
+      async ({ doc }) => {
+        try {
+          await fetch(
+            `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/revalidate?secret=${process.env.REVALIDATION_SECRET}`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ path: `/blog/${doc.slug}` }),
+            },
+          );
+        } catch (err) {
+          console.error('Revalidation failed:', err);
+        }
       },
     ],
   },
-}
+};

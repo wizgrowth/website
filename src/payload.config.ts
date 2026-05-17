@@ -9,7 +9,7 @@ import sharp from 'sharp';
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import { s3Storage } from '@payloadcms/storage-s3';
 import { Users, Media, BlogInner, DemoBooking } from './collections';
-import { Contact, Homepage, Services, BlogHome } from './globals';
+import { Contact, Homepage, Services, BlogHome, Academy } from './globals';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -29,7 +29,7 @@ export default buildConfig({
   // 🌟 END CORS
 
   collections: [Users, Media, DemoBooking, BlogInner],
-  globals: [Contact, Homepage, Services, BlogHome],
+  globals: [Contact, Homepage, Services, BlogHome, Academy],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -47,7 +47,7 @@ export default buildConfig({
 
     seoPlugin({
       collections: ['blogInner'],
-      globals: ['homepage', 'contact', 'services', 'blog-home'],
+      globals: ['homepage', 'contact', 'services', 'blog-home', 'academy'],
       uploadsCollection: 'media',
       generateTitle: ({ doc }) => doc.title,
       generateDescription: ({ doc }) => doc.plainText,

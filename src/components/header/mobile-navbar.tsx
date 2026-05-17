@@ -16,6 +16,7 @@ import { useState } from 'react';
 // export function MobileNavBar({ socialMedia }: MobileNavBarProps) {
 export function MobileNavBar() {
   const [toggle, setToggle] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
   return (
     <div className="lg:hidden">
@@ -46,12 +47,50 @@ export function MobileNavBar() {
         >
           Services
         </a>
-        <a
-          href="/blog/"
-          className="font-medium hover:bg-primary-100 px-3 py-2 text-white rounded-md hover:text-primary-300 transition duration-200"
-        >
-          Blog
-        </a>
+        <div className="flex flex-col">
+          <button
+            type="button"
+            className="font-medium hover:bg-primary-100 px-3 py-2 text-white rounded-md hover:text-primary-300 transition duration-200 flex w-full items-center justify-between gap-2 text-left"
+            aria-expanded={resourcesOpen}
+            aria-controls="mobile-resources-submenu"
+            id="mobile-resources-button"
+            onClick={() => setResourcesOpen((open) => !open)}
+          >
+            Resources
+            <ChevronDown
+              className={`size-4 shrink-0 transition-transform ${resourcesOpen ? 'rotate-180' : ''}`}
+              aria-hidden
+            />
+          </button>
+          {resourcesOpen ? (
+            <div
+              id="mobile-resources-submenu"
+              role="region"
+              aria-labelledby="mobile-resources-button"
+            >
+              <a
+                href="/blog/"
+                className="font-medium hover:bg-primary-100 block pl-8 pr-3 py-2 text-sm text-white/95 rounded-md hover:text-primary-300 transition duration-200"
+                onClick={() => {
+                  setToggle(false);
+                  setResourcesOpen(false);
+                }}
+              >
+                Blog
+              </a>
+              <a
+                href="/academy/"
+                className="font-medium hover:bg-primary-100 block pl-8 pr-3 py-2 text-sm text-white/95 rounded-md hover:text-primary-300 transition duration-200"
+                onClick={() => {
+                  setToggle(false);
+                  setResourcesOpen(false);
+                }}
+              >
+                Academy
+              </a>
+            </div>
+          ) : null}
+        </div>
         <a
           href="/contact/"
           className="font-medium hover:bg-primary-100 px-3 py-2 text-white rounded-md hover:text-primary-300 transition duration-200"

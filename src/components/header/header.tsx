@@ -4,26 +4,38 @@
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-// import { FaceBookIcon } from '../icons/facebook'
-// import { InstagramIcon } from '../icons/instagram'
-// import { Linkedin } from '../icons/linkedin'
 import { MobileNavBar } from './mobile-navbar';
 import { usePathname } from 'next/navigation';
 
 export function Header() {
   const pathName = usePathname();
   const [toolsOpen, setToolsOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
   const toolsRef = useRef<HTMLDivElement>(null);
+  const resourcesRef = useRef<HTMLDivElement>(null);
+  const resourcesActive =
+    pathName.startsWith('/blog/') || pathName.startsWith('/academy/');
 
   useEffect(() => {
-    if (!toolsOpen) return;
+    if (!toolsOpen && !resourcesOpen) return;
     function handlePointerDown(event: MouseEvent) {
-      if (toolsRef.current && !toolsRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      if (toolsOpen && toolsRef.current && !toolsRef.current.contains(target)) {
         setToolsOpen(false);
+      }
+      if (
+        resourcesOpen &&
+        resourcesRef.current &&
+        !resourcesRef.current.contains(target)
+      ) {
+        setResourcesOpen(false);
       }
     }
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') setToolsOpen(false);
+      if (event.key === 'Escape') {
+        setToolsOpen(false);
+        setResourcesOpen(false);
+      }
     }
     document.addEventListener('mousedown', handlePointerDown);
     document.addEventListener('keydown', handleKeyDown);
@@ -31,32 +43,8 @@ export function Header() {
       document.removeEventListener('mousedown', handlePointerDown);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [toolsOpen]);
+  }, [toolsOpen, resourcesOpen]);
 
-  // need to dry the code
-  // social media to be added alter
-  // const socialMedia = [
-  //   {
-  //     id: 1,
-  //     name: 'Facebook',
-  //     url: '/facebook/',
-  //     icon: <FaceBookIcon width="15px" height="15px" className="p-3 rounded-full bg-primary-100" />,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Instagram',
-  //     url: '/instagram/',
-  //     icon: (
-  //       <InstagramIcon width="15px" height="15px" className="p-3 rounded-full bg-primary-100" />
-  //     ),
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'LinkedIn',
-  //     url: '/linkedin/',
-  //     icon: <Linkedin width="15px" height="15px" className="p-3 rounded-full bg-primary-100" />,
-  //   },
-  // ]
   return (
     <section className="py-8 fixed top-0 left-0 right-0 bg-white z-10 shadow-md">
       <div className="relative">
@@ -84,12 +72,52 @@ export function Header() {
             >
               Services
             </a>
-            <a
-              href="/blog/"
-              className={`font-medium hover:bg-primary-100 px-3 py-2 rounded-md ${pathName.startsWith('/blog/') ? 'bg-primary-100' : ''}`}
+            <div
+              className="relative"
+              ref={resourcesRef}
+              onMouseEnter={() => setResourcesOpen(true)}
+              onMouseLeave={() => setResourcesOpen(false)}
             >
-              Blog
-            </a>
+              <button
+                type="button"
+                className={`font-medium hover:bg-primary-100 px-3 py-2 rounded-md inline-flex items-center gap-1 ${resourcesOpen || resourcesActive ? 'bg-primary-100' : ''}`}
+                aria-expanded={resourcesOpen}
+                aria-haspopup="menu"
+                id="resources-menu-button"
+              >
+                Resources
+                <ChevronDown
+                  className={`size-4 shrink-0 transition-transform ${resourcesOpen ? 'rotate-180' : ''}`}
+                  aria-hidden
+                />
+              </button>
+              {resourcesOpen ? (
+                <div
+                  className="absolute right-0 top-full z-20 pt-1"
+                  role="menu"
+                  aria-labelledby="resources-menu-button"
+                >
+                  <div className="min-w-[12rem] rounded-md border border-neutral-200 bg-white py-1 shadow-lg">
+                    <a
+                      href="/blog/"
+                      role="menuitem"
+                      className={`block px-3 py-2 text-sm font-medium text-neutral-800 hover:bg-primary-100 ${pathName.startsWith('/blog/') ? 'bg-primary-100' : ''}`}
+                      onClick={() => setResourcesOpen(false)}
+                    >
+                      Blog
+                    </a>
+                    <a
+                      href="/academy/"
+                      role="menuitem"
+                      className={`block px-3 py-2 text-sm font-medium text-neutral-800 hover:bg-primary-100 ${pathName.startsWith('/academy/') ? 'bg-primary-100' : ''}`}
+                      onClick={() => setResourcesOpen(false)}
+                    >
+                      Academy
+                    </a>
+                  </div>
+                </div>
+              ) : null}
+            </div>
             <a
               href="/contact/"
               className={`font-medium hover:bg-primary-100 px-3 py-2 rounded-md ${pathName === '/contact/' ? 'bg-primary-100' : ''}`}
@@ -137,16 +165,6 @@ export function Header() {
               ) : null}
             </div>
           </div>
-          {/* <div className="flex justify-center items-center gap-4 max-lg:hidden">
-            {socialMedia.map((item) => (
-              <a key={item.id} href={item.url}>
-                {item.icon}
-              </a>
-            ))}
-          </div> */}
-
-          {/* mobile navbar */}
-          {/* <MobileNavBar socialMedia={socialMedia} /> */}
           <MobileNavBar />
         </div>
       </div>

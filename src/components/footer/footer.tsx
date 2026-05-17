@@ -1,8 +1,5 @@
 import Image from 'next/image';
 import { ClockIcon } from '@components/icons/clock-icon';
-// import { FaceBookIcon } from '../icons/facebook'
-// import { InstagramIcon } from '../icons/instagram'
-// import { Linkedin } from '../icons/linkedin'
 import { PhoneIcon } from '../icons/phone';
 import { EmailIcon } from '../icons/email-icon';
 import { LocationIcon } from '../icons/location-icon';
@@ -26,7 +23,6 @@ export function Footer() {
       ),
     },
   ];
-  const year = new Date().getFullYear();
   const quote = (
     <div className="mt-5">
       <p className="text-center text-2xl leading-9 font-semibold">
@@ -44,6 +40,7 @@ export function Footer() {
       />
     </div>
   );
+  const year = new Date().getFullYear();
   return (
     <section className="bg-primary-100 pt-20  pb-8">
       <div className="container">
@@ -61,16 +58,6 @@ export function Footer() {
                 <p className="text-sm font-light text-primary-400">Sat - Sun 10AM - 5PM</p>
               </div>
             </div>
-            {/* <div className="mt-8 max-xl:mt-0">
-              <p className="text-base text-primary-300 font-bold">Social Media</p>
-              <div className="flex items-center gap-2 mt-2">
-                {socialMedia.map((item) => (
-                  <a key={item.id} href={item.url}>
-                    {item.icon}
-                  </a>
-                ))}
-              </div>
-            </div> */}
           </div>
           {/* section-2 */}
           <div className="max-xl:hidden">{quote}</div>

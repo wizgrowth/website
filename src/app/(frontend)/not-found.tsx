@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 export default function NotFound() {
   return (
     <section className="min-h-[calc(100vh-200px)] flex items-center justify-center px-4 pt-36 pb-24 max-sm:pb-5">
@@ -21,10 +19,10 @@ export default function NotFound() {
           It might have been moved or deleted. Let&apos;s get you back on track.
         </p>
 
-        <div className="flex flex-col xs:flex-row items-center justify-center gap-4 max-sm:hidden">
-          <Link
+        <div className="flex xs:flex-row items-center justify-center gap-4 ">
+          <a
             href="/"
-            className="inline-flex items-center border border-solid border-primary-400 gap-2 bg-primary-400 text-white font-medium px-8 py-3 rounded-lg hover:bg-primary-500 transition-colors duration-200"
+            className="inline-flex items-center border border-solid border-primary-400 gap-2 bg-primary-400 text-white font-medium px-8 max-sm:px-4 py-3 rounded-lg hover:bg-primary-500 transition-colors duration-200"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -41,10 +39,10 @@ export default function NotFound() {
               <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
             Go Home
-          </Link>
+          </a>
           <a
             href="/contact/"
-            className="inline-flex items-center gap-2 border-2 border-primary-400 text-primary-400 font-medium px-8 py-3 rounded-lg hover:bg-primary-100 transition-colors duration-200"
+            className="inline-flex items-center gap-2 border-2 border-primary-400 text-primary-400 font-medium px-8 max-sm:px-4 py-3 rounded-lg hover:bg-primary-100 transition-colors duration-200"
           >
             Contact Us
           </a>

@@ -1,10 +1,10 @@
-import React from 'react'
-import './styles.css'
-import { Header } from '@components/header'
-import { Footer } from '@/components/footer'
-// In your app/layout.js (App Router) or pages/_app.js (Pages Router)
-import { Poppins } from 'next/font/google'
-import { GoogleTag, NoScripts } from './scripts'
+import React from 'react';
+import './styles.css';
+import { Header } from '@components/header';
+import { Footer } from '@/components/footer';
+import { Analytics } from '@vercel/analytics/next';
+import { Poppins } from 'next/font/google';
+import { GoogleTag, NoScripts } from './scripts';
 
 // Configure the font with all variants you need
 const poppins = Poppins({
@@ -15,7 +15,7 @@ const poppins = Poppins({
   preload: true,
   // This makes the font variable accessible
   variable: '--font-poppins',
-})
+});
 
 export const metadata = {
   title: {
@@ -30,10 +30,10 @@ export const metadata = {
       'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development',
     type: 'website',
   },
-}
+};
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
-  const { children } = props
+  const { children } = props;
 
   return (
     <html lang="en" className={poppins.variable}>
@@ -45,7 +45,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           {children}
           <Footer />
         </main>
+        <Analytics />
       </body>
     </html>
-  )
+  );
 }

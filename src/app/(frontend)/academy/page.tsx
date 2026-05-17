@@ -1,9 +1,26 @@
-import './../styles.css';
+import './styles.css';
 import { getPayload } from 'payload';
 import config from '@payload-config';
 import { getMeta } from '@/app/utils/get-meta';
 import { Schema } from '@/components/scripts/schema';
-import { Hero } from './components/sections';
+import {
+  Audience,
+  Compare,
+  Curriculum,
+  DemoBand,
+  Faq,
+  FinalCta,
+  Founder,
+  Founding,
+  Hero,
+  Locations,
+  Outcomes,
+  Problem,
+  ProgrammeGlance,
+  Schedule,
+  SpecsStrip,
+  Tools,
+} from './components';
 
 const payload = await getPayload({ config });
 
@@ -23,9 +40,24 @@ export default function AcademyPage() {
   return (
     <>
       <Schema structuredData={structuredData} />
-      <section className=" bg-primary-600 antialiased">
+      <div className="antialiased">
         <Hero />
-      </section>
+        <SpecsStrip />
+        <Problem />
+        <Compare />
+        <ProgrammeGlance />
+        <Curriculum />
+        <Tools />
+        <Founder />
+        <Schedule />
+        <Outcomes />
+        <Audience />
+        <Founding />
+        <DemoBand />
+        <Locations />
+        <Faq />
+        <FinalCta />
+      </div>
     </>
   );
 }

@@ -1,0 +1,52 @@
+html {
+  scroll-padding-top: 100px;
+}
+
+@keyframes academy-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+.academy-pulse {
+  animation: academy-pulse 2.4s infinite;
+}
+
+.academy-pulse-slow {
+  animation: academy-pulse 2s infinite;
+}
+
+.academy-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.academy-reveal.academy-reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+details.academy-qa > summary {
+  list-style: none;
+}
+
+details.academy-qa > summary::-webkit-details-marker {
+  display: none;
+}
+
+.academy-qa-arrow {
+  transition: transform 0.3s ease;
+}
+
+details.academy-qa[open] .academy-qa-arrow {
+  transform: rotate(45deg);
+}

@@ -1,1 +1,1 @@
-export { Hero } from './sections';
+export * from './sections';

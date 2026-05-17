@@ -1,1 +1,16 @@
+export { Audience } from './audience';
+export { Compare } from './compare';
+export { Curriculum } from './curriculum';
+export { DemoBand } from './demo-band';
+export { Faq } from './faq';
+export { FinalCta } from './final-cta';
+export { Founder } from './founder';
+export { Founding } from './founding';
 export { Hero } from './hero';
+export { Locations } from './locations';
+export { Outcomes } from './outcomes';
+export { Problem } from './problem';
+export { ProgrammeGlance } from './programme-glance';
+export { Schedule } from './schedule';
+export { SpecsStrip } from './specs-strip';
+export { Tools } from './tools';

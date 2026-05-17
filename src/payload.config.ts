@@ -6,17 +6,10 @@ import path from 'path';
 import { buildConfig } from 'payload';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
-
-import { Users } from './collections/Users';
-import { Media } from './collections/Media';
-import { Homepage } from './collections/homepage';
-import { Services } from './collections/services';
-import { BlogInner } from './collections/blog-inner';
-import { Contact } from './collections/contact';
 import { seoPlugin } from '@payloadcms/plugin-seo';
-import { DemoBooking } from './collections/Demo-booking';
-import { BlogHome } from './collections/blog-home';
 import { s3Storage } from '@payloadcms/storage-s3';
+import { Users, Media, BlogInner, DemoBooking } from './collections';
+import { Contact, Homepage, Services, BlogHome } from './globals';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);

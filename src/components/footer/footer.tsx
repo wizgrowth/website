@@ -8,49 +8,10 @@ import { EmailIcon } from '../icons/email-icon';
 import { LocationIcon } from '../icons/location-icon';
 
 export function Footer() {
-  // social media to be added later
-  // const socialMedia = [
-  //   {
-  //     id: 1,
-  //     name: 'Facebook',
-  //     url: '/facebook/',
-  //     icon: (
-  //       <FaceBookIcon
-  //         width="13px"
-  //         height="13px"
-  //         className="p-2 rounded-full border border-primary-400 stroke-primary-300 fill-primary-300"
-  //       />
-  //     ),
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Instagram',
-  //     url: '/instagram/',
-  //     icon: (
-  //       <InstagramIcon
-  //         width="13px"
-  //         height="13px"
-  //         className="p-2 rounded-full border border-primary-400 stroke-primary-300 fill-primary-300"
-  //       />
-  //     ),
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'LinkedIn',
-  //     url: '/linkedin/',
-  //     icon: (
-  //       <Linkedin
-  //         width="13px"
-  //         height="13px"
-  //         className="p-2 rounded-full border border-primary-400 stroke-primary-300 fill-primary-300"
-  //       />
-  //     ),
-  //   },
-  // ]
-  const year = new Date().getFullYear();
-  const contactInfo = [
+  const CONTACT_INFO = [
     {
       id: 1,
+      link: 'tel:7907551261',
       content: '7907551261',
       icon: (
         <PhoneIcon width="15px" height="15px" className="stroke-primary-300 fill-primary-400" />
@@ -58,19 +19,14 @@ export function Footer() {
     },
     {
       id: 2,
-      content: 'admin@wizgrowth.com',
+      link: 'mailto:marketing@wizgrowth.com',
+      content: 'marketing@wizgrowth.com',
       icon: (
         <EmailIcon width="15px" height="15px" className="stroke-primary-300 fill-primary-400" />
       ),
     },
-    {
-      id: 3,
-      content: 'Kerala, India',
-      icon: (
-        <LocationIcon width="15px" height="15px" className="stroke-primary-300 fill-primary-400" />
-      ),
-    },
   ];
+  const year = new Date().getFullYear();
   const quote = (
     <div className="mt-5">
       <p className="text-center text-2xl leading-9 font-semibold">
@@ -121,13 +77,20 @@ export function Footer() {
           {/* sectioon-3 */}
           <div>
             <p className="text-base text-primary-300 font-bold">Contact Info</p>
-            {contactInfo.map((item) => (
-              // eslint-disable-next-line @next/next/no-html-link-for-pages
-              <a href="/" className="flex items-center gap-2 mt-2" key={item.id}>
+            {CONTACT_INFO.map((item) => (
+              <a href={item.link} className="flex items-center gap-2 mt-2" key={item.id}>
                 {item.icon}
                 <p className="text-base font-light leading-6 text-primary-400">{item.content}</p>
               </a>
             ))}
+            <div className="flex items-center gap-2 mt-2">
+              <LocationIcon
+                width="15px"
+                height="15px"
+                className="stroke-primary-300 fill-primary-400"
+              />
+              <p className="text-base font-light leading-6 text-primary-400">Kerala, India</p>
+            </div>
           </div>
         </div>
         <div className="mt-24 mr-8 max-xl:mr-0">

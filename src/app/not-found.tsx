@@ -23,10 +23,6 @@ export const metadata = {
   },
 };
 
-/**
- * Top-level 404 for unmatched URLs. With multiple root layouts (route groups),
- * not-found.tsx cannot live only inside a route group — see Next.js route groups docs.
- */
 export default function RootNotFound() {
   return (
     <main>

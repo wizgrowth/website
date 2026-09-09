@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
+import { articleBlocks } from './blocks/article-blocks';
 
 export const BlogInner: CollectionConfig = {
   slug: 'blogInner',
@@ -17,6 +18,34 @@ export const BlogInner: CollectionConfig = {
       label: 'Title',
       name: 'title',
       type: 'text',
+    },
+    {
+      label: 'Standfirst',
+      name: 'dek',
+      type: 'textarea',
+      admin: {
+        description:
+          'The short paragraph under the headline that sets up the article. Two or three sentences.',
+      },
+    },
+    {
+      label: 'Breadcrumb Label',
+      name: 'crumb',
+      type: 'text',
+      admin: {
+        description:
+          'Short label for the breadcrumb trail, e.g. "What is AEO?". Falls back to the title if empty.',
+      },
+    },
+    {
+      label: 'Published Date',
+      name: 'publishedDate',
+      type: 'date',
+      admin: {
+        description:
+          'The date shown on the article and used for sorting. Falls back to the created date if empty.',
+        date: { pickerAppearance: 'dayOnly', displayFormat: 'd MMM yyyy' },
+      },
     },
     {
       label: 'Featured Image',
@@ -41,6 +70,28 @@ export const BlogInner: CollectionConfig = {
         {
           label: 'AI',
           value: 'ai',
+        },
+        // Added with the article revamp. The three values above are kept so the
+        // existing posts that use them keep rendering.
+        {
+          label: 'Career',
+          value: 'career',
+        },
+        {
+          label: 'SEO & Content',
+          value: 'seo-content',
+        },
+        {
+          label: 'Tools',
+          value: 'tools',
+        },
+        {
+          label: 'Local Business',
+          value: 'local-business',
+        },
+        {
+          label: 'Academy',
+          value: 'academy',
         },
       ],
     },
@@ -68,9 +119,74 @@ export const BlogInner: CollectionConfig = {
       ],
     },
     {
+      label: 'TL;DR',
+      name: 'tldr',
+      type: 'array',
+      interfaceName: 'ArticleTldr',
+      admin: {
+        description:
+          'The summary box above the article. Three to five points. Leave empty to hide the box.',
+      },
+      fields: [
+        {
+          label: 'Lead-in',
+          name: 'label',
+          type: 'text',
+          admin: { description: 'Bolded opening, e.g. "What AEO is:". Optional.' },
+        },
+        {
+          label: 'Point',
+          name: 'text',
+          type: 'textarea',
+          required: true,
+        },
+      ],
+    },
+    {
       name: 'content',
       type: 'richText',
-      editor: lexicalEditor({}),
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          BlocksFeature({ blocks: articleBlocks }),
+        ],
+      }),
+    },
+    {
+      label: 'FAQs',
+      name: 'faqs',
+      type: 'array',
+      interfaceName: 'ArticleFaqs',
+      admin: {
+        description:
+          'Shown as an expandable list under the article, and used to build FAQPage structured data. Leave empty to hide the section.',
+      },
+      fields: [
+        {
+          label: 'Question',
+          name: 'question',
+          type: 'text',
+          required: true,
+        },
+        {
+          label: 'Answer',
+          name: 'answer',
+          type: 'textarea',
+          required: true,
+        },
+      ],
+    },
+    {
+      label: 'Related Articles',
+      name: 'relatedPosts',
+      type: 'relationship',
+      relationTo: 'blogInner',
+      hasMany: true,
+      maxRows: 3,
+      admin: {
+        description: 'Up to three articles shown at the end of this one.',
+      },
+      filterOptions: ({ id }) => (id ? { id: { not_equals: id } } : true),
     },
     {
       name: 'publishedBy',

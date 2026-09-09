@@ -23,11 +23,6 @@ export function ArticleHeader({ innerData }: ArticleHeaderProps) {
       ? author.profilePicture
       : null;
 
-  const featuredImage =
-    innerData?.featuredImage && typeof innerData.featuredImage === 'object'
-      ? innerData.featuredImage
-      : null;
-
   const category = categoryLabel(innerData?.category);
   const published = innerData?.publishedDate ?? innerData?.createdAt;
   const publishedLabel = published ? format(new Date(published), 'd MMM yyyy') : null;
@@ -51,15 +46,10 @@ export function ArticleHeader({ innerData }: ArticleHeaderProps) {
           </Link>
           {crumb && (
             <>
-              {/* On narrow screens the title wraps to a second line and gets
-                  truncated mid-word, so the trail stops at Blog there. */}
-              <span aria-hidden="true" className="text-[rgba(14,23,21,0.32)] max-[560px]:hidden">
+              <span aria-hidden="true" className="text-[rgba(14,23,21,0.32)]">
                 /
               </span>
-              <span
-                aria-current="page"
-                className="max-w-[42ch] truncate text-[#0E1715] max-[560px]:hidden"
-              >
+              <span aria-current="page" className="max-w-[42ch] truncate text-[#0E1715]">
                 {crumb}
               </span>
             </>
@@ -122,22 +112,6 @@ export function ArticleHeader({ innerData }: ArticleHeaderProps) {
             </Reveal>
           )}
         </div>
-
-        {featuredImage?.url && (
-          <Reveal>
-            <figure className="mt-14 max-[720px]:mt-10">
-              <Image
-                src={featuredImage.url}
-                alt={featuredImage.alt || innerData?.title || 'Article image'}
-                width={featuredImage.width || 1600}
-                height={featuredImage.height || 900}
-                className="h-auto w-full rounded-2xl object-cover"
-                sizes="(max-width: 1240px) 100vw, 1176px"
-                priority
-              />
-            </figure>
-          </Reveal>
-        )}
       </div>
     </header>
   );

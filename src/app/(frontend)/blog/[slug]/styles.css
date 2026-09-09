@@ -85,17 +85,6 @@ html {
   max-width: 68ch;
 }
 
-/* Most existing posts carry an inline text-align:justify from the editor.
-   Justified text without hyphenation opens rivers of white space, and it is
-   worst in a narrow column, so left-align it on small screens. !important is
-   needed because the alignment is an inline style on each paragraph. */
-@media (max-width: 900px) {
-  .article-body .payload-richtext p[style*='justify'],
-  .article-body .payload-richtext li[style*='justify'] {
-    text-align: left !important;
-  }
-}
-
 .article-body .payload-richtext > h2 {
   font-family: var(--font-fraunces), Georgia, serif;
   font-variation-settings:

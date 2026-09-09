@@ -210,11 +210,6 @@ export const BlogInner: CollectionConfig = {
   hooks: {
     beforeChange: [
       ({ req, data, operation }) => {
-        // Slugs saved with surrounding whitespace produced URLs like
-        // /blog/%20some-post, which 404 and were being fed to Google.
-        if (typeof data.slug === 'string') {
-          data.slug = data.slug.trim()
-        }
         if (operation === 'create') {
           if (req.user) {
             data.publishedBy = req.user.id;

@@ -1,4 +1,4 @@
-import { Hero, Services, FreeConsultation } from './components';
+import { Hero, Services, FreeConsultation, ServicePagesGrid } from './components';
 import { getPayload } from 'payload';
 import config from '@payload-config';
 import { getMeta } from '@/app/utils/get-meta';
@@ -24,6 +24,7 @@ export default function ServicesPage() {
       <Schema structuredData={structuredData} />
       <Hero />
       <Services />
+      <ServicePagesGrid />
       <FreeConsultation />
     </>
   );

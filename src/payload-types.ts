@@ -18,35 +18,6 @@ export type SideMenu =
     }[]
   | null;
 /**
- * The summary box above the article. Three to five points. Leave empty to hide the box.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArticleTldr".
- */
-export type ArticleTldr =
-  | {
-      /**
-       * Bolded opening, e.g. "What AEO is:". Optional.
-       */
-      label?: string | null;
-      text: string;
-      id?: string | null;
-    }[]
-  | null;
-/**
- * Shown as an expandable list under the article, and used to build FAQPage structured data. Leave empty to hide the section.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArticleFaqs".
- */
-export type ArticleFaqs =
-  | {
-      question: string;
-      answer: string;
-      id?: string | null;
-    }[]
-  | null;
-/**
  * Supported timezones in IANA format.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -215,7 +186,6 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -249,25 +219,10 @@ export interface BlogInner {
   id: number;
   slug: string;
   title?: string | null;
-  /**
-   * The short paragraph under the headline that sets up the article. Two or three sentences.
-   */
-  dek?: string | null;
-  /**
-   * Short label for the breadcrumb trail, e.g. "What is AEO?". Falls back to the title if empty.
-   */
-  crumb?: string | null;
-  /**
-   * The date shown on the article and used for sorting. Falls back to the created date if empty.
-   */
-  publishedDate?: string | null;
   featuredImage?: (number | null) | Media;
-  category?:
-    | ('general' | 'best of' | 'ai' | 'career' | 'seo-content' | 'tools' | 'local-business' | 'academy')[]
-    | null;
+  category?: ('general' | 'best of' | 'ai')[] | null;
   readingTime?: string | null;
   sideMenu?: SideMenu;
-  tldr?: ArticleTldr;
   content?: {
     root: {
       type: string;
@@ -283,11 +238,6 @@ export interface BlogInner {
     };
     [k: string]: unknown;
   } | null;
-  faqs?: ArticleFaqs;
-  /**
-   * Up to three articles shown at the end of this one.
-   */
-  relatedPosts?: (number | BlogInner)[] | null;
   publishedBy?: (number | null) | User;
   updatedBy?: (number | null) | User;
   meta?: {
@@ -444,7 +394,6 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
-  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -476,17 +425,11 @@ export interface DemobookingSelect<T extends boolean = true> {
 export interface BlogInnerSelect<T extends boolean = true> {
   slug?: T;
   title?: T;
-  dek?: T;
-  crumb?: T;
-  publishedDate?: T;
   featuredImage?: T;
   category?: T;
   readingTime?: T;
   sideMenu?: T | SideMenuSelect<T>;
-  tldr?: T | ArticleTldrSelect<T>;
   content?: T;
-  faqs?: T | ArticleFaqsSelect<T>;
-  relatedPosts?: T;
   publishedBy?: T;
   updatedBy?: T;
   meta?:
@@ -519,24 +462,6 @@ export interface BlogInnerSelect<T extends boolean = true> {
 export interface SideMenuSelect<T extends boolean = true> {
   titleId?: T;
   title?: T;
-  id?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArticleTldr_select".
- */
-export interface ArticleTldrSelect<T extends boolean = true> {
-  label?: T;
-  text?: T;
-  id?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArticleFaqs_select".
- */
-export interface ArticleFaqsSelect<T extends boolean = true> {
-  question?: T;
-  answer?: T;
   id?: T;
 }
 /**
@@ -933,57 +858,6 @@ export interface CollectionsWidget {
     [k: string]: unknown;
   };
   width: 'full';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "StatCardBlock".
- */
-export interface StatCardBlock {
-  /**
-   * The large number, e.g. "₹3.2L" or "68%".
-   */
-  figure: string;
-  /**
-   * One or two sentences explaining the figure.
-   */
-  body: string;
-  /**
-   * Where the figure comes from. Shown in small caps beneath the body.
-   */
-  source?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'statCard';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "PullQuoteBlock".
- */
-export interface PullQuoteBlock {
-  quote: string;
-  /**
-   * Who said it. Leave empty for an unattributed pull quote.
-   */
-  attribution?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'pullQuote';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "InlineCtaBlock".
- */
-export interface InlineCtaBlock {
-  /**
-   * The line above the buttons, e.g. "Want this run for you?"
-   */
-  label: string;
-  whatsappLabel?: string | null;
-  secondaryLabel?: string | null;
-  secondaryHref?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'inlineCta';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -78,13 +78,23 @@ export default function MeetingScheduler() {
           body: JSON.stringify(formData),
         })
         const data = await response.json()
-        console.log('Response from backend:', data)
+
+        if (!response.ok) {
+          // Don't tell the visitor their booking is confirmed when it wasn't saved.
+          console.error('Booking was not saved:', data?.message ?? response.status)
+          return
+        }
+
         setIsFormSubmitted(true)
       } catch (error) {
         console.error('Error sending booking data to backend:', error)
       }
     }
-    if (formData) {
+    // The booking is captured in two steps — name/email first, then the date
+    // and time slot. Only send it once all four fields are present, otherwise
+    // the first step fires a request that can never satisfy the collection's
+    // required fields.
+    if (formData?.name && formData?.email && formData?.date && formData?.time) {
       addBookingDataToBackend()
     }
   }, [formData])

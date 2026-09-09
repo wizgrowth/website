@@ -1,0 +1,75 @@
+/* Service page — scoped styles, matching the approach used by
+   src/app/(frontend)/academy/styles.css and the blog article page. */
+
+html {
+  scroll-padding-top: 100px;
+}
+
+.service-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.service-reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.service-qa summary::-webkit-details-marker {
+  display: none;
+}
+
+.service-qa summary {
+  list-style: none;
+}
+
+.service-qa[open] .service-qa-arrow {
+  transform: rotate(45deg);
+}
+
+.service-qa-arrow {
+  transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* The honesty section is authored as richtext in the admin panel. */
+.service-prose .payload-richtext {
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: rgba(14, 23, 21, 0.82);
+}
+
+.service-prose .payload-richtext > p {
+  margin-bottom: 1.2em;
+  max-width: 68ch;
+}
+
+.service-prose .payload-richtext > p:last-child {
+  margin-bottom: 0;
+}
+
+.service-prose .payload-richtext a {
+  color: #0e1715;
+  text-decoration: underline;
+  text-decoration-color: rgba(198, 107, 45, 0.55);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+
+.service-prose .payload-richtext a:hover {
+  text-decoration-color: #c66b2d;
+}
+
+.service-prose .payload-richtext em {
+  font-style: italic;
+}

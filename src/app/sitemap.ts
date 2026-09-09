@@ -24,6 +24,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: publishedDate || updatedAt || createdAt,
     }))
 
+  const services = await payload.find({
+    collection: 'servicePages',
+    limit: 0,
+    depth: 0,
+    sort: 'order',
+  })
+
+  const servicePages: MetadataRoute.Sitemap = services.docs
+    .map((doc) => ({ ...doc, slug: doc.slug?.trim() }))
+    .filter((doc) => Boolean(doc.slug))
+    .map(({ slug, updatedAt, createdAt }) => ({
+      url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/services/${slug}`,
+      lastModified: updatedAt || createdAt,
+    }))
+
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}` },
     { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/blog/` },
@@ -32,5 +47,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/contact/` },
   ]
 
-  return [...staticPages, ...blogInnerPages]
+  return [...staticPages, ...servicePages, ...blogInnerPages]
 }

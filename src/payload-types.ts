@@ -47,6 +47,40 @@ export type ArticleFaqs =
     }[]
   | null;
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceSteps".
+ */
+export type ServiceSteps =
+  | {
+      label: string;
+      text: string;
+      id?: string | null;
+    }[]
+  | null;
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceIncludes".
+ */
+export type ServiceIncludes =
+  | {
+      item: string;
+      id?: string | null;
+    }[]
+  | null;
+/**
+ * Shown as boxes at the foot of the page and used for FAQPage schema.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceFaqs".
+ */
+export type ServiceFaqs =
+  | {
+      question: string;
+      answer: string;
+      id?: string | null;
+    }[]
+  | null;
+/**
  * Supported timezones in IANA format.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -111,6 +145,7 @@ export interface Config {
     media: Media;
     demobooking: Demobooking;
     blogInner: BlogInner;
+    servicePages: ServicePage;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -122,6 +157,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     demobooking: DemobookingSelect<false> | DemobookingSelect<true>;
     blogInner: BlogInnerSelect<false> | BlogInnerSelect<true>;
+    servicePages: ServicePagesSelect<false> | ServicePagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -324,6 +360,91 @@ export interface BlogInner {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "servicePages".
+ */
+export interface ServicePage {
+  id: number;
+  /**
+   * Short label used in the services grid, nav and footer.
+   */
+  name: string;
+  /**
+   * The URL segment, e.g. "seo" becomes /services/seo/.
+   */
+  slug: string;
+  /**
+   * Lower numbers appear first in the services grid.
+   */
+  order?: number | null;
+  /**
+   * The page heading, without the highlighted words.
+   */
+  h1: string;
+  /**
+   * The closing words of the headline, shown in the accent colour.
+   */
+  h1Accent?: string | null;
+  /**
+   * The standfirst under the headline.
+   */
+  lead?: string | null;
+  /**
+   * The summary shown on the /services/ grid.
+   */
+  card?: string | null;
+  cardCta?: string | null;
+  steps?: ServiceSteps;
+  includes?: ServiceIncludes;
+  honesty?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  faqs?: ServiceFaqs;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    keywords?: string | null;
+    metaRobots?: string | null;
+    schema?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    canonicalUrl?: string | null;
+    metaSocial?:
+      | {
+          platform: 'facebook' | 'twitter';
+          ogTitle?: string | null;
+          ogDescription?: string | null;
+          ogImage?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -361,6 +482,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'blogInner';
         value: number | BlogInner;
+      } | null)
+    | ({
+        relationTo: 'servicePages';
+        value: number | ServicePage;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -535,6 +660,72 @@ export interface ArticleTldrSelect<T extends boolean = true> {
  * via the `definition` "ArticleFaqs_select".
  */
 export interface ArticleFaqsSelect<T extends boolean = true> {
+  question?: T;
+  answer?: T;
+  id?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "servicePages_select".
+ */
+export interface ServicePagesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  order?: T;
+  h1?: T;
+  h1Accent?: T;
+  lead?: T;
+  card?: T;
+  cardCta?: T;
+  steps?: T | ServiceStepsSelect<T>;
+  includes?: T | ServiceIncludesSelect<T>;
+  honesty?: T;
+  faqs?: T | ServiceFaqsSelect<T>;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        keywords?: T;
+        metaRobots?: T;
+        schema?: T;
+        canonicalUrl?: T;
+        metaSocial?:
+          | T
+          | {
+              platform?: T;
+              ogTitle?: T;
+              ogDescription?: T;
+              ogImage?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceSteps_select".
+ */
+export interface ServiceStepsSelect<T extends boolean = true> {
+  label?: T;
+  text?: T;
+  id?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceIncludes_select".
+ */
+export interface ServiceIncludesSelect<T extends boolean = true> {
+  item?: T;
+  id?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceFaqs_select".
+ */
+export interface ServiceFaqsSelect<T extends boolean = true> {
   question?: T;
   answer?: T;
   id?: T;

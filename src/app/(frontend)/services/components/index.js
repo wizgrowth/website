@@ -1,1 +1,1 @@
-export { Hero, Services, FreeConsultation } from './sections'
+export { Hero, Services, FreeConsultation , ServicePagesGrid } from './sections'

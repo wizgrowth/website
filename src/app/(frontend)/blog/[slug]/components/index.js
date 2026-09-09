@@ -1,11 +1,1 @@
-export {
-  ArticleHeader,
-  AuthorBio,
-  Content,
-  EndCta,
-  Faqs,
-  ProgressBar,
-  RelatedPosts,
-  Tldr,
-  TocRail,
-} from './sections'
+export { Hero, Content } from './sections'

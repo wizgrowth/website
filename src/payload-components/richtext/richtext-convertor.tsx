@@ -6,13 +6,11 @@ import type {
 } from '@payloadcms/richtext-lexical/lexical';
 import type { DefaultNodeTypes } from '@payloadcms/richtext-lexical';
 import { headingConverter } from './heading-convertor';
-import { blockConverter } from './block-convertor';
 
 // Merge with default converters
 const jsxConverters: JSXConvertersFunction<DefaultNodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   ...headingConverter,
-  ...blockConverter,
 });
 
 export const RichTextConverterComponent = ({

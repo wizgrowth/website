@@ -60,16 +60,52 @@ export interface MetaData {
   }> | null;
 }
 
-export async function getMeta({ meta }: { meta?: MetaData }): Promise<Metadata> {
+const DEFAULT_TITLE = 'Wizgrowth - India’s Leading Digital Marketing Agency';
+const DEFAULT_DESCRIPTION =
+  'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development';
+const DEFAULT_OG_IMAGE =
+  'https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/header/wizgrowth-meta-image.png';
+
+export type MetaFallback = {
+  /** Used when the CMS meta field is empty, so each page still has its own. */
+  title?: string;
+  description?: string;
+};
+
+export async function getMeta({
+  meta,
+  path,
+  fallback,
+}: {
+  meta?: MetaData;
+  /** Page path, e.g. "/services/". Used to emit a self-referencing canonical. */
+  path?: string;
+  fallback?: MetaFallback;
+}): Promise<Metadata> {
   // Get the base URL from environment or construct it
   const baseUrl = process.env.NEXT_PUBLIC_SITE_DOMAIN || 'https://www.wizgrowth.com';
+
+  const title = meta?.title || fallback?.title || DEFAULT_TITLE;
+  const description = meta?.description || fallback?.description || DEFAULT_DESCRIPTION;
+  const canonical = meta?.canonicalUrl || (path ? new URL(path, baseUrl).toString() : undefined);
+
+  // Every page gets a canonical, an OpenGraph block and a Twitter card, even
+  // when nothing is filled in the CMS. Previously these were emitted only when
+  // an editor had set a canonical or an image, so in practice no page had a
+  // canonical and only some blog posts had social images.
+  //
+  // `absolute` stops the root layout's "%s - Wizgrowth" template appending a
+  // second brand suffix to titles that already carry one.
+  const base: Metadata = {
+    title: { absolute: title },
+    description,
+    ...(canonical ? { alternates: { canonical } } : {}),
+  };
 
   // Default meta if none provided
   if (!meta) {
     return {
-      title: 'Wizgrowth - India’s Leading Digital Marketing Agency',
-      description:
-        'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development',
+      ...base,
       keywords: [
         'Wizgrowth',
         'Digital Marketing',
@@ -81,14 +117,18 @@ export async function getMeta({ meta }: { meta?: MetaData }): Promise<Metadata> 
         'Website Development',
       ],
       openGraph: {
-        title: 'Wizgrowth - India’s Leading Digital Marketing Agency',
-        description:
-          'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development',
-        images: [
-          {
-            url: 'https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/header/wizgrowth-meta-image.png',
-          },
-        ],
+        title,
+        description,
+        type: 'website',
+        siteName: 'WizGrowth',
+        ...(canonical ? { url: canonical } : {}),
+        images: [{ url: DEFAULT_OG_IMAGE }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: [DEFAULT_OG_IMAGE],
       },
     };
   }
@@ -103,12 +143,7 @@ export async function getMeta({ meta }: { meta?: MetaData }): Promise<Metadata> 
     return url.startsWith('http') ? url : `${baseUrl}${url}`;
   };
 
-  const metadata: Metadata = {
-    title: meta.title || 'Wizgrowth - India’s Leading Digital Marketing Agency',
-    description:
-      meta.description ||
-      'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development',
-  };
+  const metadata: Metadata = { ...base };
 
   // Add keywords if present
   if (meta.keywords) {
@@ -120,60 +155,39 @@ export async function getMeta({ meta }: { meta?: MetaData }): Promise<Metadata> 
     metadata.robots = meta.metaRobots;
   }
 
-  // Add canonical URL if present
-  if (meta.canonicalUrl) {
-    metadata.alternates = {
-      canonical: meta.canonicalUrl,
-    };
-  }
+  // OpenGraph — always emitted, falling back to the brand image.
+  const facebookImage = typeof facebookMeta?.ogImage === 'object' ? facebookMeta.ogImage : null;
+  const metaImage = typeof meta.image === 'object' ? meta.image : null;
+  const ogImage = facebookImage || metaImage;
 
-  // Add OpenGraph metadata
-  if (facebookMeta || meta.image) {
-    const facebookImage = typeof facebookMeta?.ogImage === 'object' ? facebookMeta.ogImage : null;
-    const metaImage = typeof meta.image === 'object' ? meta.image : null;
-    const ogImage = facebookImage || metaImage;
+  metadata.openGraph = {
+    title: facebookMeta?.ogTitle || title,
+    description: facebookMeta?.ogDescription || description,
+    type: 'website',
+    siteName: 'WizGrowth',
+    ...(canonical ? { url: canonical } : {}),
+    images: ogImage?.url
+      ? [
+          {
+            url: getFullImageUrl(ogImage.url) || '',
+            width: ogImage.width || undefined,
+            height: ogImage.height || undefined,
+            alt: ogImage.alt || title,
+          },
+        ]
+      : [{ url: DEFAULT_OG_IMAGE }],
+  };
 
-    metadata.openGraph = {
-      title:
-        facebookMeta?.ogTitle ||
-        meta.title ||
-        'Wizgrowth - India’s Leading Digital Marketing Agency',
-      description:
-        facebookMeta?.ogDescription ||
-        meta.description ||
-        'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development',
-      images: ogImage?.url
-        ? [
-            {
-              url: getFullImageUrl(ogImage.url) || '',
-              width: ogImage.width || undefined,
-              height: ogImage.height || undefined,
-              alt: ogImage.alt || meta.title || 'Wizgrowth',
-            },
-          ]
-        : undefined,
-    };
-  }
+  // Twitter — always emitted, so links unfurl with a large card everywhere.
+  const twitterImageObj = typeof twitterMeta?.ogImage === 'object' ? twitterMeta.ogImage : null;
+  const twitterImage = twitterImageObj || metaImage;
 
-  // Add Twitter metadata
-  if (twitterMeta || meta.image) {
-    const twitterImageObj = typeof twitterMeta?.ogImage === 'object' ? twitterMeta.ogImage : null;
-    const metaImage = typeof meta.image === 'object' ? meta.image : null;
-    const twitterImage = twitterImageObj || metaImage;
-
-    metadata.twitter = {
-      card: 'summary_large_image',
-      title:
-        twitterMeta?.ogTitle ||
-        meta.title ||
-        'Wizgrowth - India’s Leading Digital Marketing Agency',
-      description:
-        twitterMeta?.ogDescription ||
-        meta.description ||
-        'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development',
-      images: twitterImage?.url ? [getFullImageUrl(twitterImage.url) || ''] : undefined,
-    };
-  }
+  metadata.twitter = {
+    card: 'summary_large_image',
+    title: twitterMeta?.ogTitle || title,
+    description: twitterMeta?.ogDescription || description,
+    images: twitterImage?.url ? [getFullImageUrl(twitterImage.url) || ''] : [DEFAULT_OG_IMAGE],
+  };
 
   return metadata;
 }

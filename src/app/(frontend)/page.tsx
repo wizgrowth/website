@@ -16,6 +16,12 @@ const homePageData = await payload.findGlobal({
 export async function generateMetadata() {
   const metadata = await getMeta({
     meta: homePageData?.meta,
+    path: '/',
+    fallback: {
+      title: 'Wizgrowth — Digital Marketing Agency in Kochi, Kerala',
+      description:
+        'A growth marketing agency in Kochi running SEO, paid campaigns, content, social and analytics for brands across Kerala and India. Free 30-minute growth call.',
+    },
   });
   return metadata;
 }

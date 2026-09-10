@@ -4,6 +4,13 @@ import { PhoneIcon } from '../icons/phone';
 import { EmailIcon } from '../icons/email-icon';
 import { LocationIcon } from '../icons/location-icon';
 
+const SITE_LINKS = [
+  { href: '/services/', label: 'Services' },
+  { href: '/academy/', label: 'Academy' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/contact/', label: 'Contact' },
+];
+
 export function Footer() {
   const CONTACT_INFO = [
     {
@@ -80,7 +87,27 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-24 mr-8 max-xl:mr-0">
+        {/* The header renders Academy inside a dropdown that only mounts once
+            it is opened, so nothing on the site linked to /academy/ at all —
+            neither readers scanning a page nor crawlers ever saw it. These
+            links are always in the markup. */}
+        <nav aria-label="Footer" className="mt-20 border-t border-primary-200 pt-10">
+          <p className="text-base text-primary-300 font-bold">Explore</p>
+          <ul className="mt-4 flex flex-wrap gap-x-10 gap-y-2.5">
+            {SITE_LINKS.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className="text-base font-light leading-6 text-primary-400 hover:underline"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="mt-16 mr-8 max-xl:mr-0">
           <div className="xl:hidden mb-10">{quote}</div>
           <p className="text-sm font-normal leading-5 text-primary-400 text-center">
             Copyright © WizGrowth Inc. {year}

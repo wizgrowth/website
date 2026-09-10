@@ -28,6 +28,10 @@ export async function generateMetadata({ params }: ParamsProps) {
 
   const metadata = await getMeta({
     meta: blogInnerPage?.meta,
+    path: `/blog/${slug.trim()}/`,
+    fallback: {
+      title: blogInnerPage?.title ? `${blogInnerPage.title} | WizGrowth` : undefined,
+    },
   });
 
   return metadata;

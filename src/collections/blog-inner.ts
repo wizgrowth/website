@@ -94,6 +94,10 @@ export const BlogInner: CollectionConfig = {
   hooks: {
     beforeChange: [
       ({ req, data, operation }) => {
+        // Slugs saved with surrounding whitespace produce URLs that 404.
+        if (typeof data.slug === 'string') {
+          data.slug = data.slug.trim();
+        }
         if (operation === 'create') {
           if (req.user) {
             data.publishedBy = req.user.id;

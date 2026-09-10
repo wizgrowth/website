@@ -18,6 +18,15 @@ const poppins = Poppins({
 });
 
 export const metadata = {
+  // Without this, relative OpenGraph and canonical URLs cannot be resolved
+  // to absolute ones and Next drops them.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_DOMAIN || 'https://www.wizgrowth.com'),
+  // Google Search Console site verification. Next renders this as
+  // <meta name="google-site-verification" ...> in <head> on every page.
+  // Keep it in place — removing it un-verifies the property.
+  verification: {
+    google: 'IAx8CcrOEudLEtLPONFG4hag5hWp7ZEaNsmVIJEXxhE',
+  },
   title: {
     default: 'Wizgrowth - India’s Leading Digital Marketing Agency',
     template: '%s - Wizgrowth',

@@ -13,6 +13,12 @@ const servicesPageMetaData = await payload.findGlobal({
 export async function generateMetadata() {
   const metadata = await getMeta({
     meta: servicesPageMetaData?.meta,
+    path: '/services/',
+    fallback: {
+      title: 'Digital Marketing Services — SEO, Ads, Content | WizGrowth',
+      description:
+        'SEO, AI citations (GEO), demand generation, content marketing, social media, web development and analytics — run as growth engines with timelines in writing.',
+    },
   });
   return metadata;
 }

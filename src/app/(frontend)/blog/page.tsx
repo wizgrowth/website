@@ -13,6 +13,12 @@ const blogHomeData = await payload.findGlobal({
 export async function generateMetadata() {
   const metadata = await getMeta({
     meta: blogHomeData?.meta,
+    path: '/blog/',
+    fallback: {
+      title: 'Digital Marketing Blog — SEO, Careers & Growth | WizGrowth',
+      description:
+        'Practical writing on SEO, AI search, digital marketing careers and growing a business in Kerala — from an operator running these campaigns daily.',
+    },
   });
   return metadata;
 }

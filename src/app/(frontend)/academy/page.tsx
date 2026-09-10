@@ -31,6 +31,12 @@ const academyPageData = await payload.findGlobal({
 export async function generateMetadata() {
   const metadata = await getMeta({
     meta: academyPageData?.meta,
+    path: '/academy/',
+    fallback: {
+      title: 'Digital Marketing Academy in Kerala — WizGrowth Academy',
+      description:
+        'A 12-week operator-led digital marketing cohort in Kerala and online across India. Growth strategy, modern SEO and GEO, content systems, analytics and AI-native workflows.',
+    },
   });
   return metadata;
 }

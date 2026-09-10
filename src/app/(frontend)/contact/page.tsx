@@ -14,6 +14,12 @@ const contactMetaData = await payload.findGlobal({
 export async function generateMetadata() {
   const metadata = await getMeta({
     meta: contactMetaData?.meta,
+    path: '/contact/',
+    fallback: {
+      title: 'Contact WizGrowth — Book a Free Growth Call',
+      description:
+        'Talk to WizGrowth about growing your business. WhatsApp, call or email us in Kochi, Kerala — the first step is a free thirty-minute growth call.',
+    },
   });
   return metadata;
 }

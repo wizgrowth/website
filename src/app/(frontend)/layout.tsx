@@ -18,6 +18,9 @@ const poppins = Poppins({
 });
 
 export const metadata = {
+  // Without this, relative OpenGraph and canonical URLs cannot be resolved
+  // to absolute ones and Next drops them.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_DOMAIN || 'https://www.wizgrowth.com'),
   title: {
     default: 'Wizgrowth - India’s Leading Digital Marketing Agency',
     template: '%s - Wizgrowth',

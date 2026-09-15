@@ -68,7 +68,7 @@ export function Header() {
             </a>
             <a
               href="/services/"
-              className={`font-medium hover:bg-primary-100 px-3 py-2 rounded-md ${pathName === '/services/' ? 'bg-primary-100' : ''}`}
+              className={`font-medium hover:bg-primary-100 px-3 py-2 rounded-md ${pathName.startsWith('/services/') ? 'bg-primary-100' : ''}`}
             >
               Services
             </a>

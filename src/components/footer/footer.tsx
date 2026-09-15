@@ -1,17 +1,39 @@
 import Image from 'next/image';
+import { getPayload } from 'payload';
+import config from '@payload-config';
 import { ClockIcon } from '@components/icons/clock-icon';
 import { PhoneIcon } from '../icons/phone';
 import { EmailIcon } from '../icons/email-icon';
 import { LocationIcon } from '../icons/location-icon';
 
-const SITE_LINKS = [
+const EXPLORE = [
   { href: '/services/', label: 'Services' },
   { href: '/academy/', label: 'Academy' },
   { href: '/blog/', label: 'Blog' },
   { href: '/contact/', label: 'Contact' },
 ];
 
-export function Footer() {
+// Academy and the service pages previously had no crawlable link anywhere on
+// the site — the header renders them inside a dropdown that only mounts once
+// it is opened, so neither users scanning the page nor crawlers ever saw them.
+async function getServiceLinks() {
+  try {
+    const payload = await getPayload({ config });
+    const result = await payload.find({
+      collection: 'servicePages',
+      limit: 0,
+      depth: 0,
+      sort: 'order',
+    });
+    return result.docs.map((doc) => ({ href: `/services/${doc.slug}/`, label: doc.name }));
+  } catch {
+    // The footer must never take the page down if the query fails.
+    return [];
+  }
+}
+
+export async function Footer() {
+  const serviceLinks = await getServiceLinks();
   const CONTACT_INFO = [
     {
       id: 1,
@@ -87,24 +109,43 @@ export function Footer() {
             </div>
           </div>
         </div>
-        {/* The header renders Academy inside a dropdown that only mounts once
-            it is opened, so nothing on the site linked to /academy/ at all —
-            neither readers scanning a page nor crawlers ever saw it. These
-            links are always in the markup. */}
-        <nav aria-label="Footer" className="mt-20 border-t border-primary-200 pt-10">
-          <p className="text-base text-primary-300 font-bold">Explore</p>
-          <ul className="mt-4 flex flex-wrap gap-x-10 gap-y-2.5">
-            {SITE_LINKS.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="text-base font-light leading-6 text-primary-400 hover:underline"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+        <nav
+          aria-label="Footer"
+          className="mt-20 grid grid-cols-2 gap-10 border-t border-primary-200 pt-10 md:grid-cols-[220px_1fr]"
+        >
+          <div>
+            <p className="text-base text-primary-300 font-bold">Explore</p>
+            <ul className="mt-4 flex flex-col gap-2.5">
+              {EXPLORE.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="text-base font-light leading-6 text-primary-400 hover:underline"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {serviceLinks.length > 0 && (
+            <div>
+              <p className="text-base text-primary-300 font-bold">Services</p>
+              <ul className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+                {serviceLinks.map((item) => (
+                  <li key={item.href}>
+                    <a
+                      href={item.href}
+                      className="text-base font-light leading-6 text-primary-400 hover:underline"
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </nav>
 
         <div className="mt-16 mr-8 max-xl:mr-0">

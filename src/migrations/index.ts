@@ -5,6 +5,8 @@ import * as migration_20251123_121146_restore_prefix_column from './20251123_121
 import * as migration_20251216_195830_schema from './20251216_195830_schema';
 import * as migration_20260509_075007 from './20260509_075007';
 import * as migration_20260517_151747_academy from './20260517_151747_academy';
+import * as migration_20260909_180911_service_pages from './20260909_180911_service_pages';
+import * as migration_20260909_181500_seed_service_pages from './20260909_181500_seed_service_pages';
 import * as migration_20260910_093000_trim_blog_slugs from './20260910_093000_trim_blog_slugs';
 
 export const migrations = [
@@ -44,8 +46,18 @@ export const migrations = [
     name: '20260517_151747_academy'
   },
   {
+    up: migration_20260909_180911_service_pages.up,
+    down: migration_20260909_180911_service_pages.down,
+    name: '20260909_180911_service_pages',
+  },
+  {
+    up: migration_20260909_181500_seed_service_pages.up,
+    down: migration_20260909_181500_seed_service_pages.down,
+    name: '20260909_181500_seed_service_pages',
+  },
+  {
     up: migration_20260910_093000_trim_blog_slugs.up,
     down: migration_20260910_093000_trim_blog_slugs.down,
-    name: '20260910_093000_trim_blog_slugs'
+    name: '20260910_093000_trim_blog_slugs',
   },
 ];

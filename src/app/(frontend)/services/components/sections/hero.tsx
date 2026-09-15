@@ -1,32 +1,58 @@
-import { Button } from '@/components/buttons/button'
-import Image from 'next/image'
+import Link from 'next/link';
+import { CONTACT, ENGAGEMENT_RULES, Reveal, WhatsAppIcon } from '../shared';
+import { countWord } from './constants';
 
-export function Hero() {
+export function Hero({ serviceCount }: { serviceCount: number }) {
   return (
-    <section>
-      <div className="container">
-        <div className="mt-40 bg-primary-200 rounded-3xl flex items-center justify-evenly max-xl:lg:gap-20 max-lg:py-10 max-lg:px-10 max-sm:px-5">
-          <Image
-            src="https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/service-page/services-page-hero-image.png"
-            width={402}
-            height={480}
-            alt="Hero Image"
-            className="-mt-7 max-lg:hidden max-xl:pl-10"
-            priority
-          />
-          <div>
-            <h1 className="font-extrabold text-5xl leading-tight text-black max-lg:text-center max-lg:text-4xl max-lg:leading-snug max-sm:text-3xl max-sm:leading-snug">
-              Digital Marketing Services <br aria-hidden className="max-xl:hidden" /> That Drive
-              Results
-            </h1>
-            <Button
-              href="tel:7907551261"
-              className="px-8 py-3 bg-primary-400 text-white rounded-lg hover:opacity-90 transition duration-300 ease-in-out mt-8 block w-fit font-medium text-lg max-lg:mx-auto"
-              Btntext="Get Started Now"
-            />
-          </div>
+    <header className="wg-shell wg-hero">
+      <Reveal>
+        <p className="wg-microlabel wg-microlabel--green wg-microlabel--dot">
+          WizGrowth Agency · Kochi, Kerala
+        </p>
+        <h1 className="wg-h1">
+          {countWord(serviceCount)} services. One rule: numbers you can{' '}
+          <span className="wg-fx">check</span>
+        </h1>
+        <p className="wg-lead">
+          Pick a channel or bring us the goal — either way, every engagement starts with a free
+          growth call and a written scope, and reports monthly against targets you agreed to.
+          Misses included.
+        </p>
+        <div className="wg-hero-ctas">
+          <Link href="/contact/" className="wg-btn wg-btn--primary">
+            Book a growth call
+          </Link>
+          <a
+            href={CONTACT.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="wg-btn wg-btn--secondary"
+          >
+            <WhatsAppIcon /> WhatsApp us
+          </a>
         </div>
-      </div>
-    </section>
-  )
+        <p className="wg-hero-note">
+          Retainers across D2C, SaaS and education · Clients in Kerala, across India and abroad
+        </p>
+      </Reveal>
+
+      <Reveal>
+        <aside className="wg-glance" aria-label="What every engagement includes">
+          <p className="wg-microlabel wg-microlabel--green">Every engagement, every service</p>
+          <ul className="wg-glance-rows">
+            {ENGAGEMENT_RULES.map((rule) => (
+              <li key={rule.k}>
+                <span className="wg-k">{rule.k}</span>
+                <span className="wg-v">{rule.v}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="wg-glance-foot">
+            If a budget is too small for a channel to work honestly, we say so on the call — and
+            suggest what to do instead.
+          </p>
+        </aside>
+      </Reveal>
+    </header>
+  );
 }

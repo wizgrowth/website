@@ -1,32 +1,51 @@
+import type {
+  SerializedEditorState,
+  SerializedLexicalNode,
+} from '@payloadcms/richtext-lexical/lexical';
+import { RichTextConverterComponent } from '@/payload-components/richtext/richtext-convertor';
 import type { ServicePage } from '@/payload-types';
-import { Reveal } from '../../../components/shared';
 
+// Method, what's included and the honesty block share one .prose column,
+// exactly as in the reference service template.
 export function Method({ service }: { service: ServicePage }) {
   const steps = service.steps ?? [];
-  if (steps.length === 0) return null;
+  const includes = service.includes ?? [];
+  const honesty = service.honesty;
+  if (steps.length === 0 && includes.length === 0 && !honesty) return null;
 
   return (
-    <section className="wg-shell wg-section" aria-labelledby="method-h">
-      <div className="wg-split">
-        <Reveal className="wg-split-aside">
-          <p className="wg-microlabel wg-microlabel--green wg-microlabel--dot">The method</p>
-          <h2 id="method-h" className="wg-h2">
-            How we <span className="wg-fx">run it</span>
-          </h2>
-          <p className="wg-intent">
-            {steps.length} steps, in the order they happen. You see the same numbers we do from
-            day one.
-          </p>
-        </Reveal>
-        <ol className="wg-steps">
-          {steps.map((step) => (
-            <Reveal as="li" key={step.id ?? step.label}>
-              <b>{step.label}</b>
-              <span>{step.text}</span>
-            </Reveal>
-          ))}
-        </ol>
-      </div>
+    <section className="shell section-tight prose" aria-label="Method">
+      {steps.length > 0 && (
+        <>
+          <h2>How we run it</h2>
+          <ol className="steps">
+            {steps.map((step) => (
+              <li key={step.id ?? step.label}>
+                <b>{step.label}</b>
+                {step.text}
+              </li>
+            ))}
+          </ol>
+        </>
+      )}
+      {includes.length > 0 && (
+        <>
+          <h2>What’s included</h2>
+          <ul className="checks">
+            {includes.map((entry) => (
+              <li key={entry.id ?? entry.item}>{entry.item}</li>
+            ))}
+          </ul>
+        </>
+      )}
+      {honesty && (
+        <>
+          <h2>Timelines, pricing, honesty</h2>
+          <RichTextConverterComponent
+            data={honesty as unknown as SerializedEditorState<SerializedLexicalNode>}
+          />
+        </>
+      )}
     </section>
   );
 }

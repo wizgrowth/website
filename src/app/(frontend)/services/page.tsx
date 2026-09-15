@@ -2,23 +2,23 @@ import { getPayload } from 'payload';
 import config from '@payload-config';
 import { getMeta } from '@/app/utils/get-meta';
 import { Schema } from '@/components/scripts/schema';
-import { Engagement, HUB_FAQS, Hero, ServicesGrid } from './components/sections';
 import {
   Breadcrumb,
   EndCta,
   Faq,
+  ServiceCard,
   breadcrumbSchema,
+  faqPlain,
   faqSchema,
   fromMeta,
   getServices,
-} from './components/shared';
+  schemaList,
+} from '@/components/wg';
+import { Engagement, SERVICES_FAQS } from './components/sections';
 
-// Editors change service cards in the admin panel; the collection hook
-// revalidates this page, and this is the safety net.
 export const revalidate = 3600;
 
 const payload = await getPayload({ config });
-
 const servicesPageMetaData = await payload.findGlobal({ slug: 'services' });
 
 export async function generateMetadata() {
@@ -28,38 +28,48 @@ export async function generateMetadata() {
     fallback: {
       title: 'Digital Marketing Services in Kochi, Kerala — WizGrowth',
       description:
-        'SEO, AI citations, demand generation, content, social media, web development and analytics — scoped on a free growth call, targets in writing, reported monthly. Kochi, Kerala.',
+        'SEO, AI citations (GEO), demand generation, content, social media, web development and analytics — scoped on a free growth call, targets in writing, reported monthly.',
     },
   });
 }
 
 const CRUMBS = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/services/' }];
+const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
 
 export default async function ServicesPage() {
   const services = await getServices();
+  const count = WORDS[services.length] ?? String(services.length);
 
-  const structuredData = [
-    ...fromMeta(servicesPageMetaData?.meta?.schema),
+  const structuredData = schemaList(
+    fromMeta(servicesPageMetaData?.meta?.schema),
     breadcrumbSchema(CRUMBS),
-    faqSchema(HUB_FAQS.map((f) => ({ question: f.question, answer: f.plain }))),
-  ].filter(Boolean);
+    faqSchema(SERVICES_FAQS.map((f) => ({ question: f.question, answer: faqPlain(f) }))),
+  );
 
   return (
     <>
       <Schema structuredData={structuredData} />
       <Breadcrumb items={CRUMBS} />
-      <Hero serviceCount={services.length} />
-      <ServicesGrid services={services} />
+      <header className="shell page-hero">
+        <p className="microlabel green">WizGrowth Agency</p>
+        <h1>
+          {count} services. One rule: numbers you can <span className="fx">check</span>
+        </h1>
+        <p className="lead">
+          Pick a channel or bring us the goal — either way, every engagement starts with a free
+          growth call and a written scope, and reports monthly against targets you agreed to.
+          Misses included.
+        </p>
+      </header>
+      <section className="shell section-tight" aria-label="Services">
+        <div className="svc-grid">
+          {services.map((s) => (
+            <ServiceCard key={s.slug} service={s} />
+          ))}
+        </div>
+      </section>
       <Engagement />
-      <Faq
-        heading={
-          <>
-            Frequently asked <span className="wg-fx">questions</span>
-          </>
-        }
-        intro="The questions that come up on almost every first call. Ask anything else on the call itself."
-        items={HUB_FAQS}
-      />
+      <Faq items={SERVICES_FAQS} />
       <EndCta />
     </>
   );

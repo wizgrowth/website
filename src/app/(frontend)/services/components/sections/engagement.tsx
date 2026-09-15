@@ -1,33 +1,36 @@
-import { Reveal } from '../shared';
-import { HUB_STEPS } from './constants';
+export const ENGAGEMENT_STEPS = [
+  {
+    label: 'A free 30-minute growth call.',
+    text: 'We look at your numbers and tell you what we’d fix first — useful even if you never hire us.',
+  },
+  {
+    label: 'A written scope.',
+    text: 'Channels, targets, budgets, timelines. You see the plan before you pay for it.',
+  },
+  {
+    label: 'Work, reported monthly.',
+    text: 'One dashboard, a monthly call, and the misses named alongside the wins.',
+  },
+  {
+    label: 'Stay because it works.',
+    text: 'No long lock-ins — engagements continue on results, not contracts.',
+  },
+];
 
 export function Engagement() {
   return (
-    <section className="wg-band" aria-labelledby="engagement-h">
-      <div className="wg-shell">
-        <Reveal className="wg-sec-head">
-          <p className="wg-microlabel wg-microlabel--green wg-microlabel--dot">
-            How it works
-          </p>
-          <h2 id="engagement-h" className="wg-h2">
-            How an engagement <span className="wg-fx">starts</span>
-          </h2>
-          <p className="wg-intent">
-            The same four moves for every service, in the order they happen. Nothing is billed
-            before you’ve seen the plan.
-          </p>
-        </Reveal>
-        <Reveal>
-          <ol className="wg-band-steps">
-            {HUB_STEPS.map((step) => (
-              <li key={step.label}>
-                <b>{step.label}</b>
-                <span>{step.text}</span>
-              </li>
-            ))}
-          </ol>
-        </Reveal>
-      </div>
+    <section className="shell section-tight prose" aria-label="How engagements work">
+      <h2>
+        How an engagement <span className="fx">starts</span>
+      </h2>
+      <ol className="steps">
+        {ENGAGEMENT_STEPS.map((step) => (
+          <li key={step.label}>
+            <b>{step.label}</b>
+            {step.text}
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }

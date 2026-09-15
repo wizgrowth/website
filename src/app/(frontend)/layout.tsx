@@ -1,20 +1,28 @@
 import React from 'react';
 import './styles.css';
-import { Header } from '@components/header';
-import { Footer } from '@/components/footer';
+import './wg.css';
+import { Fraunces, Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
-import { Poppins } from 'next/font/google';
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
+import { FloatWa } from '@/components/wg';
 import { GoogleTag, NoScripts } from './scripts';
 
-// Configure the font with all variants you need
-const poppins = Poppins({
+// Brand system v2.0: Inter for everything, Fraunces italic for the one
+// accent word per headline. Both are exposed as CSS variables that wg.css
+// reads through --sans and --accent.
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  style: ['normal', 'italic'],
+  variable: '--font-inter',
   display: 'swap',
-  preload: true,
-  // This makes the font variable accessible
-  variable: '--font-poppins',
+});
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  style: ['italic'],
+  variable: '--font-fraunces',
+  axes: ['opsz', 'SOFT'],
+  display: 'swap',
 });
 
 export const metadata = {
@@ -28,32 +36,36 @@ export const metadata = {
     google: 'IAx8CcrOEudLEtLPONFG4hag5hWp7ZEaNsmVIJEXxhE',
   },
   title: {
-    default: 'Wizgrowth - India’s Leading Digital Marketing Agency',
-    template: '%s - Wizgrowth',
+    default: 'WizGrowth | Growth Marketing Agency & Academy in Kochi, Kerala',
+    template: '%s — WizGrowth',
   },
   description:
-    'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development',
+    'WizGrowth grows brands with SEO, demand generation and AI citations (GEO) — and trains marketers on the same live client work. Kochi, Kerala; clients everywhere.',
   openGraph: {
-    title: 'Wizgrowth - India’s Leading Digital Marketing Agency',
-    description:
-      'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development',
     type: 'website',
+    siteName: 'WizGrowth',
   },
+};
+
+export const viewport = {
+  themeColor: '#F2EAD8',
 };
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props;
 
   return (
-    <html lang="en" className={poppins.variable}>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
       <GoogleTag />
       <body>
         <NoScripts />
-        <main>
-          <Header />
-          {children}
-          <Footer />
-        </main>
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
+        <Header />
+        <main id="main">{children}</main>
+        <Footer />
+        <FloatWa />
         <Analytics />
       </body>
     </html>

@@ -1,86 +1,55 @@
-import { Button } from '@/components/buttons/button'
-import Image from 'next/image'
+import Link from 'next/link';
+import type { ServicePage } from '@/payload-types';
+import { ServiceCard } from '@/components/wg';
 
-type ServiesProp = {
-  id: number
-  imgSrc: string
-  title: string
-  description: string
-}
+const WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 
-export function Services() {
-  const services: ServiesProp[] = [
-    {
-      id: 1,
-      imgSrc:
-        'https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/front-page/tax-consultation.png',
-      title: 'SEO',
-      description: 'Get found and get traffic with data driven SEO.',
-    },
-    {
-      id: 2,
-      imgSrc:
-        'https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/front-page/finance-consultation.png',
-      title: 'Social Media Marketing',
-      description: 'Build your brand and connect with your audience across all platforms.',
-    },
-    {
-      id: 3,
-      imgSrc:
-        'https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/front-page/business-consultation.png',
-      title: 'Paid Advertising (PPC)',
-      description: "Boost your brand's presence on social media platforms.",
-    },
-  ]
+// The first three services in CMS order are the core engines; the rest are
+// the supporting services in the 4-up grid.
+export function Services({ services }: { services: ServicePage[] }) {
+  if (services.length === 0) return null;
+  const core = services.slice(0, 3);
+  const supporting = services.slice(3);
+  const count = WORDS[services.length] ?? String(services.length);
+
   return (
-    <section className="mt-28 pb-24 max-sm:mt-12">
-      <div className="container">
-        <div className="p-20 bg-primary-200 rounded-3xl max-sm:px-5 max-sm:py-16">
-          <p className="text-lg font-bold leading-6 text-primary-400 max-lg:text-center">
-            What we do
+    <section className="shell section" id="services" aria-labelledby="services-h">
+      <div className="sec-head">
+        <p className="microlabel green">WizGrowth Agency</p>
+        <h2 id="services-h">
+          Growth, run like a <span className="fx">craft</span>
+        </h2>
+        <p className="intent">
+          Three engines do the heavy lifting — SEO, demand generation and AI citations — with four
+          supporting services around them. One rule everywhere: targets agreed up front, results
+          reviewed monthly, misses included.
+        </p>
+      </div>
+      <div className="svc-grid">
+        {core.map((s) => (
+          <ServiceCard key={s.slug} service={s} />
+        ))}
+      </div>
+      {supporting.length > 0 && (
+        <>
+          <p className="microlabel green" style={{ display: 'block', margin: '32px 0 16px' }}>
+            Supporting services
           </p>
-          <div className="flex justify-between items-center mt-2 max-lg:flex-col max-lg:gap-6">
-            <h2 className="text-4xl font-extrabold leading-snug max-sm:text-3xl max-lg:text-center">
-              Digital Marketing Services
-            </h2>
-            <Button
-              className="py-3 px-8 bg-primary-400 text-white rounded-lg text-lg font-bold block w-fit"
-              Btntext="All Services"
-              href="/services/"
-            />
+          <div className="svc-grid svc-grid-4">
+            {supporting.map((s) => (
+              <ServiceCard key={s.slug} service={s} />
+            ))}
           </div>
-          <div className="grid gap-6 mt-16">
-            {services.map((item) => {
-              return (
-                <div
-                  key={item.id}
-                  className="bg-white py-10 px-14 flex items-center gap-12 rounded-3xl max-lg:gap-6 max-md:flex-col max-xs:px-5"
-                >
-                  <p className="text-4xl font-extrabold leading-snug text-primary-300">
-                    0{item.id}.
-                  </p>
-                  <Image
-                    src={item.imgSrc}
-                    className="rounded-xl"
-                    alt={item.title}
-                    title={item.title}
-                    width={130}
-                    height={130}
-                  />
-                  <div>
-                    <h3 className="text-2xl font-extrabold leading-snug text-primary-300 max-md:text-center max-md:mt-5">
-                      {item.title}
-                    </h3>
-                    <p className="text-base font-normal leading-6 text-primary-300 mt-4 max-md:text-center">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
+        </>
+      )}
+      <div className="svc-cta">
+        <Link href="/contact/" className="btn btn-primary">
+          Book a growth call
+        </Link>
+        <Link href="/services/" className="btn btn-quiet">
+          See all {count} services in detail
+        </Link>
       </div>
     </section>
-  )
+  );
 }

@@ -1,19 +1,22 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getMeta } from '@/app/utils/get-meta';
 import { Schema } from '@/components/scripts/schema';
 import type { ServicePage } from '@/payload-types';
 import {
   Breadcrumb,
+  CANONICAL_ORIGIN,
   EndCta,
   Faq,
-  SITE_URL,
+  ORG_ID,
   breadcrumbSchema,
   faqSchema,
   fromMeta,
   getService,
   getServices,
-} from '../components/shared';
-import { Hero, Honesty, Includes, Method, OtherServices } from './components/sections';
+  schemaList,
+} from '@/components/wg';
+import { Method } from './components/sections';
 
 export const revalidate = 3600;
 
@@ -39,68 +42,67 @@ function crumbsFor(service: ServicePage) {
   ];
 }
 
-/** Breadcrumb, Service and FAQPage structured data, plus anything from the SEO plugin. */
 function buildStructuredData(service: ServicePage) {
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: `${service.name} — WizGrowth`,
     serviceType: service.name,
-    description: service.lead ?? service.meta?.description ?? undefined,
-    url: `${SITE_URL}/services/${service.slug}/`,
-    provider: { '@type': 'Organization', name: 'WizGrowth', url: `${SITE_URL}/` },
+    provider: { '@id': ORG_ID },
     areaServed: [
       { '@type': 'Country', name: 'India' },
       { '@type': 'City', name: 'Kochi' },
     ],
+    url: `${CANONICAL_ORIGIN}/services/${service.slug}/`,
+    description: service.meta?.description ?? service.lead ?? undefined,
   };
-
-  return [
-    ...fromMeta(service.meta?.schema),
+  return schemaList(
+    fromMeta(service.meta?.schema),
     breadcrumbSchema(crumbsFor(service)),
     serviceSchema,
     faqSchema(service.faqs ?? []),
-  ].filter(Boolean);
+  );
 }
 
 export default async function ServiceDetailPage({ params }: ParamsProps) {
   const { slug } = await params;
-  const [service, services] = await Promise.all([getService(slug), getServices()]);
-
-  if (!service) {
-    notFound();
-  }
+  const service = await getService(slug);
+  if (!service) notFound();
 
   return (
     <>
       <Schema structuredData={buildStructuredData(service)} />
       <Breadcrumb items={crumbsFor(service)} />
-      <Hero service={service} />
+      <header className="shell page-hero">
+        <p className="microlabel green">WizGrowth Agency · Service</p>
+        <h1>
+          {service.h1}
+          {service.h1Accent && (
+            <>
+              {' '}
+              <span className="fx">{service.h1Accent}</span>
+            </>
+          )}
+        </h1>
+        {service.lead && <p className="lead">{service.lead}</p>}
+        <div className="hero-ctas">
+          <Link href="/contact/" className="btn btn-primary">
+            Book a growth call
+          </Link>
+          <Link href="/services/" className="btn btn-secondary">
+            See all services
+          </Link>
+        </div>
+      </header>
       <Method service={service} />
-      <Includes service={service} />
-      <Honesty service={service} />
       <Faq
-        heading={
-          <>
-            Questions we get <span className="wg-fx">asked</span>
-          </>
-        }
-        intro={`The questions that come up about ${service.name} on almost every first call.`}
         items={(service.faqs ?? []).map((f) => ({
           id: f.id,
           question: f.question,
           answer: f.answer,
         }))}
       />
-      <OtherServices current={service} services={services} />
-      <EndCta
-        heading={
-          <>
-            Want this run <span className="wg-fx">for you</span>?
-          </>
-        }
-        body="A free thirty-minute growth call. We look at your numbers and tell you what we’d fix first — no pitch deck, no obligation."
-      />
+      <EndCta />
     </>
   );
 }

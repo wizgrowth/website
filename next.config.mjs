@@ -19,6 +19,13 @@ const nextConfig = {
       {
         pathname: '/api/media/**',
       },
+      // Static images shipped in /public (founder portrait, avatars).
+      {
+        pathname: '/*.jpg',
+      },
+      {
+        pathname: '/*.png',
+      },
     ],
   },
   trailingSlash: true,

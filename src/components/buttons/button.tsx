@@ -1,8 +1,8 @@
 type ButtonProp = {
-  className?: string
-  Btntext?: string
-  href?: string
-}
+  className?: string;
+  Btntext?: string;
+  href?: string;
+};
 
 export function Button({ className, Btntext, href }: ButtonProp) {
   return (
@@ -15,5 +15,5 @@ export function Button({ className, Btntext, href }: ButtonProp) {
         <button className={className}>{Btntext}</button>
       )}
     </>
-  )
+  );
 }

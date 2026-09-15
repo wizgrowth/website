@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
+import { articleBlocks } from './blocks/article-blocks';
 
 export const BlogInner: CollectionConfig = {
   slug: 'blogInner',
@@ -17,6 +18,34 @@ export const BlogInner: CollectionConfig = {
       label: 'Title',
       name: 'title',
       type: 'text',
+    },
+    {
+      label: 'Standfirst',
+      name: 'dek',
+      type: 'textarea',
+      admin: {
+        description:
+          'The short paragraph under the headline that sets up the article. Two or three sentences.',
+      },
+    },
+    {
+      label: 'Breadcrumb Label',
+      name: 'crumb',
+      type: 'text',
+      admin: {
+        description:
+          'Short label for the breadcrumb trail, e.g. "What is AEO?". Falls back to the title if empty.',
+      },
+    },
+    {
+      label: 'Published Date',
+      name: 'publishedDate',
+      type: 'date',
+      admin: {
+        description:
+          'The date shown on the article and used for sorting. Falls back to the created date if empty.',
+        date: { pickerAppearance: 'dayOnly', displayFormat: 'd MMM yyyy' },
+      },
     },
     {
       label: 'Featured Image',
@@ -42,7 +71,71 @@ export const BlogInner: CollectionConfig = {
           label: 'AI',
           value: 'ai',
         },
+        // Added with the article revamp. The three values above are kept so the
+        // existing posts that use them keep rendering.
+        {
+          label: 'Career',
+          value: 'career',
+        },
+        {
+          label: 'SEO & Content',
+          value: 'seo-content',
+        },
+        {
+          label: 'Tools',
+          value: 'tools',
+        },
+        {
+          label: 'Local Business',
+          value: 'local-business',
+        },
+        {
+          label: 'Academy',
+          value: 'academy',
+        },
+        {
+          label: 'For Business Owners',
+          value: 'business-owners',
+        },
       ],
+    },
+    {
+      label: 'Featured on the blog index',
+      name: 'featured',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        description:
+          'Shows this article in the dark featured card at the top of /blog/. Only the most recent featured article is used.',
+      },
+    },
+    {
+      label: 'Featured Label',
+      name: 'featuredLabel',
+      type: 'text',
+      admin: {
+        condition: (data) => Boolean(data?.featured),
+        description:
+          'Small label above the featured title, e.g. "Featured · The WizGrowth Hiring Index".',
+      },
+    },
+    {
+      label: 'Featured Stat',
+      name: 'featuredStat',
+      type: 'text',
+      admin: {
+        condition: (data) => Boolean(data?.featured),
+        description: 'The big number on the featured card, e.g. "₹22K". Optional.',
+      },
+    },
+    {
+      label: 'Featured Stat Caption',
+      name: 'featuredStatCaption',
+      type: 'text',
+      admin: {
+        condition: (data) => Boolean(data?.featured),
+        description: 'What the number is, e.g. "median fresher salary · 1,200+ listings sampled".',
+      },
     },
     {
       label: 'Reading Time',
@@ -68,9 +161,74 @@ export const BlogInner: CollectionConfig = {
       ],
     },
     {
+      label: 'TL;DR',
+      name: 'tldr',
+      type: 'array',
+      interfaceName: 'ArticleTldr',
+      admin: {
+        description:
+          'The summary box above the article. Three to five points. Leave empty to hide the box.',
+      },
+      fields: [
+        {
+          label: 'Lead-in',
+          name: 'label',
+          type: 'text',
+          admin: { description: 'Bolded opening, e.g. "What AEO is:". Optional.' },
+        },
+        {
+          label: 'Point',
+          name: 'text',
+          type: 'textarea',
+          required: true,
+        },
+      ],
+    },
+    {
       name: 'content',
       type: 'richText',
-      editor: lexicalEditor({}),
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          BlocksFeature({ blocks: articleBlocks }),
+        ],
+      }),
+    },
+    {
+      label: 'FAQs',
+      name: 'faqs',
+      type: 'array',
+      interfaceName: 'ArticleFaqs',
+      admin: {
+        description:
+          'Shown as an expandable list under the article, and used to build FAQPage structured data. Leave empty to hide the section.',
+      },
+      fields: [
+        {
+          label: 'Question',
+          name: 'question',
+          type: 'text',
+          required: true,
+        },
+        {
+          label: 'Answer',
+          name: 'answer',
+          type: 'textarea',
+          required: true,
+        },
+      ],
+    },
+    {
+      label: 'Related Articles',
+      name: 'relatedPosts',
+      type: 'relationship',
+      relationTo: 'blogInner',
+      hasMany: true,
+      maxRows: 3,
+      admin: {
+        description: 'Up to three articles shown at the end of this one.',
+      },
+      filterOptions: ({ id }) => (id ? { id: { not_equals: id } } : true),
     },
     {
       name: 'publishedBy',
@@ -94,6 +252,11 @@ export const BlogInner: CollectionConfig = {
   hooks: {
     beforeChange: [
       ({ req, data, operation }) => {
+        // Slugs saved with surrounding whitespace produced URLs like
+        // /blog/%20some-post, which 404 and were being fed to Google.
+        if (typeof data.slug === 'string') {
+          data.slug = data.slug.trim();
+        }
         if (operation === 'create') {
           if (req.user) {
             data.publishedBy = req.user.id;

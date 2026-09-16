@@ -20,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .map((doc) => ({ ...doc, slug: doc.slug?.trim() }))
     .filter((doc) => Boolean(doc.slug))
     .map(({ slug, updatedAt, createdAt }) => ({
-      url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/blog/${slug}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/blog/${slug}/`,
       lastModified: updatedAt || createdAt,
     }));
 
@@ -42,12 +42,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .map((doc) => ({ ...doc, slug: doc.slug?.trim() }))
     .filter((doc) => Boolean(doc.slug))
     .map(({ slug, updatedAt, createdAt }) => ({
-      url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/services/${slug}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/services/${slug}/`,
       lastModified: updatedAt || createdAt,
     }));
 
   const staticPages: MetadataRoute.Sitemap = [
-    { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}` },
+    { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/` },
     { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/blog/` },
     { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/services/` },
     { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/academy/` },

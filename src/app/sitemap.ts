@@ -24,12 +24,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: updatedAt || createdAt,
     }));
 
-  const services = await payload.find({
-    collection: 'servicePages',
-    limit: 0,
-    depth: 0,
-    sort: 'order',
-  });
+  // The sitemap is generated at build time; if the services table is not
+  // there yet (schema behind the code), list the static pages and posts only.
+  const services = await payload
+    .find({
+      collection: 'servicePages',
+      limit: 0,
+      depth: 0,
+      sort: 'order',
+    })
+    .catch((err: unknown) => {
+      console.error('[sitemap] servicePages query failed:', err);
+      return { docs: [] as { slug?: string | null; updatedAt?: string; createdAt?: string }[] };
+    });
 
   const servicePages: MetadataRoute.Sitemap = services.docs
     .map((doc) => ({ ...doc, slug: doc.slug?.trim() }))

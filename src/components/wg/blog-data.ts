@@ -3,26 +3,41 @@ import { getPayload } from 'payload';
 import config from '@payload-config';
 import type { BlogInner } from '@/payload-types';
 
+// See services-data.ts: a schema-behind database must not break the build.
+function schemaBehind(err: unknown) {
+  console.error('[blogInner] query failed; rendering without posts:', err);
+}
+
 export const getPosts = cache(async (): Promise<BlogInner[]> => {
-  const payload = await getPayload({ config });
-  const result = await payload.find({
-    collection: 'blogInner',
-    limit: 0,
-    depth: 1,
-    sort: '-createdAt',
-  });
-  return result.docs.filter((d) => Boolean(d.slug?.trim()));
+  try {
+    const payload = await getPayload({ config });
+    const result = await payload.find({
+      collection: 'blogInner',
+      limit: 0,
+      depth: 1,
+      sort: '-createdAt',
+    });
+    return result.docs.filter((d) => Boolean(d.slug?.trim()));
+  } catch (err) {
+    schemaBehind(err);
+    return [];
+  }
 });
 
 export const getPost = cache(async (slug: string): Promise<BlogInner | undefined> => {
-  const payload = await getPayload({ config });
-  const result = await payload.find({
-    collection: 'blogInner',
-    where: { slug: { equals: slug } },
-    limit: 1,
-    depth: 2,
-  });
-  return result.docs[0];
+  try {
+    const payload = await getPayload({ config });
+    const result = await payload.find({
+      collection: 'blogInner',
+      where: { slug: { equals: slug } },
+      limit: 1,
+      depth: 2,
+    });
+    return result.docs[0];
+  } catch (err) {
+    schemaBehind(err);
+    return undefined;
+  }
 });
 
 export function postHref(post: Pick<BlogInner, 'slug'>) {

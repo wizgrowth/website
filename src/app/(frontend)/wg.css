@@ -419,8 +419,6 @@ img.avatar{padding:0; object-fit:cover; background:var(--paper-muted);}
 .article-body img { border-radius: var(--r-m); max-width: 100%; height: auto; }
 .article-body h4, .article-body h5, .article-body h6 { font-weight: 600; color: var(--ink); margin-top: 1.6em; margin-bottom: .4em; font-size: 1.1rem; letter-spacing: -0.015em; }
 .article-body blockquote { margin: 2em 0; padding-left: 24px; border-left: 4px solid var(--forest); color: var(--ink); font-weight: 500; }
-.post-card .post-thumb { aspect-ratio: 16 / 9; border-radius: var(--r-s); overflow: hidden; margin: -8px -8px 16px; background: var(--paper-muted); }
-.post-card .post-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* ── Article body rendered from the CMS ── */
 /* The rich-text renderer wraps the body in .payload-richtext, so the rhythm
@@ -431,3 +429,37 @@ img.avatar{padding:0; object-fit:cover; background:var(--paper-muted);}
 .article-body h2 { counter-increment: section; }
 .article-body h2::before { content: counter(section, decimal-leading-zero); display: block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--forest); margin-bottom: 12px; }
 .article-body .payload-richtext > h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+
+/* ── Blog index v2: image-led cards, category chips, collapsible grids ── */
+.post-card.has-thumb { padding: 0; overflow: hidden; }
+.post-thumb { position: relative; aspect-ratio: 16 / 9; background: linear-gradient(135deg, var(--paper-muted) 0%, var(--paper-hi) 100%); overflow: hidden; }
+.post-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+.post-card:hover .post-thumb img { transform: scale(1.03); }
+.post-thumb-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--accent); font-style: italic; font-weight: 500; font-size: 1.6rem; color: var(--forest); opacity: .55; letter-spacing: -0.01em; padding: 0 24px; text-align: center; }
+.post-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+.post-meta.row { display: flex; justify-content: space-between; gap: 12px; }
+.post-meta time { font-feature-settings: 'tnum'; }
+
+.cat-nav { display: flex; gap: 8px; flex-wrap: wrap; padding: 8px 0 0; }
+.cat-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: var(--r-pill); border: 1px solid var(--border-strong); background: var(--paper-hi); color: var(--ink-soft); font-size: 13.5px; font-weight: 600; text-decoration: none; transition: border-color .2s, color .2s, background .2s; }
+.cat-nav a:hover { border-color: var(--forest); color: var(--forest); }
+.cat-nav a b { font-weight: 700; font-size: 11px; letter-spacing: .06em; color: var(--ink-muted); font-feature-settings: 'tnum'; }
+.cat-nav a.is-all { background: var(--forest); border-color: var(--forest); color: var(--paper-hi); }
+.cat-nav a.is-all b { color: rgba(251,244,223,.75); }
+
+.featured-post.has-image { grid-template-columns: 1.15fr 1fr; padding: 40px; }
+.featured-img { position: relative; aspect-ratio: 16 / 10; border-radius: var(--r-m); overflow: hidden; background: var(--ink-soft); }
+.featured-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.featured-meta { display: flex; gap: 14px; align-items: center; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: rgba(242,234,216,.6); margin-bottom: 18px; }
+.sec-head.row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; max-width: none; flex-wrap: wrap; }
+.sec-head.row .microlabel.count { display: inline; margin: 0 0 6px; font-weight: 600; color: var(--ink-muted); letter-spacing: .08em; }
+
+.post-grid.is-collapsed > .post-card:nth-child(n + 7) { display: none; }
+.grid-more { display: flex; justify-content: center; margin-top: 28px; }
+.grid-more .btn-secondary { background: var(--paper-hi); }
+@media (max-width: 1024px) { .post-grid.is-collapsed > .post-card:nth-child(n + 5) { display: none; } }
+@media (max-width: 768px) {
+  .featured-post.has-image { grid-template-columns: 1fr; padding: 24px; }
+  .featured-img { aspect-ratio: 16 / 9; }
+  .post-grid.is-collapsed > .post-card:nth-child(n + 4) { display: none; }
+}

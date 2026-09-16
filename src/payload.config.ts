@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import { s3Storage } from '@payloadcms/storage-s3';
-import { Users, Media, BlogInner, DemoBooking } from './collections';
+import { Users, Media, BlogInner, DemoBooking, ServicePages } from './collections';
 import { Contact, Homepage, Services, BlogHome, Academy } from './globals';
 
 const filename = fileURLToPath(import.meta.url);
@@ -28,7 +28,7 @@ export default buildConfig({
   cors: ['http://localhost:3000', '*.vercel.app', 'https://www.wizgrowth.com'],
   // 🌟 END CORS
 
-  collections: [Users, Media, DemoBooking, BlogInner],
+  collections: [Users, Media, DemoBooking, BlogInner, ServicePages],
   globals: [Contact, Homepage, Services, BlogHome, Academy],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -46,7 +46,7 @@ export default buildConfig({
     payloadCloudPlugin(),
 
     seoPlugin({
-      collections: ['blogInner'],
+      collections: ['blogInner', 'servicePages'],
       globals: ['homepage', 'contact', 'services', 'blog-home', 'academy'],
       uploadsCollection: 'media',
       generateTitle: ({ doc }) => doc.title,

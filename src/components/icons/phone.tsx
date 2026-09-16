@@ -1,8 +1,8 @@
 type iconProps = {
-  className?: string
-  width?: string
-  height?: string
-}
+  className?: string;
+  width?: string;
+  height?: string;
+};
 
 export function PhoneIcon({ className = '', width = '21', height = '21' }: iconProps) {
   return (
@@ -13,5 +13,5 @@ export function PhoneIcon({ className = '', width = '21', height = '21' }: iconP
         <circle cx="10" cy="15.7" r="1.2"></circle>
       </svg>
     </div>
-  )
+  );
 }

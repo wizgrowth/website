@@ -1,7 +1,7 @@
 import { cache } from 'react';
 import { getPayload } from 'payload';
 import config from '@payload-config';
-import type { BlogInner } from '@/payload-types';
+import type { BlogInner, Media } from '@/payload-types';
 
 // See services-data.ts: a schema-behind database must not break the build.
 function schemaBehind(err: unknown) {
@@ -105,4 +105,19 @@ export function groupByCategory(posts: BlogInner[]) {
     }
   }
   return ordered;
+}
+
+/** The featured image as a Media object, or null when missing or unresolved. */
+export function postImage(post: Pick<BlogInner, 'featuredImage'>): Media | null {
+  const img = post.featuredImage;
+  return img && typeof img === 'object' && img.url ? img : null;
+}
+
+export function postDate(post: Pick<BlogInner, 'publishedDate' | 'createdAt'>) {
+  return post.publishedDate ?? post.createdAt;
+}
+
+/** The editor-flagged featured article, else the newest one. */
+export function pickFeatured(posts: BlogInner[]): BlogInner | undefined {
+  return posts.find((p) => p.featured) ?? posts[0];
 }

@@ -78,14 +78,23 @@ export default async function ArticlePage({ params }: ParamsProps) {
   const faqs = post.faqs ?? [];
   const career = (post.category ?? []).some((c) => CAREER_CATEGORIES.has(c));
 
+  // Editors can paste structured data into the SEO tab. When that already
+  // holds an Article or FAQPage node, the page must not emit a second one.
+  const fromEditor = fromMeta(post.meta?.schema);
+  const editorHas = (type: string) =>
+    fromEditor.some((item) => {
+      const t = (item as { '@type'?: unknown })['@type'];
+      return Array.isArray(t) ? t.includes(type) : t === type;
+    });
+
   return (
     <>
       <Schema
         structuredData={schemaList(
-          fromMeta(post.meta?.schema),
+          fromEditor,
           breadcrumbSchema(crumbsFor(post)),
-          articleSchema(post),
-          faqSchema(faqs),
+          editorHas('Article') ? null : articleSchema(post),
+          editorHas('FAQPage') ? null : faqSchema(faqs),
         )}
       />
       <ProgressBar />

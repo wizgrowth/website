@@ -2,6 +2,10 @@ import { MetadataRoute } from 'next';
 import { getPayload } from 'payload';
 import config from '@payload-config';
 
+// Refreshed hourly and on every article or service save, so new pages
+// appear without a redeploy.
+export const revalidate = 3600;
+
 const payload = await getPayload({ config });
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -15,6 +19,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   const blogInnerPages: MetadataRoute.Sitemap = result.docs
+    // Editors can hide an article from the sitemap in the admin panel.
+    .filter((doc) => !doc.hideFromSitemap)
     // Some slugs were saved with surrounding whitespace, which produced
     // sitemap URLs containing a space that 404 for crawlers.
     .map((doc) => ({ ...doc, slug: doc.slug?.trim() }))

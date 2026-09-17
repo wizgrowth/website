@@ -312,6 +312,10 @@ export interface BlogInner {
       )[]
     | null;
   /**
+   * Leave this article out of sitemap.xml. The page itself stays online; untick to list it again.
+   */
+  hideFromSitemap?: boolean | null;
+  /**
    * Shows this article in the dark featured card at the top of /blog/. Only the most recent featured article is used.
    */
   featured?: boolean | null;
@@ -632,6 +636,7 @@ export interface BlogInnerSelect<T extends boolean = true> {
   publishedDate?: T;
   featuredImage?: T;
   category?: T;
+  hideFromSitemap?: T;
   featured?: T;
   featuredLabel?: T;
   featuredStat?: T;

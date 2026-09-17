@@ -36,9 +36,11 @@ export function Header() {
   return (
     <nav className="nav" aria-label="Main">
       <div className="nav-inner">
-        <Link href="/" className="wm">
+        {/* Plain anchor on purpose: the home page runs the other design
+            system, so it needs a full page load. */}
+        <a href="/" className="wm">
           WizGrowth
-        </Link>
+        </a>
         <input
           type="checkbox"
           id="nav-toggle"

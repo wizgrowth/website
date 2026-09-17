@@ -27,9 +27,10 @@ export function Footer() {
     <footer className="footer on-ink">
       <div className="footer-grid">
         <div>
-          <Link href="/" className="wm on-ink">
+          {/* Plain anchor on purpose — see the header. */}
+          <a href="/" className="wm on-ink">
             WizGrowth
-          </Link>
+          </a>
           <p className="footer-tag">
             Grow brands. Grow people. A growth marketing agency and academy in Kochi, Kerala.
           </p>

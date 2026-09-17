@@ -16,6 +16,10 @@ export function Breadcrumb({ items }: { items: Crumb[] }) {
                 <span className="current" aria-current="page">
                   {item.label}
                 </span>
+              ) : item.href === '/' ? (
+                // The home page runs the other design system, so it needs a
+                // full page load rather than a client-side transition.
+                <a href={item.href}>{item.label}</a>
               ) : (
                 <Link href={item.href}>{item.label}</Link>
               )}

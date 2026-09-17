@@ -122,7 +122,7 @@ export const ServicePages: CollectionConfig = {
       async ({ doc }) => {
         // The service page, the hub that lists every service, and the home
         // page's service cards.
-        await revalidatePaths([`/services/${doc.slug}`, '/services', '/']);
+        await revalidatePaths([`/services/${doc.slug}`, '/services', '/', '/sitemap.xml']);
       },
     ],
   },

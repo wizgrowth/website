@@ -101,6 +101,16 @@ export const BlogInner: CollectionConfig = {
       ],
     },
     {
+      label: 'Hide from sitemap',
+      name: 'hideFromSitemap',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        description:
+          'Leave this article out of sitemap.xml. The page itself stays online; untick to list it again.',
+      },
+    },
+    {
       label: 'Featured on the blog index',
       name: 'featured',
       type: 'checkbox',
@@ -275,7 +285,7 @@ export const BlogInner: CollectionConfig = {
       async ({ doc }) => {
         // The article itself, the blog index that lists it, and the home
         // page's latest-articles row.
-        await revalidatePaths([`/blog/${doc.slug}`, '/blog', '/']);
+        await revalidatePaths([`/blog/${doc.slug}`, '/blog', '/', '/sitemap.xml']);
       },
     ],
   },

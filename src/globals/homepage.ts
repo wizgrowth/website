@@ -1,4 +1,5 @@
-import type { GlobalConfig } from 'payload'
+import type { GlobalConfig } from 'payload';
+import { revalidateHook } from '@/lib/revalidate';
 
 export const Homepage: GlobalConfig = {
   slug: 'homepage',
@@ -13,4 +14,7 @@ export const Homepage: GlobalConfig = {
       required: true,
     },
   ],
-}
+  hooks: {
+    afterChange: [revalidateHook(['/'])],
+  },
+};

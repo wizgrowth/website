@@ -1,4 +1,5 @@
-import type { GlobalConfig } from 'payload'
+import type { GlobalConfig } from 'payload';
+import { revalidateHook } from '@/lib/revalidate';
 
 export const Services: GlobalConfig = {
   slug: 'services',
@@ -13,4 +14,7 @@ export const Services: GlobalConfig = {
       required: true,
     },
   ],
-}
+  hooks: {
+    afterChange: [revalidateHook(['/services'])],
+  },
+};

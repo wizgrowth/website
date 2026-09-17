@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload';
 import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { articleBlocks } from './blocks/article-blocks';
+import { revalidatePaths } from '@/lib/revalidate';
 
 export const BlogInner: CollectionConfig = {
   slug: 'blogInner',
@@ -272,18 +273,9 @@ export const BlogInner: CollectionConfig = {
     ],
     afterChange: [
       async ({ doc }) => {
-        try {
-          await fetch(
-            `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/revalidate?secret=${process.env.REVALIDATION_SECRET}`,
-            {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ path: `/blog/${doc.slug}` }),
-            },
-          );
-        } catch (err) {
-          console.error('Revalidation failed:', err);
-        }
+        // The article itself, the blog index that lists it, and the home
+        // page's latest-articles row.
+        await revalidatePaths([`/blog/${doc.slug}`, '/blog', '/']);
       },
     ],
   },

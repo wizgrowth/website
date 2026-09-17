@@ -24,6 +24,9 @@ import {
 } from '@/components/wg';
 import { ACADEMY_FAQS, SYLLABUS } from './components/sections';
 
+// Re-rendered on save from the admin panel, and hourly as a safety net.
+export const revalidate = 3600;
+
 const payload = await getPayload({ config });
 const academyPageData = await payload.findGlobal({ slug: 'academy' });
 
@@ -38,7 +41,10 @@ export async function generateMetadata() {
   });
 }
 
-const CRUMBS = [{ label: 'Home', href: '/' }, { label: 'Academy', href: '/academy/' }];
+const CRUMBS = [
+  { label: 'Home', href: '/' },
+  { label: 'Academy', href: '/academy/' },
+];
 
 const COURSE_SCHEMA = {
   '@context': 'https://schema.org',
@@ -96,8 +102,8 @@ export default function AcademyPage() {
           </a>
         </div>
         <p className="hero-note">
-          {ACADEMY.fee} or 3 monthly payments · A new batch every month · In person in Kochi or
-          live online
+          {ACADEMY.fee} or 3 monthly payments · A new batch every month · In person in Kochi or live
+          online
         </p>
       </header>
 
@@ -146,9 +152,8 @@ export default function AcademyPage() {
           The shape of the twelve <span className="fx">weeks</span>
         </h2>
         <p>
-          Every module is taught from current agency work — when the curriculum says “live
-          account,” it means a real business’s real budget, supervised by the person responsible
-          for it.
+          Every module is taught from current agency work — when the curriculum says “live account,”
+          it means a real business’s real budget, supervised by the person responsible for it.
         </p>
         <div className="syllabus">
           {SYLLABUS.map(([week, title, text]) => (
@@ -169,8 +174,8 @@ export default function AcademyPage() {
         </h2>
         <p>
           <strong>For:</strong> students and freshers who want their first job to count, working
-          marketers stuck at the execution level, and career-switchers who’d rather build proof
-          than collect certificates.
+          marketers stuck at the execution level, and career-switchers who’d rather build proof than
+          collect certificates.
         </p>
         <p>
           <strong>Not for:</strong> certificate collectors. If you want a paper for the wall with no

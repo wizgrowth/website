@@ -16,6 +16,9 @@ import {
 import BookingForm from './components/booking-form';
 import { Channels, NextSteps } from './components/sections';
 
+// Re-rendered on save from the admin panel, and hourly as a safety net.
+export const revalidate = 3600;
+
 const payload = await getPayload({ config });
 const contactMetaData = await payload.findGlobal({ slug: 'contact' });
 
@@ -31,7 +34,10 @@ export async function generateMetadata() {
   });
 }
 
-const CRUMBS = [{ label: 'Home', href: '/' }, { label: 'Contact', href: '/contact/' }];
+const CRUMBS = [
+  { label: 'Home', href: '/' },
+  { label: 'Contact', href: '/contact/' },
+];
 
 const CONTACT_SCHEMA = {
   '@context': 'https://schema.org',

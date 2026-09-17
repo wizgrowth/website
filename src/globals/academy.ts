@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload';
+import { revalidateHook } from '@/lib/revalidate';
 
 export const Academy: GlobalConfig = {
   slug: 'academy',
@@ -13,4 +14,7 @@ export const Academy: GlobalConfig = {
       required: true,
     },
   ],
+  hooks: {
+    afterChange: [revalidateHook(['/academy'])],
+  },
 };

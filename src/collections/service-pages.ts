@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { revalidatePaths } from '@/lib/revalidate';
 
 // One document per service page, rendered at /services/<slug>/.
 // A collection rather than a global per page, so new services can be added
@@ -119,22 +120,9 @@ export const ServicePages: CollectionConfig = {
     ],
     afterChange: [
       async ({ doc }) => {
-        // The hub lists every service's card, so it goes stale too.
-        const paths = [`/services/${doc.slug}`, '/services'];
-        for (const path of paths) {
-          try {
-            await fetch(
-              `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/revalidate?secret=${process.env.REVALIDATION_SECRET}`,
-              {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ path }),
-              },
-            );
-          } catch (err) {
-            console.error('Revalidation failed:', err);
-          }
-        }
+        // The service page, the hub that lists every service, and the home
+        // page's service cards.
+        await revalidatePaths([`/services/${doc.slug}`, '/services', '/']);
       },
     ],
   },

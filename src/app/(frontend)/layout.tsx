@@ -1,30 +1,13 @@
 import React from 'react';
-import './styles.css';
-import './wg.css';
-import { Fraunces, Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
-import { FloatWa } from '@/components/wg';
 import { GoogleTag, NoScripts } from './scripts';
 
-// Brand system v2.0: Inter for everything, Fraunces italic for the one
-// accent word per headline. Both are exposed as CSS variables that wg.css
-// reads through --sans and --accent.
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  style: ['italic'],
-  variable: '--font-fraunces',
-  axes: ['opsz', 'SOFT'],
-  display: 'swap',
-});
-
+// The site now runs two design systems side by side while the migration
+// proceeds: the home page carries the new one, every other page still carries
+// brand system v2.0. Their stylesheets share six class names, so neither is
+// imported here — each half loads its own in its own layout, and links between
+// the two halves are plain anchors so the browser does a full page load and the
+// two stylesheets are never in the document together.
 export const metadata = {
   // Without this, relative OpenGraph and canonical URLs cannot be resolved
   // to absolute ones and Next drops them.
@@ -36,11 +19,11 @@ export const metadata = {
     google: 'IAx8CcrOEudLEtLPONFG4hag5hWp7ZEaNsmVIJEXxhE',
   },
   title: {
-    default: 'WizGrowth | Growth Marketing Agency & Academy in Kochi, Kerala',
+    default: 'WizGrowth — Great brands. Bigger futures.',
     template: '%s — WizGrowth',
   },
   description:
-    'WizGrowth grows brands with SEO, demand generation and AI citations (GEO) — and trains marketers on the same live client work. Kochi, Kerala; clients everywhere.',
+    'WizGrowth brings search, demand and AI visibility together to move your brand forward. A growth marketing agency and academy in Kochi, Kerala.',
   openGraph: {
     type: 'website',
     siteName: 'WizGrowth',
@@ -55,17 +38,11 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props;
 
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="en">
       <GoogleTag />
       <body>
         <NoScripts />
-        <a className="skip-link" href="#main">
-          Skip to content
-        </a>
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
-        <FloatWa />
+        {children}
         <Analytics />
       </body>
     </html>

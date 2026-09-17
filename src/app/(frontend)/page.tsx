@@ -1,71 +1,77 @@
+import Script from 'next/script';
 import { getPayload } from 'payload';
 import config from '@payload-config';
 import { getMeta } from '@/app/utils/get-meta';
 import { Schema } from '@/components/scripts/schema';
 import {
-  EndCta,
-  Faq,
   ORGANIZATION_SCHEMA,
   WEBSITE_SCHEMA,
-  faqPlain,
   faqSchema,
   fromMeta,
-  getPosts,
-  getServices,
   schemaList,
 } from '@/components/wg';
-import {
-  AcademyBlock,
-  BlogTeaser,
-  CaseStudy,
-  Flywheel,
-  HOME_FAQS,
-  Hero,
-  Services,
-  StatBand,
-} from './components/sections';
+import './fresh.css';
+import { HOME_MARKUP } from './home-markup';
 
+// The markup is the approved design, shipped verbatim rather than rewritten as
+// components, so the live page cannot drift from what was signed off. Its
+// behaviour lives in /fresh/app.js. Nothing on this page comes from the CMS
+// except the SEO fields below; the hourly window matches the other pages and
+// lets a save in the admin panel refresh it on demand.
 export const revalidate = 3600;
 
 const payload = await getPayload({ config });
 const homePageData = await payload.findGlobal({ slug: 'homepage' });
 
+const TITLE = 'WizGrowth — Great brands. Bigger futures.';
+const DESCRIPTION =
+  'Get found. Get chosen. Keep growing. WizGrowth brings search, demand and AI visibility together to move your brand forward — from Kochi, Kerala.';
+
 export async function generateMetadata() {
   return getMeta({
     meta: homePageData?.meta,
     path: '/',
-    fallback: {
-      title: 'WizGrowth | Growth Marketing Agency & Academy in Kochi, Kerala',
-      description:
-        'WizGrowth grows brands with SEO, demand generation and AI citations (GEO) — and trains marketers on the same live client work. Kochi, Kerala; clients everywhere.',
-    },
+    fallback: { title: TITLE, description: DESCRIPTION },
   });
 }
 
-export default async function HomePage() {
-  const [services, posts] = await Promise.all([getServices(), getPosts()]);
-  const salaryReport = posts.find((p) => p.slug.trim() === 'digital-marketing-salary-india');
-  const latest = posts.filter((p) => p.id !== salaryReport?.id).slice(0, 3);
+export const viewport = {
+  themeColor: '#10120f',
+};
 
+// Kept in step with the three questions shown on the page; the schema text and
+// the visible text have to match.
+const HOME_FAQS = [
+  {
+    question: 'Where would we start?',
+    answer:
+      'With a conversation about your goals, what’s working, and what isn’t. The first step is to agree on the problem worth solving, not to add another channel to your list.',
+  },
+  {
+    question: 'Do all three disciplines need to be involved?',
+    answer:
+      'Not necessarily. The right starting point depends on the problem. Search, demand and AI visibility can support each other, but the plan should follow your priorities.',
+  },
+  {
+    question: 'What does progress look like?',
+    answer:
+      'We agree on the measures that matter before the work begins. Then we review the evidence together, including what needs to change. No guaranteed rankings or one-size-fits-all growth promises.',
+  },
+];
+
+export default function HomePage() {
   const structuredData = schemaList(
     fromMeta(homePageData?.meta?.schema),
     ORGANIZATION_SCHEMA,
     WEBSITE_SCHEMA,
-    faqSchema(HOME_FAQS.map((f) => ({ question: f.question, answer: faqPlain(f) }))),
+    faqSchema(HOME_FAQS),
   );
 
   return (
     <>
       <Schema structuredData={structuredData} />
-      <Hero />
-      <StatBand />
-      <Flywheel />
-      <Services services={services} />
-      <CaseStudy />
-      <AcademyBlock />
-      <BlogTeaser posts={latest} salaryReport={salaryReport} />
-      <Faq items={HOME_FAQS} />
-      <EndCta />
+      <div dangerouslySetInnerHTML={{ __html: HOME_MARKUP }} />
+      <Script src="/fresh/app.js" strategy="afterInteractive" />
     </>
   );
 }

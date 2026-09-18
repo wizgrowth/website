@@ -68,7 +68,6 @@ $$('[data-profile]').forEach(control=>{
   if(key==='trustpilot')link.querySelector('.review-sub').innerHTML='View our profile <svg class="arrow" aria-hidden="true"><use href="#arrow-up"/></svg>';
   control.replaceWith(link);
  }
- });
 });
 // The four supplied social URLs are also baked into the HTML for no-JavaScript access.
 $$('[data-footer-service]').forEach(link=>link.addEventListener('click',event=>{

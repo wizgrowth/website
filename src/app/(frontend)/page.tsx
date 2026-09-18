@@ -1,4 +1,3 @@
-import Script from 'next/script';
 import { getPayload } from 'payload';
 import config from '@payload-config';
 import { getMeta } from '@/app/utils/get-meta';
@@ -71,7 +70,10 @@ export default function HomePage() {
     <>
       <Schema structuredData={structuredData} />
       <div dangerouslySetInnerHTML={{ __html: HOME_MARKUP }} />
-      <Script src="/fresh/app.js" strategy="afterInteractive" />
+      {/* A real deferred script tag, not next/script: this page is static
+          markup, so its behaviour should not wait on React hydrating, and the
+          tag belongs in the server HTML where a failure is visible. */}
+      <script defer src="/fresh/app.js" />
     </>
   );
 }

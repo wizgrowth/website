@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import type { BlogInner } from '@/payload-types';
 import { cardData } from '@/components/wg';
+import { CoverImage } from './cover-image';
 
 // The editor's spotlight: the editor-flagged featured article, else the newest.
 export function Spotlight({ post }: { post: BlogInner }) {
@@ -21,11 +21,9 @@ export function Spotlight({ post }: { post: BlogInner }) {
         <span className="wg-feature-meta">{card.byline}</span>
       </div>
       <Link className="wg-feature-image" href={card.href} aria-label={`Read: ${card.title}`}>
-        <Image
-          src={card.cover.src}
-          alt={card.cover.alt}
-          width={card.cover.width}
-          height={card.cover.height}
+        <CoverImage
+          cover={card.cover}
+          fallback={card.fallback}
           sizes="(max-width: 700px) 100vw, 40vw"
           priority
         />

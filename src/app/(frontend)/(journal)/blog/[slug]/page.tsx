@@ -3,13 +3,10 @@ import { getMeta } from '@/app/utils/get-meta';
 import { Schema } from '@/components/scripts/schema';
 import type { BlogInner } from '@/payload-types';
 import {
-  Breadcrumb,
   CANONICAL_ORIGIN,
-  EndCta,
-  Faq,
   ORG_ID,
-  WA_CAREER_REVIEW,
   breadcrumbSchema,
+  coverOf,
   faqSchema,
   fromMeta,
   getPost,
@@ -17,7 +14,17 @@ import {
   postHref,
   schemaList,
 } from '@/components/wg';
-import { ArticleHeader, AuthorBio, Body, ProgressBar, Related, Tldr, authorOf } from './components/sections';
+import { extractHeadings } from '@/payload-components/richtext/headings';
+import { EnquiryButton } from '../components/sections';
+import {
+  Banner,
+  Prose,
+  ReadingRail,
+  Related,
+  authorOf,
+  offerFor,
+  type ArticleContent,
+} from './components/sections';
 
 export const revalidate = 3600;
 
@@ -46,13 +53,13 @@ function crumbsFor(post: BlogInner) {
 
 function articleSchema(post: BlogInner) {
   const author = authorOf(post);
-  const image = post.featuredImage && typeof post.featuredImage === 'object' ? post.featuredImage.url : null;
+  const cover = coverOf(post);
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title,
     description: post.dek ?? post.meta?.description ?? undefined,
-    ...(image ? { image: image.startsWith('http') ? image : `${CANONICAL_ORIGIN}${image}` } : {}),
+    image: cover.src.startsWith('http') ? cover.src : `${CANONICAL_ORIGIN}${cover.src}`,
     datePublished: post.publishedDate ?? post.createdAt,
     dateModified: post.updatedAt,
     author: author
@@ -68,15 +75,15 @@ function articleSchema(post: BlogInner) {
   };
 }
 
-const CAREER_CATEGORIES = new Set(['career', 'academy']);
-
 export default async function ArticlePage({ params }: ParamsProps) {
   const { slug } = await params;
   const [post, all] = await Promise.all([getPost(slug), getPosts()]);
   if (!post) notFound();
 
+  const content = post.content as ArticleContent;
+  const headings = extractHeadings(content);
   const faqs = post.faqs ?? [];
-  const career = (post.category ?? []).some((c) => CAREER_CATEGORIES.has(c));
+  const offer = offerFor(post);
 
   // Editors can paste structured data into the SEO tab. When that already
   // holds an Article or FAQPage node, the page must not emit a second one.
@@ -97,29 +104,19 @@ export default async function ArticlePage({ params }: ParamsProps) {
           editorHas('FAQPage') ? null : faqSchema(faqs),
         )}
       />
-      <ProgressBar />
-      <Breadcrumb items={crumbsFor(post)} />
-      <ArticleHeader post={post} />
-      <Tldr post={post} />
-      <Body post={post} />
-      <Faq items={faqs.map((f) => ({ id: f.id, question: f.question, answer: f.answer }))} />
-      <AuthorBio post={post} />
+      <Banner post={post} headings={headings} />
+      <div className="shell j-reading">
+        <ReadingRail headings={headings} slug={post.slug}>
+          <div className="wg-article-rail">
+            <span className="j-label">MAKE IT YOUR NEXT STEP</span>
+            <h3>Good ideas work better in practice.</h3>
+            <p>Tell us what you want to improve.</p>
+            <EnquiryButton label={offer.label} goal={offer.goal} source={post.slug} />
+          </div>
+        </ReadingRail>
+        <Prose post={post} content={content} />
+      </div>
       <Related post={post} all={all} />
-      {career ? (
-        <EndCta
-          eyebrow="Talk to us"
-          heading={
-            <>
-              Stuck at the ₹6–8 LPA wall? Let’s <span className="fx">actually</span> look at why
-            </>
-          }
-          body="A 30-minute call. We’ll review your portfolio and your last two case studies, and tell you the one thing to fix before your next negotiation. No pitch."
-          primary={{ href: '/contact/', label: 'Book a career review' }}
-          whatsapp={{ href: WA_CAREER_REVIEW, label: 'WhatsApp us' }}
-        />
-      ) : (
-        <EndCta />
-      )}
     </>
   );
 }

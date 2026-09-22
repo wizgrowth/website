@@ -14,7 +14,8 @@ const AGENCY = [
 const COMPANY = [
   { href: '/academy/', label: 'Academy' },
   { href: '/work/', label: 'Work' },
-  { href: '/blog/', label: 'Blog' },
+  // Plain anchor on purpose: the blog runs the other design system.
+  { href: '/blog/', label: 'Blog', reload: true },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
@@ -50,7 +51,7 @@ export function Footer() {
           <ul>
             {COMPANY.map((l) => (
               <li key={l.href}>
-                <Link href={l.href}>{l.label}</Link>
+                {'reload' in l ? <a href={l.href}>{l.label}</a> : <Link href={l.href}>{l.label}</Link>}
               </li>
             ))}
           </ul>

@@ -26,6 +26,10 @@ const nextConfig = {
       {
         pathname: '/*.png',
       },
+      // Blog cover illustrations.
+      {
+        pathname: '/images/**',
+      },
     ],
   },
   trailingSlash: true,

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { getPayload } from 'payload';
 import config from '@payload-config';
 import { getMeta } from '@/app/utils/get-meta';
@@ -188,7 +187,7 @@ export default function AcademyPage() {
             Most freshers earn ₹15,000–25,000 a month in their first role — not the ₹50,000 many
             academies advertise. What the twelve weeks change is your trajectory after that first
             job: specialization plus verifiable proof is what breaks the ₹6–8 LPA wall. The full
-            data is in <Link href="/blog/digital-marketing-salary-india/">our salary report</Link>.
+            data is in <a href="/blog/digital-marketing-salary-india/">our salary report</a>.
           </p>
         </div>
       </section>

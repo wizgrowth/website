@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "(yes | cross-env NODE_OPTIONS=--no-deprecation payload migrate || echo \"[build] migrate did not complete; continuing\") && node --check public/fresh/app.js && cross-env NODE_OPTIONS=--no-deprecation next build",
+    "build": "(yes | cross-env NODE_OPTIONS=--no-deprecation payload migrate || echo \"[build] migrate did not complete; continuing\") && node --check public/fresh/app.js && node --check public/journal/app.js && cross-env NODE_OPTIONS=--no-deprecation next build",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation portless wizgrowth next dev",
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",

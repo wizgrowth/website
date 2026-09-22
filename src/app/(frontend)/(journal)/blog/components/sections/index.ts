@@ -1,5 +1,6 @@
 export { ArticleCard } from './article-card';
 export { BottomCta } from './bottom-cta';
+export { CoverImage } from './cover-image';
 export { EnquiryButton } from './enquiry-button';
 export { JournalHub } from './journal-hub';
 export { Picks } from './picks';

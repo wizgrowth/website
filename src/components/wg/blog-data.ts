@@ -164,6 +164,11 @@ export const BLOG_COVERS = {
 
 const SEARCH_TOPICS = new Set(['seo-content', 'local-business', 'tools', 'business-owners']);
 
+/** The stock cover that suits the article's topic. */
+export function fallbackCoverOf(post: Pick<BlogInner, 'category'>): Cover {
+  return SEARCH_TOPICS.has(post.category?.[0] ?? '') ? BLOG_COVERS.search : BLOG_COVERS.answers;
+}
+
 /** The article's featured image, else the stock cover that suits its topic. */
 export function coverOf(post: Pick<BlogInner, 'featuredImage' | 'category' | 'title'>): Cover {
   const image = postImage(post);
@@ -175,7 +180,7 @@ export function coverOf(post: Pick<BlogInner, 'featuredImage' | 'category' | 'ti
       height: image.height || 1024,
     };
   }
-  return SEARCH_TOPICS.has(post.category?.[0] ?? '') ? BLOG_COVERS.search : BLOG_COVERS.answers;
+  return fallbackCoverOf(post);
 }
 
 /** Everything a card needs, as plain data, so client components can render it. */
@@ -188,6 +193,8 @@ export type CardData = {
   topicValue: string;
   byline: string;
   cover: Cover;
+  /** Shown instead when the cover fails to load (e.g. the media store is down). */
+  fallback: Cover;
 };
 
 export function cardData(post: BlogInner): CardData {
@@ -202,5 +209,6 @@ export function cardData(post: BlogInner): CardData {
     topicValue: topic.value,
     byline: [author?.name ?? 'WizGrowth', post.readingTime].filter(Boolean).join(' · '),
     cover: coverOf(post),
+    fallback: fallbackCoverOf(post),
   };
 }

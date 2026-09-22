@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import type { BlogInner } from '@/payload-types';
-import { coverOf, postDate, topicOf } from '@/components/wg';
+import { coverOf, fallbackCoverOf, postDate, topicOf } from '@/components/wg';
+import { CoverImage } from '../../../components/sections/cover-image';
 import type { ArticleHeading } from '@/payload-components/richtext/headings';
 import { Avatar, authorOf, formatDate } from './author';
 
@@ -43,11 +43,9 @@ export function Banner({ post, headings }: BannerProps) {
             )}
           </div>
           <figure className="wg-article-cover">
-            <Image
-              src={cover.src}
-              alt={cover.alt}
-              width={cover.width}
-              height={cover.height}
+            <CoverImage
+              cover={cover}
+              fallback={fallbackCoverOf(post)}
               sizes="(max-width: 700px) 100vw, 50vw"
               priority
             />

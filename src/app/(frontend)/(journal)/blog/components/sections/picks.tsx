@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import type { BlogInner } from '@/payload-types';
 import { cardData } from '@/components/wg';
+import { CoverImage } from './cover-image';
 
 // "Worth your time": the two most recent articles after the spotlight.
 export function Picks({ posts }: { posts: BlogInner[] }) {
@@ -24,11 +24,10 @@ export function Picks({ posts }: { posts: BlogInner[] }) {
                   {card.byline} <span aria-hidden="true">↗</span>
                 </span>
               </div>
-              <Image
-                src={card.cover.src}
-                alt={card.cover.alt}
-                width={110}
-                height={103}
+              <CoverImage
+                cover={card.cover}
+                fallback={card.fallback}
+                size={{ width: 110, height: 103 }}
                 sizes="110px"
               />
             </Link>

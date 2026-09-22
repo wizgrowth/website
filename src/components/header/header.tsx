@@ -7,7 +7,9 @@ import { useEffect, useState } from 'react';
 const LINKS = [
   { href: '/services/', label: 'Services' },
   { href: '/work/', label: 'Work' },
-  { href: '/blog/', label: 'Blog' },
+  // The blog runs the other design system, so its link is a plain anchor
+  // (full page load) — see the layout comment in src/app/(frontend).
+  { href: '/blog/', label: 'Blog', reload: true },
   { href: '/academy/', label: 'Academy' },
   { href: '/about/', label: 'About' },
 ];
@@ -53,9 +55,13 @@ export function Header() {
         <ul className="nav-links" id="nav-menu">
           {LINKS.map((link) => (
             <li key={link.href}>
-              <Link href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
-                {link.label}
-              </Link>
+              {'reload' in link ? (
+                <a href={link.href}>{link.label}</a>
+              ) : (
+                <Link href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                  {link.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>

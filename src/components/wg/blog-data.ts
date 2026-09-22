@@ -121,3 +121,86 @@ export function postDate(post: Pick<BlogInner, 'publishedDate' | 'createdAt'>) {
 export function pickFeatured(posts: BlogInner[]): BlogInner | undefined {
   return posts.find((p) => p.featured) ?? posts[0];
 }
+
+/** The topic a post is filed under: its first category, with the display label. */
+export function topicOf(post: Pick<BlogInner, 'category'>) {
+  return { value: post.category?.[0] ?? 'general', label: categoryLabel(post) };
+}
+
+/** Topics present in a set of posts, in display order, with counts. */
+export function topicCounts(posts: BlogInner[]) {
+  const counts = new Map<string, { value: string; label: string; count: number }>();
+  for (const post of posts) {
+    const topic = topicOf(post);
+    const entry = counts.get(topic.value) ?? { ...topic, count: 0 };
+    entry.count += 1;
+    counts.set(topic.value, entry);
+  }
+  const order = new Map(CATEGORY_ORDER.map((c, i) => [c.value, i]));
+  return [...counts.values()].sort(
+    (a, b) => (order.get(a.value) ?? 99) - (order.get(b.value) ?? 99) || a.label.localeCompare(b.label),
+  );
+}
+
+export type Cover = { src: string; alt: string; width: number; height: number };
+
+// The two illustrations from the design hand-off, for articles without a
+// featured image. File names and alt text describe the picture itself so
+// image search and assistants can read them.
+export const BLOG_COVERS = {
+  search: {
+    src: '/images/blog/lilac-magnifying-glass-finds-lime-conversation-bubble.webp',
+    alt: 'A lilac magnifying glass finds a lime conversation bubble among website cursors.',
+    width: 1536,
+    height: 1024,
+  },
+  answers: {
+    src: '/images/blog/open-book-with-lime-answer-bubble.webp',
+    alt: 'An open lilac book with a lime answer bubble floating above it.',
+    width: 1536,
+    height: 1024,
+  },
+} satisfies Record<string, Cover>;
+
+const SEARCH_TOPICS = new Set(['seo-content', 'local-business', 'tools', 'business-owners']);
+
+/** The article's featured image, else the stock cover that suits its topic. */
+export function coverOf(post: Pick<BlogInner, 'featuredImage' | 'category' | 'title'>): Cover {
+  const image = postImage(post);
+  if (image?.url) {
+    return {
+      src: image.url,
+      alt: image.alt || post.title || '',
+      width: image.width || 1536,
+      height: image.height || 1024,
+    };
+  }
+  return SEARCH_TOPICS.has(post.category?.[0] ?? '') ? BLOG_COVERS.search : BLOG_COVERS.answers;
+}
+
+/** Everything a card needs, as plain data, so client components can render it. */
+export type CardData = {
+  id: number;
+  href: string;
+  title: string;
+  dek: string;
+  topic: string;
+  topicValue: string;
+  byline: string;
+  cover: Cover;
+};
+
+export function cardData(post: BlogInner): CardData {
+  const topic = topicOf(post);
+  const author = post.publishedBy && typeof post.publishedBy === 'object' ? post.publishedBy : null;
+  return {
+    id: post.id,
+    href: postHref(post),
+    title: post.title ?? 'Untitled',
+    dek: post.dek ?? '',
+    topic: topic.label,
+    topicValue: topic.value,
+    byline: [author?.name ?? 'WizGrowth', post.readingTime].filter(Boolean).join(' · '),
+    cover: coverOf(post),
+  };
+}

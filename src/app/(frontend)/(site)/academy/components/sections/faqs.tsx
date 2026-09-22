@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import type { FaqItem } from '@/components/wg';
 import { ACADEMY } from '@/components/wg';
 
-const report = (text: string) => <Link href="/blog/digital-marketing-salary-india/">{text}</Link>;
+// Plain anchor: the blog runs the other design system, so it needs a full page load.
+const report = (text: string) => <a href="/blog/digital-marketing-salary-india/">{text}</a>;
 
 export const ACADEMY_FAQS: FaqItem[] = [
   {

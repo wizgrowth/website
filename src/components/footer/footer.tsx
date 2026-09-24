@@ -12,7 +12,7 @@ const AGENCY = [
 ];
 
 const COMPANY = [
-  { href: '/academy/', label: 'Academy' },
+  { href: '/academy/', label: 'Academy', reload: true },
   { href: '/work/', label: 'Work' },
   // Plain anchor on purpose: the blog runs the other design system.
   { href: '/blog/', label: 'Blog', reload: true },

@@ -10,7 +10,7 @@ const LINKS = [
   // The blog runs the other design system, so its link is a plain anchor
   // (full page load) — see the layout comment in src/app/(frontend).
   { href: '/blog/', label: 'Blog', reload: true },
-  { href: '/academy/', label: 'Academy' },
+  { href: '/academy/', label: 'Academy', reload: true },
   { href: '/about/', label: 'About' },
 ];
 

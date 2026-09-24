@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import '../fresh.css';
 import '../journal.css';
-import { CHAT_WA, CONTACT_DIALOG, FOOTER, SYMBOLS } from './chrome';
+import { CHAT_WA, CONTACT_DIALOG, FOOTER, SYMBOLS } from '../chrome';
 
 // The blog runs the Fresh Start design system (the home page's), extended by
 // journal.css. Brand system v2.0 pages live in (site) with their own layout;

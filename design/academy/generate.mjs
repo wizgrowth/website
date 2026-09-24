@@ -15,24 +15,28 @@ const PAGES = [
     id: 'hub',
     file: 'academy.html',
     url: '/academy/',
+    course: 'Digital Marketing Course with AI',
     whatsapp: wa("Hi WizGrowth Academy — I'd like details about the next batch."),
   },
   {
     id: 'course',
     file: 'digital-marketing-course.html',
     url: '/academy/digital-marketing-course/',
+    course: 'Digital Marketing Course with AI',
     whatsapp: wa("Hi WizGrowth Academy — I'd like to join the next 12-week Digital Marketing Course with AI."),
   },
   {
     id: 'mentorship',
     file: 'advanced-mentorship.html',
     url: '/academy/advanced-digital-marketing-mentorship/',
+    course: 'Advanced Digital Marketing Mentorship',
     whatsapp: wa("Hi WizGrowth Academy — I'd like to apply for the Advanced Digital Marketing Mentorship. My current role and the website I would work on:"),
   },
   {
     id: 'owners',
     file: 'business-owners.html',
     url: '/academy/digital-marketing-for-business-owners/',
+    course: 'Digital Marketing for Business Owners',
     whatsapp: wa("Hi WizGrowth Academy — I'd like to book a 15-minute fit call about Digital Marketing for Business Owners."),
   },
 ];
@@ -42,6 +46,10 @@ const FILE_TO_URL = {
   'digital-marketing-course-v7-standalone.html': '/academy/digital-marketing-course/',
   'advanced-mentorship-v7-standalone.html': '/academy/advanced-digital-marketing-mentorship/',
   'business-owners-v7-standalone.html': '/academy/digital-marketing-for-business-owners/',
+  'academy-v8-standalone.html': '/academy/',
+  'digital-marketing-course-v8-standalone.html': '/academy/digital-marketing-course/',
+  'advanced-mentorship-v8-standalone.html': '/academy/advanced-digital-marketing-mentorship/',
+  'business-owners-v8-standalone.html': '/academy/digital-marketing-for-business-owners/',
 };
 
 // The one embedded image: the trainer portrait, shipped as a file instead.
@@ -73,8 +81,14 @@ function convert(page, html) {
   body = body.replace('class="signature-word" href="#top"', 'class="signature-word" href="/"');
   // Placeholder buttons: WhatsApp for enquiries, the services hub for "done for you".
   body = body.replace(/<a class="button ghost" href="#">Prefer it done for you\?/, '<a class="button ghost" href="/services/">Prefer it done for you?');
-  body = body.replace(/<a class="button dark" href="#"/g, `<a class="button dark" href="${page.whatsapp}" target="_blank" rel="noopener noreferrer"`);
-  body = body.replace(/<a class="button lime" href="#enquire">/g, `<a class="button lime" href="${page.whatsapp}" target="_blank" rel="noopener noreferrer">`);
+  // Enquiry buttons open the shared sheet (data-lead-open, handled by
+  // /academy/app.js); without JavaScript they fall through to WhatsApp.
+  const opener = `href="${page.whatsapp}" target="_blank" rel="noopener noreferrer" data-lead-open data-lead-course="${page.course}"`;
+  body = body.replace(/<a class="button dark" href="#"( data-lead-open)?/g, `<a class="button dark" ${opener}`);
+  body = body.replace(/<a class="button lime" href="#"( data-lead-open)?>/g, `<a class="button lime" ${opener}>`);
+  body = body.replace(/<a class="button lime" href="#enquire">/g, `<a class="button lime" ${opener}>`);
+  body = body.replace(/<a class="header-cta" href="#" data-lead-open>/g, `<a class="header-cta" ${opener}>`);
+  body = body.replace(/<dialog class="lead-sheet"[\s\S]*?<\/dialog>/, ''); // shared, rendered by the layout
   const leftover = [...body.matchAll(/href="#"/g)].length;
   if (leftover) throw new Error(`${page.file}: ${leftover} placeholder link(s) left`);
   // The current page's own link in the nav is marked; the design left it to the file name.
@@ -121,6 +135,17 @@ fs.writeFileSync(path.join(out, 'types.ts'), `export type AcademyPage = {
   html: string;
 };
 `);
+const courseFile = path.join(here, 'digital-marketing-course.html');
+if (fs.existsSync(courseFile)) {
+  const course = fs.readFileSync(courseFile, 'utf8');
+  const sheet = course.match(/<dialog class="lead-sheet"[\s\S]*?<\/dialog>/)[0].trim();
+  const sheetCss = course.match(/\/\* Academy lead sheet[\s\S]*?(?=<\/style>)/)[0].trim();
+  fs.writeFileSync(path.join(out, 'lead-sheet.ts'), `// Generated from design/academy/digital-marketing-course.html by design/academy/generate.mjs.
+// The enquiry sheet every academy page's buttons open; rendered once by the layout.
+export const LEAD_SHEET = \`${escapeTs(sheet)}\`;
+`);
+  if (css) css.push(sheetCss);
+}
 if (css) {
   fs.writeFileSync(path.join(root, 'src/app/(frontend)/academy.css'), `/* WIZGROWTH / ACADEMY
    Generated from design/academy/academy.html by design/academy/generate.mjs:

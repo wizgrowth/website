@@ -50,3 +50,43 @@
   document.querySelectorAll('[data-top]').forEach((btn) =>
     btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' })));
 })();
+
+// Enquiry sheet, from the course page of the hand-off: one step, WhatsApp-first.
+// Buttons carry data-lead-open and data-lead-course; the sheet is in the layout.
+(() => {
+  const dialog = document.getElementById('academy-lead');
+  const form = document.getElementById('academy-lead-form');
+  if (!dialog || !form) return;
+  const course = document.getElementById('lead-course');
+  const error = document.getElementById('lead-error');
+  const defaultCourse = 'Digital Marketing Course with AI';
+  function openLead(value) {
+    course.value = value || defaultCourse;
+    if (course.value !== (value || defaultCourse)) course.value = defaultCourse;
+    if (typeof dialog.showModal === 'function') dialog.showModal(); else dialog.setAttribute('open', '');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('lead-name').focus({ preventScroll: true }), 60);
+  }
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-lead-open]');
+    if (!btn || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    openLead(btn.dataset.leadCourse || defaultCourse);
+  });
+  document.querySelectorAll('[data-lead-close]').forEach((btn) => btn.addEventListener('click', () => dialog.close()));
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+  dialog.addEventListener('close', () => { document.body.style.overflow = ''; error.textContent = ''; });
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('lead-name').value.trim();
+    const phone = document.getElementById('lead-phone').value.trim();
+    const note = document.getElementById('lead-note').value.trim();
+    if (!name || !phone) { error.textContent = 'Please add your name and WhatsApp number.'; return; }
+    error.textContent = '';
+    const lines = ['Hi WizGrowth Academy — I would like to enquire about a course.', '', 'Name: ' + name, 'My WhatsApp number: ' + phone, 'Interested in: ' + course.value];
+    if (note) lines.push('Note: ' + note);
+    const url = 'https://wa.me/917907551261?text=' + encodeURIComponent(lines.join('\n'));
+    const win = window.open(url, '_blank', 'noopener,noreferrer');
+    if (!win) location.href = url;
+  });
+})();

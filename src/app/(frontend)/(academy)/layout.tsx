@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import '../academy.css';
+import { LEAD_SHEET } from './markup/lead-sheet';
 
 // The academy pages are the design hand-off's markup shipped verbatim (see
 // design/academy/README.md), on their own stylesheet. Like the home page and
@@ -22,6 +23,8 @@ export default function AcademyLayout({ children }: { children: ReactNode }) {
     <>
       <div id="top" dangerouslySetInnerHTML={{ __html: SYMBOLS }} />
       {children}
+      {/* The enquiry sheet every page's buttons open; see markup/lead-sheet.ts. */}
+      <div dangerouslySetInnerHTML={{ __html: LEAD_SHEET }} />
       {/* A real deferred script tag, as on the home page: the markup is static,
           so its behaviour should not wait on React hydrating. */}
       <script defer src="/academy/app.js" />

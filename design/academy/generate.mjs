@@ -74,6 +74,7 @@ function convert(page, html) {
   body = body
     .replace(/<script[\s\S]*?<\/script>/g, '') // behaviour lives in /academy/app.js
     .replace(/<svg[^>]*width="0"[\s\S]*?<\/svg>/, '') // symbols come from the layout
+    .replace(/<footer[\s\S]*?<\/footer>/, '') // the site footer comes from the layout
     .replace(/<img alt="([^"]*)" loading="lazy" src="data:image\/webp;base64,[^"]*"\/>/, (m, alt) =>
       `<img alt="${alt}" loading="lazy" src="${PORTRAIT.src}" width="${PORTRAIT.width}" height="${PORTRAIT.height}"/>`);
   for (const [file, url] of Object.entries(FILE_TO_URL)) body = body.replaceAll(`href="${file}"`, `href="${url}"`);
@@ -146,7 +147,32 @@ export const LEAD_SHEET = \`${escapeTs(sheet)}\`;
 `);
   if (css) css.push(sheetCss);
 }
+// The site-wide footer (home page markup) needs its rules from fresh.css:
+// every rule whose selector mentions the footer, lifted out of that sheet
+// including the ones inside media queries.
+function footerRules(source) {
+  const wanted = /\.site-footer|\.footer-|\.signature-|\.review-|\.social-icons|\.clutch-dot|\.trust-star|#back-top|\.solid-icon/;
+  const blocks = [];
+  function walk(text, prelude) {
+    let i = 0;
+    while (i < text.length) {
+      const open = text.indexOf('{', i);
+      if (open < 0) break;
+      const selector = text.slice(i, open).trim();
+      let depth = 1, j = open + 1;
+      while (j < text.length && depth) { if (text[j] === '{') depth++; else if (text[j] === '}') depth--; j++; }
+      const body = text.slice(open + 1, j - 1);
+      if (selector.startsWith('@media')) walk(body, selector);
+      else if (!selector.startsWith('@') && wanted.test(selector)) blocks.push(prelude ? `${prelude}{${selector}{${body}}}` : `${selector}{${body}}`);
+      i = j;
+    }
+  }
+  walk(source.replace(/\/\*[\s\S]*?\*\//g, ''), '');
+  return blocks.join('\n');
+}
 if (css) {
+  css.push('/* The site-wide footer: its rules from fresh.css, so the home page footer renders here unchanged. */');
+  css.push(footerRules(fs.readFileSync(path.join(root, 'src/app/(frontend)/fresh.css'), 'utf8')));
   fs.writeFileSync(path.join(root, 'src/app/(frontend)/academy.css'), `/* WIZGROWTH / ACADEMY
    Generated from design/academy/academy.html by design/academy/generate.mjs:
    the hand-off's stylesheet followed by its hero overrides. Loaded only by the

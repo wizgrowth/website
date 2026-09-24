@@ -47,7 +47,7 @@
       menu.setAttribute('aria-expanded', 'false');
     }));
   }
-  document.querySelectorAll('[data-top]').forEach((btn) =>
+  document.querySelectorAll('[data-top], #back-top').forEach((btn) =>
     btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' })));
 })();
 

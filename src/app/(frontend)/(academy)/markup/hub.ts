@@ -84,7 +84,7 @@ export const HUB: AcademyPage = {
 </div></section>
 <section class="section" id="trainer"><div class="shell"><div class="trainer-layout">
 <figure class="trainer-portrait"><img alt="Vismaya, trainer at WizGrowth Academy" loading="lazy" src="/images/academy/vismaya-babu-wizgrowth-academy-trainer.webp" width="1100" height="1375"/><span aria-hidden="true" class="trainer-photo-mark">LIVE<br/>MENTORED</span><span aria-hidden="true" class="trainer-photo-line"></span></figure>
-<div class="trainer-copy"><div class="eyebrow">YOUR TRAINER / 04</div><h2>Vismaya.</h2><p>Vismaya teaches every session herself, with hands-on work across SEO, content, search visibility and live feedback. Her verified role, experience and LinkedIn profile can be added here before launch.</p><div class="trainer-meta"><span>SEO &amp; CONTENT</span><span>SEARCH MARKETING</span><span>LIVE TEACHING</span></div></div>
+<div class="trainer-copy"><div class="eyebrow">YOUR TRAINER / 04</div><h2>Vismaya.</h2><p>Vismaya works across SEO, content and AI visibility, helping brands understand how they appear in search and AI-generated answers, and how that visibility translates into measurable business results.</p><div class="trainer-meta"><span>SEO &amp; CONTENT</span><span>SEARCH MARKETING</span><span>LIVE TEACHING</span></div></div>
 </div></div></section>
 <section class="section lilac"><div class="shell">
 <div class="section-head"><span class="eyebrow">WHAT YOU LEAVE WITH</span><span class="num">05 / 06</span></div>
@@ -100,6 +100,5 @@ export const HUB: AcademyPage = {
 <div><div class="eyebrow">NEXT BATCH / 06</div><h2>15 seats.<br/>₹30,000.</h2></div>
 <div class="cta-copy"><p>Each batch is capped at 15 students. The full 12-week course fee is ₹30,000, with instalment options available.</p><a class="button dark" href="https://wa.me/917907551261?text=Hi%20WizGrowth%20Academy%20%E2%80%94%20I'd%20like%20details%20about%20the%20next%20batch." target="_blank" rel="noopener noreferrer" data-lead-open data-lead-course="Digital Marketing Course with AI">Message us on WhatsApp <svg class="arrow"><use href="#arrow-up"></use></svg></a></div>
 </div></div></section>
-</main>
-<footer class="site-footer"><div class="shell"><div class="footer-top"><p>Independent thinking.<br/>Forward momentum.<br/><br/>AI / SEO / SOCIAL</p><div class="footer-links"><a aria-current="page" href="/academy/">Academy</a><a href="/academy/digital-marketing-course/">12-week course</a><a href="/academy/advanced-digital-marketing-mentorship/">Mentorship</a><a href="/academy/digital-marketing-for-business-owners/">Business owners</a></div></div><div class="footer-signature"><div class="signature-main"><a class="signature-word" href="/">wiz<span>growth</span></a><button aria-label="Back to top" class="back-top" data-top=""><svg class="arrow"><use href="#arrow-up"></use></svg></button></div></div><div class="footer-bottom"><span>Copyright © WizGrowth Inc. 2026</span><span>A LITTLE WIZ. A LOT OF POSSIBILITY.</span><span>KERALA, INDIA ↗</span></div></div></footer>`,
+</main>`,
 };

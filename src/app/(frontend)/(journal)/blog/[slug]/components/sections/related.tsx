@@ -1,15 +1,16 @@
 import Link from 'next/link';
 import type { BlogInner } from '@/payload-types';
-import { cardData } from '@/components/wg';
+import { cardData, type BlogSummary } from '@/components/wg';
 import { ArticleCard } from '../../../components/sections/article-card';
 
-// Editor-chosen related posts first; otherwise the most recent others. The
-// design's grid holds two, so the first two are shown.
-export function Related({ post, all }: { post: BlogInner; all: BlogInner[] }) {
+// Editor-chosen related posts first (populated with the collection's
+// defaultPopulate, so without their bodies); otherwise the most recent
+// others. The design's grid holds two, so the first two are shown.
+export function Related({ post, recent }: { post: BlogInner; recent: BlogSummary[] }) {
   const chosen = (post.relatedPosts ?? []).filter(
     (p): p is BlogInner => typeof p === 'object' && p !== null,
   );
-  const items = (chosen.length > 0 ? chosen : all.filter((p) => p.id !== post.id)).slice(0, 2);
+  const items = (chosen.length > 0 ? chosen : recent).slice(0, 2);
   if (items.length === 0) return null;
   return (
     <section className="j-related" aria-label="Related articles">

@@ -75,6 +75,8 @@ function convert(page, html) {
     .replace(/<script[\s\S]*?<\/script>/g, '') // behaviour lives in /academy/app.js
     .replace(/<svg[^>]*width="0"[\s\S]*?<\/svg>/, '') // symbols come from the layout
     .replace(/<footer[\s\S]*?<\/footer>/, '') // the site footer comes from the layout
+    .replace(/<div class="top">[\s\S]*?<\/header><\/div><\/div>/, '') // the site header comes from the layout
+    .replace(/<nav aria-label="Mobile academy navigation"[\s\S]*?<\/nav>/, '')
     .replace(/<img alt="([^"]*)" loading="lazy" src="data:image\/webp;base64,[^"]*"\/>/, (m, alt) =>
       `<img alt="${alt}" loading="lazy" src="${PORTRAIT.src}" width="${PORTRAIT.width}" height="${PORTRAIT.height}"/>`);
   for (const [file, url] of Object.entries(FILE_TO_URL)) body = body.replaceAll(`href="${file}"`, `href="${url}"`);
@@ -94,13 +96,14 @@ function convert(page, html) {
   if (leftover) throw new Error(`${page.file}: ${leftover} placeholder link(s) left`);
   // The current page's own link in the nav is marked; the design left it to the file name.
   body = body.replace(new RegExp(`<a href="${page.url}">`, 'g'), `<a aria-current="page" href="${page.url}">`).replace(/aria-current="page" aria-current="page"/g, 'aria-current="page"');
+  body = body.replace('<main>', '<main id="main" tabindex="-1">').replace('<span class="h1-tail">', ' <span class="h1-tail">');
   body = body.trim();
 
   return { title, description, schema, styles, wiz, body };
 }
 
 fs.mkdirSync(out, { recursive: true });
-let css = null;
+let css = null; // eslint-disable-line prefer-const
 const built = [];
 for (const page of PAGES) {
   const file = path.join(here, page.file);
@@ -151,7 +154,7 @@ export const LEAD_SHEET = \`${escapeTs(sheet)}\`;
 // every rule whose selector mentions the footer, lifted out of that sheet
 // including the ones inside media queries.
 function footerRules(source) {
-  const wanted = /\.site-footer|\.footer-|\.signature-|\.review-|\.social-icons|\.clutch-dot|\.trust-star|#back-top|\.solid-icon/;
+  const wanted = /\.site-footer|\.footer-|\.signature-|\.review-|\.social-icons|\.clutch-dot|\.trust-star|#back-top|\.solid-icon|\.brand(?![\w-])/;
   const blocks = [];
   function walk(text, prelude) {
     let i = 0;
@@ -170,7 +173,29 @@ function footerRules(source) {
   walk(source.replace(/\/\*[\s\S]*?\*\//g, ''), '');
   return blocks.join('\n');
 }
+// The hand-off's own header and footer are not rendered (the layout supplies
+// the site's), so their rules go too, or they would fight the lifted ones.
+function withoutChrome(source) {
+  const chrome = /\.(site-header|header-cta|header-cta-icon|menu-toggle|mobile-nav-v4|brand-lockup|brand-word|brand-divider|brand-section|brand|desktop-nav|top|site-footer|footer-top|footer-links|footer-signature|signature-main|signature-word|back-top|footer-bottom)(?![\w-])|@keyframes wgHeaderIn/;
+  function walk(text) {
+    let out = '', i = 0;
+    while (i < text.length) {
+      const open = text.indexOf('{', i);
+      if (open < 0) { out += text.slice(i); break; }
+      const selector = text.slice(i, open);
+      let depth = 1, j = open + 1;
+      while (j < text.length && depth) { if (text[j] === '{') depth++; else if (text[j] === '}') depth--; j++; }
+      const body = text.slice(open + 1, j - 1);
+      if (selector.trim().startsWith('@media')) { const inner = walk(body); if (inner.trim()) out += `${selector}{${inner}}`; }
+      else if (!chrome.test(selector)) out += `${selector}{${body}}`;
+      i = j;
+    }
+    return out;
+  }
+  return walk(source);
+}
 if (css) {
+  css = css.map(withoutChrome);
   css.push('/* The site-wide footer: its rules from fresh.css, so the home page footer renders here unchanged. */');
   css.push(footerRules(fs.readFileSync(path.join(root, 'src/app/(frontend)/fresh.css'), 'utf8')));
   fs.writeFileSync(path.join(root, 'src/app/(frontend)/academy.css'), `/* WIZGROWTH / ACADEMY

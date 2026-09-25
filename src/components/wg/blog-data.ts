@@ -8,7 +8,43 @@ function schemaBehind(err: unknown) {
   console.error('[blogInner] query failed; rendering without posts:', err);
 }
 
-export const getPosts = cache(async (): Promise<BlogInner[]> => {
+/** The fields a card, a related link or a listing needs; never the article body. */
+export type BlogSummary = Pick<
+  BlogInner,
+  | 'id'
+  | 'slug'
+  | 'title'
+  | 'dek'
+  | 'category'
+  | 'readingTime'
+  | 'featured'
+  | 'featuredLabel'
+  | 'publishedDate'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'featuredImage'
+  | 'publishedBy'
+>;
+
+// Every listing query selects only these. The full documents of sixty
+// articles are about 2 MB per render, of which the cards use under 100 KB;
+// that difference was most of the database's monthly egress.
+export const SUMMARY_SELECT = {
+  slug: true,
+  title: true,
+  dek: true,
+  category: true,
+  readingTime: true,
+  featured: true,
+  featuredLabel: true,
+  publishedDate: true,
+  createdAt: true,
+  updatedAt: true,
+  featuredImage: true,
+  publishedBy: true,
+} as const;
+
+export const getPosts = cache(async (): Promise<BlogSummary[]> => {
   try {
     const payload = await getPayload({ config });
     const result = await payload.find({
@@ -16,8 +52,28 @@ export const getPosts = cache(async (): Promise<BlogInner[]> => {
       limit: 0,
       depth: 1,
       sort: '-createdAt',
+      select: SUMMARY_SELECT,
     });
-    return result.docs.filter((d) => Boolean(d.slug?.trim()));
+    return (result.docs as BlogSummary[]).filter((d) => Boolean(d.slug?.trim()));
+  } catch (err) {
+    schemaBehind(err);
+    return [];
+  }
+});
+
+/** The most recent articles other than one, for related links when the editor chose none. */
+export const getRecentPosts = cache(async (excludeId: number, limit = 2): Promise<BlogSummary[]> => {
+  try {
+    const payload = await getPayload({ config });
+    const result = await payload.find({
+      collection: 'blogInner',
+      where: { id: { not_equals: excludeId } },
+      limit,
+      depth: 1,
+      sort: '-createdAt',
+      select: SUMMARY_SELECT,
+    });
+    return (result.docs as BlogSummary[]).filter((d) => Boolean(d.slug?.trim()));
   } catch (err) {
     schemaBehind(err);
     return [];
@@ -82,8 +138,8 @@ export function categoryLabel(post: Pick<BlogInner, 'category'>) {
 }
 
 /** Posts grouped in the fixed section order; each post appears once, under its first category. */
-export function groupByCategory(posts: BlogInner[]) {
-  const buckets = new Map<string, BlogInner[]>();
+export function groupByCategory(posts: BlogSummary[]) {
+  const buckets = new Map<string, BlogSummary[]>();
   for (const post of posts) {
     const key = post.category?.[0] ?? 'general';
     if (!buckets.has(key)) buckets.set(key, []);
@@ -118,7 +174,7 @@ export function postDate(post: Pick<BlogInner, 'publishedDate' | 'createdAt'>) {
 }
 
 /** The editor-flagged featured article, else the newest one. */
-export function pickFeatured(posts: BlogInner[]): BlogInner | undefined {
+export function pickFeatured(posts: BlogSummary[]): BlogSummary | undefined {
   return posts.find((p) => p.featured) ?? posts[0];
 }
 
@@ -128,7 +184,7 @@ export function topicOf(post: Pick<BlogInner, 'category'>) {
 }
 
 /** Topics present in a set of posts, in display order, with counts. */
-export function topicCounts(posts: BlogInner[]) {
+export function topicCounts(posts: BlogSummary[]) {
   const counts = new Map<string, { value: string; label: string; count: number }>();
   for (const post of posts) {
     const topic = topicOf(post);
@@ -197,7 +253,7 @@ export type CardData = {
   fallback: Cover;
 };
 
-export function cardData(post: BlogInner): CardData {
+export function cardData(post: BlogSummary): CardData {
   const topic = topicOf(post);
   const author = post.publishedBy && typeof post.publishedBy === 'object' ? post.publishedBy : null;
   return {

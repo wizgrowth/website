@@ -36,6 +36,7 @@ export default function WorkPage() {
       </header>
 
       <section className="shell section-tight" aria-label="Flagship engagement">
+        <h2 className="sr-only">Flagship engagement</h2>
         <div className="case-card">
           <div>
             <p className="microlabel">

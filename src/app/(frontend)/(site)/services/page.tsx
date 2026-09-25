@@ -62,6 +62,7 @@ export default async function ServicesPage() {
         </p>
       </header>
       <section className="shell section-tight" aria-label="Services">
+        <h2 className="sr-only">The seven services</h2>
         <div className="svc-grid">
           {services.map((s) => (
             <ServiceCard key={s.slug} service={s} />

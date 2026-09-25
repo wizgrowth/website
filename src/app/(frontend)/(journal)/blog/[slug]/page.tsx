@@ -10,7 +10,7 @@ import {
   faqSchema,
   fromMeta,
   getPost,
-  getPosts,
+  getRecentPosts,
   postHref,
   schemaList,
 } from '@/components/wg';
@@ -33,6 +33,7 @@ type ParamsProps = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: ParamsProps) {
   const { slug } = await params;
   const post = await getPost(slug);
+  if (!post) return { title: { absolute: 'Article not found — WizGrowth' }, robots: { index: false, follow: false } };
   return getMeta({
     meta: post?.meta,
     path: `/blog/${slug.trim()}/`,
@@ -77,8 +78,10 @@ function articleSchema(post: BlogInner) {
 
 export default async function ArticlePage({ params }: ParamsProps) {
   const { slug } = await params;
-  const [post, all] = await Promise.all([getPost(slug), getPosts()]);
+  const post = await getPost(slug);
   if (!post) notFound();
+  // Only fetched when the editor chose no related posts.
+  const recent = (post.relatedPosts ?? []).length > 0 ? [] : await getRecentPosts(post.id, 2);
 
   const content = post.content as ArticleContent;
   const headings = extractHeadings(content);
@@ -109,14 +112,14 @@ export default async function ArticlePage({ params }: ParamsProps) {
         <ReadingRail headings={headings} slug={post.slug}>
           <div className="wg-article-rail">
             <span className="j-label">MAKE IT YOUR NEXT STEP</span>
-            <h3>Good ideas work better in practice.</h3>
+            <h2>Good ideas work better in practice.</h2>
             <p>Tell us what you want to improve.</p>
             <EnquiryButton label={offer.label} goal={offer.goal} source={post.slug} />
           </div>
         </ReadingRail>
         <Prose post={post} content={content} />
       </div>
-      <Related post={post} all={all} />
+      <Related post={post} recent={recent} />
     </>
   );
 }

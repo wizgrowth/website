@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Calendar } from '@/components/ui/calendar'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -13,6 +13,13 @@ const schema = yup
   })
   .required()
 
+const TIME_SLOTS: string[] = []
+for (let hour = 9; hour < 17; hour++) {
+  for (let minutes = 0; minutes < 60; minutes += 30) {
+    TIME_SLOTS.push(`${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`)
+  }
+}
+
 export default function BookingForm() {
   type BookingDataProps = {
     name?: string
@@ -23,25 +30,12 @@ export default function BookingForm() {
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [selectedTime, setSelectedTime] = useState<string | null>(null)
-  const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([])
   const [bookingConfirmed, setBookingConfirmed] = useState<boolean>(false)
   const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false)
   const [formData, setFormData] = useState<BookingDataProps | null>(null)
 
-  // Generate time slots when a date is selected
-  useEffect(() => {
-    if (!selectedDate) return
-
-    const slots = []
-    // Create 30-minute slots from 9 AM to 5 PM
-    for (let hour = 9; hour < 17; hour++) {
-      for (let minutes = 0; minutes < 60; minutes += 30) {
-        const timeString = `${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
-        slots.push(timeString)
-      }
-    }
-    setAvailableTimeSlots(slots)
-  }, [selectedDate])
+  // 30-minute slots from 9 AM to 5 PM, offered once a date is chosen.
+  const availableTimeSlots = selectedDate ? TIME_SLOTS : []
 
   const handleDateSelect = (date: Date | undefined) => {
     if (!date) return
@@ -55,38 +49,30 @@ export default function BookingForm() {
     setBookingConfirmed(false)
   }
 
-  const handleBooking = () => {
-    if (selectedDate && selectedTime) {
-      setFormData((prevData) => ({
-        ...prevData,
-        date: selectedDate.toDateString(),
-        time: selectedTime,
-      }))
+  const [saving, setSaving] = useState(false)
+  const [bookingError, setBookingError] = useState('')
+
+  // The slot is saved only once name, email, date and time are all chosen,
+  // and "Booked" appears only after the server says it was stored.
+  const handleBooking = async () => {
+    if (!selectedDate || !selectedTime || !formData) return
+    setSaving(true)
+    setBookingError('')
+    try {
+      const response = await fetch('/api/booking/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, date: selectedDate.toDateString(), time: selectedTime }),
+      })
+      if (!response.ok) throw new Error(`Booking request failed with status ${response.status}`)
       setBookingConfirmed(true)
+    } catch (error) {
+      console.error('Error sending booking data to backend:', error)
+      setBookingError('That slot could not be saved. Please try again, or message us on WhatsApp.')
+    } finally {
+      setSaving(false)
     }
   }
-
-  useEffect(() => {
-    async function addBookingDataToBackend() {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/booking/`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        })
-        const data = await response.json()
-        console.log('Response from backend:', data)
-        setIsFormSubmitted(true)
-      } catch (error) {
-        console.error('Error sending booking data to backend:', error)
-      }
-    }
-    if (formData) {
-      addBookingDataToBackend()
-    }
-  }, [formData])
 
   //   const formatDate = (date: Date) => {
   //     if (!date) return ''
@@ -212,9 +198,19 @@ export default function BookingForm() {
                 </div>
                 {selectedTime && (
                   <div style={{ marginTop: 22 }}>
-                    <button type="button" onClick={handleBooking} className="btn btn-primary">
-                      Confirm {selectedTime}
+                    <button
+                      type="button"
+                      onClick={handleBooking}
+                      className="btn btn-primary"
+                      disabled={saving}
+                    >
+                      {saving ? 'Saving…' : `Confirm ${selectedTime}`}
                     </button>
+                    {bookingError && (
+                      <p className="field-error" role="alert" style={{ marginTop: 10 }}>
+                        {bookingError}
+                      </p>
+                    )}
                   </div>
                 )}
               </div>

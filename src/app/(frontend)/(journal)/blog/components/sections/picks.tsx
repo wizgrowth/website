@@ -1,10 +1,9 @@
 import Link from 'next/link';
-import type { BlogInner } from '@/payload-types';
-import { cardData } from '@/components/wg';
+import { cardData, type BlogSummary } from '@/components/wg';
 import { CoverImage } from './cover-image';
 
 // "Worth your time": the two most recent articles after the spotlight.
-export function Picks({ posts }: { posts: BlogInner[] }) {
+export function Picks({ posts }: { posts: BlogSummary[] }) {
   if (posts.length === 0) return null;
   return (
     <section className="wg-picks" aria-labelledby="picks-title">

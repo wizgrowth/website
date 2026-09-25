@@ -18,16 +18,16 @@ const LINKS = [
 // React that is state instead, so the menu also closes on navigation.
 export function Header() {
   const pathname = usePathname() ?? '/';
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  // The menu is open only for the path it was opened on, so navigating
+  // closes it without an effect that sets state.
+  const [openOn, setOpenOn] = useState<string | null>(null);
+  const open = openOn === pathname;
+  const setOpen = (next: boolean) => setOpenOn(next ? pathname : null);
 
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === 'Escape') setOpenOn(null);
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);

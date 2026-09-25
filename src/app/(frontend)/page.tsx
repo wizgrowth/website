@@ -10,6 +10,8 @@ import {
   schemaList,
 } from '@/components/wg';
 import './fresh.css';
+import './header.css';
+import { siteHeader } from './chrome';
 import { HOME_MARKUP } from './home-markup';
 
 // The markup is the approved design, shipped verbatim rather than rewritten as
@@ -18,6 +20,14 @@ import { HOME_MARKUP } from './home-markup';
 // except the SEO fields below; the hourly window matches the other pages and
 // lets a save in the admin panel refresh it on demand.
 export const revalidate = 3600;
+
+// The approved markup's own header and menu dialog are swapped for the site
+// header (see chrome.ts); its "Let's talk" carries data-contact, which
+// /fresh/app.js binds to the enquiry dialog.
+const MARKUP = HOME_MARKUP.replace(
+  /<div class="dark-top" id="top">[\s\S]*?<\/header>\s*<\/div>\s*<\/div>/,
+  () => siteHeader({ contact: 'href="#contact" data-contact' }),
+).replace(/<dialog class="menu-dialog"[\s\S]*?<\/dialog>/, '');
 
 const payload = await getPayload({ config });
 const homePageData = await payload.findGlobal({ slug: 'homepage' });
@@ -69,11 +79,12 @@ export default function HomePage() {
   return (
     <>
       <Schema structuredData={structuredData} />
-      <div dangerouslySetInnerHTML={{ __html: HOME_MARKUP }} />
+      <div dangerouslySetInnerHTML={{ __html: MARKUP }} />
       {/* A real deferred script tag, not next/script: this page is static
           markup, so its behaviour should not wait on React hydrating, and the
           tag belongs in the server HTML where a failure is visible. */}
       <script defer src="/fresh/app.js" />
+      <script defer src="/header.js" />
     </>
   );
 }

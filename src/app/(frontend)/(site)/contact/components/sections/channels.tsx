@@ -3,6 +3,7 @@ import { CONTACT, WA_BOOK_CALL, WaIcon } from '@/components/wg';
 export function Channels() {
   return (
     <section className="shell section-tight" aria-label="Contact channels">
+      <h2 className="sr-only">Ways to reach us</h2>
       <div className="channel-grid">
         <div className="channel">
           <p className="microlabel green">Fastest</p>

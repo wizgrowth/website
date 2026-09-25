@@ -1,10 +1,9 @@
 import Link from 'next/link';
-import type { BlogInner } from '@/payload-types';
-import { cardData } from '@/components/wg';
+import { cardData, type BlogSummary } from '@/components/wg';
 import { CoverImage } from './cover-image';
 
 // The editor's spotlight: the editor-flagged featured article, else the newest.
-export function Spotlight({ post }: { post: BlogInner }) {
+export function Spotlight({ post }: { post: BlogSummary }) {
   const card = cardData(post);
   return (
     <section className="wg-feature" aria-labelledby="feature-title">

@@ -225,7 +225,7 @@ h2 .fx, h3 .fx{font-weight:500;}
 .footer-grid{max-width:var(--container); margin:0 auto; padding:0 32px; display:grid; grid-template-columns:2fr 1fr 1fr 1.4fr; gap:40px;}
 .footer .wm{font-size:22px;}
 .footer-tag{margin-top:14px; font-size:14.5px; max-width:30ch; line-height:1.55;}
-.footer h4{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--green-tint); margin-bottom:16px;}
+.footer h3{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--green-tint); margin-bottom:16px;}
 .footer ul{list-style:none;}
 .footer li{margin-bottom:10px;}
 .footer a{color:rgba(242,234,216,.65); text-decoration:none; font-size:14px; transition:color .2s;}
@@ -463,3 +463,8 @@ img.avatar{padding:0; object-fit:cover; background:var(--paper-muted);}
   .featured-img { aspect-ratio: 16 / 9; }
   .post-grid.is-collapsed > .post-card:nth-child(n + 4) { display: none; }
 }
+
+/* QA: hidden headings that keep the outline in order; links at least 24px tall to tap. */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.nav-links a{display:inline-block;padding-block:6px}.breadcrumb a,.footer ul a,.footer-contact p a{display:inline-block;padding-block:4px}.btn-quiet{min-height:24px;display:inline-flex;align-items:center}
+.nav .wm{display:inline-flex;align-items:center;min-height:32px}.social-row a{min-width:36px;min-height:36px;align-items:center;justify-content:center;margin:-8px}

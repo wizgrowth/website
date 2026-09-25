@@ -37,7 +37,7 @@ export function Footer() {
           </p>
         </div>
         <nav aria-label="Agency links">
-          <h4>Agency</h4>
+          <h3>Agency</h3>
           <ul>
             {AGENCY.map((l) => (
               <li key={l.href}>
@@ -47,7 +47,7 @@ export function Footer() {
           </ul>
         </nav>
         <nav aria-label="Company links">
-          <h4>Company</h4>
+          <h3>Company</h3>
           <ul>
             {COMPANY.map((l) => (
               <li key={l.href}>
@@ -57,14 +57,14 @@ export function Footer() {
           </ul>
         </nav>
         <div className="footer-contact">
-          <h4>Talk to us</h4>
+          <h3>Talk to us</h3>
           <p>
             <a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a>
           </p>
           <p>
             <a href={CONTACT.emailHref}>{CONTACT.email}</a>
           </p>
-          <h4 style={{ marginTop: 22 }}>Follow</h4>
+          <h3 style={{ marginTop: 22 }}>Follow</h3>
           <div className="social-row">
             <a
               href="https://x.com/wiz_growth"
@@ -97,7 +97,7 @@ export function Footer() {
               </svg>
             </a>
           </div>
-          <h4 style={{ marginTop: 22 }}>Find us on</h4>
+          <h3 style={{ marginTop: 22 }}>Find us on</h3>
           <p>
             <a href="https://clutch.co/profile/wizgrowth" rel="noopener" target="_blank">
               Clutch

@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { footerRules } from '../shared/footer-rules.mjs';
+import { footerBase, footerRules } from '../shared/footer-rules.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '../..');
@@ -132,6 +132,7 @@ body{margin:0}html{scroll-behavior:smooth}.svc{overflow-x:clip}
 .skip-link{position:fixed;left:24px;top:-100px;background:#c5f86b;color:#10120f;padding:15px;z-index:500}.skip-link:focus{top:20px}
 ${sheets.join('\n')}
 /* The site-wide footer: its rules from fresh.css, so the home page footer renders here unchanged. */
+${footerBase}
 ${footerRules(fs.readFileSync(path.join(root, 'src/app/(frontend)/fresh.css'), 'utf8'))}
 `);
 console.log('services.css written');

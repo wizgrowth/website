@@ -16,6 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     limit: 0,
     depth: 0,
     sort: '-createdAt',
+    select: { slug: true, updatedAt: true, createdAt: true, hideFromSitemap: true },
   });
 
   const blogInnerPages: MetadataRoute.Sitemap = result.docs
@@ -38,6 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       limit: 0,
       depth: 0,
       sort: 'order',
+      select: { slug: true, updatedAt: true, createdAt: true },
     })
     .catch((err: unknown) => {
       console.error('[sitemap] servicePages query failed:', err);

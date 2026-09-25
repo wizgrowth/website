@@ -23,11 +23,11 @@ const SYMBOLS = `<svg width="0" height="0" aria-hidden="true" style="position:ab
 // The home page's footer, with its academy link pointing here and its
 // "Let's talk" opening the academy's own enquiry sheet.
 // "Let's talk" carries data-lead-open, which /academy/app.js binds to the sheet.
-const HEADER = siteHeader({ contact: 'href="/academy/#enquire" data-lead-open', current: 'academy' });
+const HEADER = siteHeader({ contact: 'href="/academy/#enquire" data-lead-open' });
 
 const FOOTER = siteFooter({
   contact: 'href="/academy/#enquire" data-lead-open',
-  rewrites: { 'href="/#academy"': 'href="/academy/" aria-current="page"' },
+  rewrites: { '<a href="/academy/">Academy</a>': '<a href="/academy/" aria-current="page">Academy</a>' },
 });
 
 export default function AcademyLayout({ children }: { children: ReactNode }) {

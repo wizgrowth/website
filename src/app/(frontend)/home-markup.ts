@@ -212,7 +212,7 @@ export const HOME_MARKUP = `
  <div class="lead-layout">
   <aside class="lead-side" aria-label="Little Wiz, your enquiry guide">
    <span class="brand"><svg class="mark" aria-hidden="true"><use href="#wg-mark"/></svg>wizgrowth</span>
-   <div class="lead-side-head"><span class="eyebrow">A GOOD PLACE TO BEGIN</span><h3>Big plans.<br><span>Small first step.</span></h3><p>No perfect brief needed.<br>Just you, your ambition, and a little Wiz.</p></div>
+   <div class="lead-side-head"><span class="eyebrow">A GOOD PLACE TO BEGIN</span><p class="lead-side-title">Big plans.<br><span>Small first step.</span></p><p>No perfect brief needed.<br>Just you, your ambition, and a little Wiz.</p></div>
    <div class="lead-side-art"><svg aria-hidden="true" class="lead-mascot" viewBox="110 -4 290 278">
 <defs>
 <linearGradient id="lead-body-fill" x1="0" x2=".85" y1="0" y2="1"><stop offset="0" stop-color="#d9ff97"></stop><stop offset=".58" stop-color="#c5f86b"></stop><stop offset="1" stop-color="#a3d84e"></stop></linearGradient>
@@ -233,7 +233,7 @@ export const HOME_MARKUP = `
 <path d="m238 202 5 7 9-15" fill="none" stroke="#5b7936" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
 </g>
 <g class="wiz-sparkles" stroke="#c3b9fb" stroke-linecap="round" stroke-width="2"><path d="M156 83v12m-6-6h12"></path><path d="m331 48 3 5m12 4 5-1"></path><path d="m352 213 2 8m-6-5 10-2"></path></g>
-</svg><span class="lead-float ai" data-lead-float="ai"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/><path d="m20 2 .6 1.4L22 4l-1.4.6L20 6"/></svg>AI</span><span class="lead-float seo" data-lead-float="seo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m14.5 14.5 5.5 5.5"/></svg>SEO</span><span class="lead-float social" data-lead-float="social"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12h-9l-5 4v-4H4Z"/><path d="M8 8h8m-8 4h5"/></svg>Social</span></div>
+</svg><span class="lead-float ai" data-lead-float="ai" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/><path d="m20 2 .6 1.4L22 4l-1.4.6L20 6"/></svg>AI</span><span class="lead-float seo" data-lead-float="seo" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m14.5 14.5 5.5 5.5"/></svg>SEO</span><span class="lead-float social" data-lead-float="social" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12h-9l-5 4v-4H4Z"/><path d="M8 8h8m-8 4h5"/></svg>Social</span></div>
    <div class="lead-side-note"><small>LITTLE WIZ SAYS</small><p id="lead-wiz-note">Choose what matters to you. We can start small.</p></div>
   </aside>
   <div class="lead-main">
@@ -259,7 +259,7 @@ export const HOME_MARKUP = `
 <g class="wiz-sparkles" stroke="#c3b9fb" stroke-linecap="round" stroke-width="2"><path d="M156 83v12m-6-6h12"></path><path d="m331 48 3 5m12 4 5-1"></path><path d="m352 213 2 8m-6-5 10-2"></path></g>
 </svg><span class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</span></span><div class="lead-top-actions"><button class="lead-close" data-close type="button" aria-label="Close enquiry"><svg class="arrow" aria-hidden="true"><use href="#close-icon"/></svg></button></div></div>
    <form class="lead-form" id="contact-form" novalidate>
-    <section class="lead-screen" aria-labelledby="contact-dialog-title">
+    <section class="lead-screen">
      <div class="lead-step-kicker"><span class="lead-pip"></span>ONE SHORT MESSAGE. NO PERFECT BRIEF NEEDED.</div>
      <h2 class="lead-step-heading" id="contact-dialog-title" tabindex="-1">Where should<br>we grow next?</h2>
      <p class="lead-desc">Choose what matters, tell us a little, and your message opens in WhatsApp or email for you to send.</p>

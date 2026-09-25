@@ -81,12 +81,12 @@ $$('[data-footer-service]').forEach(link=>link.addEventListener('click',event=>{
 function initLeadStudio(){
  const dialog=$('#contact-dialog'), form=$('#contact-form');
  const goals=$$('input[name="goals"]',form), goal=$('#contact-goal'), name=$('#contact-name'), email=$('#contact-email'), phone=$('#contact-phone'), company=$('#contact-company'), website=$('#contact-website'), note=$('#lead-send-note'), more=$('.lead-more',dialog);
- const labels={ai:'AI visibility',seo:'SEO & search',social:'Social media',paid:'Paid campaigns',website:'Website & content',academy:'Learning at the academy',unsure:'Not sure yet'};
+ const labels={ai:'AI visibility',seo:'SEO & search',social:'Social media',paid:'Paid campaigns',website:'Website & content',academy:'Learn at the academy',unsure:'Help me decide'};
  const art=$('.lead-side-art',dialog), sideNote=$('#lead-wiz-note');
  const notes={ai:'A good place to start: help your expertise become the answer.',seo:'Let\'s connect your expertise with the people looking for it.',social:'More good conversations. Less posting for the sake of it.',paid:'Let\'s give every campaign a clear job to do.',website:'A clearer website. Content with a reason to exist.',academy:'Curiosity is a great starting point. Tell us what you\'d like to learn.',unsure:'No jargon required. Start with the problem, not the channel.'};
  let openingFocus=null,cheerTimer=0;
  function cheer(){if(!art)return;clearTimeout(cheerTimer);art.classList.remove('is-cheering');void art.offsetWidth;if(!paused&&!reduced.matches)art.classList.add('is-cheering');cheerTimer=setTimeout(()=>art.classList.remove('is-cheering'),1100);}
- function syncSide(changed){const keys=selected();$$('.lead-float',dialog).forEach(el=>el.classList.toggle('is-picked',keys.includes(el.dataset.leadFloat)));if(sideNote&&changed){sideNote.textContent=notes[changed]||notes.unsure;cheer();}}
+ function syncSide(changed){const keys=selected();$$('.lead-float',dialog).forEach(el=>el.classList.toggle('is-picked',keys.includes(el.dataset.leadFloat)));if(!sideNote)return;if(changed){sideNote.textContent=notes[changed]||notes.unsure;cheer();}else sideNote.textContent=keys.length?notes[keys[keys.length-1]]:'Choose what matters to you. We can start small.';}
  function selected(){return goals.filter(g=>g.checked).map(g=>g.value);}
  function setError(id,text){const el=$(id);if(!el)return;el.textContent=text;el.hidden=!text;}
  function clearFieldError(input){input.removeAttribute('aria-invalid');setError('#'+input.id+'-error','');}
@@ -152,7 +152,7 @@ function initLeadStudio(){
  return {open,get selected(){return selected();}};
 }
 const leadStudio=initLeadStudio();
-$$('[data-contact]').forEach(button=>button.addEventListener('click',()=>leadStudio.open(button)));
+$$('[data-contact]').forEach(button=>button.addEventListener('click',e=>{if(button.tagName==='A')e.preventDefault();leadStudio.open(button);}));
 
 // A small, useful character-led guide. Suggestions are pre-written, not an audit.
 function initLittleWiz(){

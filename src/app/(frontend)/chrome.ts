@@ -27,9 +27,6 @@ export function siteFooter({ contact, rewrites = {} }: FooterOptions) {
   let footer = pick(/<footer class="site-footer[\s\S]*?<\/footer>/, 'footer')
     .replaceAll('href="#top"', 'href="/"')
     .replaceAll('href="#expertise"', 'href="/#expertise"')
-    .replaceAll('href="#about"', 'href="/#about"')
-    .replaceAll('href="#approach"', 'href="/#approach"')
-    .replaceAll('href="#academy"', 'href="/#academy"')
     .replace(/<button type="button" data-contact>[\s\S]*?<\/button>/g, `<a ${contact}>Let's talk ${ARROW}</a>`);
   for (const [from, to] of Object.entries(rewrites)) footer = footer.replace(from, to);
   return footer;
@@ -44,13 +41,13 @@ type HeaderOptions = {
   /** Attributes for the "Let's talk" link (desktop and mobile), e.g. the data attribute a script binds. */
   contact: string;
   /** Which top-level item is the current section, for aria-current. */
-  current?: 'academy' | 'journal' | 'about' | 'agency';
+  current?: 'journal' | 'about';
 };
 
 const AGENCY_LINKS = [
-  ['/#expertise', 'Search & organic growth', 'SEO, content and technical foundations.'],
-  ['/#expertise', 'Demand generation & PPC', 'Campaigns with a clear commercial job.'],
-  ['/#expertise', 'AI visibility', 'Make your expertise easier to reference.'],
+  ['/services/seo/', 'Search & organic growth', 'SEO, content and technical foundations.'],
+  ['/services/performance-marketing/', 'Demand generation & PPC', 'Campaigns with a clear commercial job.'],
+  ['/services/ai-citations/', 'AI visibility', 'Make your expertise easier to reference.'],
   ['/services/social-media-marketing/', 'Social media marketing', 'Useful content and real conversations.'],
   ['/services/content-marketing/', 'Content marketing', 'Content built around intent and action.'],
   ['/services/web-development/', 'Website development', 'Clearer journeys from interest to enquiry.'],
@@ -87,8 +84,8 @@ export function siteHeader({ contact, current }: HeaderOptions) {
       <a class="wgh-brand" href="/" aria-label="WizGrowth home"><span class="wgh-word">wizgrowth</span></a>
       <nav class="wgh-nav" aria-label="Main navigation">
         <div class="wgh-item" data-wgh-dropdown>
-          <button class="wgh-trigger" type="button" aria-expanded="false"${cur('agency')}>Agency ${CHEVRON}</button>
-          <div class="wgh-drop wgh-drop-agency" role="menu">
+          <button class="wgh-trigger" type="button" aria-expanded="false">Agency ${CHEVRON}</button>
+          <div class="wgh-drop wgh-drop-agency">
             <div class="wgh-drop-inner">
               <aside class="wgh-drop-intro"><div><div class="wgh-drop-eyebrow">AGENCY / SERVICES</div><p class="wgh-drop-title">Growth, joined up.</p><p>Search, demand and AI visibility working in the same direction.</p></div><div class="wgh-drop-count">06 CAPABILITIES</div></aside>
               <div class="wgh-drop-links">${dropLinks(AGENCY_LINKS)}</div>
@@ -96,8 +93,8 @@ export function siteHeader({ contact, current }: HeaderOptions) {
           </div>
         </div>
         <div class="wgh-item" data-wgh-dropdown>
-          <button class="wgh-trigger" type="button" aria-expanded="false"${cur('academy')}>Academy ${CHEVRON}</button>
-          <div class="wgh-drop wgh-drop-academy" role="menu">
+          <button class="wgh-trigger" type="button" aria-expanded="false">Academy ${CHEVRON}</button>
+          <div class="wgh-drop wgh-drop-academy">
             <div class="wgh-drop-inner">
               <aside class="wgh-drop-intro"><div><div class="wgh-drop-eyebrow">WIZGROWTH / ACADEMY</div><p class="wgh-drop-title">Learn by doing.</p><p>Live, practical programmes built around real work.</p></div><div class="wgh-drop-count">03 PROGRAMMES</div></aside>
               <div class="wgh-drop-links">${dropLinks(ACADEMY_LINKS)}</div>

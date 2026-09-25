@@ -8,6 +8,21 @@ export const BlogInner: CollectionConfig = {
   access: {
     read: () => true,
   },
+  // What another document gets when it relates to an article (e.g. an
+  // article's relatedPosts): the card fields, never the body. See
+  // SUMMARY_SELECT in src/components/wg/blog-data.ts.
+  defaultPopulate: {
+    slug: true,
+    title: true,
+    dek: true,
+    category: true,
+    readingTime: true,
+    publishedDate: true,
+    createdAt: true,
+    updatedAt: true,
+    featuredImage: true,
+    publishedBy: true,
+  },
   fields: [
     {
       label: 'Slug',

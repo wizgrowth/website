@@ -13,7 +13,7 @@ type Props = {
 // markup with Little Wiz's messages attached for /academy/app.js.
 export function AcademyMarkup({ page, crumbs, editorSchema = [] }: Props) {
   const messages = JSON.stringify(page.wizMessages).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
-  const html = page.html.replace('data-wiz-speech=""', `data-wiz-speech="" data-wiz-messages="${messages}"`);
+  const html = page.html.replace('data-wiz-speech=""', () => `data-wiz-speech="" data-wiz-messages="${messages}"`);
   return (
     <>
       <Schema structuredData={schemaList(editorSchema, breadcrumbSchema(crumbs), page.schema)} />

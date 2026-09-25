@@ -7,6 +7,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    // Optimised variants are kept for 30 days; the originals come from the
+    // CMS route below, which the CDN caches as well, so the object store is
+    // read about once per file instead of on every request.
+    minimumCacheTTL: 2592000,
     remotePatterns: [
       {
         protocol: 'https',
@@ -37,6 +41,16 @@ const nextConfig = {
   // manager, analytics and inline scripts would each need an allowance first.
   async headers() {
     return [
+      {
+        // Uploaded files: a day in the browser, thirty days at the edge.
+        // Files are addressed by name, so a replaced upload with the same
+        // name takes up to a day to show; that beats re-reading the object
+        // store for every visitor.
+        source: '/api/media/file/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=86400, s-maxage=2592000, stale-while-revalidate=604800' },
+        ],
+      },
       {
         source: '/:path*',
         headers: [

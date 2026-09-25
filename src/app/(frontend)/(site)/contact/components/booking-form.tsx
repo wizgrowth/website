@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Calendar } from '@/components/ui/calendar'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -13,6 +13,13 @@ const schema = yup
   })
   .required()
 
+const TIME_SLOTS: string[] = []
+for (let hour = 9; hour < 17; hour++) {
+  for (let minutes = 0; minutes < 60; minutes += 30) {
+    TIME_SLOTS.push(`${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`)
+  }
+}
+
 export default function BookingForm() {
   type BookingDataProps = {
     name?: string
@@ -23,25 +30,12 @@ export default function BookingForm() {
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [selectedTime, setSelectedTime] = useState<string | null>(null)
-  const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([])
   const [bookingConfirmed, setBookingConfirmed] = useState<boolean>(false)
   const [isFormSubmitted, setIsFormSubmitted] = useState<boolean>(false)
   const [formData, setFormData] = useState<BookingDataProps | null>(null)
 
-  // Generate time slots when a date is selected
-  useEffect(() => {
-    if (!selectedDate) return
-
-    const slots = []
-    // Create 30-minute slots from 9 AM to 5 PM
-    for (let hour = 9; hour < 17; hour++) {
-      for (let minutes = 0; minutes < 60; minutes += 30) {
-        const timeString = `${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
-        slots.push(timeString)
-      }
-    }
-    setAvailableTimeSlots(slots)
-  }, [selectedDate])
+  // 30-minute slots from 9 AM to 5 PM, offered once a date is chosen.
+  const availableTimeSlots = selectedDate ? TIME_SLOTS : []
 
   const handleDateSelect = (date: Date | undefined) => {
     if (!date) return

@@ -10,6 +10,17 @@
     const trigger = item.querySelector('.wgh-trigger');
     trigger.addEventListener('click', (e) => {
       e.stopPropagation();
+      // Opened by hover (mouse users): the click means close. Hover is
+      // suppressed until the pointer leaves so it does not reopen at once.
+      const drop = item.querySelector('.wgh-drop');
+      const shownByHover = !item.classList.contains('is-open') && drop && getComputedStyle(drop).visibility === 'visible';
+      if (shownByHover) {
+        item.classList.add('is-closed');
+        item.addEventListener('pointerleave', () => item.classList.remove('is-closed'), { once: true });
+        closeAll();
+        return;
+      }
+      item.classList.remove('is-closed');
       const next = !item.classList.contains('is-open');
       closeAll(next ? item : null);
       item.classList.toggle('is-open', next);

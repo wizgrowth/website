@@ -25,6 +25,8 @@ fs.writeFileSync(path.join(root, 'src/app/(frontend)/header.css'), `/* WIZGROWTH
 ${vars}${css.trim()}
 /* Additions: with the nav hidden on phones the right-hand group keeps to the right edge. */
 .wgh-right{justify-self:end}
+/* A click on a hover-opened dropdown closes it (see header.js). */
+.wgh-item.is-closed>.wgh-drop{opacity:0!important;visibility:hidden!important;pointer-events:none!important}.wgh-item.is-closed>.wgh-trigger svg{transform:none!important}.wgh-item.is-closed::after{opacity:0!important}
 /* Dropdown titles are paragraphs, not document headings: they sit before the page's h1. */
 .wgh-drop-intro .wgh-drop-title{font-size:29px;line-height:1.02;letter-spacing:-.055em;margin:22px 0 0;max-width:180px;font-weight:500}.wgh-drop-academy .wgh-drop-intro .wgh-drop-title{font-size:31px}
 /* Skip link for the halves whose stylesheet lacks one (the academy). */

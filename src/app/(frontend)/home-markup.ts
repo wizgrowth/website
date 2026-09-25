@@ -170,7 +170,7 @@ export const HOME_MARKUP = `
 
 <footer class="site-footer footer-complete footer-v2" id="site-footer"><div class="shell">
  <div class="footer-directory">
-  <div class="footer-intro"><a class="brand" href="#top" aria-label="WizGrowth home"><svg class="mark" aria-hidden="true"><use href="#wg-mark"/></svg>wizgrowth</a><p>Independent thinking.<br> Forward momentum.</p>
+  <div class="footer-intro"><a class="brand" href="#top" aria-label="WizGrowth home">wizgrowth</a><p>Independent thinking.<br> Forward momentum.</p>
    <div class="footer-social-heading">LET'S STAY CONNECTED</div><div class="social-icons" role="group" aria-label="WizGrowth social channels">
      <a data-social="instagram" href="https://www.instagram.com/wiz_growth/" target="_blank" rel="noopener noreferrer" aria-label="WizGrowth on Instagram (opens in a new tab)" title="Instagram"><svg aria-hidden="true" viewBox="0 0 24 24"><rect height="18" rx="5" width="18" x="3" y="3"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" fill="currentColor" r=".9" stroke="none"></circle></svg></a>
      <a data-social="linkedin" href="https://www.linkedin.com/company/wiz-growth/" target="_blank" rel="noopener noreferrer" aria-label="WizGrowth on LinkedIn (opens in a new tab)" title="LinkedIn"><svg aria-hidden="true" class="solid-icon" viewBox="0 0 24 24"><path d="M5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM3.5 9H7v12H3.5ZM10 9h3.3v1.7A3.9 3.9 0 0 1 16.8 8.7C20.6 8.7 21 11.1 21 14.2V21h-3.5v-6.1c0-1.5 0-3.3-2-3.3s-2.1 1.6-2.1 3.2V21H10Z"></path></svg></a>
@@ -185,7 +185,7 @@ export const HOME_MARKUP = `
 <a href="/services/content-marketing/">Content marketing</a>
 <a href="/services/web-development/">Website development</a>
 <a href="/services/analytics/">Analytics &amp; reporting</a></nav>
-  <nav class="footer-nav" aria-label="About WizGrowth"><h3>WizGrowth</h3><a href="#about">The bigger picture</a><a href="#approach">Our approach</a><a href="#academy">Academy</a><a href="/blog/">Journal</a><button type="button" data-contact>Let's talk <svg class="arrow" aria-hidden="true"><use href="#arrow-up"/></svg></button></nav>
+  <nav class="footer-nav" aria-label="About WizGrowth"><h3>WizGrowth</h3><a href="/academy/">Academy</a><a href="/academy/digital-marketing-course/">Digital Marketing Course with AI</a><a href="/academy/advanced-digital-marketing-mentorship/">Advanced Mentorship</a><a href="/academy/digital-marketing-for-business-owners/">For Business Owners</a><a href="/blog/">Journal</a><button type="button" data-contact>Let's talk <svg class="arrow" aria-hidden="true"><use href="#arrow-up"/></svg></button></nav>
   <div class="footer-contact"><h3>Say hello</h3><address>
 <a href="tel:+917907551261"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="m5 3 4 1 1 5-3 2c2 3 3 4 6 6l2-3 5 1 1 4c-1 6-9 1-12-2S0 4 5 3Z"></path></svg>+91 79075 51261</a>
 <a href="mailto:marketing@wizgrowth.com"><svg aria-hidden="true" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m4 7 8 6 8-6"></path></svg>marketing@wizgrowth.com</a>

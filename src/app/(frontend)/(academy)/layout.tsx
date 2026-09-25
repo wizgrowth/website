@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import '../academy.css';
-import { siteFooter } from '../chrome';
+import '../header.css';
+import { siteFooter, siteHeader } from '../chrome';
 import { LEAD_SHEET } from './markup/lead-sheet';
 
 // The academy pages are the design hand-off's markup shipped verbatim (see
@@ -21,6 +22,9 @@ const SYMBOLS = `<svg width="0" height="0" aria-hidden="true" style="position:ab
 
 // The home page's footer, with its academy link pointing here and its
 // "Let's talk" opening the academy's own enquiry sheet.
+// "Let's talk" carries data-lead-open, which /academy/app.js binds to the sheet.
+const HEADER = siteHeader({ contact: 'href="/academy/#enquire" data-lead-open', current: 'academy' });
+
 const FOOTER = siteFooter({
   contact: 'href="/academy/#enquire" data-lead-open',
   rewrites: { 'href="/#academy"': 'href="/academy/" aria-current="page"' },
@@ -29,7 +33,8 @@ const FOOTER = siteFooter({
 export default function AcademyLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      <div id="top" dangerouslySetInnerHTML={{ __html: SYMBOLS }} />
+      <div dangerouslySetInnerHTML={{ __html: SYMBOLS }} />
+      <div dangerouslySetInnerHTML={{ __html: HEADER }} />
       {children}
       <div dangerouslySetInnerHTML={{ __html: FOOTER }} />
       {/* The enquiry sheet every page's buttons open; see markup/lead-sheet.ts. */}
@@ -37,6 +42,7 @@ export default function AcademyLayout({ children }: { children: ReactNode }) {
       {/* A real deferred script tag, as on the home page: the markup is static,
           so its behaviour should not wait on React hydrating. */}
       <script defer src="/academy/app.js" />
+      <script defer src="/header.js" />
     </>
   );
 }

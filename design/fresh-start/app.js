@@ -50,8 +50,7 @@ tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>selectService(tab));tab.
 // Native dialogs provide keyboard focus management and Escape dismissal.
 const dialogs=$$('dialog');function openDialog(dialog){dialogs.forEach(d=>{if(d.open)d.close();});dialog.showModal();body.style.overflow='hidden';}
 dialogs.forEach(dialog=>{dialog.addEventListener('close',()=>{if(!dialogs.some(d=>d.open))body.style.overflow='';});dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});$$('[data-close]',dialog).forEach(b=>b.addEventListener('click',()=>dialog.close()));});
-$('#menu-open').addEventListener('click',()=>openDialog($('#menu-dialog')));
-$$('#menu-dialog a').forEach(a=>a.addEventListener('click',()=>$('#menu-dialog').close()));
+// The menu belongs to the site header (public/header.js); the old #menu-open button is gone.
 // Contact triggers are bound by the enquiry studio below.
 $('#academy-open').addEventListener('click',()=>openDialog($('#academy-dialog')));
 $('#back-top').addEventListener('click',()=>window.scrollTo({top:0,behavior:paused?'instant':'smooth'}));

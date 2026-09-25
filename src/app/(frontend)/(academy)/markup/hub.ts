@@ -9,14 +9,7 @@ export const HUB: AcademyPage = {
   description: "Live digital marketing courses in Kerala for SEO, content and AI search. ₹30,000, max 15 per batch, taught on real websites.",
   schema: {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.wizgrowth.com/#organization","name":"WizGrowth","url":"https://www.wizgrowth.com/","email":"marketing@wizgrowth.com","telephone":"+91 79075 51261"},{"@type":"LocalBusiness","@id":"https://www.wizgrowth.com/academy/#localbusiness","name":"WizGrowth Academy","url":"https://www.wizgrowth.com/academy/","parentOrganization":{"@id":"https://www.wizgrowth.com/#organization"},"areaServed":[{"@type":"City","name":"Kochi"},{"@type":"State","name":"Kerala"}],"priceRange":"₹₹"}]},
   wizMessages: ["Let's learn by doing.","Build it. Rank it. Show it.","Small batch. Real feedback."],
-  html: `<div class="top"><div class="shell"><header class="site-header">
-<a aria-label="WizGrowth Academy home" class="brand-lockup" href="/academy/"><span class="brand-word">wizgrowth</span><span aria-hidden="true" class="brand-divider"></span><span class="brand-section">academy</span></a>
-<nav aria-label="Academy navigation" class="desktop-nav"><a href="#courses">Courses</a><a href="#difference">Why WizGrowth</a><a href="#trainer">Trainer</a><a aria-current="page" href="/academy/">Academy</a></nav>
-<a class="header-cta" href="#enquire"><span>Let's talk</span><span class="header-cta-icon"><svg aria-hidden="true" class="arrow"><use href="#arrow-up"></use></svg></span></a>
-<button aria-expanded="false" aria-label="Open menu" class="menu-toggle" data-menu=""><svg viewbox="0 0 24 24"><path d="M3 8h18M3 16h18" fill="none" stroke-width="1.5"></path></svg></button>
-</header></div></div>
-<nav aria-label="Mobile academy navigation" class="mobile-nav-v4 shell" data-mobile-nav=""><a href="#courses">Courses</a><a href="#difference">Why WizGrowth</a><a href="#trainer">Trainer</a><a href="#enquire">Enquire</a></nav>
-<main>
+  html: `<main>
 <section class="hero">
 <div class="shell"><div class="hero-grid">
 <div class="hero-copy">

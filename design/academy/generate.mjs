@@ -75,6 +75,8 @@ function convert(page, html) {
     .replace(/<script[\s\S]*?<\/script>/g, '') // behaviour lives in /academy/app.js
     .replace(/<svg[^>]*width="0"[\s\S]*?<\/svg>/, '') // symbols come from the layout
     .replace(/<footer[\s\S]*?<\/footer>/, '') // the site footer comes from the layout
+    .replace(/<div class="top">[\s\S]*?<\/header><\/div><\/div>/, '') // the site header comes from the layout
+    .replace(/<nav aria-label="Mobile academy navigation"[\s\S]*?<\/nav>/, '')
     .replace(/<img alt="([^"]*)" loading="lazy" src="data:image\/webp;base64,[^"]*"\/>/, (m, alt) =>
       `<img alt="${alt}" loading="lazy" src="${PORTRAIT.src}" width="${PORTRAIT.width}" height="${PORTRAIT.height}"/>`);
   for (const [file, url] of Object.entries(FILE_TO_URL)) body = body.replaceAll(`href="${file}"`, `href="${url}"`);

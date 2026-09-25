@@ -7,7 +7,7 @@
   const $$ = (s) => [...document.querySelectorAll(s)];
 
   // Reveal on scroll (also the SEO journey line and the web build stage).
-  const revealed = $$('.reveal, .journey, .build-stage');
+  const revealed = $$('.reveal, .journey, .build-stage, .system');
   if ('IntersectionObserver' in window) {
     const o = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); } }), { threshold: 0.12, rootMargin: '0px 0px -20px' });
     revealed.forEach((el) => o.observe(el));
@@ -100,5 +100,80 @@
       dots.forEach((d, i) => { const p = (t + i * 0.24) % 1; const pt = pipePath.getPointAtLength(len * p); d.setAttribute('cx', pt.x); d.setAttribute('cy', pt.y); });
       requestAnimationFrame(tick);
     })(start);
+  }
+})();
+
+// Services hub: the growth check, the service workbench and the problem chooser.
+(() => {
+  const triage = document.querySelector('[data-triage]');
+  if (triage) {
+    const choices = [...triage.querySelectorAll('[data-triage-key]')];
+    const stages = [...triage.querySelectorAll('[data-stage]')];
+    const pulse = triage.querySelector('[data-journey-pulse]');
+    const status = triage.querySelector('[data-triage-status]');
+    const data = {
+      found: { service: 'SEO', support: 'CONTENT MARKETING', why: 'Existing demand is there, but your pages are not visible enough at the moment of intent.', stages: [0], inspect: ['Indexing and technical health', 'Queries already generating impressions', 'Page and intent gaps'], link: '/services/seo/', cta: 'See the SEO approach' },
+      ai: { service: 'AI SEARCH VISIBILITY', support: 'SEO', why: 'Your brand may exist online, but AI-assisted search may not find enough clear, consistent evidence to reference it confidently.', stages: [0, 2], inspect: ['Buyer questions where competitors get named', 'Entity consistency across public sources', 'Evidence, mentions and citations already available'], link: '/services/ai-search-visibility/', cta: 'See AI Search Visibility' },
+      paid: { service: 'DEMAND GENERATION', support: 'WEB DEVELOPMENT', why: 'The bottleneck is not necessarily more spend. It is knowing which audience, message and landing experience creates qualified pipeline.', stages: [0, 3], inspect: ['Conversion tracking before spend', 'Cost per qualified lead by campaign', 'Landing-page drop-off and offer clarity'], link: '/services/demand-generation/', cta: 'See Demand Generation' },
+      message: { service: 'CONTENT MARKETING', support: 'SEO', why: 'You have expertise, but it is not yet packaged around the questions buyers actually ask and the evidence they need to trust the answer.', stages: [1, 2], inspect: ['High-value buyer questions', 'Existing expertise that is buried or fragmented', 'Content gaps across search and AI discovery'], link: '/services/content-marketing/', cta: 'See Content Marketing' },
+      social: { service: 'SOCIAL MEDIA', support: 'CONTENT MARKETING', why: 'Publishing is happening, but the content system may not be creating enough relevance, response or repeat attention.', stages: [1, 2], inspect: ['Which posts start actual conversations', 'Content themes buyers return to', 'Response and community patterns, not likes alone'], link: '/services/social-media-marketing/', cta: 'See Social Media' },
+      site: { service: 'WEB DEVELOPMENT', support: 'CONTENT MARKETING', why: 'Attention is arriving, but the website may be making the offer hard to understand, trust or act on.', stages: [1, 2, 3], inspect: ['Where visitors abandon the journey', 'Clarity of the offer and next action', 'Speed, tracking and conversion friction'], link: '/services/web-development/', cta: 'See Web Development' },
+    };
+    const select = (key) => {
+      const d = data[key]; if (!d) return;
+      choices.forEach((b) => { const on = b.dataset.triageKey === key; b.classList.toggle('active', on); b.setAttribute('aria-pressed', String(on)); });
+      stages.forEach((s, i) => s.classList.toggle('active', d.stages.includes(i)));
+      const last = Math.max(...d.stages), positions = [7, 35.7, 64.3, 93];
+      pulse.style.left = positions[last] + '%';
+      status.textContent = 'BOTTLENECK · ' + stages[last].textContent.trim();
+      triage.querySelector('[data-result-service]').textContent = d.service;
+      triage.querySelector('[data-result-why]').textContent = d.why;
+      triage.querySelector('[data-result-support]').textContent = 'SUPPORTING MOVE · ' + d.support;
+      [1, 2, 3].forEach((n, i) => { triage.querySelector('[data-inspect-' + n + ']').textContent = d.inspect[i]; });
+      const link = triage.querySelector('[data-result-link]'); link.href = d.link; link.firstChild.textContent = d.cta + ' ';
+      triage.classList.remove('changing'); void triage.offsetWidth; triage.classList.add('changing');
+    };
+    choices.forEach((b) => b.addEventListener('click', () => select(b.dataset.triageKey)));
+    select('found');
+  }
+
+  const services = {
+    seo: { k: '01 / ORGANIC SEARCH', t: 'Be found when intent is already there.', c: 'Technical SEO, search intent, useful pages, local visibility and authority — built around qualified discovery rather than vanity rankings.', m: 'SEARCH → ANSWER → TRUST → ENQUIRY', l: 'See SEO', u: '/services/seo/', w: ['QUERY', 'PAGE', 'TRUST', 'ENQUIRY'] },
+    ai: { k: '02 / AI SEARCH VISIBILITY', t: 'Become easier to retrieve, understand and reference.', c: 'Clearer entities, useful answers, first-party evidence, third-party authority and measurement across AI-assisted search experiences.', m: 'QUESTION → SOURCES → SIGNALS → CITATION', l: 'See AI Search Visibility', u: '/services/ai-search-visibility/', w: ['QUESTION', 'SOURCES', 'SIGNALS', 'CITATION'] },
+    demand: { k: '03 / DEMAND GENERATION', t: 'Turn paid attention into a measurable learning loop.', c: 'Tracking, media, landing pages, creative testing and optimisation connected to lead cost, pipeline and revenue.', m: 'ATTENTION → CLICK → LEAD → PIPELINE', l: 'See Demand Generation', u: '/services/demand-generation/', w: ['ATTENTION', 'CLICK', 'LEAD', 'PIPELINE'] },
+    content: { k: '04 / CONTENT MARKETING', t: 'Turn expertise into something buyers can find and use.', c: 'Question research, editorial strategy, evidence-led production, optimisation and refreshes designed for search, AI and human readers.', m: 'QUESTION → ANGLE → EVIDENCE → PUBLISH', l: 'See Content Marketing', u: '/services/content-marketing/', w: ['QUESTION', 'ANGLE', 'EVIDENCE', 'PUBLISH'] },
+    social: { k: '05 / SOCIAL MEDIA', t: 'Make the brand easier to notice, remember and talk to.', c: 'A consistent content system, platform-native creative and community management built around conversations rather than filler.', m: 'PUBLISH → LISTEN → REPLY → LEARN', l: 'See Social Media', u: '/services/social-media-marketing/', w: ['PUBLISH', 'LISTEN', 'REPLY', 'LEARN'] },
+    web: { k: '06 / WEB DEVELOPMENT', t: 'Turn attention into a clearer next step.', c: 'Conversion-first structure, fast development, SEO foundations, analytics and a site your team can actually own after launch.', m: 'LAND → UNDERSTAND → TRUST → ACT', l: 'See Web Development', u: '/services/web-development/', w: ['LAND', 'UNDERSTAND', 'TRUST', 'ACT'] },
+  };
+  const rows = [...document.querySelectorAll('.service-row')];
+  if (rows.length) {
+    const selectService = (row) => {
+      rows.forEach((r) => { const active = r === row; r.classList.toggle('active', active); r.setAttribute('aria-selected', String(active)); });
+      const d = services[row.dataset.service]; if (!d) return;
+      document.getElementById('stage-kicker').textContent = d.k; document.getElementById('stage-title').textContent = d.t; document.getElementById('stage-copy').textContent = d.c; document.getElementById('stage-meta').textContent = d.m;
+      const link = document.getElementById('stage-link'); link.href = d.u; link.firstChild.textContent = d.l + ' ';
+      d.w.forEach((v, i) => { document.getElementById('word' + (i + 1)).textContent = v; });
+      const line = document.querySelector('.pulse-line'); if (line && line.animate) line.animate([{ opacity: 0.4 }, { opacity: 1 }], { duration: 380 });
+    };
+    rows.forEach((r) => { r.addEventListener('mouseenter', () => selectService(r)); r.addEventListener('focus', () => selectService(r)); r.addEventListener('click', () => selectService(r)); });
+  }
+
+  const problems = {
+    found: ['SEO owns the gap between existing search demand and your visibility.', 'See the SEO approach', '/services/seo/'],
+    ai: ['AI Search Visibility owns the gap between what your brand knows and what AI-assisted search can confidently retrieve and reference.', 'See AI Search Visibility', '/services/ai-search-visibility/'],
+    paid: ['Demand Generation owns the gap between paid attention and a lead economics model you can trust.', 'See Demand Generation', '/services/demand-generation/'],
+    message: ['Content Marketing owns the gap between your expertise and the questions your market actually asks.', 'See Content Marketing', '/services/content-marketing/'],
+    social: ['Social Media owns the gap between publishing activity and real audience conversation.', 'See Social Media', '/services/social-media-marketing/'],
+    site: ['Web Development owns the gap between traffic arriving and a visitor understanding, trusting and taking the next step.', 'See Web Development', '/services/web-development/'],
+  };
+  const problemEls = [...document.querySelectorAll('.problem')];
+  if (problemEls.length) {
+    const selectProblem = (el) => {
+      problemEls.forEach((p) => p.classList.toggle('active', p === el));
+      const d = problems[el.dataset.problem]; if (!d) return;
+      document.getElementById('problem-note').textContent = d[0];
+      const a = document.getElementById('problem-link'); a.href = d[2]; a.firstChild.textContent = d[1] + ' ';
+    };
+    problemEls.forEach((el) => { el.addEventListener('click', () => selectProblem(el)); el.addEventListener('mouseenter', () => selectProblem(el)); el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectProblem(el); } }); });
   }
 })();

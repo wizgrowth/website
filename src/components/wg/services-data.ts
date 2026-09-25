@@ -22,6 +22,9 @@ const RENAMED: Record<string, string> = {
   'performance-marketing': 'demand-generation',
 };
 
+/** Services retired with the redesign; their documents stay in the CMS but they have no page. */
+export const RETIRED_SERVICES = new Set(['analytics']);
+
 /** The live address of a service, given its CMS slug. */
 export function serviceHref(slug: string) {
   return `/services/${RENAMED[slug] ?? slug}/`;

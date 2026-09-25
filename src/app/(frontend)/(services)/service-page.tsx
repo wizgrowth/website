@@ -8,7 +8,7 @@ import type { ServiceMarkup } from './markup/types';
 // design's graph plus a breadcrumb list (and a FAQPage where the design has
 // none), and the markup ships as generated.
 export async function serviceMetadata(page: ServiceMarkup) {
-  const service = await getService(page.cmsSlug);
+  const service = page.cmsSlug ? await getService(page.cmsSlug) : undefined;
   return getMeta({
     meta: service?.meta,
     path: page.url,
@@ -26,18 +26,15 @@ function hasType(schema: unknown, type: string): boolean {
   return false;
 }
 
-export async function ServicePage({ page }: { page: ServiceMarkup }) {
-  const service = await getService(page.cmsSlug);
-  const crumbs = [
-    { label: 'Home', href: '/' },
-    { label: 'Services', href: '/services/' },
-    { label: page.name, href: page.url },
-  ];
+export async function ServicePage({ page, editorSchema }: { page: ServiceMarkup; editorSchema?: unknown[] }) {
+  const service = page.cmsSlug ? await getService(page.cmsSlug) : undefined;
+  const crumbs = [{ label: 'Home', href: '/' }, { label: 'Services', href: '/services/' }];
+  if (page.url !== '/services/') crumbs.push({ label: page.name, href: page.url });
   return (
     <>
       <Schema
         structuredData={schemaList(
-          fromMeta(service?.meta?.schema),
+          editorSchema ?? fromMeta(service?.meta?.schema),
           breadcrumbSchema(crumbs),
           page.schema,
           hasType(page.schema, 'FAQPage') ? null : faqSchema(page.faqs),

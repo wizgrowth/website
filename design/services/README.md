@@ -16,6 +16,7 @@ the generated files by hand.
 
 | File | Live URL | CMS slug (SEO fields) |
 |---|---|---|
+| hub.html | /services/ | (the `services` global) |
 | seo.html | /services/seo/ | seo |
 | ai-search-visibility.html | /services/ai-search-visibility/ | ai-citations |
 | demand-generation.html | /services/demand-generation/ | performance-marketing |
@@ -23,5 +24,5 @@ the generated files by hand.
 | social-media-marketing.html | /services/social-media-marketing/ | social-media-marketing |
 | web-development.html | /services/web-development/ | web-development |
 
-The analytics page and the services hub have no hand-off yet and stay on the
-previous design.
+The analytics service was retired with this redesign: /services/analytics/
+redirects to the hub.

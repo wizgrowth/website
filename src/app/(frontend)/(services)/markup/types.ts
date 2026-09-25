@@ -1,7 +1,7 @@
 export type ServiceMarkup = {
   url: string;
-  /** The servicePages document whose SEO fields override the page's own. */
-  cmsSlug: string;
+  /** The servicePages document whose SEO fields override the page's own; null for the hub. */
+  cmsSlug: string | null;
   name: string;
   title: string;
   description: string;

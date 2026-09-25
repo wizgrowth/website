@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getPayload } from 'payload';
 import config from '@payload-config';
-import { serviceHref } from '@/components/wg/services-data';
+import { RETIRED_SERVICES, serviceHref } from '@/components/wg/services-data';
 
 // Refreshed hourly and on every article or service save, so new pages
 // appear without a redeploy.
@@ -49,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const servicePages: MetadataRoute.Sitemap = services.docs
     .map((doc) => ({ ...doc, slug: doc.slug?.trim() }))
-    .filter((doc) => Boolean(doc.slug))
+    .filter((doc) => Boolean(doc.slug) && !RETIRED_SERVICES.has(doc.slug!))
     .map(({ slug, updatedAt, createdAt }) => ({
       url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${serviceHref(slug!)}`,
       lastModified: updatedAt || createdAt,

@@ -9,6 +9,7 @@ const root = path.resolve(here, '../..');
 const out = path.join(root, 'src/app/(frontend)/(services)/markup');
 
 export const PAGES = [
+  { id: 'hub', file: 'hub.html', url: '/services/', cms: null, name: 'Services' },
   { id: 'seo', file: 'seo.html', url: '/services/seo/', cms: 'seo', name: 'SEO' },
   { id: 'ai', file: 'ai-search-visibility.html', url: '/services/ai-search-visibility/', cms: 'ai-citations', name: 'AI Search Visibility' },
   { id: 'demand', file: 'demand-generation.html', url: '/services/demand-generation/', cms: 'performance-marketing', name: 'Demand Generation' },
@@ -108,8 +109,8 @@ export const ${page.id.toUpperCase()}: ServiceMarkup = {
 }
 fs.writeFileSync(path.join(out, 'types.ts'), `export type ServiceMarkup = {
   url: string;
-  /** The servicePages document whose SEO fields override the page's own. */
-  cmsSlug: string;
+  /** The servicePages document whose SEO fields override the page's own; null for the hub. */
+  cmsSlug: string | null;
   name: string;
   title: string;
   description: string;

@@ -44,20 +44,20 @@ type HeaderOptions = {
   current?: 'journal' | 'about';
 };
 
+// Order, names and Title Case as the owner set them (2026-09-25); Web Development is reachable but not listed.
 const AGENCY_LINKS = [
-  ['/services/seo/', 'SEO', 'Search and organic growth: content and technical foundations.'],
-  ['/services/ai-search-visibility/', 'AI search visibility', 'Make your expertise easier to reference.'],
-  ['/services/demand-generation/', 'Demand generation & PPC', 'Campaigns with a clear commercial job.'],
-  ['/services/social-media-marketing/', 'Social media marketing', 'Useful content and real conversations.'],
-  ['/services/content-marketing/', 'Content marketing', 'Content built around intent and action.'],
-  ['/services/web-development/', 'Website development', 'Clearer journeys from interest to enquiry.'],
-  ['/services/marketing-consultation/', 'Marketing consultation', 'An independent read of your numbers and a written plan.'],
+  ['/services/ai-search-visibility/', 'AI Search Visibility', 'Make your expertise easier to reference.'],
+  ['/services/content-marketing/', 'Content Marketing', 'Content built around intent and action.'],
+  ['/services/social-media-marketing/', 'Social Media Marketing', 'Useful content and real conversations.'],
+  ['/services/seo/', 'Search Engine Optimisation', 'Search and organic growth: content and technical foundations.'],
+  ['/services/marketing-consultation/', 'Marketing Consultation', 'An independent read of your numbers and a written plan.'],
+  ['/services/demand-generation/', 'Demand Generation', 'Campaigns with a clear commercial job.'],
 ];
 
 const ACADEMY_LINKS = [
-  ['/academy/digital-marketing-course/', 'Digital Marketing Course with AI', 'Beginner to job-ready in 12 weeks.'],
-  ['/academy/advanced-digital-marketing-mentorship/', 'Advanced Mentorship', 'For working marketers ready to own growth.'],
-  ['/academy/digital-marketing-for-business-owners/', 'For Business Owners', 'Learn to own or judge your organic growth.'],
+  ['/academy/digital-marketing-course/', 'Freshers', 'Beginner to job-ready in 12 weeks.'],
+  ['/academy/advanced-digital-marketing-mentorship/', 'Working Professionals', 'For working marketers ready to own growth.'],
+  ['/academy/digital-marketing-for-business-owners/', 'Business Owners', 'Learn to own or judge your organic growth.'],
 ];
 
 const CHEVRON = '<svg aria-hidden="true"><use href="#wgh-chevron"/></svg>';
@@ -88,7 +88,7 @@ export function siteHeader({ contact, current }: HeaderOptions) {
           <button class="wgh-trigger" type="button" aria-expanded="false">Agency ${CHEVRON}</button>
           <div class="wgh-drop wgh-drop-agency">
             <div class="wgh-drop-inner">
-              <aside class="wgh-drop-intro"><div><div class="wgh-drop-eyebrow">AGENCY / SERVICES</div><p class="wgh-drop-title">Growth, joined up.</p><p>Search, demand and AI visibility working in the same direction.</p></div><div class="wgh-drop-count">07 CAPABILITIES</div></aside>
+              <aside class="wgh-drop-intro"><div><div class="wgh-drop-eyebrow">AGENCY / SERVICES</div><p class="wgh-drop-title">Growth, joined up.</p><p>Search, demand and AI visibility working in the same direction.</p></div><div class="wgh-drop-count">06 CAPABILITIES</div></aside>
               <div class="wgh-drop-links">${dropLinks(AGENCY_LINKS)}</div>
             </div>
           </div>

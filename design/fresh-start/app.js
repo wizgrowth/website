@@ -82,7 +82,11 @@ function initLeadStudio(){
  const dialog=$('#contact-dialog'), form=$('#contact-form');
  const goals=$$('input[name="goals"]',form), goal=$('#contact-goal'), name=$('#contact-name'), email=$('#contact-email'), phone=$('#contact-phone'), company=$('#contact-company'), website=$('#contact-website'), note=$('#lead-send-note'), more=$('.lead-more',dialog);
  const labels={ai:'AI visibility',seo:'SEO & search',social:'Social media',paid:'Paid campaigns',website:'Website & content',academy:'Learning at the academy',unsure:'Not sure yet'};
- let openingFocus=null;
+ const art=$('.lead-side-art',dialog), sideNote=$('#lead-wiz-note');
+ const notes={ai:'A good place to start: help your expertise become the answer.',seo:'Let\'s connect your expertise with the people looking for it.',social:'More good conversations. Less posting for the sake of it.',paid:'Let\'s give every campaign a clear job to do.',website:'A clearer website. Content with a reason to exist.',academy:'Curiosity is a great starting point. Tell us what you\'d like to learn.',unsure:'No jargon required. Start with the problem, not the channel.'};
+ let openingFocus=null,cheerTimer=0;
+ function cheer(){if(!art)return;clearTimeout(cheerTimer);art.classList.remove('is-cheering');void art.offsetWidth;if(!paused&&!reduced.matches)art.classList.add('is-cheering');cheerTimer=setTimeout(()=>art.classList.remove('is-cheering'),1100);}
+ function syncSide(changed){const keys=selected();$$('.lead-float',dialog).forEach(el=>el.classList.toggle('is-picked',keys.includes(el.dataset.leadFloat)));if(sideNote&&changed){sideNote.textContent=notes[changed]||notes.unsure;cheer();}}
  function selected(){return goals.filter(g=>g.checked).map(g=>g.value);}
  function setError(id,text){const el=$(id);if(!el)return;el.textContent=text;el.hidden=!text;}
  function clearFieldError(input){input.removeAttribute('aria-invalid');setError('#'+input.id+'-error','');}
@@ -91,13 +95,13 @@ function initLeadStudio(){
  goals.forEach(input=>input.addEventListener('change',()=>{
   if(input.checked&&input.value==='unsure')goals.forEach(g=>{if(g!==input)g.checked=false;});
   if(input.checked&&input.value!=='unsure'){const u=goals.find(g=>g.value==='unsure');if(u)u.checked=false;}
-  setError('#lead-goals-error','');
+  setError('#lead-goals-error','');syncSide(input.checked?input.value:'');
  }));
  function normalWebsite(){const v=website.value.trim();if(!v)return '';try{const url=new URL(/^[a-z]+:\/\//i.test(v)?v:'https://'+v);if(!['https:','http:'].includes(url.protocol)||!url.hostname.includes('.')||/\s/.test(v)||url.username||url.password)return null;return url.href;}catch{return null;}}
  function validate(){
   let first=null;const flag=el=>{if(!first)first=el;};
   [goal,name,email,phone,website].forEach(clearFieldError);
-  if(!selected().length){setError('#lead-goals-error','Choose at least one, or "Not sure yet".');flag(goals[0]);}
+  if(!selected().length){setError('#lead-goals-error','Choose at least one, or "Help me decide".');flag(goals[0]);}
   if(!goal.value.trim())flag(invalid(goal,'Tell us a little about what you would like to change.'));
   if(!name.value.trim())flag(invalid(name,'What should we call you?'));
   if(!email.value.trim()||!email.validity.valid)flag(invalid(email,'Enter an email address like you@company.com.'));
@@ -139,10 +143,10 @@ function initLeadStudio(){
   if(event.shiftKey&&(current===first||!targets.includes(current))){event.preventDefault();last.focus();}
   else if(!event.shiftKey&&current===last){event.preventDefault();first.focus();}
  });
- dialog.addEventListener('close',()=>{if(openingFocus&&openingFocus.isConnected)openingFocus.focus({preventScroll:true});});
+ dialog.addEventListener('close',()=>{clearTimeout(cheerTimer);if(art)art.classList.remove('is-cheering');if(openingFocus&&openingFocus.isConnected)openingFocus.focus({preventScroll:true});});
  function open(source){
   openingFocus=source||document.activeElement;
-  if(source&&source.hasAttribute('data-academy-interest')&&!selected().length){const a=goals.find(g=>g.value==='academy');if(a)a.checked=true;}
+  if(source&&source.hasAttribute('data-academy-interest')&&!selected().length){const a=goals.find(g=>g.value==='academy');if(a){a.checked=true;syncSide('academy');}}
   openDialog(dialog);$('#contact-dialog-title').focus({preventScroll:true});dialog.scrollTop=0;
  }
  return {open,get selected(){return selected();}};

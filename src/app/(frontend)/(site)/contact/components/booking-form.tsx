@@ -55,38 +55,30 @@ export default function BookingForm() {
     setBookingConfirmed(false)
   }
 
-  const handleBooking = () => {
-    if (selectedDate && selectedTime) {
-      setFormData((prevData) => ({
-        ...prevData,
-        date: selectedDate.toDateString(),
-        time: selectedTime,
-      }))
+  const [saving, setSaving] = useState(false)
+  const [bookingError, setBookingError] = useState('')
+
+  // The slot is saved only once name, email, date and time are all chosen,
+  // and "Booked" appears only after the server says it was stored.
+  const handleBooking = async () => {
+    if (!selectedDate || !selectedTime || !formData) return
+    setSaving(true)
+    setBookingError('')
+    try {
+      const response = await fetch('/api/booking/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, date: selectedDate.toDateString(), time: selectedTime }),
+      })
+      if (!response.ok) throw new Error(`Booking request failed with status ${response.status}`)
       setBookingConfirmed(true)
+    } catch (error) {
+      console.error('Error sending booking data to backend:', error)
+      setBookingError('That slot could not be saved. Please try again, or message us on WhatsApp.')
+    } finally {
+      setSaving(false)
     }
   }
-
-  useEffect(() => {
-    async function addBookingDataToBackend() {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_DOMAIN}/api/booking/`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        })
-        const data = await response.json()
-        console.log('Response from backend:', data)
-        setIsFormSubmitted(true)
-      } catch (error) {
-        console.error('Error sending booking data to backend:', error)
-      }
-    }
-    if (formData) {
-      addBookingDataToBackend()
-    }
-  }, [formData])
 
   //   const formatDate = (date: Date) => {
   //     if (!date) return ''
@@ -212,9 +204,19 @@ export default function BookingForm() {
                 </div>
                 {selectedTime && (
                   <div style={{ marginTop: 22 }}>
-                    <button type="button" onClick={handleBooking} className="btn btn-primary">
-                      Confirm {selectedTime}
+                    <button
+                      type="button"
+                      onClick={handleBooking}
+                      className="btn btn-primary"
+                      disabled={saving}
+                    >
+                      {saving ? 'Saving…' : `Confirm ${selectedTime}`}
                     </button>
+                    {bookingError && (
+                      <p className="field-error" role="alert" style={{ marginTop: 10 }}>
+                        {bookingError}
+                      </p>
+                    )}
                   </div>
                 )}
               </div>

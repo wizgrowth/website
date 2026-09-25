@@ -9,12 +9,12 @@ export const HUB: AcademyPage = {
   description: "Live digital marketing courses in Kerala for SEO, content and AI search. ₹30,000, max 15 per batch, taught on real websites.",
   schema: {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.wizgrowth.com/#organization","name":"WizGrowth","url":"https://www.wizgrowth.com/","email":"marketing@wizgrowth.com","telephone":"+91 79075 51261"},{"@type":"LocalBusiness","@id":"https://www.wizgrowth.com/academy/#localbusiness","name":"WizGrowth Academy","url":"https://www.wizgrowth.com/academy/","parentOrganization":{"@id":"https://www.wizgrowth.com/#organization"},"areaServed":[{"@type":"City","name":"Kochi"},{"@type":"State","name":"Kerala"}],"priceRange":"₹₹"}]},
   wizMessages: ["Let's learn by doing.","Build it. Rank it. Show it.","Small batch. Real feedback."],
-  html: `<main>
+  html: `<main id="main" tabindex="-1">
 <section class="hero">
 <div class="shell"><div class="hero-grid">
 <div class="hero-copy">
 <div class="eyebrow kicker">WIZGROWTH / ACADEMY</div>
-<h1>Digital marketing courses in Kerala <span class="accent">for how people search now.</span><span class="h1-tail">Google, ChatGPT and AI Overviews.</span></h1>
+<h1>Digital marketing courses in Kerala <span class="accent">for how people search now.</span> <span class="h1-tail">Google, ChatGPT and AI Overviews.</span></h1>
 <p>Batches of 15, taught live by a working SEO and content marketer. Learn on a real website you own and leave with rankings, published work and reporting you can show.</p>
 <div class="hero-actions"><a class="button lime" href="https://wa.me/917907551261?text=Hi%20WizGrowth%20Academy%20%E2%80%94%20I'd%20like%20details%20about%20the%20next%20batch." target="_blank" rel="noopener noreferrer" data-lead-open data-lead-course="Digital Marketing Course with AI">Enquire on WhatsApp <svg class="arrow"><use href="#arrow-up"></use></svg></a><a class="button ghost" href="/academy/digital-marketing-course/">See the 12-week course <svg class="arrow"><use href="#arrow-up"></use></svg></a></div><div class="in-short"><span>IN SHORT</span><p><strong>WizGrowth Academy</strong> is a digital marketing academy in Kochi running live digital marketing courses in Kerala for freshers, working marketers and business owners. The 12-week beginner course costs ₹30,000 and is capped at 15 students per batch.</p></div>
 </div>

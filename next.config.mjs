@@ -33,6 +33,21 @@ const nextConfig = {
     ],
   },
   trailingSlash: true,
+  // Baseline security headers. No Content-Security-Policy yet: the tag
+  // manager, analytics and inline scripts would each need an allowance first.
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+        ],
+      },
+    ];
+  },
   // Old article URLs that Search Console still reports as 404s, plus links
   // inside articles to posts that were renamed or never written. Each goes
   // to the closest live article, or the blog index when there is none.

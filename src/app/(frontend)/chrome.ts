@@ -90,7 +90,7 @@ export function siteHeader({ contact, current }: HeaderOptions) {
           <button class="wgh-trigger" type="button" aria-expanded="false"${cur('agency')}>Agency ${CHEVRON}</button>
           <div class="wgh-drop wgh-drop-agency" role="menu">
             <div class="wgh-drop-inner">
-              <aside class="wgh-drop-intro"><div><div class="wgh-drop-eyebrow">AGENCY / SERVICES</div><h2>Growth, joined up.</h2><p>Search, demand and AI visibility working in the same direction.</p></div><div class="wgh-drop-count">06 CAPABILITIES</div></aside>
+              <aside class="wgh-drop-intro"><div><div class="wgh-drop-eyebrow">AGENCY / SERVICES</div><p class="wgh-drop-title">Growth, joined up.</p><p>Search, demand and AI visibility working in the same direction.</p></div><div class="wgh-drop-count">06 CAPABILITIES</div></aside>
               <div class="wgh-drop-links">${dropLinks(AGENCY_LINKS)}</div>
             </div>
           </div>
@@ -99,7 +99,7 @@ export function siteHeader({ contact, current }: HeaderOptions) {
           <button class="wgh-trigger" type="button" aria-expanded="false"${cur('academy')}>Academy ${CHEVRON}</button>
           <div class="wgh-drop wgh-drop-academy" role="menu">
             <div class="wgh-drop-inner">
-              <aside class="wgh-drop-intro"><div><div class="wgh-drop-eyebrow">WIZGROWTH / ACADEMY</div><h2>Learn by doing.</h2><p>Live, practical programmes built around real work.</p></div><div class="wgh-drop-count">03 PROGRAMMES</div></aside>
+              <aside class="wgh-drop-intro"><div><div class="wgh-drop-eyebrow">WIZGROWTH / ACADEMY</div><p class="wgh-drop-title">Learn by doing.</p><p>Live, practical programmes built around real work.</p></div><div class="wgh-drop-count">03 PROGRAMMES</div></aside>
               <div class="wgh-drop-links">${dropLinks(ACADEMY_LINKS)}</div>
             </div>
           </div>

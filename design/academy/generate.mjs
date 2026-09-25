@@ -96,6 +96,7 @@ function convert(page, html) {
   if (leftover) throw new Error(`${page.file}: ${leftover} placeholder link(s) left`);
   // The current page's own link in the nav is marked; the design left it to the file name.
   body = body.replace(new RegExp(`<a href="${page.url}">`, 'g'), `<a aria-current="page" href="${page.url}">`).replace(/aria-current="page" aria-current="page"/g, 'aria-current="page"');
+  body = body.replace('<main>', '<main id="main" tabindex="-1">').replace('<span class="h1-tail">', ' <span class="h1-tail">');
   body = body.trim();
 
   return { title, description, schema, styles, wiz, body };

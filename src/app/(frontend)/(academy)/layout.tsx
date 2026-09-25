@@ -33,6 +33,9 @@ const FOOTER = siteFooter({
 export default function AcademyLayout({ children }: { children: ReactNode }) {
   return (
     <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <div dangerouslySetInnerHTML={{ __html: SYMBOLS }} />
       <div dangerouslySetInnerHTML={{ __html: HEADER }} />
       {children}

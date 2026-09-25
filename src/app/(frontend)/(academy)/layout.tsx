@@ -37,7 +37,7 @@ export default function AcademyLayout({ children }: { children: ReactNode }) {
         Skip to content
       </a>
       <div dangerouslySetInnerHTML={{ __html: SYMBOLS }} />
-      <div dangerouslySetInnerHTML={{ __html: HEADER }} />
+      <div className="wgh-sticky" dangerouslySetInnerHTML={{ __html: HEADER }} />
       {children}
       <div dangerouslySetInnerHTML={{ __html: FOOTER }} />
       {/* The enquiry sheet every page's buttons open; see markup/lead-sheet.ts. */}

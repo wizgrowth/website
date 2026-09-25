@@ -33,7 +33,7 @@ export default function ServicesLayout({ children }: { children: ReactNode }) {
         Skip to content
       </a>
       <div dangerouslySetInnerHTML={{ __html: SYMBOLS }} />
-      <div dangerouslySetInnerHTML={{ __html: HEADER }} />
+      <div className="wgh-sticky" dangerouslySetInnerHTML={{ __html: HEADER }} />
       {children}
       <div dangerouslySetInnerHTML={{ __html: FOOTER }} />
       <script defer src="/services/app.js" />

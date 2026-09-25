@@ -1481,7 +1481,7 @@ body{margin:0}html{scroll-behavior:smooth}.svc{overflow-x:clip}
 @media(max-width:700px){.footer-complete .footer-bottom{padding-bottom:64px}}
 @media(max-width:700px){.footer-bottom .concept-note{font-size:8px}}
 .site-footer.footer-v2{padding-top:64px}
-.footer-v2 .footer-directory{grid-template-columns:1.1fr 1fr .62fr 1.15fr;gap:46px;padding-bottom:43px}
+.footer-v2 .footer-directory{grid-template-columns:1.05fr 1fr .9fr 1.05fr;gap:46px;padding-bottom:43px}
 .footer-v2 .footer-intro .brand{font-size:26px;margin-bottom:19px;letter-spacing:-1.2px}
 .footer-v2 .footer-intro>p{font-size:15px;line-height:1.7;max-width:275px}
 .footer-v2 .footer-directory h3{margin:4px 0 21px;font-size:10px;letter-spacing:.11em}
@@ -1536,7 +1536,7 @@ body{margin:0}html{scroll-behavior:smooth}.svc{overflow-x:clip}
 @media(min-width:1680px){.footer-v2 .footer-directory{gap:64px}}
 @media(min-width:1680px){.signature-word{font-size:244px}}
 @media(min-width:1680px){.review-badge{width:236px}}
-@media(max-width:1180px){.footer-v2 .footer-directory{gap:27px;grid-template-columns:1fr 1fr .7fr 1.1fr}}
+@media(max-width:1180px){.footer-v2 .footer-directory{gap:27px;grid-template-columns:1fr 1fr .9fr 1fr}}
 @media(max-width:1180px){.footer-v2 .footer-contact address{font-size:11px}}
 @media(max-width:1180px){.footer-v2 .footer-nav a{font-size:12px}}
 @media(max-width:1180px){.social-icons{gap:6px}}

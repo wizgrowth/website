@@ -23,7 +23,7 @@ the generated files by hand.
 | content-marketing.html | /services/content-marketing/ | content-marketing |
 | social-media-marketing.html | /services/social-media-marketing/ | social-media-marketing |
 | web-development.html | /services/web-development/ | web-development |
-| marketing-consultation.html | /services/marketing-consultation/ (draft: noindex, unlinked) | — |
+| marketing-consultation.html | /services/marketing-consultation/ | — (no CMS document; meta comes from the design) |
 
 The analytics service was retired with this redesign: /services/analytics/
 redirects to the hub.

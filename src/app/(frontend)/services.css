@@ -1287,7 +1287,7 @@ body{margin:0}html{scroll-behavior:smooth}.svc{overflow-x:clip}
 .svc-consult .options h2{font-size:clamp(50px,5.8vw,88px);line-height:.93;letter-spacing:-.064em;margin:17px 0 0;max-width:820px}
 .svc-consult .options-head p{max-width:450px;font-size:14px;line-height:1.7;color:#4e4565}
 .svc-consult .option-table{margin-top:44px;border-top:1px solid #8e82bd}
-.svc-consult .option-row{display:grid;grid-template-columns:1.1fr 1.5fr .7fr;gap:24px;padding:24px 0;border-bottom:1px solid #8e82bd;align-items:center}
+.svc-consult .option-row{display:grid;grid-template-columns:1.1fr 2.2fr;gap:24px;padding:24px 0;border-bottom:1px solid #8e82bd;align-items:center}
 .svc-consult .option-row strong{font-size:26px;letter-spacing:-.045em}
 .svc-consult .option-row p{font-size:13px;line-height:1.55;color:#4f4761;margin:0}
 .svc-consult .option-row b{font:11px var(--mono);font-weight:400;text-align:right}
@@ -1341,7 +1341,7 @@ body{margin:0}html{scroll-behavior:smooth}.svc{overflow-x:clip}
 .svc-consult .decision-grid{grid-template-columns:1fr 1fr}
 .svc-consult .decision:nth-child(2){border-right:0}
 .svc-consult .decision:nth-child(-n+2){border-bottom:1px solid #d8ddd4}
-.svc-consult .option-row{grid-template-columns:1fr 1.2fr .7fr}
+.svc-consult .option-row{grid-template-columns:1fr 1.9fr}
 .svc-consult .principle{grid-template-columns:42px 1fr}
 .svc-consult .principle p{grid-column:2}
 .svc-consult .proof-slots{grid-template-columns:1fr}

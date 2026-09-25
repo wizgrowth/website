@@ -8,6 +8,7 @@ const AGENCY = [
   { href: '/services/content-marketing/', label: 'Content marketing' },
   { href: '/services/social-media-marketing/', label: 'Social media' },
   { href: '/services/web-development/', label: 'Web development' },
+  { href: '/services/marketing-consultation/', label: 'Marketing consultation' },
 ];
 
 const COMPANY = [

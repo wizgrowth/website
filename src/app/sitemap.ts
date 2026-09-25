@@ -59,6 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/` },
     { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/blog/` },
     { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/services/` },
+    { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/services/marketing-consultation/` },
     { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/academy/` },
     { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/academy/digital-marketing-course/` },
     { url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/academy/advanced-digital-marketing-mentorship/` },

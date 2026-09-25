@@ -16,8 +16,7 @@ export const PAGES = [
   { id: 'content', file: 'content-marketing.html', url: '/services/content-marketing/', cms: 'content-marketing', name: 'Content Marketing' },
   { id: 'social', file: 'social-media-marketing.html', url: '/services/social-media-marketing/', cms: 'social-media-marketing', name: 'Social Media Marketing' },
   { id: 'web', file: 'web-development.html', url: '/services/web-development/', cms: 'web-development', name: 'Web Development' },
-  // Draft until its prices, timelines, case studies and languages are confirmed: reachable, but not indexed or linked.
-  { id: 'consult', file: 'marketing-consultation.html', url: '/services/marketing-consultation/', cms: null, name: 'Marketing Consultation', draft: true },
+  { id: 'consult', file: 'marketing-consultation.html', url: '/services/marketing-consultation/', cms: null, name: 'Marketing Consultation' },
 ];
 
 const escapeTs = (s) => s.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');

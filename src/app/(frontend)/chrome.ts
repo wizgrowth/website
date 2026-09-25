@@ -51,6 +51,7 @@ const AGENCY_LINKS = [
   ['/services/social-media-marketing/', 'Social media marketing', 'Useful content and real conversations.'],
   ['/services/content-marketing/', 'Content marketing', 'Content built around intent and action.'],
   ['/services/web-development/', 'Website development', 'Clearer journeys from interest to enquiry.'],
+  ['/services/marketing-consultation/', 'Marketing consultation', 'An independent read of your numbers and a written plan.'],
 ];
 
 const ACADEMY_LINKS = [
@@ -87,7 +88,7 @@ export function siteHeader({ contact, current }: HeaderOptions) {
           <button class="wgh-trigger" type="button" aria-expanded="false">Agency ${CHEVRON}</button>
           <div class="wgh-drop wgh-drop-agency">
             <div class="wgh-drop-inner">
-              <aside class="wgh-drop-intro"><div><div class="wgh-drop-eyebrow">AGENCY / SERVICES</div><p class="wgh-drop-title">Growth, joined up.</p><p>Search, demand and AI visibility working in the same direction.</p></div><div class="wgh-drop-count">06 CAPABILITIES</div></aside>
+              <aside class="wgh-drop-intro"><div><div class="wgh-drop-eyebrow">AGENCY / SERVICES</div><p class="wgh-drop-title">Growth, joined up.</p><p>Search, demand and AI visibility working in the same direction.</p></div><div class="wgh-drop-count">07 CAPABILITIES</div></aside>
               <div class="wgh-drop-links">${dropLinks(AGENCY_LINKS)}</div>
             </div>
           </div>

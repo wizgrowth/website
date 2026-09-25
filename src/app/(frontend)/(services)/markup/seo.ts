@@ -7,6 +7,7 @@ export const SEO: ServiceMarkup = {
   url: "/services/seo/",
   cmsSlug: "seo",
   name: "SEO",
+  draft: false,
   title: "SEO Services in Kochi & Kerala | WizGrowth",
   description: "SEO services in Kochi and Kerala built around qualified searches, technical health, useful content, authority and transparent reporting.",
   schema: {"@context":"https://schema.org","@type":"Service","name":"SEO Services","serviceType":"Search Engine Optimisation","provider":{"@type":"Organization","name":"WizGrowth","url":"https://www.wizgrowth.com/"},"areaServed":["Kochi","Kerala","India"],"url":"https://www.wizgrowth.com/services/seo/","description":"SEO services focused on qualified search demand, technical health, answer-first content, authority and transparent reporting."},

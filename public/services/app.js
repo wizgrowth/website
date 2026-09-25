@@ -106,7 +106,7 @@
 // Services hub: the growth check, the service workbench and the problem chooser.
 (() => {
   const triage = document.querySelector('[data-triage]');
-  if (triage) {
+  if (triage && triage.querySelector('[data-triage-key]')) {
     const choices = [...triage.querySelectorAll('[data-triage-key]')];
     const stages = [...triage.querySelectorAll('[data-stage]')];
     const pulse = triage.querySelector('[data-journey-pulse]');
@@ -176,4 +176,23 @@
     };
     problemEls.forEach((el) => { el.addEventListener('click', () => selectProblem(el)); el.addEventListener('mouseenter', () => selectProblem(el)); el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectProblem(el); } }); });
   }
+})();
+
+// Marketing consultation: the situation picker in the hero.
+(() => {
+  const title = document.getElementById('triage-title'), copy = document.getElementById('triage-copy'), list = document.getElementById('triage-list');
+  if (!title || !copy || !list) return;
+  const triage = {
+    revenue: { title: 'Fix the measurement picture before changing spend.', copy: 'If reports and revenue disagree, the first job is to check conversion definitions, attribution and CRM handoff before making channel decisions.', checks: ['Conversion tracking', 'Revenue / CRM handoff', 'Channel contribution'] },
+    spend: { title: 'Find whether the leak is media, message or landing page.', copy: 'Rising spend is not automatically an ad-platform problem. We would separate traffic quality, creative fatigue, landing-page conversion and lead quality before moving budget.', checks: ['Cost per qualified lead', 'Landing-page conversion', 'Lead quality by source'] },
+    hire: { title: 'Define the job before you hire the person or agency.', copy: 'Before signing a retainer or hiring a lead, we would make the target, measurement model, channel priorities and 90-day responsibilities explicit.', checks: ['Growth target', 'Channel ownership', 'Reporting standard'] },
+    second: { title: 'Audit the work without assuming the agency is the problem.', copy: 'A second opinion should test the numbers, strategy and execution. If the current agency is doing good work, that is a useful answer too.', checks: ['Scope vs delivery', 'Reporting accuracy', 'Commercial impact'] },
+  };
+  const buttons = [...document.querySelectorAll('.triage-choice[data-triage]')];
+  buttons.forEach((button) => button.addEventListener('click', () => {
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+    const d = triage[button.dataset.triage]; if (!d) return;
+    title.textContent = d.title; copy.textContent = d.copy;
+    list.replaceChildren(...d.checks.map((x) => { const li = document.createElement('li'); li.textContent = x; return li; }));
+  }));
 })();

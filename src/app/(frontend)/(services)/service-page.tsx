@@ -9,11 +9,12 @@ import type { ServiceMarkup } from './markup/types';
 // none), and the markup ships as generated.
 export async function serviceMetadata(page: ServiceMarkup) {
   const service = page.cmsSlug ? await getService(page.cmsSlug) : undefined;
-  return getMeta({
+  const meta = await getMeta({
     meta: service?.meta,
     path: page.url,
     fallback: { title: page.title, description: page.description },
   });
+  return page.draft ? { ...meta, robots: { index: false, follow: true } } : meta;
 }
 
 function hasType(schema: unknown, type: string): boolean {

@@ -16,6 +16,8 @@ export const PAGES = [
   { id: 'content', file: 'content-marketing.html', url: '/services/content-marketing/', cms: 'content-marketing', name: 'Content Marketing' },
   { id: 'social', file: 'social-media-marketing.html', url: '/services/social-media-marketing/', cms: 'social-media-marketing', name: 'Social Media Marketing' },
   { id: 'web', file: 'web-development.html', url: '/services/web-development/', cms: 'web-development', name: 'Web Development' },
+  // Draft until its prices, timelines, case studies and languages are confirmed: reachable, but not indexed or linked.
+  { id: 'consult', file: 'marketing-consultation.html', url: '/services/marketing-consultation/', cms: null, name: 'Marketing Consultation', draft: true },
 ];
 
 const escapeTs = (s) => s.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
@@ -98,6 +100,7 @@ export const ${page.id.toUpperCase()}: ServiceMarkup = {
   url: ${JSON.stringify(page.url)},
   cmsSlug: ${JSON.stringify(page.cms)},
   name: ${JSON.stringify(page.name)},
+  draft: ${JSON.stringify(Boolean(page.draft))},
   title: ${JSON.stringify(p.title)},
   description: ${JSON.stringify(p.description)},
   schema: ${JSON.stringify(p.schema)},
@@ -112,6 +115,8 @@ fs.writeFileSync(path.join(out, 'types.ts'), `export type ServiceMarkup = {
   /** The servicePages document whose SEO fields override the page's own; null for the hub. */
   cmsSlug: string | null;
   name: string;
+  /** Kept out of search results and site navigation until its placeholders are filled. */
+  draft: boolean;
   title: string;
   description: string;
   /** The design's JSON-LD, emitted as-is beside the breadcrumb list. */

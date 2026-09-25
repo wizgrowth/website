@@ -7,6 +7,7 @@ export const HUB: ServiceMarkup = {
   url: "/services/",
   cmsSlug: null,
   name: "Services",
+  draft: false,
   title: "Growth Marketing Services | WizGrowth Kochi",
   description: "",
   schema: {"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"WizGrowth","url":"https://www.wizgrowth.com/","email":"marketing@wizgrowth.com","telephone":"+91 79075 51261"},{"@type":"ItemList","name":"WizGrowth growth marketing services","itemListElement":[{"@type":"ListItem","position":1,"url":"https://www.wizgrowth.com/services/seo/","name":"SEO"},{"@type":"ListItem","position":2,"url":"https://www.wizgrowth.com/services/ai-search-visibility/","name":"AI Search Visibility"},{"@type":"ListItem","position":3,"url":"https://www.wizgrowth.com/services/demand-generation/","name":"Demand Generation"},{"@type":"ListItem","position":4,"url":"https://www.wizgrowth.com/services/content-marketing/","name":"Content Marketing"},{"@type":"ListItem","position":5,"url":"https://www.wizgrowth.com/services/social-media-marketing/","name":"Social Media Marketing"},{"@type":"ListItem","position":6,"url":"https://www.wizgrowth.com/services/web-development/","name":"Web Development"}]}]},

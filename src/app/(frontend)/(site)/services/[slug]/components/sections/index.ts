@@ -1,1 +1,0 @@
-export { Method } from './method';

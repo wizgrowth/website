@@ -2,19 +2,21 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { footerRules } from '../shared/footer-rules.mjs';
+import { footerBase, footerRules } from '../shared/footer-rules.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '../..');
 const out = path.join(root, 'src/app/(frontend)/(services)/markup');
 
 export const PAGES = [
+  { id: 'hub', file: 'hub.html', url: '/services/', cms: null, name: 'Services' },
   { id: 'seo', file: 'seo.html', url: '/services/seo/', cms: 'seo', name: 'SEO' },
   { id: 'ai', file: 'ai-search-visibility.html', url: '/services/ai-search-visibility/', cms: 'ai-citations', name: 'AI Search Visibility' },
   { id: 'demand', file: 'demand-generation.html', url: '/services/demand-generation/', cms: 'performance-marketing', name: 'Demand Generation' },
   { id: 'content', file: 'content-marketing.html', url: '/services/content-marketing/', cms: 'content-marketing', name: 'Content Marketing' },
   { id: 'social', file: 'social-media-marketing.html', url: '/services/social-media-marketing/', cms: 'social-media-marketing', name: 'Social Media Marketing' },
   { id: 'web', file: 'web-development.html', url: '/services/web-development/', cms: 'web-development', name: 'Web Development' },
+  { id: 'consult', file: 'marketing-consultation.html', url: '/services/marketing-consultation/', cms: null, name: 'Marketing Consultation' },
 ];
 
 const escapeTs = (s) => s.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
@@ -97,6 +99,7 @@ export const ${page.id.toUpperCase()}: ServiceMarkup = {
   url: ${JSON.stringify(page.url)},
   cmsSlug: ${JSON.stringify(page.cms)},
   name: ${JSON.stringify(page.name)},
+  draft: ${JSON.stringify(Boolean(page.draft))},
   title: ${JSON.stringify(p.title)},
   description: ${JSON.stringify(p.description)},
   schema: ${JSON.stringify(p.schema)},
@@ -108,9 +111,11 @@ export const ${page.id.toUpperCase()}: ServiceMarkup = {
 }
 fs.writeFileSync(path.join(out, 'types.ts'), `export type ServiceMarkup = {
   url: string;
-  /** The servicePages document whose SEO fields override the page's own. */
-  cmsSlug: string;
+  /** The servicePages document whose SEO fields override the page's own; null for the hub. */
+  cmsSlug: string | null;
   name: string;
+  /** Kept out of search results and site navigation until its placeholders are filled. */
+  draft: boolean;
   title: string;
   description: string;
   /** The design's JSON-LD, emitted as-is beside the breadcrumb list. */
@@ -131,6 +136,7 @@ body{margin:0}html{scroll-behavior:smooth}.svc{overflow-x:clip}
 .skip-link{position:fixed;left:24px;top:-100px;background:#c5f86b;color:#10120f;padding:15px;z-index:500}.skip-link:focus{top:20px}
 ${sheets.join('\n')}
 /* The site-wide footer: its rules from fresh.css, so the home page footer renders here unchanged. */
+${footerBase}
 ${footerRules(fs.readFileSync(path.join(root, 'src/app/(frontend)/fresh.css'), 'utf8'))}
 `);
 console.log('services.css written');

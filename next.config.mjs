@@ -79,6 +79,8 @@ const nextConfig = {
       // Two services were renamed in the redesign (CMS slugs unchanged).
       { source: '/services/ai-citations/', destination: '/services/ai-search-visibility/', permanent: true },
       { source: '/services/performance-marketing/', destination: '/services/demand-generation/', permanent: true },
+      // The analytics service was retired; its page is gone.
+      { source: '/services/analytics/', destination: '/services/', permanent: true },
       blog('is-seo-still-worth-it-2026', 'is-seo-still-worth-it/'),
       blog(
         'digital-marketing-institute-alappuzha-cherthala-kochi',

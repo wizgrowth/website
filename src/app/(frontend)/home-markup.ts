@@ -184,7 +184,7 @@ export const HOME_MARKUP = `
 <a href="/services/social-media-marketing/">Social media marketing</a>
 <a href="/services/content-marketing/">Content marketing</a>
 <a href="/services/web-development/">Website development</a>
-<a href="/services/analytics/">Analytics &amp; reporting</a></nav>
+<a href="/services/marketing-consultation/">Marketing consultation</a></nav>
   <nav class="footer-nav" aria-label="About WizGrowth"><h3>WizGrowth</h3><a href="/academy/">Academy</a><a href="/academy/digital-marketing-course/">Digital Marketing Course with AI</a><a href="/academy/advanced-digital-marketing-mentorship/">Advanced Mentorship</a><a href="/academy/digital-marketing-for-business-owners/">For Business Owners</a><a href="/blog/">Journal</a><button type="button" data-contact>Let's talk <svg class="arrow" aria-hidden="true"><use href="#arrow-up"/></svg></button></nav>
   <div class="footer-contact"><h3>Say hello</h3><address>
 <a href="tel:+917907551261"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="m5 3 4 1 1 5-3 2c2 3 3 4 6 6l2-3 5 1 1 4c-1 6-9 1-12-2S0 4 5 3Z"></path></svg>+91 79075 51261</a>

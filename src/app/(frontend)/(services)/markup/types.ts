@@ -1,8 +1,10 @@
 export type ServiceMarkup = {
   url: string;
-  /** The servicePages document whose SEO fields override the page's own. */
-  cmsSlug: string;
+  /** The servicePages document whose SEO fields override the page's own; null for the hub. */
+  cmsSlug: string | null;
   name: string;
+  /** Kept out of search results and site navigation until its placeholders are filled. */
+  draft: boolean;
   title: string;
   description: string;
   /** The design's JSON-LD, emitted as-is beside the breadcrumb list. */

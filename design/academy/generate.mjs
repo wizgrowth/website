@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { footerRules } from '../shared/footer-rules.mjs';
+import { footerBase, footerRules } from '../shared/footer-rules.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '../..');
@@ -175,6 +175,7 @@ function withoutChrome(source) {
 if (css) {
   css = css.map(withoutChrome);
   css.push('/* The site-wide footer: its rules from fresh.css, so the home page footer renders here unchanged. */');
+  css.push(footerBase);
   css.push(footerRules(fs.readFileSync(path.join(root, 'src/app/(frontend)/fresh.css'), 'utf8')));
   fs.writeFileSync(path.join(root, 'src/app/(frontend)/academy.css'), `/* WIZGROWTH / ACADEMY
    Generated from design/academy/academy.html by design/academy/generate.mjs:

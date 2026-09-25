@@ -45,9 +45,9 @@ type HeaderOptions = {
 };
 
 const AGENCY_LINKS = [
-  ['/services/seo/', 'Search & organic growth', 'SEO, content and technical foundations.'],
-  ['/services/performance-marketing/', 'Demand generation & PPC', 'Campaigns with a clear commercial job.'],
-  ['/services/ai-citations/', 'AI visibility', 'Make your expertise easier to reference.'],
+  ['/services/seo/', 'SEO', 'Search and organic growth: content and technical foundations.'],
+  ['/services/ai-search-visibility/', 'AI search visibility', 'Make your expertise easier to reference.'],
+  ['/services/demand-generation/', 'Demand generation & PPC', 'Campaigns with a clear commercial job.'],
   ['/services/social-media-marketing/', 'Social media marketing', 'Useful content and real conversations.'],
   ['/services/content-marketing/', 'Content marketing', 'Content built around intent and action.'],
   ['/services/web-development/', 'Website development', 'Clearer journeys from interest to enquiry.'],

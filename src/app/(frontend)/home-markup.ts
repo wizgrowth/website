@@ -178,9 +178,9 @@ export const HOME_MARKUP = `
      <a data-social="whatsapp" href="https://api.whatsapp.com/send/?phone=917907551261&amp;text=Hi+WizGrowth+%E2%80%94+I%E2%80%99d+like+to+talk+about+growing+my+business.&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener noreferrer" aria-label="WizGrowth on WhatsApp (opens in a new tab)" title="WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-12 7l-5 2 1.5-5A8 8 0 1 1 20 12Z"></path><path d="m8.1 7 2 .6.5 2-1.2 1.1a8 8 0 0 0 3.2 3.2l1.1-1.2 2 .5.6 2c-1 2-3.5.8-5.6-1.2S6.1 8 8.1 7Z" stroke-width="1.3"></path></svg></a>
     </div>
   </div>
-  <nav class="footer-nav footer-services" aria-label="Services"><h3>Services</h3><a href="#expertise" data-footer-service="search">Search engine optimisation</a>
-<a href="#expertise" data-footer-service="ai">AI visibility &amp; citations</a>
-<a href="#expertise" data-footer-service="demand">Demand generation &amp; PPC</a>
+  <nav class="footer-nav footer-services" aria-label="Services"><h3>Services</h3><a href="/services/seo/">Search engine optimisation</a>
+<a href="/services/ai-search-visibility/">AI search visibility</a>
+<a href="/services/demand-generation/">Demand generation &amp; PPC</a>
 <a href="/services/social-media-marketing/">Social media marketing</a>
 <a href="/services/content-marketing/">Content marketing</a>
 <a href="/services/web-development/">Website development</a>

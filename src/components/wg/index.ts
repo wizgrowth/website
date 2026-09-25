@@ -8,6 +8,6 @@ export { ServiceCard } from './service-card';
 export { StickyCta } from './sticky-cta';
 export { WaIcon } from './wa-icon';
 export * from './constants';
-export { getService, getServices } from './services-data';
+export { getService, getServices, serviceHref } from './services-data';
 export * from './blog-data';
 export * from './structured-data';

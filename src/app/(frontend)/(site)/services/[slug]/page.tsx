@@ -107,7 +107,18 @@ export default async function ServiceDetailPage({ params }: ParamsProps) {
   );
 }
 
+// Services with a redesigned static page (src/app/(frontend)/(services));
+// this CMS-driven route only serves the rest, e.g. analytics.
+const REDESIGNED = new Set([
+  'seo',
+  'ai-citations',
+  'performance-marketing',
+  'content-marketing',
+  'social-media-marketing',
+  'web-development',
+]);
+
 export async function generateStaticParams() {
   const services = await getServices();
-  return services.map((doc) => ({ slug: doc.slug }));
+  return services.filter((doc) => !REDESIGNED.has(doc.slug)).map((doc) => ({ slug: doc.slug }));
 }

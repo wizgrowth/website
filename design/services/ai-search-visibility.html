@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>AI Search Visibility Services (GEO &amp; AEO) | WizGrowth</title>
+<meta content="AI search visibility services from WizGrowth. Improve entity clarity, answer-ready content, authority and measurement across AI-assisted search experiences." name="description"/>
+<link href="https://www.wizgrowth.com/services/ai-search-visibility/" rel="canonical"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/>
+<style>
+:root{
+  --ink:#10120f; --paper:#fff; --soft:#f4f6f2; --line:#d9ddd4;
+  --lime:#c5f86b; --lime-2:#ddff9f; --lilac:#c3b9fb; --muted:#667063;
+  --mono:"Courier New",Courier,monospace; --sans:Arial,Helvetica,sans-serif;
+  --shell:min(1380px,calc(100vw - 64px)); --ease:cubic-bezier(.22,.8,.22,1);
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);overflow-x:hidden}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit}svg{display:block}::selection{background:var(--lime);color:var(--ink)}
+.skip{position:fixed;left:16px;top:12px;z-index:1000;background:var(--lime);padding:10px 14px;transform:translateY(-150%)}.skip:focus{transform:none}
+.shell{width:var(--shell);margin-inline:auto}
+.eyebrow{font:10px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.arrow{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6}
+
+/* Header */
+.site-top{background:var(--ink);color:#fff;position:relative;z-index:80}
+.site-header{height:92px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:32px;border-bottom:1px solid #2c3129}
+.brand{display:inline-flex;align-items:center;gap:10px;font-size:27px;font-weight:700;letter-spacing:-1.8px}
+.brand-mark{width:34px;height:34px;fill:var(--lime)}
+.main-nav{display:flex;justify-content:center;align-items:center;gap:28px;font-size:13px;color:#b8c0b3}
+.main-nav>a,.nav-service>button{padding:10px 0;background:none;border:0;cursor:pointer;color:inherit;position:relative}
+.main-nav>a:after,.nav-service>button:after{content:"";position:absolute;left:0;right:100%;bottom:4px;height:1px;background:var(--lime);transition:right .25s var(--ease)}
+.main-nav>a:hover,.nav-service>button:hover{color:#fff}.main-nav>a:hover:after,.nav-service>button:hover:after{right:0}
+.nav-service{position:relative}.nav-service>button{display:flex;align-items:center;gap:8px}.nav-service>button svg{width:12px;height:12px;transition:transform .25s}.nav-service.open>button svg{transform:rotate(180deg)}
+.service-menu{position:absolute;top:58px;left:50%;width:660px;transform:translate(-50%,12px);opacity:0;visibility:hidden;pointer-events:none;background:#f7f8f5;color:var(--ink);border:1px solid #d9ddd4;box-shadow:0 24px 70px #0003;transition:.25s var(--ease);display:grid;grid-template-columns:190px 1fr}
+.nav-service.open .service-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
+.menu-intro{padding:28px;background:var(--lilac);display:flex;flex-direction:column;justify-content:space-between;min-height:330px}.menu-intro strong{font-size:33px;line-height:.98;letter-spacing:-.055em}.menu-intro p{font-size:12px;line-height:1.65;color:#51486c}.menu-links{padding:12px 22px}.menu-links a{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:15px 4px;border-bottom:1px solid #dde0da}.menu-links a:last-child{border-bottom:0}.menu-links span:first-child{font:9px var(--mono);color:#7d8577}.menu-links strong{font-size:14px}.menu-links i{font-style:normal;font-size:16px}.menu-links a:hover strong{transform:translateX(3px)}.menu-links strong{transition:transform .2s}
+.header-cta{display:inline-flex;align-items:center;gap:12px;font-size:12px;color:#fff}.header-cta span{border-bottom:1px solid #fff;padding-bottom:3px}.header-cta b{width:38px;height:38px;border-radius:50%;background:var(--lime);display:grid;place-items:center;color:var(--ink);font-weight:400;transition:transform .25s}.header-cta:hover b{transform:translate(2px,-2px)}
+.menu-toggle{display:none;background:none;border:0;color:#fff;width:42px;height:42px;padding:10px}.menu-toggle svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.5}
+.mobile-nav{display:none;background:#151813;border-top:1px solid #2c3129;padding:18px 24px 28px}.mobile-nav a{display:flex;justify-content:space-between;padding:15px 0;border-bottom:1px solid #2c3129;color:#d9dfd5;font-size:16px}.mobile-nav.open{display:block}
+.service-rail{position:fixed;right:0;top:50%;z-index:40;transform:translateY(-50%);writing-mode:vertical-rl;background:var(--lilac);padding:16px 10px;font:9px/1 var(--mono);letter-spacing:.14em;color:var(--ink);border:1px solid #9e92d8;border-right:0}
+
+/* Hero */
+.hero{min-height:calc(100vh - 92px);background:var(--ink);color:#fff;position:relative;overflow:hidden;display:flex;align-items:center}
+.hero:before{content:"";position:absolute;width:610px;height:610px;border:1px solid #31372d;border-radius:50%;right:-210px;top:-205px}.hero:after{content:"";position:absolute;width:360px;height:360px;border:1px solid #252a22;border-radius:50%;right:70px;bottom:-220px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(390px,.92fr);gap:6%;align-items:center;padding:58px 0 62px;position:relative;z-index:2}
+.hero-kicker{display:flex;align-items:center;gap:10px;color:#aeb6a8}.hero-kicker:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lilac);box-shadow:0 0 0 7px #c3b9fb12}
+.hero h1{font-size:clamp(66px,8vw,128px);line-height:.83;letter-spacing:-.078em;margin:26px 0 0;max-width:900px;font-weight:700}.hero h1 .accent{color:var(--lilac)}
+.hero-sub{font-size:17px;line-height:1.62;color:#bac3b5;max-width:650px;margin-top:28px}.hero-actions{display:flex;gap:15px;align-items:center;margin-top:28px}.btn{display:inline-flex;align-items:center;gap:14px;padding:14px 18px;font-size:12px;font-weight:700;border:1px solid}.btn.lime{background:var(--lime);color:var(--ink);border-color:var(--lime)}.btn.ghost{border-color:#444b3f;color:#fff}.btn svg{width:16px;height:16px;transition:transform .25s}.btn:hover svg{transform:translate(3px,-3px)}
+.hero-proof{display:grid;grid-template-columns:repeat(3,1fr);margin-top:36px;border-top:1px solid #363c32;max-width:720px}.hero-proof div{padding:14px 18px 0 0;border-right:1px solid #363c32}.hero-proof div:last-child{border-right:0;padding-left:18px}.hero-proof span{display:block;font:8px var(--mono);letter-spacing:.1em;color:#778173;margin-bottom:6px}.hero-proof strong{font-size:12px;color:#d9dfd5;font-weight:500}
+
+/* Hero visual */
+.ai-stage{position:relative;height:470px;display:grid;place-items:center}
+.ai-window{width:min(100%,500px);background:#f5f4ff;color:var(--ink);border:1px solid #4b465b;box-shadow:18px 18px 0 var(--lime);position:relative;transform:rotate(-.8deg)}
+.ai-window:before{content:"AI SEARCH / BUYER QUESTION";position:absolute;right:-18px;top:30px;writing-mode:vertical-rl;background:var(--lilac);padding:9px 6px;font:8px var(--mono);letter-spacing:.12em}
+.ai-top{padding:14px 16px;border-bottom:1px solid #d8d2ef;display:flex;justify-content:space-between;gap:14px;align-items:center}.ai-dots{display:flex;gap:5px}.ai-dots i{width:6px;height:6px;border-radius:50%;background:#8b82ae}.ai-top span{font:8px var(--mono);letter-spacing:.1em;color:#736b8b}
+.ai-body{padding:20px 18px 18px}.ai-question{font-size:23px;line-height:1.08;letter-spacing:-.045em;max-width:390px}.ai-question small{display:block;font:8px var(--mono);letter-spacing:.11em;color:#756d8b;margin-bottom:8px}
+.ai-sources{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.ai-source{border:1px solid #bcb3dd;background:#fff;padding:7px 9px;font:8px var(--mono);letter-spacing:.08em;position:relative}.ai-source.on{background:var(--lime);border-color:#9fcb53}
+.ai-answer{margin-top:18px;border-top:1px solid #d3cdeb;padding-top:16px}.ai-answer-label{font:8px var(--mono);letter-spacing:.11em;color:#716987}.ai-answer p{font-size:13px;line-height:1.62;margin:8px 0 0;color:#454052}.ai-answer mark{background:var(--lilac);padding:0 3px}.ai-citations{display:flex;gap:8px;margin-top:14px}.ai-citations span{font:8px var(--mono);padding:6px 8px;border:1px solid #a99fc9;background:#fff}
+.ai-note{position:absolute;left:3%;bottom:13%;background:#1b2018;border:1px solid #3c4437;color:#b8c1b2;padding:12px 14px;font:9px/1.5 var(--mono);transform:rotate(4deg)}
+
+/* Tighter section rhythm */
+.statement{padding:82px 0 74px;background:#fff;position:relative;overflow:hidden}.statement .eyebrow{color:#747d70}.statement h2{font-size:clamp(56px,7vw,108px);line-height:.91;letter-spacing:-.07em;margin:22px 0 0;max-width:1210px}.statement h2 span{color:#8d9587}.statement-copy{display:grid;grid-template-columns:1fr .8fr;gap:8%;margin-top:38px;padding-top:23px;border-top:1px solid var(--line)}.statement-copy p{font-size:16px;line-height:1.68;margin:0;max-width:680px}.statement-copy aside{font:10px/1.7 var(--mono);color:#717a6d;max-width:380px}
+
+/* Evidence stack */
+.evidence{background:var(--soft);padding:76px 0 82px;border-top:1px solid var(--line)}
+.evidence-head{display:grid;grid-template-columns:.95fr 1.05fr;gap:7%;align-items:end;margin-bottom:34px}.evidence-head h2{font-size:clamp(48px,5vw,78px);line-height:.97;letter-spacing:-.065em;margin:16px 0 0}.evidence-head p{font-size:14px;line-height:1.7;color:#65705f;max-width:470px;justify-self:end;margin:0}
+.stack{border-top:1px solid #cbd1c6}.stack-row{display:grid;grid-template-columns:54px minmax(250px,.72fr) 1.28fr 26px;gap:24px;align-items:center;border-bottom:1px solid #cbd1c6;padding:18px 0;transition:background .25s,padding .25s}.stack-row:hover{background:#ecefe9;padding-inline:14px}.stack-row .n{font:9px var(--mono);color:#7a8375}.stack-row h3{font-size:clamp(23px,2.3vw,35px);letter-spacing:-.05em;margin:0;font-weight:600}.stack-row p{font-size:12px;line-height:1.65;color:#65705f;margin:0;max-width:650px}.stack-row b{font-size:18px;font-weight:400;color:#7c8577;transition:transform .25s}.stack-row:hover b{transform:translate(3px,-3px);color:var(--ink)}
+
+/* Prompt to answer map */
+.answer-map{background:var(--lilac);padding:80px 0 84px;overflow:hidden}
+.answer-head{display:flex;justify-content:space-between;align-items:end;gap:40px}.answer-head h2{font-size:clamp(52px,6.3vw,94px);line-height:.92;letter-spacing:-.07em;margin:18px 0 0;max-width:820px}.answer-head p{font-size:14px;line-height:1.7;max-width:380px;margin:0 0 4px}
+.answer-lab{display:grid;grid-template-columns:.78fr 1.22fr;gap:6%;margin-top:44px;align-items:stretch}
+.question-pick{border-top:1px solid #9487cb}.query-btn{width:100%;display:grid;grid-template-columns:28px 1fr auto;gap:14px;text-align:left;align-items:center;border:0;border-bottom:1px solid #9487cb;background:transparent;padding:17px 0;cursor:pointer}.query-btn span{font:8px var(--mono);color:#63597d}.query-btn strong{font-size:18px;letter-spacing:-.03em}.query-btn i{font-style:normal;font-size:16px}.query-btn.active strong{font-weight:700}.query-btn.active i{transform:rotate(45deg)}
+.map-stage{min-height:410px;background:var(--ink);color:#fff;position:relative;overflow:hidden;padding:28px}
+.map-stage:before{content:"CONCEPTUAL VISIBILITY LOOP";position:absolute;right:22px;top:20px;font:8px var(--mono);letter-spacing:.1em;color:#71806a}
+.map-question{position:absolute;left:28px;top:30px;width:46%;font-size:28px;line-height:1.05;letter-spacing:-.05em}.map-question small{display:block;font:8px var(--mono);letter-spacing:.12em;color:#8d9987;margin-bottom:8px}
+.source-cloud{position:absolute;left:28px;right:28px;top:140px;bottom:100px}.source-node{position:absolute;padding:9px 11px;border:1px solid #56614d;background:#171b15;font:8px var(--mono);letter-spacing:.08em;color:#c4cec0;transition:.3s}.source-node:nth-child(1){left:0;top:12%}.source-node:nth-child(2){left:34%;top:0}.source-node:nth-child(3){right:2%;top:20%}.source-node:nth-child(4){left:20%;bottom:4%}.source-node:nth-child(5){right:14%;bottom:0}.source-node.on{background:var(--lime);border-color:var(--lime);color:var(--ink);transform:translateY(-3px)}
+.map-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.map-lines path{stroke:#66755e;stroke-width:1.1;fill:none;stroke-dasharray:5 8;opacity:.8}
+.map-answer{position:absolute;right:28px;bottom:24px;width:48%;background:#f3f4ef;color:var(--ink);padding:16px;border-left:4px solid var(--lime)}.map-answer span{font:8px var(--mono);letter-spacing:.1em;color:#6f7869}.map-answer p{font-size:12px;line-height:1.55;margin:7px 0 0}
+.map-note{position:absolute;left:28px;bottom:27px;font:8px/1.55 var(--mono);color:#788473;max-width:230px}
+
+/* Operating loop */
+.loop{background:var(--ink);color:#fff;padding:84px 0 88px;overflow:hidden}
+.loop-head{display:grid;grid-template-columns:.82fr 1.18fr;gap:8%;align-items:end}.loop-head h2{font-size:clamp(52px,6.2vw,94px);line-height:.92;letter-spacing:-.07em;margin:18px 0 0}.loop-head p{font-size:14px;line-height:1.75;color:#aab5a3;max-width:500px;margin:0 0 4px}
+.loop-grid{display:grid;grid-template-columns:minmax(340px,.82fr) 1.18fr;gap:8%;align-items:center;margin-top:44px}
+.orbit{position:relative;aspect-ratio:1/1;max-width:480px;margin:auto}.orbit:before,.orbit:after{content:"";position:absolute;border:1px solid #394235;border-radius:50%}.orbit:before{inset:8%}.orbit:after{inset:25%}.orbit-core{position:absolute;inset:36%;background:var(--lilac);color:var(--ink);border-radius:50%;display:grid;place-items:center;text-align:center;font:9px/1.45 var(--mono);letter-spacing:.08em;padding:10px}
+.orbit-node{position:absolute;width:118px;min-height:58px;border:1px solid #4d5846;background:#151914;padding:10px 11px;font:8px/1.45 var(--mono);letter-spacing:.07em;color:#c2ccbd}.orbit-node b{display:block;color:var(--lime);font-size:9px;margin-bottom:3px}.orbit-node.a{left:0;top:8%}.orbit-node.b{right:0;top:20%}.orbit-node.c{right:2%;bottom:12%}.orbit-node.d{left:5%;bottom:5%}.orbit-node.e{left:50%;top:-3%;transform:translateX(-50%)}
+.loop-list{border-top:1px solid #394136}.loop-item{display:grid;grid-template-columns:44px 1fr;gap:18px;border-bottom:1px solid #394136;padding:17px 0}.loop-item span{font:9px var(--mono);color:#73806d;padding-top:4px}.loop-item strong{display:block;font-size:21px;letter-spacing:-.03em;font-weight:500}.loop-item p{font-size:12px;line-height:1.7;color:#9aa695;margin:5px 0 0}
+
+/* Scope */
+.scope{padding:78px 0 82px;background:#fff}.scope-grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:9%}.scope h2{font-size:clamp(52px,5.7vw,86px);line-height:.93;letter-spacing:-.067em;margin:20px 0 0;position:sticky;top:130px}.scope-list{border-top:1px solid var(--line)}.scope-item{display:grid;grid-template-columns:30px 1fr;gap:20px;padding:17px 0;border-bottom:1px solid var(--line);align-items:start}.scope-item span{font:9px var(--mono);color:#7d8578;padding-top:4px}.scope-item strong{font-size:18px;letter-spacing:-.025em;font-weight:500}.scope-note{margin-top:26px;font-size:13px;line-height:1.75;color:#697265;max-width:660px}
+
+/* Honesty */
+.honesty{background:var(--lime);padding:72px 0 76px}.honesty .eyebrow{color:#52652e}.honesty h2{font-size:clamp(54px,6.6vw,100px);line-height:.9;letter-spacing:-.073em;margin:20px 0 0;max-width:1120px}.honesty h2 span{color:#5b7134}.honesty-grid{display:grid;grid-template-columns:1fr 1fr;gap:8%;margin-top:38px;padding-top:22px;border-top:1px solid #91b34e}.honesty-grid>p{font-size:16px;line-height:1.7;margin:0}.honesty-points{display:grid;gap:14px}.honesty-points div{display:grid;grid-template-columns:110px 1fr;gap:18px;font-size:12px;line-height:1.6}.honesty-points span{font:8px var(--mono);letter-spacing:.1em;color:#52642f}
+
+/* FAQ */
+.faq{padding:78px 0 84px;background:var(--soft)}.faq-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:9%}.faq h2{font-size:clamp(50px,5.3vw,78px);letter-spacing:-.067em;line-height:.95;margin:18px 0 0;position:sticky;top:130px}.faq-list{border-top:1px solid #cfd4ca}details{border-bottom:1px solid #cfd4ca}summary{list-style:none;cursor:pointer;padding:20px 40px 20px 0;font-size:17px;letter-spacing:-.025em;position:relative}summary::-webkit-details-marker{display:none}summary:after{content:"+";position:absolute;right:1px;top:15px;font-size:26px;font-weight:300;transition:transform .25s}details[open] summary:after{transform:rotate(45deg)}details p{font-size:13px;line-height:1.75;color:#65705f;max-width:690px;padding:0 34px 21px 0;margin:0}
+
+/* Final */
+.final{background:var(--ink);color:#fff;padding:84px 0 90px;position:relative;overflow:hidden}.final:after{content:"AI";position:absolute;right:-24px;bottom:-78px;font-size:330px;line-height:1;font-weight:700;letter-spacing:-.1em;color:#171b15}.final .shell{position:relative;z-index:2}.final h2{font-size:clamp(64px,7.8vw,120px);line-height:.87;letter-spacing:-.078em;margin:22px 0 0;max-width:1080px}.final h2 span{color:var(--lilac)}.final-bottom{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-top:40px;padding-top:22px;border-top:1px solid #3a4236}.final-bottom p{font-size:14px;line-height:1.68;color:#aab5a4;max-width:530px;margin:0}.final-contact{font:9px/1.7 var(--mono);letter-spacing:.05em;color:#889481;text-align:right}
+.footer{background:#0b0d0b;color:#899384;padding:25px 0;font:8px var(--mono);letter-spacing:.08em}.footer .shell{display:flex;justify-content:space-between;gap:20px}
+
+/* Motion */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .72s var(--ease),transform .72s var(--ease)}.reveal.in{opacity:1;transform:none}
+@keyframes blink{50%{opacity:0}}
+@media(max-width:980px){
+  :root{--shell:min(100% - 40px,900px)}.service-rail{display:none}.main-nav{display:none}.menu-toggle{display:block}.header-cta span{display:none}.site-header{height:80px}.hero{min-height:auto}.hero-grid{grid-template-columns:1fr;padding-top:46px}.ai-stage{height:420px}.statement-copy,.evidence-head,.answer-lab,.loop-head,.loop-grid,.scope-grid,.honesty-grid,.faq-grid{grid-template-columns:1fr}.evidence-head p{justify-self:start}.map-stage{min-height:430px}.scope h2,.faq h2{position:relative;top:auto;margin-bottom:36px}.answer-head{align-items:start;flex-direction:column}.final-bottom{align-items:start;flex-direction:column}.final-contact{text-align:left}
+}
+@media(max-width:620px){
+  :root{--shell:calc(100% - 28px)}.brand{font-size:23px}.brand-mark{width:29px;height:29px}.hero h1{font-size:59px}.hero-sub{font-size:15px}.hero-actions{align-items:stretch;flex-direction:column}.btn{justify-content:space-between}.hero-proof{grid-template-columns:1fr}.hero-proof div{border-right:0;border-bottom:1px solid #363c32;padding:12px 0}.hero-proof div:last-child{padding-left:0;border-bottom:0}.ai-stage{height:350px}.ai-window{width:94%;box-shadow:10px 10px 0 var(--lime)}.statement,.evidence,.answer-map,.loop,.scope,.honesty,.faq,.final{padding-block:62px}.statement h2,.honesty h2{font-size:51px}.stack-row{grid-template-columns:34px 1fr 22px;gap:12px}.stack-row p{grid-column:2/4;margin-top:4px}.answer-head{display:block}.answer-head p{margin-top:18px}.map-stage{min-height:520px}.map-question{width:75%;font-size:24px}.source-cloud{top:145px;bottom:170px}.map-answer{left:28px;right:28px;width:auto;bottom:24px}.map-note{display:none}.orbit{max-width:360px}.orbit-node{width:104px}.scope h2,.faq h2{font-size:50px}.honesty-points div{grid-template-columns:1fr;gap:3px}.final h2{font-size:58px}.footer .shell{flex-direction:column}.service-menu{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* Conversion CTA refinement */
+.cta-note{margin:11px 0 0;max-width:620px;font:9px/1.6 var(--mono);letter-spacing:.035em;color:var(--muted);opacity:.9}
+.hero .cta-note,.hero-demand .cta-note{color:#8f9a8b}.hero-content .cta-note,.hero-social .cta-note,.hero-web .cta-note{color:#687064}
+.final .cta-note{color:#7f897b}.hero-actions+.cta-note{max-width:540px}
+@media(max-width:620px){.cta-note{font-size:9px;margin-top:10px}}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Service",
+      "name":"AI Search Visibility Services",
+      "alternateName":["Generative Engine Optimization (GEO)","Answer Engine Optimization (AEO)"],
+      "serviceType":"AI Search Visibility",
+      "provider":{"@type":"Organization","name":"WizGrowth","url":"https://www.wizgrowth.com/"},
+      "areaServed":["India","Kerala","Kochi"],
+      "url":"https://www.wizgrowth.com/services/ai-search-visibility/",
+      "description":"AI search visibility services focused on entity clarity, answer-ready content, credible evidence, third-party authority and measurement across AI-assisted search experiences."
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"What is AI Search Visibility?","acceptedAnswer":{"@type":"Answer","text":"AI Search Visibility is the work of making a brand easier for AI-assisted search systems to understand, retrieve and reference when people ask relevant questions. It overlaps with SEO, GEO and AEO."}},
+        {"@type":"Question","name":"Is AI Search Visibility the same as GEO or AEO?","acceptedAnswer":{"@type":"Answer","text":"They overlap. GEO and AEO are industry labels for improving visibility in generated and answer-style search experiences. WizGrowth uses AI Search Visibility as the clearer buyer-facing service name."}},
+        {"@type":"Question","name":"Can you guarantee my brand appears in ChatGPT or other AI answers?","acceptedAnswer":{"@type":"Answer","text":"No. Independent AI systems control their own outputs. WizGrowth can improve the public evidence, clarity and authority around a brand and track a fixed set of buyer questions over time, but cannot guarantee a model response."}},
+        {"@type":"Question","name":"Do I need llms.txt or special AI schema?","acceptedAnswer":{"@type":"Answer","text":"No special AI-only markup is required for Google Search. Standard crawlability, accurate structured data, useful content and clear entity information remain the important foundations."}},
+        {"@type":"Question","name":"How do you measure AI visibility?","acceptedAnswer":{"@type":"Answer","text":"WizGrowth tracks a fixed set of buyer-intent questions across relevant AI-assisted search tools, logs brand mentions and citations where observable, and reviews AI-referred traffic and conversions where analytics exposes them."}}
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<svg aria-hidden="true" height="0" style="position:absolute;overflow:hidden" width="0"><defs>
+<symbol id="wg-mark" viewbox="0 0 80 80"><path d="M7 12h17l9 26 9-26h17L45 52H29zM28 43h17l8 24H36zM59 12h14L57 59l-8-24z"></path></symbol>
+<symbol id="arrow-up" viewbox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"></path></symbol>
+<symbol id="chev" viewbox="0 0 16 16"><path d="m3 6 5 5 5-5"></path></symbol>
+</defs></svg>
+<div class="site-top"><div class="shell"><header class="site-header">
+<a class="brand" href="https://www.wizgrowth.com/"><svg class="brand-mark"><use href="#wg-mark"></use></svg><span>wizgrowth</span></a>
+<nav aria-label="Main navigation" class="main-nav">
+<div class="nav-service" data-service-nav=""><button aria-expanded="false" type="button">Services <svg class="arrow"><use href="#chev"></use></svg></button>
+<div class="service-menu"><div class="menu-intro"><div><span class="eyebrow">WIZGROWTH / AGENCY</span><strong>Different channels.<br/>One direction.</strong></div><p>Search, demand, AI, content, social and web — connected around growth.</p></div><div class="menu-links">
+<a href="/services/seo/"><span>01</span><strong>SEO</strong><i>↗</i></a><a href="/services/ai-search-visibility/"><span>02</span><strong>AI Search Visibility</strong><i>↗</i></a><a href="/services/demand-generation/"><span>03</span><strong>Demand Generation</strong><i>↗</i></a><a href="/services/content-marketing/"><span>04</span><strong>Content Marketing</strong><i>↗</i></a><a href="/services/social-media-marketing/"><span>05</span><strong>Social Media</strong><i>↗</i></a><a href="/services/web-development/"><span>06</span><strong>Web Development</strong><i>↗</i></a>
+</div></div></div>
+<a href="/work/">Work</a><a href="/blog/">Blog</a><a href="/academy/">Academy</a><a href="/about/">About</a>
+</nav>
+<a class="header-cta" href="#contact"><span>Talk to us</span><b><svg class="arrow"><use href="#arrow-up"></use></svg></b></a>
+<button aria-expanded="false" aria-label="Open menu" class="menu-toggle" data-menu="" type="button"><svg viewbox="0 0 24 24"><path d="M3 8h18M3 16h18"></path></svg></button>
+</header></div><nav class="mobile-nav" data-mobile=""><a href="/services/">Services <span>↗</span></a><a href="/work/">Work <span>↗</span></a><a href="/blog/">Blog <span>↗</span></a><a href="/academy/">Academy <span>↗</span></a><a href="/about/">About <span>↗</span></a></nav></div>
+<div class="service-rail">02 / 06 · AI SEARCH VISIBILITY</div>
+<main id="main">
+<section class="hero">
+<div class="shell hero-grid">
+<div>
+<div class="hero-kicker eyebrow reveal">WIZGROWTH AGENCY · AI SEARCH VISIBILITY</div>
+<h1 class="reveal">AI search visibility for brands worth <span class="accent">referencing.</span></h1>
+<p class="hero-sub reveal">WizGrowth helps make your brand easier for AI-assisted search systems to understand, retrieve and reference when buyers ask relevant questions — through clearer entities, useful answers, first-party evidence, third-party authority and measurement.</p>
+<div class="hero-actions reveal"><a class="btn lime" href="#contact">Check my AI visibility <svg class="arrow"><use href="#arrow-up"></use></svg></a><a class="btn ghost" href="#evidence">See what makes a brand citable <svg class="arrow"><use href="#arrow-up"></use></svg></a></div><p class="cta-note">Send your brand and 3 buyer questions. That is enough to start.</p>
+<div class="hero-proof reveal"><div><span>FOCUS</span><strong>Buyer questions &amp; brand evidence</strong></div><div><span>MEASURE</span><strong>Mentions · citations · referral traffic</strong></div><div><span>REALITY</span><strong>No guaranteed model output</strong></div></div>
+</div>
+<div aria-hidden="true" class="ai-stage reveal">
+<div class="ai-window">
+<div class="ai-top"><div class="ai-dots"><i></i><i></i><i></i></div><span>AI-ASSISTED SEARCH / EXAMPLE</span></div>
+<div class="ai-body">
+<div class="ai-question"><small>BUYER QUESTION</small><span data-ai-query="">Which agency can improve AI search visibility for a B2B brand?</span></div>
+<div class="ai-sources"><span class="ai-source on">BRAND SITE</span><span class="ai-source on">EXPERT CONTENT</span><span class="ai-source">REVIEWS</span><span class="ai-source">THIRD-PARTY SOURCES</span></div>
+<div class="ai-answer"><div class="ai-answer-label">GENERATED ANSWER / CONCEPT</div><p>Strong candidates tend to have <mark>clear expertise, consistent entity information and evidence other sources can corroborate.</mark></p><div class="ai-citations"><span>[1] SITE</span><span>[2] INDUSTRY</span><span>[3] REVIEWS</span></div></div>
+</div>
+</div>
+<div class="ai-note">QUESTION → SOURCES → SIGNALS → ANSWER</div>
+</div>
+</div></section>
+<section class="statement"><div class="shell">
+<div class="eyebrow reveal">THE POINT OF AI SEARCH VISIBILITY</div>
+<h2 class="reveal">You do not optimise a chatbot.<br/><span>You strengthen the evidence it can find.</span></h2>
+<div class="statement-copy reveal"><p>AI-assisted search experiences pull from many kinds of public information. Our job is to make your brand clearer, more useful and better supported across the places those systems may retrieve or reference.</p><aside>GEO and AEO are useful industry labels. The practical work still depends on strong SEO foundations, clear entities, useful content, credible third-party signals and honest measurement.</aside></div>
+</div></section>
+<section class="evidence" id="evidence"><div class="shell">
+<div class="evidence-head"><div><div class="eyebrow reveal">THE EVIDENCE STACK</div><h2 class="reveal">Five signals.<br/>One clearer brand.</h2></div><p class="reveal">Each layer reduces ambiguity. Together they make it easier for search and AI systems to understand what your brand is, what it knows, and when it is relevant.</p></div>
+<div class="stack">
+<div class="stack-row reveal"><span class="n">01</span><h3>Entity clarity</h3><p>Consistent facts about your company, services, people, products and locations across your site, structured data and trusted profiles.</p><b>↗</b></div>
+<div class="stack-row reveal"><span class="n">02</span><h3>Answer-ready content</h3><p>Definitions, comparisons, FAQs and practical pages that answer the core question early, then add the evidence and depth a buyer needs.</p><b>↗</b></div>
+<div class="stack-row reveal"><span class="n">03</span><h3>First-party evidence</h3><p>Original examples, benchmarks, case evidence, methods and data that give other people — and systems — something specific to reference.</p><b>↗</b></div>
+<div class="stack-row reveal"><span class="n">04</span><h3>Third-party authority</h3><p>Relevant mentions, reviews, directories, communities and editorial coverage that corroborate what your own website says.</p><b>↗</b></div>
+<div class="stack-row reveal"><span class="n">05</span><h3>Technical access &amp; measurement</h3><p>Crawlable pages, accurate standard structured data, analytics and a repeatable visibility baseline so movement can be observed over time.</p><b>↗</b></div>
+</div>
+</div></section>
+<section class="answer-map reveal"><div class="shell">
+<div class="answer-head"><div><div class="eyebrow">THE VISIBILITY LOOP</div><h2>From a buyer question<br/>to a brand mention.</h2></div><p>Different AI systems work differently. This is the practical model we use to organise the work: make the right evidence easier to retrieve, connect and trust.</p></div>
+<div class="answer-lab">
+<div class="question-pick">
+<button class="query-btn active" data-query-index="0"><span>01</span><strong>Who should I hire?</strong><i>↗</i></button>
+<button class="query-btn" data-query-index="1"><span>02</span><strong>What should I choose?</strong><i>↗</i></button>
+<button class="query-btn" data-query-index="2"><span>03</span><strong>How does this work?</strong><i>↗</i></button>
+<button class="query-btn" data-query-index="3"><span>04</span><strong>Which option fits me?</strong><i>↗</i></button>
+</div>
+<div aria-live="polite" class="map-stage">
+<div class="map-question"><small>BUYER PROMPT</small><span id="map-question">Which AI search visibility agency should a B2B company consider?</span></div>
+<div class="source-cloud">
+<span class="source-node on">YOUR SITE</span><span class="source-node on">EXPERT CONTENT</span><span class="source-node">REVIEWS</span><span class="source-node">INDUSTRY SOURCES</span><span class="source-node">COMMUNITIES</span>
+<svg class="map-lines" preserveaspectratio="none" viewbox="0 0 700 240"><path d="M70 45 C230 20 365 90 610 160"></path><path d="M285 18 C360 65 430 100 610 160"></path><path d="M600 60 C590 90 600 115 610 160"></path><path d="M230 215 C390 210 500 190 610 160"></path><path d="M570 220 C585 205 600 185 610 160"></path></svg>
+</div>
+<div class="map-note">Signals are not a guarantee. They are the public evidence and context we can improve.</div>
+<div class="map-answer"><span>ANSWER / CONCEPT</span><p id="map-answer">Brands are more likely to be surfaced when their expertise is clear, corroborated and easy to retrieve across multiple trusted sources.</p></div>
+</div>
+</div>
+</div></section>
+<section class="loop"><div class="shell">
+<div class="loop-head"><div><div class="eyebrow reveal">HOW WE RUN IT</div><h2 class="reveal">A visibility loop,<br/>not a one-off trick.</h2></div><p class="reveal">We establish a baseline, improve the evidence around the brand, then repeat the same buyer questions over time so progress is visible rather than anecdotal.</p></div>
+<div class="loop-grid">
+<div aria-hidden="true" class="orbit reveal">
+<div class="orbit-core">CLEARER BRAND<br/>STRONGER EVIDENCE</div>
+<div class="orbit-node a"><b>01 / BASELINE</b>What gets named today?</div>
+<div class="orbit-node b"><b>02 / ALIGN</b>Make the entity consistent.</div>
+<div class="orbit-node c"><b>03 / PUBLISH</b>Create useful answers.</div>
+<div class="orbit-node d"><b>04 / EARN</b>Build external proof.</div>
+<div class="orbit-node e"><b>05 / TRACK</b>Repeat and measure.</div>
+</div>
+<div class="loop-list">
+<div class="loop-item reveal"><span>01</span><div><strong>Baseline buyer questions.</strong><p>We define a fixed prompt set around real commercial questions and record current mentions, citations and competitors where observable.</p></div></div>
+<div class="loop-item reveal"><span>02</span><div><strong>Align the entity.</strong><p>We tighten how the brand, services, people and locations are described across the website, structured data and trusted profiles.</p></div></div>
+<div class="loop-item reveal"><span>03</span><div><strong>Publish stronger evidence.</strong><p>We build answer-ready pages, comparisons, FAQs, supporting examples and original assets around the questions buyers actually ask.</p></div></div>
+<div class="loop-item reveal"><span>04</span><div><strong>Earn corroboration.</strong><p>Relevant reviews, directories, editorial mentions, communities and digital PR help create independent evidence around the brand.</p></div></div>
+<div class="loop-item reveal"><span>05</span><div><strong>Track what changed.</strong><p>We repeat the same prompt set, monitor AI-referred traffic where available, and report movement without pretending the models are controllable.</p></div></div>
+</div>
+</div>
+</div></section>
+<section class="scope"><div class="shell scope-grid">
+<div><div class="eyebrow reveal">WHAT'S INCLUDED</div><h2 class="reveal">The work behind stronger AI visibility.</h2></div>
+<div><div class="scope-list">
+<div class="scope-item reveal"><span>01</span><strong>AI visibility baseline across a fixed buyer-question set</strong></div>
+<div class="scope-item reveal"><span>02</span><strong>Entity, brand and service-definition alignment</strong></div>
+<div class="scope-item reveal"><span>03</span><strong>Standard structured data and technical search foundations</strong></div>
+<div class="scope-item reveal"><span>04</span><strong>Answer-ready service, comparison, FAQ and supporting content</strong></div>
+<div class="scope-item reveal"><span>05</span><strong>Original examples, data assets and referenceable evidence</strong></div>
+<div class="scope-item reveal"><span>06</span><strong>Relevant third-party authority, reviews, directories and digital PR</strong></div>
+<div class="scope-item reveal"><span>07</span><strong>Monthly prompt-set tracking and competitor comparison</strong></div>
+<div class="scope-item reveal"><span>08</span><strong>AI-referral and conversion reporting where analytics exposes it</strong></div>
+</div><p class="scope-note reveal">We do not sell llms.txt, special “AI schema”, or guaranteed ChatGPT placement as shortcuts. Where a technical file or platform convention is useful, we can implement it — but the core work is clearer information, stronger evidence and credible authority.</p></div>
+</div></section>
+<section class="honesty"><div class="shell">
+<div class="eyebrow reveal">GEO / AEO / AI VISIBILITY</div>
+<h2 class="reveal">Useful labels.<br/><span>No magic switch.</span></h2>
+<div class="honesty-grid reveal"><p>AI Search Visibility is the clearest buyer-facing name for this work. GEO and AEO are useful supporting terms, but the foundations still overlap heavily with good SEO: crawlability, clear entities, useful content, evidence, authority and measurement.</p><div class="honesty-points"><div><span>GUARANTEES</span><strong>No agency controls what an independent AI system says.</strong></div><div><span>MEASUREMENT</span><strong>We use a fixed question set so month-to-month changes are comparable.</strong></div><div><span>PRICING</span><strong>Scope depends on the brand’s current visibility, content and authority baseline.</strong></div></div></div>
+</div></section>
+<section class="faq"><div class="shell faq-grid"><div><div class="eyebrow reveal">BEFORE YOU ASK</div><h2 class="reveal">Frequently asked questions.</h2></div><div class="faq-list reveal">
+<details><summary>What is AI Search Visibility?</summary><p>AI Search Visibility is the work of making your brand easier for AI-assisted search systems to understand, retrieve and reference when people ask relevant questions. It includes entity clarity, useful answer-ready content, credible evidence, third-party authority and measurement.</p></details>
+<details><summary>Is AI Search Visibility the same as GEO or AEO?</summary><p>They overlap. GEO and AEO are industry terms for improving visibility in generated and answer-style search experiences. We use AI Search Visibility as the clearer buyer-facing service name, while still using GEO and AEO where those terms help explain the discipline.</p></details>
+<details><summary>Can you guarantee my brand appears in ChatGPT, Gemini or Perplexity?</summary><p>No. Independent AI systems control their own outputs. We can improve the public evidence, clarity and authority around your brand and track a fixed set of buyer questions over time, but we cannot guarantee a model response.</p></details>
+<details><summary>Do I need llms.txt or special AI schema?</summary><p>No special AI-only markup is required for Google Search. Standard crawlability, accurate structured data, useful content and clear entity information remain the important foundations. We do not sell a technical file as a shortcut to AI visibility.</p></details>
+<details><summary>How do you measure AI visibility?</summary><p>We track a fixed set of buyer-intent questions across relevant AI-assisted search tools, log brand mentions and citations where observable, compare competitor presence, and review AI-referred traffic and conversions where analytics exposes them.</p></details>
+</div></div></section>
+<section class="final" id="contact"><div class="shell"><div class="eyebrow reveal">TALK TO WIZGROWTH</div><h2 class="reveal">Give us three buyer questions. We’ll check the signals behind the answers.</h2><div class="final-bottom reveal"><div><p>Share your brand or website and three questions buyers might ask ChatGPT, Perplexity, Gemini or Google AI experiences. We’ll use them to focus the first conversation on visibility gaps, not generic GEO theory.</p><div class="hero-actions"><a class="btn lime" href="mailto:marketing@wizgrowth.com?subject=AI%20Search%20Visibility%20check&amp;body=Brand%20/%20website%3A%0ABuyer%20question%201%3A%0ABuyer%20question%202%3A%0ABuyer%20question%203%3A">Send my 3 questions <svg class="arrow"><use href="#arrow-up"></use></svg></a><a class="btn ghost" href="https://api.whatsapp.com/send/?phone=917907551261&amp;text=Hi%20WizGrowth%20%E2%80%94%20I%E2%80%99d%20like%20an%20AI%20Search%20Visibility%20check.%20Brand/site%3A%20%5BURL%5D.%20Buyer%20questions%3A%201%29%20%5BQUESTION%5D%202%29%20%5BQUESTION%5D%203%29%20%5BQUESTION%5D." rel="noopener" target="_blank">Send questions on WhatsApp <svg class="arrow"><use href="#arrow-up"></use></svg></a></div></div><div class="final-contact">+91 79075 51261<br/>marketing@wizgrowth.com<br/><br/>KOCHI · KERALA · INDIA</div></div></div></section>
+</main>
+<footer class="footer"><div class="shell"><span>© 2026 WIZGROWTH · KOCHI, KERALA</span><span>GROW BRANDS. GROW PEOPLE.</span></div></footer>
+<script>
+(() => {
+  const nav=document.querySelector('[data-service-nav]');
+  if(nav){const btn=nav.querySelector('button');btn.addEventListener('click',e=>{e.stopPropagation();const open=nav.classList.toggle('open');btn.setAttribute('aria-expanded',open)});document.addEventListener('click',()=>{nav.classList.remove('open');btn.setAttribute('aria-expanded','false')});nav.querySelector('.service-menu').addEventListener('click',e=>e.stopPropagation());}
+  const menuBtn=document.querySelector('[data-menu]'), mobile=document.querySelector('[data-mobile]');
+  if(menuBtn&&mobile)menuBtn.addEventListener('click',()=>{const open=mobile.classList.toggle('open');menuBtn.setAttribute('aria-expanded',open)});
+
+  const queryData=[
+    {
+      q:'Which AI search visibility agency should a B2B company consider?',
+      a:'Brands are more likely to be surfaced when their expertise is clear, corroborated and easy to retrieve across multiple trusted sources.',
+      on:[0,1,3]
+    },
+    {
+      q:'Which CRM is a good fit for a 50-person sales team?',
+      a:'Comparison-style questions reward clear product definitions, practical criteria, first-party evidence and independent third-party validation.',
+      on:[0,2,4]
+    },
+    {
+      q:'How does AI search visibility differ from SEO?',
+      a:'Clear definitions, well-structured explanations and consistent entity context help systems connect a brand with the right topic and question.',
+      on:[0,1,2]
+    },
+    {
+      q:'Which option fits a company that already ranks well in Google?',
+      a:'When traditional visibility is strong, the next gap may be brand clarity, third-party corroboration, referenceable evidence or measurement across AI-assisted search.',
+      on:[1,2,3,4]
+    }
+  ];
+  const buttons=[...document.querySelectorAll('.query-btn')];
+  const nodes=[...document.querySelectorAll('.source-node')];
+  const qEl=document.getElementById('map-question'), aEl=document.getElementById('map-answer');
+  function setQuery(i){
+    buttons.forEach((b,n)=>b.classList.toggle('active',n===i));
+    nodes.forEach((n,idx)=>n.classList.toggle('on',queryData[i].on.includes(idx)));
+    qEl.textContent=queryData[i].q;
+    aEl.textContent=queryData[i].a;
+  }
+  buttons.forEach((b,i)=>b.addEventListener('click',()=>setQuery(i)));
+
+  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.13});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  const heroQueries=[
+    'Which agency can improve AI search visibility for a B2B brand?',
+    'What makes a brand easier for AI search to reference?',
+    'How do I measure visibility in AI-assisted search?'
+  ];
+  const heroQ=document.querySelector('[data-ai-query]');let qi=0;
+  if(heroQ&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    setInterval(()=>{
+      qi=(qi+1)%heroQueries.length;
+      heroQ.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(-6px)'}],{duration:180,fill:'forwards'}).onfinish=()=>{
+        heroQ.textContent=heroQueries[qi];
+        heroQ.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:240,fill:'forwards'});
+      };
+    },3600);
+  }
+})();
+</script>
+</body>
+</html>

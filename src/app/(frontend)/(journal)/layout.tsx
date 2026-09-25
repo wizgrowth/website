@@ -27,7 +27,7 @@ export default function JournalLayout({ children }: { children: ReactNode }) {
         Skip to content
       </a>
       <div dangerouslySetInnerHTML={{ __html: SYMBOLS }} />
-      <div dangerouslySetInnerHTML={{ __html: HEADER }} />
+      <div className="wgh-sticky" dangerouslySetInnerHTML={{ __html: HEADER }} />
       <main id="main" tabIndex={-1}>
         {children}
       </main>

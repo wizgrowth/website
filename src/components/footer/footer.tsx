@@ -2,13 +2,12 @@ import Link from 'next/link';
 import { CONTACT } from '@/components/wg/constants';
 
 const AGENCY = [
-  { href: '/services/seo/', label: 'SEO' },
-  { href: '/services/ai-search-visibility/', label: 'AI search visibility' },
-  { href: '/services/demand-generation/', label: 'Demand generation' },
-  { href: '/services/content-marketing/', label: 'Content marketing' },
-  { href: '/services/social-media-marketing/', label: 'Social media' },
-  { href: '/services/web-development/', label: 'Web development' },
-  { href: '/services/marketing-consultation/', label: 'Marketing consultation' },
+  { href: '/services/ai-search-visibility/', label: 'AI Search Visibility' },
+  { href: '/services/content-marketing/', label: 'Content Marketing' },
+  { href: '/services/social-media-marketing/', label: 'Social Media Marketing' },
+  { href: '/services/seo/', label: 'Search Engine Optimisation' },
+  { href: '/services/marketing-consultation/', label: 'Marketing Consultation' },
+  { href: '/services/demand-generation/', label: 'Demand Generation' },
 ];
 
 const COMPANY = [

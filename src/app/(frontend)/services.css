@@ -1485,6 +1485,9 @@ body{margin:0}html{scroll-behavior:smooth}.svc{overflow-x:clip}
 .footer-v2 .footer-intro .brand{font-size:26px;margin-bottom:19px;letter-spacing:-1.2px}
 .footer-v2 .footer-intro>p{font-size:15px;line-height:1.7;max-width:275px}
 .footer-v2 .footer-directory h3{margin:4px 0 21px;font-size:10px;letter-spacing:.11em}
+.footer-v2 .footer-directory .footer-nav h3 a{display:inline;min-height:0;padding:0;font:inherit;line-height:inherit;color:inherit;text-decoration:none}
+.footer-v2 .footer-directory .footer-nav h3 a:hover{color:var(--lime)}
+.footer-more{margin-top:26px}
 .footer-v2 .footer-nav a,.footer-v2 .footer-nav button{display:flex;align-items:center;gap:10px;font-size:14px;line-height:1.55;margin-bottom:0;min-height:32px;color:#e5e9df;width:fit-content;background:transparent;padding:3px 0;text-align:left;transition:color .2s}
 .footer-v2 .footer-nav a:hover,.footer-v2 .footer-nav button:hover{color:var(--lime)}
 .footer-v2 .footer-contact address{font-size:14px;gap:12px;line-height:1.5}
@@ -1564,13 +1567,13 @@ body{margin:0}html{scroll-behavior:smooth}.svc{overflow-x:clip}
 @media(max-width:900px){.signature-return{width:52px;height:52px}}
 @media(max-width:900px){.signature-meta{font-size:8px}}
 @media(max-width:700px){.site-footer.footer-v2{padding-top:40px}}
-@media(max-width:700px){.footer-v2 .footer-directory{gap:30px 25px;padding-bottom:30px;grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.footer-v2 .footer-directory{gap:30px 22px;padding-bottom:30px;grid-template-columns:1.12fr .88fr}}
 @media(max-width:700px){.footer-v2 .footer-intro{grid-column:1/-1}}
 @media(max-width:700px){.footer-v2 .footer-contact{grid-column:1/-1}}
 @media(max-width:700px){.footer-v2 .footer-intro .brand{font-size:26px;margin-bottom:14px}}
 @media(max-width:700px){.footer-v2 .footer-intro>p{font-size:15px;max-width:340px}}
 @media(max-width:700px){.footer-social-heading{margin-top:21px}}
-@media(max-width:700px){.footer-v2 .footer-nav a,.footer-v2 .footer-nav button{font-size:14px;min-height:34px}}
+@media(max-width:700px){.footer-v2 .footer-nav a,.footer-v2 .footer-nav button{font-size:13px;min-height:34px;white-space:nowrap}}
 @media(max-width:700px){.footer-v2 .footer-hours{max-width:340px}}
 @media(max-width:700px){.footer-v2 .footer-hours dl>div{font-size:12px}}
 @media(max-width:700px){.footer-v2 .footer-hours dd{font-size:12px}}

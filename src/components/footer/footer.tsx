@@ -3,8 +3,8 @@ import { CONTACT } from '@/components/wg/constants';
 
 const AGENCY = [
   { href: '/services/seo/', label: 'SEO' },
-  { href: '/services/ai-citations/', label: 'AI citations (GEO)' },
-  { href: '/services/performance-marketing/', label: 'Demand generation' },
+  { href: '/services/ai-search-visibility/', label: 'AI search visibility' },
+  { href: '/services/demand-generation/', label: 'Demand generation' },
   { href: '/services/content-marketing/', label: 'Content marketing' },
   { href: '/services/social-media-marketing/', label: 'Social media' },
   { href: '/services/web-development/', label: 'Web development' },

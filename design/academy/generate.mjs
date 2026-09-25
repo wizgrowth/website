@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { footerRules } from '../shared/footer-rules.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '../..');
@@ -149,29 +150,6 @@ if (fs.existsSync(courseFile)) {
 export const LEAD_SHEET = \`${escapeTs(sheet)}\`;
 `);
   if (css) css.push(sheetCss);
-}
-// The site-wide footer (home page markup) needs its rules from fresh.css:
-// every rule whose selector mentions the footer, lifted out of that sheet
-// including the ones inside media queries.
-function footerRules(source) {
-  const wanted = /\.site-footer|\.footer-|\.signature-|\.review-|\.social-icons|\.clutch-dot|\.trust-star|#back-top|\.solid-icon|\.brand(?![\w-])/;
-  const blocks = [];
-  function walk(text, prelude) {
-    let i = 0;
-    while (i < text.length) {
-      const open = text.indexOf('{', i);
-      if (open < 0) break;
-      const selector = text.slice(i, open).trim();
-      let depth = 1, j = open + 1;
-      while (j < text.length && depth) { if (text[j] === '{') depth++; else if (text[j] === '}') depth--; j++; }
-      const body = text.slice(open + 1, j - 1);
-      if (selector.startsWith('@media')) walk(body, selector);
-      else if (!selector.startsWith('@') && wanted.test(selector)) blocks.push(prelude ? `${prelude}{${selector}{${body}}}` : `${selector}{${body}}`);
-      i = j;
-    }
-  }
-  walk(source.replace(/\/\*[\s\S]*?\*\//g, ''), '');
-  return blocks.join('\n');
 }
 // The hand-off's own header and footer are not rendered (the layout supplies
 // the site's), so their rules go too, or they would fight the lifted ones.

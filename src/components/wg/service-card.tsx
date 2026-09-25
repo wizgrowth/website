@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { serviceHref } from './services-data';
 import type { ServicePage } from '@/payload-types';
 
 type ServiceCardProps = {
@@ -10,7 +11,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
     <article className="card">
       <h3>{service.name}</h3>
       {service.card && <p>{service.card}</p>}
-      <Link className="btn btn-quiet" href={`/services/${service.slug}/`}>
+      <Link className="btn btn-quiet" href={serviceHref(service.slug)}>
         {service.cardCta || 'Learn more'}
       </Link>
     </article>

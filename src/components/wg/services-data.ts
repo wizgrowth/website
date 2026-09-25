@@ -14,6 +14,19 @@ function schemaBehind(err: unknown) {
   return [] as ServicePage[];
 }
 
+// Two services were renamed in the redesign; their CMS documents keep the
+// old slug (the admin panel and the SEO fields), the pages live at the new
+// addresses, and next.config.mjs redirects the old ones.
+const RENAMED: Record<string, string> = {
+  'ai-citations': 'ai-search-visibility',
+  'performance-marketing': 'demand-generation',
+};
+
+/** The live address of a service, given its CMS slug. */
+export function serviceHref(slug: string) {
+  return `/services/${RENAMED[slug] ?? slug}/`;
+}
+
 export const getServices = cache(async (): Promise<ServicePage[]> => {
   try {
     const payload = await getPayload({ config });

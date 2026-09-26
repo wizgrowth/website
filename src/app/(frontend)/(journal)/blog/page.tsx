@@ -27,7 +27,7 @@ export async function generateMetadata() {
     fallback: {
       title: 'The WizGrowth Blog — Good ideas. Clearer growth.',
       description:
-        'Practical thinking on search, content, careers and websites from a working growth team in Kochi: salary reports, SEO guides and honest methods for the next step your business needs.',
+        'Practical thinking on search, content, careers and websites from a working growth team in Kochi: salary reports, SEO guides and honest methods.',
     },
   });
 }

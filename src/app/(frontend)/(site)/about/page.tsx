@@ -17,7 +17,7 @@ export async function generateMetadata() {
     fallback: {
       title: 'About WizGrowth — Grow Brands. Grow People.',
       description:
-        'WizGrowth is a growth marketing agency and academy in Kochi, Kerala, founded by Vismaya Babu. One flywheel: client campaigns power the curriculum; trained talent powers the agency.',
+        'WizGrowth is a growth marketing agency and academy in Kochi, Kerala, founded by Vismaya Babu. Client campaigns power the curriculum; trained talent powers the agency.',
     },
   });
 }

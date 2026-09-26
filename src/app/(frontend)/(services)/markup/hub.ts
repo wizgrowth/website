@@ -72,6 +72,7 @@ export const HUB: ServiceMarkup = {
    <div class="stage-bottom"><small id="stage-meta">SEARCH → ANSWER → TRUST → ENQUIRY</small><a class="stage-link" id="stage-link" href="/services/seo/">See SEO <svg class="arrow"><use href="#arrow-up"/></svg></a></div>
   </aside>
  </div>
+ <nav class="service-index reveal" aria-label="All service pages"><span>ALL PAGES</span><a href="/services/ai-search-visibility/">AI Search Visibility</a><a href="/services/content-marketing/">Content Marketing</a><a href="/services/social-media-marketing/">Social Media Marketing</a><a href="/services/seo/">Search Engine Optimisation</a><a href="/services/marketing-consultation/">Marketing Consultation</a><a href="/services/demand-generation/">Demand Generation</a><a href="/services/web-development/">Web Development</a></nav>
 </div></section>
 
 <section class="chooser" id="choose"><div class="shell">

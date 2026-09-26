@@ -28,17 +28,19 @@
     });
   });
   document.addEventListener('click', () => closeAll());
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
-
   const toggle = document.querySelector('[data-wgh-menu]');
   const panel = document.querySelector('[data-wgh-panel]');
-  if (toggle && panel) {
-    toggle.addEventListener('click', () => {
-      const open = panel.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    });
-  }
+  const setPanel = (open) => {
+    panel.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  if (toggle && panel) toggle.addEventListener('click', () => setPanel(!panel.classList.contains('is-open')));
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    closeAll();
+    if (toggle && panel && panel.classList.contains('is-open')) { setPanel(false); toggle.focus(); }
+  });
   document.querySelectorAll('[data-wgh-section]').forEach((section) => {
     const btn = section.querySelector('.wgh-mobile-accordion');
     btn.addEventListener('click', () => {

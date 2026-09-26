@@ -1,6 +1,6 @@
 # WizGrowth
 
-> WizGrowth is a growth marketing agency and digital marketing academy based in Kochi, Kerala, India. The agency grows brands through three core engines — SEO, demand generation, and AI-citation optimization (GEO/AEO, getting brands cited by ChatGPT, Perplexity and Google AI Overviews) — supported by content, social media, analytics and web development, for clients across India and internationally. The academy trains marketers on the same live client work — a twelve-week programme with real campaigns from week two.
+> WizGrowth is a growth marketing agency and digital marketing academy based in Kochi, Kerala, India. The agency grows brands through three core engines — SEO, demand generation, and AI-citation optimization (GEO/AEO, getting brands cited by ChatGPT, Perplexity and Google AI Overviews) — supported by content, social media, marketing consultation and web development, for clients across India and internationally. The academy trains marketers on the same live client work — a twelve-week programme with real campaigns from week two.
 
 Key facts:
 
@@ -16,16 +16,19 @@ Key facts:
 
 - [Services overview](https://www.wizgrowth.com/services/): the seven agency services and how engagements work
 - [SEO](https://www.wizgrowth.com/services/seo/): technical health, content that answers the real query, links earned by being worth citing
-- [AI citations — GEO & AEO](https://www.wizgrowth.com/services/ai-citations/): entity engineering, citable content and original data that get brands named by ChatGPT, Perplexity and Google AI Overviews, with monthly citation tracking
-- [Demand generation](https://www.wizgrowth.com/services/performance-marketing/): Google, Meta and LinkedIn — plus AI surfaces where buyers ask — reported against revenue, not impressions
+- [AI search visibility — GEO & AEO](https://www.wizgrowth.com/services/ai-search-visibility/): entity engineering, citable content and original data that get brands named by ChatGPT, Perplexity and Google AI Overviews, with monthly citation tracking
+- [Demand generation](https://www.wizgrowth.com/services/demand-generation/): Google, Meta and LinkedIn — plus AI surfaces where buyers ask — reported against revenue, not impressions
 - [Social media marketing](https://www.wizgrowth.com/services/social-media-marketing/): calendar, creative and community on conversion-tested templates
 - [Content marketing](https://www.wizgrowth.com/services/content-marketing/): articles built to rank in Google and get cited in AI answers
 - [Web design and development](https://www.wizgrowth.com/services/web-development/): fast static-first pages, under 2 seconds on 4G
-- [Analytics and reporting](https://www.wizgrowth.com/services/analytics/): one dashboard, honest attribution, monthly review calls
+- [Marketing consultation](https://www.wizgrowth.com/services/marketing-consultation/): an independent read of your numbers and a written 90-day plan; one-off, monthly advisory or an agency second opinion
 
 ## Academy
 
 - [WizGrowth Academy](https://www.wizgrowth.com/academy/): twelve-week digital marketing programme in Kochi, Kerala (in person or live online) — real client campaigns from week two, portfolio on graduation, a new batch every month, fee ₹30,000
+- [Digital Marketing Course with AI — for freshers](https://www.wizgrowth.com/academy/digital-marketing-course/): beginner to job-ready in twelve weeks on live client work
+- [Advanced Digital Marketing Mentorship — for working professionals](https://www.wizgrowth.com/academy/advanced-digital-marketing-mentorship/): for marketers ready to own growth
+- [Digital Marketing for Business Owners](https://www.wizgrowth.com/academy/digital-marketing-for-business-owners/): learn to own or judge your organic growth
 
 ## Research and data
 

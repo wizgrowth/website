@@ -71,7 +71,7 @@ function scopeCss(css, scope) {
 function convert(page, html) {
   const head = html.match(/<head>([\s\S]*?)<\/head>/)[1];
   const title = decode(head.match(/<title>([^<]*)<\/title>/)[1].trim());
-  const description = decode((head.match(/<meta content="([^"]*)" name="description"/) || [])[1] || '');
+  const description = decode((head.match(/<meta content="([^"]*)" name="description"/) || head.match(/<meta name="description" content="([^"]*)"/) || [])[1] || '');
   const schema = JSON.parse((head.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/) || [, 'null'])[1]);
   const css = head.match(/<style>([\s\S]*?)<\/style>/)[1];
   let main = html.match(/<main[\s\S]*?<\/main>/)[0];
@@ -82,7 +82,7 @@ function convert(page, html) {
   if (leftover) throw new Error(`${page.file}: ${leftover} hand-off file link(s) left in the page`);
   const faqs = [...main.matchAll(/<details>\s*<summary>([\s\S]*?)<\/summary>\s*<p>([\s\S]*?)<\/p>/g)].map((m) => ({ question: text(m[1]), answer: text(m[2]) }));
   const body = `<div class="svc svc-${page.id}">${rail}${main}</div>`;
-  return { title, description, schema, faqs, css: scopeCss(css, `svc-${page.id}`), body };
+  return { title, description, schema, faqs, css: scopeCss(css, `svc-${page.id}`).replace(/(\.svc-[a-z]+ \.reveal)\{opacity:0;/g, '$1.pre:not(.in){opacity:0;'), body };
 }
 
 fs.mkdirSync(out, { recursive: true });

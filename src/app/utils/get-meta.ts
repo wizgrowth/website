@@ -63,8 +63,8 @@ export interface MetaData {
 const DEFAULT_TITLE = 'Wizgrowth - India’s Leading Digital Marketing Agency';
 const DEFAULT_DESCRIPTION =
   'Helping businesses grow through SEO, social media, content marketing, paid campaigns, website design and website development';
-const DEFAULT_OG_IMAGE =
-  'https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/header/wizgrowth-meta-image.png';
+// Served from this site (src/app/opengraph-image.png), not the object store, which can be over quota.
+const DEFAULT_OG_IMAGE = `${process.env.NEXT_PUBLIC_SITE_DOMAIN || 'https://www.wizgrowth.com'}/opengraph-image.png`;
 
 export type MetaFallback = {
   /** Used when the CMS meta field is empty, so each page still has its own. */
@@ -87,7 +87,16 @@ export async function getMeta({
 
   const title = meta?.title || fallback?.title || DEFAULT_TITLE;
   const description = meta?.description || fallback?.description || DEFAULT_DESCRIPTION;
-  const canonical = meta?.canonicalUrl || (path ? new URL(path, baseUrl).toString() : undefined);
+  // An editor-set canonical is honoured only when it is a full URL; a bare
+  // slug (one post had "/aeo-for-b2b-saas/") would point search engines at a
+  // page that does not exist, so the page's own URL wins.
+  const editorCanonical = meta?.canonicalUrl?.trim();
+  const canonical =
+    editorCanonical && /^https?:\/\//.test(editorCanonical)
+      ? editorCanonical
+      : path
+        ? new URL(path, baseUrl).toString()
+        : undefined;
 
   // Every page gets a canonical, an OpenGraph block and a Twitter card, even
   // when nothing is filled in the CMS. Previously these were emitted only when

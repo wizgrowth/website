@@ -29,7 +29,7 @@ export async function generateMetadata() {
     fallback: {
       title: 'Contact WizGrowth — Book a Free Growth Call',
       description:
-        'WhatsApp, call or email WizGrowth in Kochi, Kerala. A free 30-minute growth call: we look at your numbers, tell you what we’d fix first, and put the scope in writing.',
+        'WhatsApp, call or email WizGrowth in Kochi, Kerala. A free 30-minute growth call: we look at your numbers and tell you what we’d fix first, in writing.',
     },
   });
 }

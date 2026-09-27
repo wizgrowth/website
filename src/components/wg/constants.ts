@@ -1,6 +1,10 @@
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_DOMAIN ?? 'https://www.wizgrowth.com';
 export const CANONICAL_ORIGIN = 'https://www.wizgrowth.com';
 export const ORG_ID = `${CANONICAL_ORIGIN}/#organization`;
+/** The academy as an entity of its own, referenced from Course provider fields. */
+export const ACADEMY_ID = `${CANONICAL_ORIGIN}/academy/#organization`;
+/** The founder, so articles, courses and the About page all point at one Person. */
+export const PERSON_ID = `${CANONICAL_ORIGIN}/#vismaya-babu`;
 
 export const CONTACT = {
   phoneDisplay: '+91 79075 51261',

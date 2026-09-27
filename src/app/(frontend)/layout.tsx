@@ -24,6 +24,13 @@ export const metadata = {
   },
   description:
     'WizGrowth brings search, demand and AI visibility together to move your brand forward. A growth marketing agency and academy in Kochi, Kerala.',
+  // Full-length snippets and large image previews are what AI Overviews and
+  // Discover need; a page that must stay out of the index sets its own robots.
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large', 'max-video-preview': -1 },
+  },
   openGraph: {
     type: 'website',
     siteName: 'WizGrowth',

@@ -6,6 +6,7 @@ import {
   Breadcrumb,
   CANONICAL_ORIGIN,
   EndCta,
+  FOUNDER_SCHEMA,
   ORG_ID,
   breadcrumbSchema,
   schemaList,
@@ -17,7 +18,7 @@ export async function generateMetadata() {
     fallback: {
       title: 'About WizGrowth — Grow Brands. Grow People.',
       description:
-        'WizGrowth is a growth marketing agency and academy in Kochi, Kerala, founded by Vismaya Babu. One flywheel: client campaigns power the curriculum; trained talent powers the agency.',
+        'WizGrowth is a growth marketing agency and academy in Kochi, Kerala, founded by Vismaya Babu. Client campaigns power the curriculum; trained talent powers the agency.',
     },
   });
 }
@@ -31,22 +32,10 @@ const ABOUT_SCHEMA = {
   about: { '@id': ORG_ID },
 };
 
-const PERSON_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Vismaya Babu',
-  jobTitle: 'Founder',
-  worksFor: { '@id': ORG_ID },
-  url: `${CANONICAL_ORIGIN}/about/`,
-  image: `${CANONICAL_ORIGIN}/vismaya.jpg`,
-  description:
-    'Founder of WizGrowth, a growth marketing agency and academy in Kochi, Kerala, specializing in SEO growth, demand generation and AI-citation optimization (GEO). Writes honest data on marketing careers and salaries in India.',
-};
-
 export default function AboutPage() {
   return (
     <>
-      <Schema structuredData={schemaList(breadcrumbSchema(CRUMBS), ABOUT_SCHEMA, PERSON_SCHEMA)} />
+      <Schema structuredData={schemaList(breadcrumbSchema(CRUMBS), ABOUT_SCHEMA, FOUNDER_SCHEMA)} />
       <Breadcrumb items={CRUMBS} />
 
       <header className="shell page-hero">

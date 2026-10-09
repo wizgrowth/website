@@ -40,7 +40,7 @@ $$('[data-replay]').forEach(b=>b.addEventListener('click',()=>{window.scrollTo({
 // Reveal enhancements do not hide content unless an observer is installed.
 if('IntersectionObserver' in window){
  const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('in');observer.unobserve(entry.target);}});},{threshold:.13,rootMargin:'0px 0px -18px 0px'});
- body.classList.add('observing');$$('.reveal').forEach(el=>observer.observe(el));
+ const fold=window.innerHeight;$$('.reveal').forEach(el=>{if(el.getBoundingClientRect().top>fold)el.classList.add('pre');observer.observe(el);});
 }
 // Accessible service tabs; no arbitrary auto-rotation while somebody is reading.
 const tabs=$$('[data-service]');function selectService(tab,focus=false){

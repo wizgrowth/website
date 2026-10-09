@@ -7,7 +7,7 @@ export const HUB: AcademyPage = {
   url: "/academy/",
   title: "Digital Marketing Courses in Kerala with AI | WizGrowth",
   description: "Live digital marketing courses in Kerala for SEO, content and AI search. ₹30,000, max 15 per batch, taught on real websites.",
-  schema: {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.wizgrowth.com/#organization","name":"WizGrowth","url":"https://www.wizgrowth.com/","email":"marketing@wizgrowth.com","telephone":"+91 79075 51261"},{"@type":"LocalBusiness","@id":"https://www.wizgrowth.com/academy/#localbusiness","name":"WizGrowth Academy","url":"https://www.wizgrowth.com/academy/","parentOrganization":{"@id":"https://www.wizgrowth.com/#organization"},"areaServed":[{"@type":"City","name":"Kochi"},{"@type":"State","name":"Kerala"}],"priceRange":"₹₹"}]},
+  schema: {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.wizgrowth.com/#organization","name":"WizGrowth","url":"https://www.wizgrowth.com/","email":"marketing@wizgrowth.com","telephone":"+91 79075 51261"},{"@type":"LocalBusiness","@id":"https://www.wizgrowth.com/academy/#organization","name":"WizGrowth Academy","url":"https://www.wizgrowth.com/academy/","parentOrganization":{"@id":"https://www.wizgrowth.com/#organization"},"areaServed":[{"@type":"City","name":"Kochi"},{"@type":"State","name":"Kerala"}],"priceRange":"₹₹"}]},
   wizMessages: ["Let's learn by doing.","Build it. Rank it. Show it.","Small batch. Real feedback."],
   html: `<main id="main" tabindex="-1">
 <section class="hero">

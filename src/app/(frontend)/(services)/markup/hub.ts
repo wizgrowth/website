@@ -9,7 +9,7 @@ export const HUB: ServiceMarkup = {
   name: "Services",
   draft: false,
   title: "Growth Marketing Services | WizGrowth Kochi",
-  description: "",
+  description: "Explore WizGrowth services across SEO, AI Search Visibility, demand generation, content marketing, social media and web development — connected around measurable growth.",
   schema: {"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"WizGrowth","url":"https://www.wizgrowth.com/","email":"marketing@wizgrowth.com","telephone":"+91 79075 51261"},{"@type":"ItemList","name":"WizGrowth growth marketing services","itemListElement":[{"@type":"ListItem","position":1,"url":"https://www.wizgrowth.com/services/seo/","name":"SEO"},{"@type":"ListItem","position":2,"url":"https://www.wizgrowth.com/services/ai-search-visibility/","name":"AI Search Visibility"},{"@type":"ListItem","position":3,"url":"https://www.wizgrowth.com/services/demand-generation/","name":"Demand Generation"},{"@type":"ListItem","position":4,"url":"https://www.wizgrowth.com/services/content-marketing/","name":"Content Marketing"},{"@type":"ListItem","position":5,"url":"https://www.wizgrowth.com/services/social-media-marketing/","name":"Social Media Marketing"},{"@type":"ListItem","position":6,"url":"https://www.wizgrowth.com/services/web-development/","name":"Web Development"}]}]},
   faqs: [],
   html: `<div class="svc svc-hub"><main id="main" tabindex="-1">
@@ -43,7 +43,7 @@ export const HUB: ServiceMarkup = {
     </div>
    </div>
    <div class="triage-result" aria-live="polite">
-    <div class="result-service"><small>LIKELY STARTING POINT</small><h3 data-result-service>SEO</h3><p data-result-why>Existing demand is there, but your pages are not visible enough at the moment of intent.</p><span class="support" data-result-support>SUPPORTING MOVE · CONTENT MARKETING</span><a class="result-link" data-result-link href="/services/seo/">See the SEO approach <svg class="arrow"><use href="#arrow-up"/></svg></a></div>
+    <div class="result-service"><small>LIKELY STARTING POINT</small><p data-result-service>SEO</p><p data-result-why>Existing demand is there, but your pages are not visible enough at the moment of intent.</p><span class="support" data-result-support>SUPPORTING MOVE · CONTENT MARKETING</span><a class="result-link" data-result-link href="/services/seo/">See the SEO approach <svg class="arrow"><use href="#arrow-up"/></svg></a></div>
     <div class="inspect"><small>WE WOULD INSPECT FIRST</small><div class="inspect-list"><span data-inspect-1>Indexing and technical health</span><span data-inspect-2>Queries already generating impressions</span><span data-inspect-3>Page and intent gaps</span></div></div>
    </div>
   </div>

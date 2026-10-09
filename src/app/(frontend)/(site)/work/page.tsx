@@ -8,7 +8,7 @@ export async function generateMetadata() {
     fallback: {
       title: 'Work & Track Record — WizGrowth',
       description:
-        'Where the WizGrowth method was built: growth roles at SurveySparrow and Emvigo Technologies, and a B2B funnel taken from zero to consistent monthly inbound conversions.',
+        'Where the WizGrowth method was built: growth roles at SurveySparrow and Emvigo Technologies, and a B2B funnel taken from zero to steady monthly inbound.',
     },
   });
 }

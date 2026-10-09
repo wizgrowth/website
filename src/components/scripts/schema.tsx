@@ -4,7 +4,7 @@ const DEFAULT_STRUCTURED_DATA = [
     '@type': 'Organization',
     name: 'WizGrowth',
     url: 'https://www.wizgrowth.com',
-    logo: 'https://ibffbzwoucksfljolszp.supabase.co/storage/v1/object/public/wizgrowth-assets/header/wizgrowth-header-logo.png',
+    logo: 'https://www.wizgrowth.com/logo.png',
   },
   {
     '@context': 'https://schema.org',

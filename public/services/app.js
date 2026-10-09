@@ -10,7 +10,9 @@
   const revealed = $$('.reveal, .journey, .build-stage, .system');
   if ('IntersectionObserver' in window) {
     const o = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); } }), { threshold: 0.12, rootMargin: '0px 0px -20px' });
-    revealed.forEach((el) => o.observe(el));
+    // Blocks already on screen stay visible (the hero is usually the LCP element); the rest hide until scrolled to.
+    const fold = window.innerHeight;
+    revealed.forEach((el) => { if (el.classList.contains('reveal') && el.getBoundingClientRect().top > fold) el.classList.add('pre'); o.observe(el); });
   } else revealed.forEach((el) => el.classList.add('in'));
 
   // Rotating example queries (SEO and AI heroes).

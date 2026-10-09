@@ -96,7 +96,7 @@ img,svg{display:block;max-width:100%}
 .dark .editorial{border-color:#36402f}
 .editorial-row{display:grid;grid-template-columns:70px minmax(240px,.75fr) minmax(300px,1.25fr) auto;gap:34px;align-items:center;padding:31px 0;border-bottom:1px solid var(--line)}
 .dark .editorial-row{border-color:#36402f}
-.editorial-row .index{font:10px var(--mono);color:#818b7a}
+.editorial-row .index{font:10px var(--mono);color:#66705f}
 .editorial-row h3{margin:0;font-size:clamp(28px,3vw,46px);letter-spacing:-.05em;font-weight:500}
 .editorial-row p{margin:0;color:var(--muted);font-size:14px;line-height:1.75;max-width:590px}
 .dark .editorial-row p{color:#9fab95}
@@ -275,7 +275,7 @@ img,svg{display:block;max-width:100%}
 .wiz-chip.a{left:2px;top:123px;transform:rotate(-4deg)}
 .wiz-chip.b{right:0;bottom:103px;background:var(--lime);border-color:var(--lime);color:#17200f;animation-delay:-1.8s;transform:rotate(3deg)}
 .wiz-chip.c{left:48px;bottom:37px;background:#201d28;border-color:#615779;color:#d8d1ed;animation-delay:-3.1s;transform:rotate(-2deg)}
-.wiz-footnote{position:absolute;right:8px;bottom:24px;text-align:right;font:8px/1.55 var(--mono);letter-spacing:.09em;color:#6f7969}
+.wiz-footnote{position:absolute;right:8px;bottom:24px;text-align:right;font:8px/1.55 var(--mono);letter-spacing:.09em;color:#5c6556}
 .wiz-footnote strong{display:block;color:#9ba694;font-weight:400}
 @keyframes wizFloat{0%,100%{transform:translateY(0) rotate(-.3deg)}50%{transform:translateY(-8px) rotate(.7deg)}}
 @keyframes wizSprout{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(5deg)}}
@@ -464,7 +464,7 @@ img,svg{display:block;max-width:100%}
 .footer-v2 .footer-intro .brand{font-size:26px;margin-bottom:19px;letter-spacing:-1.2px}
 .footer-v2 .footer-intro>p{font-size:15px;line-height:1.7;max-width:275px}
 .footer-v2 .footer-directory h3{margin:4px 0 21px;font-size:10px;letter-spacing:.11em}
-.footer-v2 .footer-directory .footer-nav h3 a{display:inline;min-height:0;padding:0;font:inherit;line-height:inherit;color:inherit;text-decoration:none}
+.footer-v2 .footer-directory .footer-nav h3 a{display:inline-block;min-height:0;padding:8px 0;margin:-8px 0;font:inherit;line-height:inherit;color:inherit;text-decoration:none}
 .footer-v2 .footer-directory .footer-nav h3 a:hover{color:var(--lime)}
 .footer-more{margin-top:26px}
 .footer-v2 .footer-nav a,.footer-v2 .footer-nav button{display:flex;align-items:center;gap:10px;font-size:14px;line-height:1.55;margin-bottom:0;min-height:32px;color:#e5e9df;width:fit-content;background:transparent;padding:3px 0;text-align:left;transition:color .2s}

@@ -17,6 +17,8 @@ export const metadata = {
   // Keep it in place — removing it un-verifies the property.
   verification: {
     google: 'IAx8CcrOEudLEtLPONFG4hag5hWp7ZEaNsmVIJEXxhE',
+    // Bing Webmaster Tools, rendered as <meta name="msvalidate.01">. Keep it too.
+    other: { 'msvalidate.01': '1DA598EE78DB145F1EF2F15B2BFE7E83' },
   },
   title: {
     default: 'WizGrowth — Great brands. Bigger futures.',

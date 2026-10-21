@@ -90,13 +90,22 @@ export async function getMeta({
   // An editor-set canonical is honoured only when it is a full URL; a bare
   // slug (one post had "/aeo-for-b2b-saas/") would point search engines at a
   // page that does not exist, so the page's own URL wins.
+  const self = path ? new URL(path, baseUrl).toString() : undefined;
   const editorCanonical = meta?.canonicalUrl?.trim();
-  const canonical =
-    editorCanonical && /^https?:\/\//.test(editorCanonical)
-      ? editorCanonical
-      : path
-        ? new URL(path, baseUrl).toString()
-        : undefined;
+  const canonical = (() => {
+    if (!editorCanonical || !/^https?:\/\//.test(editorCanonical)) return self;
+    // A canonical on this site that names a different URL is a typo, not a
+    // syndication note: it would hand the page's ranking to a URL that does
+    // not exist. Only a canonical on another domain is taken at its word.
+    try {
+      const target = new URL(editorCanonical);
+      const own = new URL(baseUrl);
+      if (target.host === own.host || target.host === 'www.wizgrowth.com') return self;
+    } catch {
+      return self;
+    }
+    return editorCanonical;
+  })();
 
   // Every page gets a canonical, an OpenGraph block and a Twitter card, even
   // when nothing is filled in the CMS. Previously these were emitted only when
